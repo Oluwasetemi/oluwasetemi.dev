@@ -8,11 +8,39 @@
     <title></title>
   </head>
   <body>
+    <!--Twitter-->
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+      }(document, "script", "twitter-wjs"));</script>
+    <!--facebook-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
     <header class="header">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-12">
-            <h1>threadly</h1>
+            <h1>Oluwasetemi </h1>
           </div>
         </div>
       </div>
@@ -32,9 +60,15 @@
         </div>
         
         <ul class="comments" id="comments">
-          <li>Have tou felt it?</li>
+          <li>Have you felt it?</li>
           <li>There has been an awakening.</li>
         </ul>
+      </div>
+      <div class="container">
+        <div class="twitter-timeline">
+          <a class="twitter-timeline" href="https://twitter.com/setemiojo" data-widget-id="730583646105698310">Tweets by @setemiojo</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
       </div>
     </div>
     <hr>
@@ -42,11 +76,15 @@
       <div class="container">
         <div class="row">
           &copy; Oluwasetemi! 
+          <a href="https://twitter.com/setemiojo" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @setemiojo</a>
+          <iframe src="https://ghbtns.com/github-btn.html?user=oluwasetemi&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+
         </div>
       </div>
     </footer>
     
     <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
+
   </body>
 </html>
