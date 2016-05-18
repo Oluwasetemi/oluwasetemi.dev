@@ -2,7 +2,7 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
-h1 {
+header h1 {
   border-left: 2px solid #00f28f;
   font-size: 48px;
   font-weight: 400;
@@ -63,4 +63,13 @@ li {
   border-left: 2px solid #000;
   font-size: 36px;
   margin:  0 0 36px;
+}
+
+.intro {
+  padding: 5px;
+  margin: 10px 20px;
+}
+
+li[role="listitem"] {
+  display: inline;
 }
