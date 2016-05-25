@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -15,16 +16,12 @@ header h1 {
 
 form input {
   background: #f0f0f0;
-  
   border: none;
   border-left: 2px solid #fff;
-  
   font-size: 36px;
   padding: 20px;
   width: 100%;
-  
-  transition:  background 3s, border-left 2s;
-    
+  transition: background 3s, border-left 2s;
 }
 
 form input:focus {
@@ -37,23 +34,20 @@ form input:focus {
 button.btn {
   background: transparent;
   border: none;
-  
   color: #00f20f;
   cursor: pointer;
-  
   font-size: 36px;
-  
   padding: 20px 24px;
   transition: background 2s, color 2s;
 }
 
 button.btn:hover {
-  background: #00f28f
-    color: #fff;
+  background: #00f28f;
+  color: #fff;
 }
 
 .comments {
-  margin-top:20px;
+  margin-top: 20px;
   list-style: none;
   padding-left: 0px;
 }
@@ -62,7 +56,7 @@ li {
   padding-left: 20px;
   border-left: 2px solid #000;
   font-size: 36px;
-  margin:  0 0 36px;
+  margin: 0 0 36px;
 }
 
 .intro {
@@ -72,4 +66,18 @@ li {
 
 li[role="listitem"] {
   display: inline;
+  padding: 0 0 0 15px;
+  margin: 0 0 0 10px;
 }
+
+ul[role="list"] {
+  position: relative;
+}
+
+a:link {}
+
+a:visited {}
+
+a:hover {}
+
+a:active {}
