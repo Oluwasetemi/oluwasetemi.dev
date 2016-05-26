@@ -4,7 +4,7 @@ body {
 }
 
 header h1 {
-  border-left: 2px solid #00f28f;
+  border-left: 2px solid #00f20f;
   font-size: 48px;
   font-weight: 400;
   padding-left: 30px;
@@ -14,7 +14,7 @@ header h1 {
   margin-top: 80px;
 }
 
-form input {
+form input[type="text"] {
   background: #f0f0f0;
   border: none;
   border-left: 2px solid #fff;
@@ -74,10 +74,30 @@ ul[role="list"] {
   position: relative;
 }
 
-a:link {}
+span a:link {
+  margin: 5px;
+  padding: 3px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+}
 
-a:visited {}
+span a:visited {
+  text-decoration: none;
+}
 
-a:hover {}
+span a:hover {
+  border: 2px thin #123;
+  background-color: #00f20f;
+  text-decoration: none;
+}
 
-a:active {}
+span a:active {
+  text-decoration: none;
+  border-bottom: 2px solid red;
+}
+
+nav {
+  padding: 20px;
+}

@@ -78,7 +78,7 @@ h6,
   width: 0;
   height: 0;
   margin-left: -5px;
-  vertical-align: middle;
+  vertical-align: top;
   content: " ";
   border-right: 5px solid transparent;
   border-bottom: 5px solid;
@@ -186,4 +186,30 @@ h6,
 
 .blog-footer p:last-child {
   margin-bottom: 0;
+}
+
+
+/*Learning Transitions*/
+
+.color-change {
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 14px 80px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #00A6FF;
+  font-size: 1.5rem;
+  font-family: 'Roboto';
+  font-weight: 100;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px #AFE9FF;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+}
+
+.color-change:hover {
+  color: #006398;
+  border: 1px solid #006398;
+  box-shadow: 2px 2px 20px #AFE9FF;
 }
