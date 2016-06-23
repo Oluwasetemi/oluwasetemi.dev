@@ -64,7 +64,7 @@ li {
   margin: 10px 20px;
 }
 
-li[role="listitem"] {
+[role="list"] {
   display: inline;
   padding: 0 0 0 15px;
   margin: 0 0 0 10px;
