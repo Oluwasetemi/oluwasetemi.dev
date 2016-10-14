@@ -1,33 +1,54 @@
 <html>
 
-<head>
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!--The below 3 tags *is* useful for content specification on the website-->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
+		<!--The below 3 tags *is* useful for content specification on the website-->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,900' rel='stylesheet' type='text/css'>
 
-  <title>Error: 404 </title>
+		<title>Error: 404 </title>
 
-  <style>
-    div.error {
-      text-align: center;
-      cursor: not-allowed;
-      color: #f00;
-      transition: color: 0.5s;
-    }
-  </style>
+		<style>
+			div.error {
+				position: absolute;
+				top: 25%;
+				left: 40%;
+				cursor: not-allowed;
+				color: #f00;
+				transition: color: 0.5s;
+			}
+			
+			p {
+				font-size: 40px;
+				border-left: 2px solid #4a2020;
+				padding: 10px;
+				background-color: #dcdcdc;
+				transition: all .5s;
+			}
+			
+			body {
+				font: 100%/1.6 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				background-color: #fff;
+				color: #444;
+				padding: 0 1em;
+				margin: 0 auto;
+				text-align: left;
+				font-weight: 300;
+			}
+		</style>
 
-</head>
+	</head>
 
-<body onload="">
-  <div class="error" role="">
-    <p>Error</p>
-  </div>
-</body>
+	<body onload="">
+		<div class="error" role="">
+			<p title="click back button">Error</p>
+		</div>
+	</body>
 
 </html>

@@ -1,158 +1,251 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US">
 
-<head>
-  <!-- The below 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Oluwasetemi: Home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Ojo Oluwasetemi" />
+		<meta name="copyright" content="setemiojo.com" />
 
-  <!--The below 3 tags *is* useful for content specification on the website-->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="https://avatars3.githubusercontent.com/u/10030028?v=3&s=40">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,900' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="css/style.css">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<style>
+			/* my Portfolio */
+			
+			body {
+				font: 100%/1.6 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				background-color: #fff;
+				color: #444;
+				padding: 0 1em;
+				margin: 0 auto;
+				text-align: left;
+				font-weight: 300;
+			}
+			/* Styling links*/
+			
+			a {
+				color: #ee2418;
+				text-decoration: none;
+				transition: all .5s ease;
+			}
+			
+			a:visited {
+				color: #ee2418;
+			}
+			
+			a:hover {
+				color: #000;
+			}
+			
+			a:focus {
+				outline: thin dotted;
+			}
+			
+			a:hover,
+			a:active {
+				outline: 0;
+			}
+			/* Making images responsive */
+			
+			img {
+				width: 100%;
+				height: auto;
+				border: 1px solid #ccc;
+				margin-top: 1em;
+			}
+			
+			h1,
+			h2,
+			h3 {
+				font-weight: 900;
+				padding: 0;
+				margin: 0;
+			}
+			
+			h1 {
+				font-size: 1.875em;
+				/*30px*/
+				text-transform: uppercase;
+				margin-top: .5em;
+			}
+			
+			h1 a,
+			h1 a:visited,
+			a h3,
+			a:visited h3 {
+				color: #444;
+			}
+			
+			h1 a:hover,
+			a:hover h3 {
+				color: #ee2418;
+			}
+			
+			h2 {
+				font-size: 2.5em;
+				/*40px*/
+				line-height: 1.1;
+			}
+			
+			h3 {
+				font-size: 1.875em;
+				/* 30px*/
+				line-height: 1;
+				margin: 1.5em 0 0 0;
+			}
+			
+			small {
+				font-weight: 200;
+				font-size: 12px;
+			}
+			
+			ul,
+			ol,
+			dd {
+				margin: 0;
+			}
+			
+			ul li li,
+			ol li li {
+				margin: 0 0 0 1em;
+			}
+			
+			.banner {
+				margin-bottom: 1em;
+				padding-bottom: 1em;
+				border-bottom: 1px solid #444;
+			}
+			
+			.more-info ul {
+				list-style: none;
+				list-style-image: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.main-content {
+				padding-bottom: 1em;
+			}
+			
+			.more-info,
+			.footer-info {
+				border-top: 1px solid #000;
+				margin: .5em 0;
+				padding: .5em 0;
+				font-size: 0.875em;
+			}
+			/*14px*/
+			/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+			
+			@media only screen and (min-width: 42em) {
+				body {
+					max-width: 58.75em;
+				}
+				.banner {
+					width: 100%;
+					margin-bottom: 2em;
+					padding-bottom: 1em;
+					border-bottom: 3px solid #444;
+				}
+				h1 {
+					font-size: 2.438em;
+					/*39px*/
+				}
+				h2 {
+					font-size: 6.25em;
+					/*100px*/
+					line-height: 1.15;
+					margin-bottom: .2em;
+				}
+				.main-content {
+					width: 100%;
+					/*780px/940px*/
+					float: left;
+					margin: 0;
+				}
+				.wrap {
+					width: 100%;
+					border-top: 3px solid #444;
+					float: left;
+					margin-top: 2em;
+				}
+				.more-info {
+					float: right;
+					border: none;
+				}
+				.more-info li {
+					display: inline;
+					padding: 0 0 0 2em;
+				}
+				.footer-info {
+					float: left;
+					border: none;
+				}
+			}
+			/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+			
+			@media print {
+				body {
+					width: 100%;
+					margin: 0;
+					padding: 1em;
+					font-size: 12pt;
+					line-height: 1.5;
+				}
+				/*h1, h2, h3 { font-size: 14pt;}*/
+				/* links */
+				a:link,
+				a:visited {
+					color: #333;
+					text-decoration: none;
+				}
+				/* hide */
+				.main-nav,
+				.more-info {
+					display: none;
+				}
+				/* print URLs after articles 
+article p a:after { content: " (" attr(href) ")"; } */
+			}
+		</style>
 
-  <link rel="stylesheet" href="/octicons/octicons.css">
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-  <title>Oluwasetemi - icode || Resume </title>
 
-  <script src="https://use.fontawesome.com/8c8884afb7.js"></script>
-</head>
+	</head>
 
-<body>
-  <!--Twitter-->
-  <script>
-    window.twttr = (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
+	<body>
 
-      t._e = [];
-      t.ready = function (f) {
-        t._e.push(f);
-      };
-
-      return t;
-    }(document, "script", "twitter-wjs"));
-  </script>
+		<header role="banner" class="banner">
+			<h1><a href="index.html">Ojo Oluwasetemi </a></h1>
+		</header>
 
 
-  <!--facebook-->
-  <div id="fb-root"></div>
-  <script>
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
+
+		<main role="main" class="main-content">
+			<h2>Professional Web Developer <small>In-training.</small> </h2>
+			<h3><a href="https://github.com/Oluwasetemi/">Say Hi to me on Github!<i class=fa fa-github></i></a></h3>
+		</main>
 
 
-  <header class="header">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6 col-md-6">
-          <h1>Oluwasetemi <span class="mega-octicon octicon-check"></span></h1>
-        </div>
-        <div class="col-xs-6 col-md-6">
-          <nav>
-            <span><a href="#">Home</a></span>
-            <span><a href="blog.html">Blog</a></span>
-            <span><a href="resume.html">Resume</a></span>
-            <span><a href="#">ideas</a></span>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="main">
-    <div class="container">
-      <div class="row">
-        <h1> Ojo <b>Oluwasetemi</b></h1>
-        <p>Software Developer &amp; Code Education Enthusiast</p>
-        <div class="fa-hover">
-          <ul class=" contact-me list-inline" role="list">
-            <li role="listitem"><a href="https://github.com/oluwasetemi"><i class="fa fa-github fa-2x"></i></a></li>
-            <li role="listitem"><a href="mailto:osojo@student.lautech.edu.ng"><i class="fa fa-envelope fa-2x"></i></a></li>
-            <li role="listitem"><a href="https://twitter.com/setemiojo"><i class="fa fa-twitter fa-2x"></i></a></li>
-            <li role="listitem"><a href="https://www.linkedin.com/in/oluwasetemi-stephen-0b199a46?"><i class="fa fa-linkedin fa-2x"></i></a></li>
-            <li role="listitem"><a href="https://www.facebook.com/ojosetemi"><i class="fa fa-facebook fa-2x"></i></a></li>
-            <li role="listitem"><a href="https://medium.com/"><i class="fa fa-medium fa-2x" aria-hidden="true"></i></a></li>
-          </ul>
-        </div>
-
-        <div class="intro">
-          <p> <i class="fa fa-quote-left" aria-hidden="true"></i>I am a FRONT END WEB DEVELOPER in Traning. My goal is to be a Javascript Full Stack Developer. Not so far away. I have interest in <code>coding</code>, writing, and teaching. </p>
-          <code> var languages = html, css, javascript, C#, C++;</code>
-          <br>
-          <code> var frameworks = bootstrap, jQuery, angular</code>
-          <br>
-        </div>
-
-        <br>
-
-        <form class="form">
-          <div class="col-xs-8 col-md-10">
-            <input id="comment" type="text" placeholder="share your thoughts">
-          </div>
-          <div class="col-xs-4 col-md-2">
-            <button type="submit" class="btn">post</button>
-          </div>
-        </form>
-      </div>
+		<div class="wrap">
+			<aside role="complementary" class="more-info">
+				<ul>
+					<li> <a href="http://www.setemiojo.com/resume">R&#233;sum&#233;</a></li>
+					<li><a href="http://twitter.com/setemiojo">Twitter</a></li>
+					<li><a href="https://www.linkedin.com/in/setemiojo">LinkedIn</a></li>
+					<li><a href="http://www.freecodecamp.com/oluwasetemi/">Freecodecamp</a></li>
+				</ul>
+			</aside>
 
 
-      <ul class="comments" id="comments">
-        <li>Have you felt it?</li>
-        <li>There has been an awakening.</li>
-      </ul>
-    </div>
-    <div class="container">
-      <div class="twitter-timeline">
-        <a class="twitter-timeline" href="https://twitter.com/setemiojo" data-widget-id="730583646105698310">Tweets by @setemiojo</a>
-        <script>
-          ! function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-              p = /^http:/.test(d.location) ? 'http' : 'https';
-            if (!d.getElementById(id)) {
-              js = d.createElement(s);
-              js.id = id;
-              js.src = p + "://platform.twitter.com/widgets.js";
-              fjs.parentNode.insertBefore(js, fjs);
-            }
-          }(document, "script", "twitter-wjs");
-        </script>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        &copy; Oluwasetemi! with <span class="mega-octicon octicon-heart"></span> from <span class="octicon octicon-logo-github"></span>
-        <br>
-        <a href="https://twitter.com/setemiojo" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @setemiojo</a>
-        <iframe src="https://ghbtns.com/github-btn.html?user=oluwasetemi&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-        <br>
-      </div>
-    </div>
-  </footer>
+			<footer role="contentinfo" class="footer-info">
+				Copyright &copy; <a href="http://www.setemiojo.com/">Oluwasetemi</a>
+				<p>Portfolio idea from Donny Truong <a href="http://twitter.com/@visualgui">@visualgui</a>
+			</footer>
+		</div>
 
-  <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
-  <script src="js/script.js"></script>
-
-</body>
+	</body>
 
 </html>
