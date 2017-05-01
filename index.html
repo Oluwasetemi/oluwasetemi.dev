@@ -9,15 +9,15 @@
 		<meta name="author" content="Ojo Oluwasetemi" />
 		<meta name="copyright" content="setemiojo.com" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Raleway:300,900' rel='stylesheet' type='text/css'>
 
 		<style>
 			/* my Portfolio */
-			
+
 			body {
 				font: 100%/1.6 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				background-color: #fff;
+				background-color: #ffd;
 				color: #444;
 				padding: 0 1em;
 				margin: 0 auto;
@@ -25,38 +25,38 @@
 				font-weight: 300;
 			}
 			/* Styling links*/
-			
+
 			a {
 				color: #ee2418;
 				text-decoration: none;
 				transition: all .5s ease;
 			}
-			
+
 			a:visited {
 				color: #ee2418;
 			}
-			
+
 			a:hover {
 				color: #000;
 			}
-			
+
 			a:focus {
 				outline: thin dotted;
 			}
-			
+
 			a:hover,
 			a:active {
 				outline: 0;
 			}
 			/* Making images responsive */
-			
+
 			img {
 				width: 100%;
 				height: auto;
 				border: 1px solid #ccc;
 				margin-top: 1em;
 			}
-			
+
 			h1,
 			h2,
 			h3 {
@@ -64,72 +64,82 @@
 				padding: 0;
 				margin: 0;
 			}
-			
+
 			h1 {
 				font-size: 1.875em;
 				/*30px*/
 				text-transform: uppercase;
 				margin-top: .5em;
 			}
-			
+
 			h1 a,
 			h1 a:visited,
 			a h3,
 			a:visited h3 {
 				color: #444;
 			}
-			
+
 			h1 a:hover,
 			a:hover h3 {
 				color: #ee2418;
 			}
-			
+
 			h2 {
 				font-size: 2.5em;
 				/*40px*/
 				line-height: 1.1;
 			}
-			
+
 			h3 {
 				font-size: 1.875em;
 				/* 30px*/
 				line-height: 1;
 				margin: 1.5em 0 0 0;
 			}
-			
+
 			small {
 				font-weight: 200;
 				font-size: 12px;
 			}
-			
+
 			ul,
 			ol,
 			dd {
 				margin: 0;
 			}
-			
+
 			ul li li,
 			ol li li {
 				margin: 0 0 0 1em;
 			}
-			
+
+			iframe {
+				border-left: 5px solid #ee2418;
+				height: 110px;
+				width: 200px;
+				overflow: hidden;
+				position: absolute;
+				right: 25%;
+				bottom: 47%;
+			}
+
 			.banner {
 				margin-bottom: 1em;
 				padding-bottom: 1em;
 				border-bottom: 1px solid #444;
 			}
-			
+
 			.more-info ul {
 				list-style: none;
 				list-style-image: none;
 				margin: 0;
 				padding: 0;
 			}
-			
+
 			.main-content {
 				padding-bottom: 1em;
 			}
-			
+
 			.more-info,
 			.footer-info {
 				border-top: 1px solid #000;
@@ -139,7 +149,7 @@
 			}
 			/*14px*/
 			/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-			
+
 			@media only screen and (min-width: 42em) {
 				body {
 					max-width: 58.75em;
@@ -186,7 +196,7 @@
 				}
 			}
 			/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-			
+
 			@media print {
 				body {
 					width: 100%;
@@ -224,9 +234,17 @@ article p a:after { content: " (" attr(href) ")"; } */
 
 
 		<main role="main" class="main-content">
-			<h2>Professional Web Developer <small>In-training.</small> </h2>
-			<h3><a href="https://github.com/Oluwasetemi/">Say Hi to me on Github!<i class=fa fa-github></i></a></h3>
+			<h2>
+				<del>Professional</del> Web Developer <small>In-training.</small>
+			</h2>
+			<h4><a href="http://twitter.com/setemiojo">Say Hi to me on Twitter!<i class=fa fa-github></i></a></h4>
+			<p>
+				watch out for May 1 #Reboot like I said on twitter moving to a <a href="https://jekyllrb.com">blog</a><br>
+				<p> I will be talking about what I'm learning and a lot of interesting stuffs I think about.</p>
+			</p>
+			<iframe src="http://githubbadge.appspot.com/Oluwasetemi" frameBorder="2px"></iframe>
 		</main>
+
 
 
 		<div class="wrap">
@@ -246,5 +264,6 @@ article p a:after { content: " (" attr(href) ")"; } */
 			</footer>
 		</div>
 
-</body>
+	</body>
+
 </html>
