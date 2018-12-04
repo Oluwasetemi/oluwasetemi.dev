@@ -7,7 +7,7 @@ import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import { formatReadingTime } from '../utils/helpers'
 import { rhythm } from '../utils/typography'
-import favicon from '../assets/apple-icon.png'
+// import favicon from '../assets/apple-icon.png'
 
 class BlogIndex extends React.Component {
   render() {
@@ -24,7 +24,6 @@ class BlogIndex extends React.Component {
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }, {name: "title", content: "Ojo Oluwasetemi Stephen's Blog"}]}
           title={siteTitle}
-          link={[{rel: "shortcut icon", href: favicon}]}
         />
         <Bio />
         {posts.map(({ node }) => {

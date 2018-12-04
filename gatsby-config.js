@@ -54,7 +54,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#800080`,
         display: `minimal-ui`,
-        icon: `src/assets/apple-icon`,
+        icon: `src/assets/apple-icon.png`,
       },
     },
     `gatsby-plugin-offline`,
