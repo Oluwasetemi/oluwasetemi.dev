@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'OOS Blog',
-    author: 'Ojo Oluwasetemi',
+    title: '{...OOS}',
+    author: 'Ojo Oluwasetemi Stephen',
     description: 'I write about modern JavaScipt, web development, computer science and opinions are mine.🚀',
     siteUrl: 'http://oluwasetemi.github.io/',
   },
@@ -41,20 +41,20 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-130441994-1`,
       },
     },
     `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `{..OOS}`,
+        short_name: `OOS`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#800080`,
         display: `minimal-ui`,
-        icon: `src/assets/gatsby-icon.png`,
+        icon: `src/assets/apple-icon`,
       },
     },
     `gatsby-plugin-offline`,

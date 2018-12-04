@@ -4,6 +4,7 @@ import { Link,graphql } from 'gatsby'
 import get from 'lodash/get'
 
 import Bio from '../components/Bio'
+import { formatReadingTime } from '../utils/helpers'
 import Layout from '../components/Layout'
 import { rhythm, scale } from '../utils/typography'
 
@@ -31,6 +32,7 @@ class BlogPostTemplate extends React.Component {
           }}
         >
           {post.frontmatter.date}
+          {` • ${formatReadingTime(post.timeToRead)}`}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
@@ -85,6 +87,7 @@ export const pageQuery = graphql`
       id
       excerpt
       html
+      timeToRead
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

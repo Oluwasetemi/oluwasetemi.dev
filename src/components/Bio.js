@@ -24,13 +24,20 @@ class Bio extends React.Component {
             marginBottom: 0,
             width: rhythm(2),
             height: rhythm(2),
+            borderRadius: '50%',
           }}
         />
         <p>
-          Written by <strong>Ojo Oluwasetemi</strong> who lives and works in Ibadan, Nigeria building useful things.{' '}
-          <a href="https://twitter.com/setemiojo">
-            You should follow him on Twitter
+          Written by {' '}
+          <strong>
+            <a href="https://github.com/Oluwasetemi">Ojo Oluwasetemi Stephen</a> {'...OOS'}
+          </strong> who lives and works in Ibadan, Nigeria.{' '}
+          <a href="https://mobile.twitter.com/setemiojo">
+            Say Hi to  Him on Twitter.
           </a>
+          <br />
+          {' '}
+          <a href="/rss.xml">RSS feed</a>
         </p>
       </div>
     )
