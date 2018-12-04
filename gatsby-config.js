@@ -3,9 +3,9 @@ module.exports = {
     title: 'OOS Blog',
     author: 'Ojo Oluwasetemi',
     description: 'I write about modern JavaScipt, web development, computer science and opinions are mine.🚀',
-    siteUrl: 'https://oluwasetemi.github.io/',
+    siteUrl: 'http://oluwasetemi.github.io/',
   },
-  pathPrefix: '/',
+  // pathPrefix: '/',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
