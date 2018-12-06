@@ -13,5 +13,7 @@ development might be [React](https://reactjs.org) and [GraphQL](https://graphql.
 I leave with these quotes:
 
 > If you are a professional make your promise and keep it.
+>
 > Trust and attention are the two building blocks of the modern economy.
-> Seth Godin.
+>
+> \- Seth Godin.
