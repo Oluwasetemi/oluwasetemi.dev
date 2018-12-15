@@ -30,14 +30,14 @@ class Bio extends React.Component {
         <p>
           Written by {' '}
           <strong>
-            <a href="https://github.com/Oluwasetemi">Ojo Oluwasetemi Stephen</a> {'...OOS'}
+            <a className="link" href="https://github.com/Oluwasetemi">Ojo Oluwasetemi Stephen</a> {'...OOS'}
           </strong> who lives and works in Ibadan, Nigeria.{' '}
-          <a href="https://mobile.twitter.com/setemiojo">
+          <a className="link" href="https://mobile.twitter.com/setemiojo">
             Say Hi to  Him on Twitter.
           </a>
           <br />
           {' '}
-          <a href="/rss.xml">RSS feed</a>
+          <a className="link" href="/rss.xml">RSS feed</a>
         </p>
       </div>
     )
