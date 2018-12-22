@@ -7,7 +7,6 @@ import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import { formatReadingTime } from '../utils/helpers'
 import { rhythm } from '../utils/typography'
-// import favicon from '../assets/apple-icon.png'
 
 class BlogIndex extends React.Component {
   render() {
