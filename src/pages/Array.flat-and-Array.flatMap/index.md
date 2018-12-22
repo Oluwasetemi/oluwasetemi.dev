@@ -38,6 +38,26 @@ function flattenArray(arr) {
 
 Use recursion, decrementing depth by 1 for each level of depth. Use Array.prototype.reduce() and Array.prototype.concat() to merge elements or arrays. Base case, for depth equal to 1 stops recursion. Omit the second argument, depth to flatten only to a depth of 1 (single flatten).
 
+Lodash comes in handy here with several utilities like `flatten` that flattens array a single level deep. `flattenDeep` recursively flattens an array.`flattenDepth` also recursively flatten an array up to depth that defaults to 1.
+
+```js
+import _ from 'lodash';
+
+_.flatten([1, [2, [3, [4]], 5]]);
+// => [1, 2, [3, [4]], 5]
+
+_.flattenDeep([1, [2, [3, [4]], 5]]);
+// => [1, 2, 3, 4, 5]
+
+var array = [1, [2, [3, [4]], 5]];
+
+_.flattenDepth(array, 1);
+// => [1, 2, [3, [4]], 5]
+
+_.flattenDepth(array, 2);
+// => [1, 2, 3, [4], 5]
+```
+
 ---
 
 ### Deep flattens an array
@@ -51,11 +71,18 @@ const deepFlatten = arr =>
 
 ### Now Behold your Future
 
+The syntax for the flat and flatMap
+
+```js
+var newArray = arr.flat([depth]); //defaults to one
+```
+
 ```js
 [1, 2, [3, [4, 5]], 5, 6].flatMap(
   (v, i) => (Array.isArray(v) ? v.flat() : v)
   )
 ```
+
 The future is here not Just evenly distributed.
 with the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
 
@@ -64,6 +91,23 @@ with the two methods, we can flatten an array easily. `flatMap` combines the pow
 [1, 2, [3, [4, 5]], 5, 6].flat(Infinity);
 // [1, 2, 3, 4, 5, 5, 6]
 
-[1, 2, [3, [4, 5]], 5, 6].flat(1) // flats 1 depth level
+[1, 2, [3, [4, 5]], 5, 6].flat() // flats 1 depth level - default
 // [1, 2, 3, [4, 5], 5, 6]
+
+[1, 2, [3, [4, 5]], 5, 6].flat(2) // flats 2 depth level
+// [1, 2, 3, [4, 5], 5, 6]
+
 ```
+
+The flat method removes empty slots in arrays and it will be very useful in cleaning up arrays.
+
+```js
+const arr = [1, 2, ,4, 5];
+arr.flat(); // [1, 2, 4, 5]
+```
+
+### Specification and Support
+
+It is still in the [candidate recommendation stage 3](https://tc39.github.io/proposal-flatMap/#sec-Array.prototype.flat) in the TC39 Proposals meaning only very few browser will have implemented it. Google Chrome supports start from version 69 and Firefox from version 62 with Opera and Safari supporting from 56 and 12 respectively.
+
+[Nodejs does not have support for it at all](https://node.green/).
