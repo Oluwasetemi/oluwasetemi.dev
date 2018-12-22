@@ -69,11 +69,11 @@ A life changing opportunity to do the work that really counts for the people tha
 
 Trust is key, very few would leave their house to a meet-up destination in Ibadan without prior knowing the venue or the organizers. [Dapo Ajuwon](https://mobile.twitter.com/dapseen) was very helpful in the beginning as we connected on Facebook. Thank you fine boy footwear lover Co-organizer of GDG Ibadan.
 
-![FCC Poster 4](https://res.cloudinary.com/drnqdd87d/image/upload/v1545019733/IMG-20181011-WA0006_myd6ns.jpg)
+![FCC Poster 4](https://res.cloudinary.com/drnqdd87d/image/upload/v1545019804/IMG-20180724-WA0001_qlkjkq.jpg)
 
 We met may, june, july, september, october, november and december with over 40 different person in attendance, roughly 120 in total attendance. Our target is to help anyone with interest to get started with JavaScript and web development in general. All the meet-up happened at the EduLight HQ, Dugbe, Ibadan with several talks and workshop on how to get the best from the community.
 
-![FCC Poster 5](https://res.cloudinary.com/drnqdd87d/image/upload/v1545019733/IMG-20181011-WA0006_myd6ns.jpg)
+![FCC Poster 5](https://res.cloudinary.com/drnqdd87d/image/upload/v1545019681/IMG_20181212_174224_767_h3vuvs.jpg)
 
 To read more check out my blog on the summary of the community in writing.
 

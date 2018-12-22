@@ -83,8 +83,7 @@ var newArray = arr.flat([depth]); //defaults to one
   )
 ```
 
-The future is here not Just evenly distributed.
-with the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
+The future is here not Just evenly distributed. With the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
 
 ```js
 // Infinity can be used to flatten recursively
