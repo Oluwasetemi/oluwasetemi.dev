@@ -33,6 +33,16 @@ A lot of my family associates wanted to know my next move and decision and it wa
 
 ---
 
+### Volunteering at SimplyGospellyricsAfrica
+
+Here is a one thing I skipped in the initial draft, how managed?. The funny thing about gospellyrics is how much it had helped me to become a better person. The friends I met in the process are som wonderful, Oluwarufus and Ewatomi(Ifeoluwa I-solo). Before I Finished **NYSC** I started posting lyrics for fun before I loved it. (can't say why maybe i like Rufus - Thats a story for another day). Then Rufus reached out and he promised a small token and that made me more happy to post more frequently and remember that I was out of service with nothing to do, just learn to code and post gospellyrics was not a bad way to get means of survival - I mean data to stay alive on the internet and keep learning.
+
+Getting to read lyrics of song over and over made me get close to the creativity of song writers and artistes, got to follow a lot of then on the social media. If only we all saw ourselves as artists, in our day to day pursuit we can unlock the art in us for the world to see. It also drew me close to God in fellowship. I posted 389 songs 2017 to 2018 August and I was given a target of 3 songs at least per day or a total of 30 songs monthly. The learning of how to write codes become overwhelming and I could not keep up with posting the lyrics again. I had  issues with one of the website where I got most of the foreign Africa lyrics from. It was a venture that was captivating and I hope I can do more in the coming days. Thank Mr Oluwarufus and his lovely wife.
+
+I asked him to be my mentor and he chickened out on my request -  I know he is a busy man. Still I get to call him and ask him a lot of questions about software development and the tech community in lagos. I hope to get a better shot at working on a project together sometimes soon.
+
+---
+
 ### Rejection and Human Plans
 
 Taking life one step at a time is a blessing you can do for yourself at any phase or stage in life. I took this approach with all I was going to be involved in. I was not emotionally attached to anything/ Process/ Idea/ Perspective.
@@ -139,6 +149,13 @@ I will be learning how to play chess.
 
 ---
 
+### A New Love For Podcasts
+
+![Podcast Screenshot 27th December, 2018](/podcastDec2018.jpg)
+A list of
+
+---
+
 ### Moments in Pictures
 
-![Answernig a question at for loppe Ibadan Meetup](./2018-in-picture.jpg)
+![Answering a question at forloop Ibadan Meetup](./2018-in-picture.jpg)

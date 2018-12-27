@@ -17,44 +17,48 @@ It was renamed to `flat` after TC39 met in May 2018 and `Array.prototype.flatMap
 
 ### How do we flatten an Array Before ?
 
-```js{1,4}
+```js{1-6,9}
 const flatten = (arr, depth = 1) =>
   arr.reduce(
     (a, v) =>
       a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v),
     []
   )
+
 const flattened = arr => [].concat(...arr)
 ```
 
-```js
+```js{}
 function flattenArray(arr) {
   const flattened = [].concat(...arr)
-  return flattened.some(item =>
-    Array.isArray(item) ? flattenArray(flattened) : flattened
+  return flattened.some(item =>Array.isArray(item))
+    ? flattenArray(flattened)
+    : flattened
   )
 }
+
+flattenArray([1, 2, [3, [4, 5]], 5, 6])
 ```
 
 Use recursion, decrementing depth by 1 for each level of depth. Use Array.prototype.reduce() and Array.prototype.concat() to merge elements or arrays. Base case, for depth equal to 1 stops recursion. Omit the second argument, depth to flatten only to a depth of 1 (single flatten).
 
 Lodash comes in handy here with several utilities like `flatten` that flattens array a single level deep. `flattenDeep` recursively flattens an array.`flattenDepth` also recursively flatten an array up to depth that defaults to 1.
 
-```js
-import _ from 'lodash';
+```js{3,6,11,14}
+import _ from 'lodash'
 
-_.flatten([1, [2, [3, [4]], 5]]);
+_.flatten([1, [2, [3, [4]], 5]])
 // => [1, 2, [3, [4]], 5]
 
-_.flattenDeep([1, [2, [3, [4]], 5]]);
+_.flattenDeep([1, [2, [3, [4]], 5]])
 // => [1, 2, 3, 4, 5]
 
-var array = [1, [2, [3, [4]], 5]];
+var array = [1, [2, [3, [4]], 5]]
 
-_.flattenDepth(array, 1);
+_.flattenDepth(array, 1)
 // => [1, 2, [3, [4]], 5]
 
-_.flattenDepth(array, 2);
+_.flattenDepth(array, 2)
 // => [1, 2, 3, [4], 5]
 ```
 
@@ -75,34 +79,38 @@ The syntax for the flat and flatMap
 
 ```js
 var newArray = arr.flat([depth]); //defaults to one
+
+var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
+    // return element for new_array
+}[, thisArg])
 ```
 
 ```js
-[1, 2, [3, [4, 5]], 5, 6].flatMap(
-  (v, i) => (Array.isArray(v) ? v.flat() : v)
-  )
+;[1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v))
 ```
 
 The future is here not Just evenly distributed. With the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
 
 ```js
 // Infinity can be used to flatten recursively
-[1, 2, [3, [4, 5]], 5, 6].flat(Infinity);
+;[1, 2, [3, [4, 5]], 5, 6].flat(Infinity)
 // [1, 2, 3, 4, 5, 5, 6]
 
-[1, 2, [3, [4, 5]], 5, 6].flat() // flats 1 depth level - default
-// [1, 2, 3, [4, 5], 5, 6]
+;[1, 2, [3, [4, 5]], 5, 6]
+  .flat() // flats 1 depth level - default
+  [
+    // [1, 2, 3, [4, 5], 5, 6]
 
-[1, 2, [3, [4, 5]], 5, 6].flat(2) // flats 2 depth level
+    (1, 2, [3, [4, 5]], 5, 6)
+  ].flat(2) // flats 2 depth level
 // [1, 2, 3, [4, 5], 5, 6]
-
 ```
 
 The flat method removes empty slots in arrays and it will be very useful in cleaning up arrays.
 
 ```js
-const arr = [1, 2, ,4, 5];
-arr.flat(); // [1, 2, 4, 5]
+const arr = [1, 2, , 4, 5]
+arr.flat() // [1, 2, 4, 5]
 ```
 
 ### Specification and Support
