@@ -33,9 +33,9 @@ A lot of my family associates wanted to know my next move and decision and it wa
 
 ---
 
-### Volunteering at SimplyGospellyricsAfrica
+### Volunteering at [SimplyGospellyricsAfrica](https://gospellyricsng.com)
 
-Here is a one thing I skipped in the initial draft, how managed?. The funny thing about gospellyrics is how much it had helped me to become a better person. The friends I met in the process are som wonderful, Oluwarufus and Ewatomi(Ifeoluwa I-solo). Before I Finished **NYSC** I started posting lyrics for fun before I loved it. (can't say why maybe i like Rufus - Thats a story for another day). Then Rufus reached out and he promised a small token and that made me more happy to post more frequently and remember that I was out of service with nothing to do, just learn to code and post gospellyrics was not a bad way to get means of survival - I mean data to stay alive on the internet and keep learning.
+Here is a one thing I skipped in the initial draft, how managed?. The funny thing about gospellyrics is how much it had helped me to become a better person. The friends I met in the process are som wonderful, [Oluwarufus](https://mobile.twitter.com/oluwarufus) and [Ewaoluwa(Ifeoluwa I-solo)](https://mobile.twitter.com/i_am_i_solo). Before I Finished **NYSC** I started posting lyrics for fun before I loved it. (can't say why maybe i like Rufus - Thats a story for another day). Then Rufus reached out and he promised a small token and that made me more happy to post more frequently and remember that I was out of service with nothing to do, just learn to code and post gospellyrics was not a bad way to get means of survival - I mean data to stay alive on the internet and keep learning.
 
 Getting to read lyrics of song over and over made me get close to the creativity of song writers and artistes, got to follow a lot of then on the social media. If only we all saw ourselves as artists, in our day to day pursuit we can unlock the art in us for the world to see. It also drew me close to God in fellowship. I posted 389 songs 2017 to 2018 August and I was given a target of 3 songs at least per day or a total of 30 songs monthly. The learning of how to write codes become overwhelming and I could not keep up with posting the lyrics again. I had  issues with one of the website where I got most of the foreign Africa lyrics from. It was a venture that was captivating and I hope I can do more in the coming days. Thank Mr Oluwarufus and his lovely wife.
 
@@ -152,10 +152,34 @@ I will be learning how to play chess.
 ### A New Love For Podcasts
 
 ![Podcast Screenshot 27th December, 2018](/podcastDec2018.jpg)
-A list of tt
+A list of the podcasts I love listening to
+
+1. [Syntax fm co-hosted by Wes Bos and Scott Tolinski](https://syntax.fm)
+2. [Freecodecamp Podcast by the freecodecamp community](https://freecodecamp.libsyn.com/)
+3. [Akimbo by Seth Godin](http://www.akimbo.link/)
+4. [Ask Pastor John by Pastor John Piper](https://www.desiringgod.org/ask-pastor-john)
+5. [Basecs by Vaidehi Joshi & Saron Yitbarek](https://www.codenewbie.org/basecs)
+6. [Behind the Tech with Kevin Scott](https://behindthetech.libsynpro.com/)
+7. [The TIM Ferriss show by Tim Ferriss](https://tim.blog/podcast/)
+8. [The CodeNewBie](https://www.codenewbie.org/podcast)
+9. [Full Stack Radio by Adam Wathan](http://www.fullstackradio.com/)
+10. [Forloop Podcast](https://podcast.forloop.africa) by [Kolokodess](https://mobile.twitter.com/Kolokodess)
+11. [JavaScript Jabber by Charles Max Woods](https://devchat.tv/js-jabber/)
+12. [The console.log by Harry Wolff and Matthew Gerstman](https://theconsolelog.com/)
+13. [React Podcast by Chantastic](https://reactpodcast.simplecast.fm/)
+14. [Retropod](https://www.washingtonpost.com/podcasts/retropod/)
+15. [ShopTalk by Chris Coyer](https://shoptalkshow.com/)
+16. [Quote of the Day by Sean Croxton](http://quoteofthedayshow.libsyn.com/)
+17. [Command Line Heroes](https://www.redhat.com/en/command-line-heroes)
+18. [Front end Happy Hour](http://frontendhappyhour.com/http://frontendhappyhour.com/)
+19. [FreakNomics Radio](http://freakonomics.com/)
+
+I listen mostly while on commute or doing chores or anytime I need to cool off with a walk. I encourage new devs to start a culture of listening to Podcast by using a podcast management app, I use [Pocket Casts](https://www.pocketcasts.com/). The best for me is Syntax FM.
 
 ---
 
 ### Moments in Pictures
 
-![Answering a question at forloop Ibadan Meetup](./2018-in-picture.jpg)
+![Answering a question at forloop Ibadan Meetup](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940894/2018-in-picture-1_frqd6w.jpg)
+
+![With friends at another friend's wedding](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940930/2018-in-picture-16_s1omtw.jpg)
