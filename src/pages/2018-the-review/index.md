@@ -95,7 +95,7 @@ To read more check out my blog on the [summary of the community](https://oluwase
 
 At a very difficult time for me and my family - especially managing the properties in Abuja and Ibadan. Keeping the family running is a cost that every man will pay sooner or later. More so I enjoyed living with **Aderinola Omobolade** very well for months before she finished secondary school and moved to lagos with my elder sister. I got better in communication with **Ayooluwa Omobolaji** as well, which has been my desire for a longtime now. I appreciate his simple and balance harmony and I am blessed to have such wonderful hearts to share my life with.
 
-![Bolade's graduation](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940757/2018-in-picture-17_i3uexf.jpghttps://res.cloudinary.com/drnqdd87d/image/upload/v1545940757/2018-in-picture-17_i3uexf.jpg)
+![Bolade's graduation](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940757/2018-in-picture-17_i3uexf.jpg)
 
 My constant fight and worry partner **Waleade Adetayo Omotayo** is the best sibling package ever. I give her a lot of trouble but I get love in return seeing you is a placebo every time. My partner in this struggle. Your are a warrior and I hope I can be like you one day big sister. Thank you for permitting me to stay in Ibadan.
 
