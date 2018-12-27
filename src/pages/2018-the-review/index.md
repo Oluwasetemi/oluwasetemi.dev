@@ -152,7 +152,7 @@ I will be learning how to play chess.
 ### A New Love For Podcasts
 
 ![Podcast Screenshot 27th December, 2018](/podcastDec2018.jpg)
-A list of
+A list of tt
 
 ---
 

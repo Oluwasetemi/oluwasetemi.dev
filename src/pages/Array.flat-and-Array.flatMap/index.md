@@ -86,30 +86,32 @@ var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
 ```
 
 ```js
-;[1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v))
+[1, 2, [3, [4, 5]], 5, 6].flatMap(
+  (v, i) => (Array.isArray(v)
+    ? v.flat()
+    : v)
+  )
 ```
 
 The future is here not Just evenly distributed. With the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
 
-```js
+```js{2,5,8}
 // Infinity can be used to flatten recursively
-;[1, 2, [3, [4, 5]], 5, 6].flat(Infinity)
+[1, 2, [3, [4, 5]], 5, 6].flat(Infinity)
 // [1, 2, 3, 4, 5, 5, 6]
 
-;[1, 2, [3, [4, 5]], 5, 6]
-  .flat() // flats 1 depth level - default
-  [
-    // [1, 2, 3, [4, 5], 5, 6]
+[1, 2, [3, [4, 5]], 5, 6].flat() // flats 1 depth level - default
+// [1, 2, 3, [4, 5], 5, 6]
 
-    (1, 2, [3, [4, 5]], 5, 6)
-  ].flat(2) // flats 2 depth level
+[1, 2, [3, [4, 5]], 5, 6].flat(2) // flats 2 depth level
 // [1, 2, 3, [4, 5], 5, 6]
 ```
 
 The flat method removes empty slots in arrays and it will be very useful in cleaning up arrays.
 
 ```js
-const arr = [1, 2, , 4, 5]
+const arr = [1, 2, , 4, 5];
+
 arr.flat() // [1, 2, 4, 5]
 ```
 
