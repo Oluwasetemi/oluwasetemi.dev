@@ -129,7 +129,7 @@ I am sure of one thing, it's always good to move on when you feel too convenient
 
 As a digital nomad, I have been documenting my process of Job application in a google spread sheet that I hope I will make public soon, applying to Jobs and doing interviews have taught me a lot of things. I will update it here once I have finalized the new Job.
 
-If you know anyone who is looking to hire a JavaScript developer (front-end or back-end) kindly reach out to [me](http://cv-oluwasetemi.netlify.comhttp://cv-oluwasetemi.netlify.com).
+If you know anyone who is looking to hire a JavaScript developer (front-end or back-end) kindly reach out to [me](http://cv-oluwasetemi.netlify.com).
 
 ---
 
