@@ -2,8 +2,11 @@ module.exports = {
   siteMetadata: {
     title: '{...OOS}',
     author: 'Ojo Oluwasetemi Stephen',
-    description: 'I write about modern JavaScipt, web development, computer science and opinions are mine.🚀',
-    siteUrl: 'http://oluwasetemi.github.io/',
+    description: 'I write about modern JavaScript, web development, computer science and opinions are mine.🚀',
+    siteUrl: 'https://oluwasetemi.github.io/',
+    social: {
+      twitter: '@setemiojo'
+    }
   },
   // pathPrefix: '/',
   plugins: [

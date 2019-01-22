@@ -30,8 +30,8 @@ class Bio extends React.Component {
         <p>
           Written by {' '}
           <strong>
-            <a className="link" href="https://github.com/Oluwasetemi">Ojo Oluwasetemi Stephen</a> {'...OOS'}
-          </strong> who lives and works in Ibadan, Nigeria.{' '}
+            <a className="link" href="https://github.com/Oluwasetemi">Oluwasetemi Ojo Stephen</a> {'...OOS'}
+          </strong> Relocated to Lagos, Nigeria.🎈{' '}
           <a className="link" href="https://mobile.twitter.com/setemiojo">
             Say Hi to  Him on Twitter.
           </a>

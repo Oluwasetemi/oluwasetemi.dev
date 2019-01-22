@@ -5,6 +5,8 @@ import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO';
+import Footer from '../components/Footer';
 import { formatReadingTime } from '../utils/helpers'
 import { rhythm } from '../utils/typography'
 
@@ -24,6 +26,7 @@ class BlogIndex extends React.Component {
           meta={[{ name: 'description', content: siteDescription }, {name: "title", content: "Ojo Oluwasetemi Stephen's Blog"}]}
           title={siteTitle}
         />
+        <SEO />
         <Bio />
         {posts.map(({ node }) => {
           const title = get(node, 'frontmatter.title') || node.fields.slug
@@ -46,6 +49,7 @@ class BlogIndex extends React.Component {
             </div>
           )
         })}
+        <Footer />
       </Layout>
     )
   }

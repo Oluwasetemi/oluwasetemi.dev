@@ -1,9 +1,11 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link,graphql } from 'gatsby'
+import Utterance from 'react-utterances';
 import get from 'lodash/get'
 
 import Bio from '../components/Bio'
+import SEO from '../components/SEO';
 import { formatReadingTime } from '../utils/helpers'
 import Layout from '../components/Layout'
 import { rhythm, scale } from '../utils/typography'
@@ -17,10 +19,11 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={`${post.frontmatter.title} | ${siteTitle}`}
+        <SEO
+          lang={'en'}
+          title={post.frontmatter.title}
+          description={siteDescription}
+          slug={post.fields.slug}
         />
         <h1>{post.frontmatter.title}</h1>
         <p
@@ -40,6 +43,8 @@ class BlogPostTemplate extends React.Component {
             marginBottom: rhythm(1),
           }}
         />
+        <p>Comments Should Load Here😜</p>
+        <Utterance repo={'Oluwasetemi/Oluwasetemi.github.io'} type={'url'}/>
         <Bio />
 
         <ul
@@ -91,6 +96,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+      }
+      fields {
+        slug
       }
     }
   }

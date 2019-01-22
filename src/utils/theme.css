@@ -12,11 +12,10 @@
    word-break: normal;
    word-wrap: normal;
    line-height: 1.5;
-
+   margin-bottom: 0;
    -moz-tab-size: 4;
    -o-tab-size: 4;
    tab-size: 4;
-
    -webkit-hyphens: none;
    -moz-hyphens: none;
    -ms-hyphens: none;
@@ -144,7 +143,11 @@
  }
 
  .gatsby-highlight {
+  -webkit-overflow-scrolling: touch;
    overflow: auto;
+   margin-bottom: 1.75rem;
+   border-radius: 10px;
+   background: #011627;
  }
 
  .gatsby-highlight pre[class*="language-"] {
