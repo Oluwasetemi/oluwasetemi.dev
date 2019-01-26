@@ -21,11 +21,6 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }, {name: "title", content: "Ojo Oluwasetemi Stephen's Blog"}]}
-          title={siteTitle}
-        />
         <SEO />
         <Bio />
         {posts.map(({ node }) => {

@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { Link,graphql } from 'gatsby'
 import Utterance from 'react-utterances';
 import get from 'lodash/get'
@@ -25,7 +24,7 @@ class BlogPostTemplate extends React.Component {
           description={siteDescription}
           slug={post.fields.slug}
         />
-        <h1>{post.frontmatter.title}</h1>
+        <h1 style={{color: 'var(--color)'}}>{post.frontmatter.title}</h1>
         <p
           style={{
             ...scale(-1 / 5),
