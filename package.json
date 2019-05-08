@@ -1,5 +1,5 @@
 {
-  "name": "OOS-Blog",
+  "name": "oos-blog ",
   "description": "I write about modern JavaScript, web development, computer science and opinions are mine.🚀",
   "version": "1.0.0",
   "author": "Ojo Oluwasetemi <setemiojo@gmail.com>",
@@ -41,7 +41,7 @@
     "gh-pages": "^1.2.0",
     "prettier": "^1.14.2"
   },
-  "homepage": "https://oluwasetemi.github.io/",
+  "homepage": "https://oluwasetemi.dev/",
   "keywords": [
     "gatsby"
   ],
