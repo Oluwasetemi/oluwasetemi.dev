@@ -120,3 +120,9 @@ arr.flat() // [1, 2, 4, 5]
 It is still in the [candidate recommendation stage 3](https://tc39.github.io/proposal-flatMap/#sec-Array.prototype.flat) in the TC39 Proposals meaning only very few browser will have implemented it. Google Chrome supports start from version 69 and Firefox from version 62 with Opera and Safari supporting from 56 and 12 respectively.
 
 [Nodejs does not have support for it at all](https://node.green/).
+
+**updated on 3rd January, 2019**
+
+Nodejs now supports `Array.prototype.flat`, `Array.prototype.flatMap` and `flat and flatMap in Array.prototype[@@unscopables]` in the recent nodejs version 11.15.0 release. Below is a screenshot from [Node Green](https://node.green). What is [Node Green](https://node.green)? ( Its a node version of [CanIUse](https://caniuse.com))
+
+![A picture of the nodejs versions that supports flat and flatMap](https://res.cloudinary.com/drnqdd87d/image/upload/v1578022086/Screenshot_2020-01-03_at_04.23.39_szrwka.png).

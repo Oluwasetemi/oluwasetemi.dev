@@ -27,4 +27,4 @@ Coding alone might be good but coding with a team is better since much work can 
 
 ### Final Advice
 
-My advice is to be able to manage both situation properly. To always have time we work alone and knowing when to ask for help will give you more in terms of result. "Wolves are have their strength in their packs". To level up you need people who can help the way you code. Coding alone comes with the risk as pointed out by Jeff Atwood's article.
+My advice is to be able to manage both situation properly. To always have time we work alone and knowing when to ask for help will give you more in terms of result. "Wolves are have their strength in their packs". To level up you need people who can help the way you code. Coding alone comes with the risk as pointed out by [Jeff Atwood's article](https://blog.codinghorror.com/in-programming-one-is-the-loneliest-number/).
