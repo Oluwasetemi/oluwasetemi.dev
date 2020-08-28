@@ -1,5 +1,5 @@
 ---
-title: Summary Report of the Freecodecamp Ibadan Community
+title: summary report of the freecodecamp ibadan community
 date: "2018-12-22T06:00:00.211Z"
 ---
 
