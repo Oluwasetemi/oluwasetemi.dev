@@ -1,9 +1,7 @@
 import React from 'react'
-
+import 'typeface-merriweather'
 // Import typefaces
 import 'typeface-montserrat'
-import 'typeface-merriweather'
-
 import profilePic from '../assets/profile-pic.jpg'
 import { rhythm } from '../utils/typography'
 
@@ -31,7 +29,7 @@ class Bio extends React.Component {
           Written by {' '}
           <strong>
             <a className="link" href="https://github.com/Oluwasetemi">Oluwasetemi Ojo Stephen</a> {'...OOS'}
-          </strong> Relocated to Lagos, Nigeria.🎈{' '}
+          </strong> Relocated to Osogbo, Osun State, Nigeria.🎈{' '}
           <a className="link" href="https://mobile.twitter.com/setemiojo">
             Say Hi to  Him on Twitter.
           </a>
