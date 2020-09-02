@@ -1,26 +1,24 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import get from 'lodash/get'
-import Helmet from 'react-helmet'
-
+import React from 'react'
 import Bio from '../components/Bio'
+import Footer from '../components/Footer'
 import Layout from '../components/Layout'
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 import { rhythm } from '../utils/typography'
 
-class BlogIndex extends React.Component {
-  render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const siteDescription = get(
-      this,
-      'props.data.site.siteMetadata.description'
-    )
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+
+function BlogIndex(props) {
+  const siteTitle = get(props, 'data.site.siteMetadata.title')
+  const siteDescription = get(
+    props,
+    'data.site.siteMetadata.description'
+  )
+  const posts = get(props, 'data.allMarkdownRemark.edges')
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={props.location} title={siteTitle}>
         <SEO />
         <Bio />
         {posts.map(({ node }) => {
@@ -47,7 +45,6 @@ class BlogIndex extends React.Component {
         <Footer />
       </Layout>
     )
-  }
 }
 
 export default BlogIndex
