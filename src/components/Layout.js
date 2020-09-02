@@ -1,11 +1,10 @@
-import React from 'react'
 import { Link } from 'gatsby'
-
+import React from 'react'
 import { rhythm, scale } from '../utils/typography'
 
-class Layout extends React.Component {
-  render() {
-    const { location, title, children } = this.props
+
+function Layout(props) {
+    const { location, title, children } = props
     const rootPath = `${__PATH_PREFIX__}/`
     let header
 
@@ -66,7 +65,6 @@ class Layout extends React.Component {
         {children}
       </div>
     )
-  }
 }
 
 export default Layout

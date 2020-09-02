@@ -5,8 +5,7 @@ import 'typeface-montserrat'
 import profilePic from '../assets/profile-pic.jpg'
 import { rhythm } from '../utils/typography'
 
-class Bio extends React.Component {
-  render() {
+function Bio (props) {
     return (
       <div
         style={{
@@ -39,7 +38,6 @@ class Bio extends React.Component {
         </p>
       </div>
     )
-  }
 }
 
 export default Bio

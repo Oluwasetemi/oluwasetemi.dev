@@ -2,8 +2,7 @@ import React from 'react';
 import { rhythm } from '../utils/typography';
 
 
-class Footer extends React.Component {
-  render() {
+function Footer (props) {
     return (
       <footer
         style={{
@@ -41,7 +40,6 @@ class Footer extends React.Component {
         </a>
       </footer>
     );
-  }
 }
 
 export default Footer;
