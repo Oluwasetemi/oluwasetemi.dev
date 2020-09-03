@@ -10,7 +10,7 @@ One goal was to write code and get to build products(software) useful and usable
 
 ![Dancing into 2020 in style](https://res.cloudinary.com/drnqdd87d/image/upload/v1578022058/76988591_526287721292875_839773037896022696_n.jpg_a2xm1a.jpg)
 
-> 📷 photo credit https://www.instagram.com/danmayor_/
+> 📷 photo credit [https://www.instagram.com/danmayor_/](Dan Mayor)
 
 I met a lot of awesome folks this year ranging from day to day co-workers to community leaders and mentors. Learnt that your net-worth is a true reflection of your network. [Ama](https://twitter.com/amakha__) - Star girl👩🏼‍🎤🌟, [Dike](https://twitter.com/Chukwudike__), [Richard](https://twitter.com/nyntein), [Ibrahim](https://twitter.com/_darangi), [MZ](https://twitter.com/mzndako), [Kenny](https://twitter.com/_KennyShittu) became my all day pals at work. Non technical friends like my [Boss](https://twitter.com/ireadastory), Sewa, Jenny, [Passion Incubators](https://twitter.com/P_Incubator) People, [Leadspace friends](https://twitter.com/TheLeadspace) - [Nonye](Link), [kelvin](https://twitter.com/KelvmakanjuOla) and [Lateefat](https://link), My [HubOne](https://www.fcmb.com/hub-one/) Pals, ScholarX team - [Nonso](https://twitter.com/Williamsnonso11) and [Funmilola - Cake Vendor](https://twitter.com/melawlah) and MyCrib Team and special mention to the hardworking Theo who get us sorted at all time. Kudos to Babajide and the FCMB team for the great community full of impact most especially the world class idea of [Epic hours](https://www.fcmb.com/hub-one/event.php?a=epic-hour-at-hub-one).
 
@@ -22,7 +22,7 @@ Meet with someone I so much admire in the Nigerian Tech Space, the one and only 
 
 ![Meet Prosper at the 1st Edition of the JAMStack meetup, Lagos](https://res.cloudinary.com/drnqdd87d/image/upload/v1578028409/40519jamstacklagos_ym6tpb.jpg)
 
-> 📷 photo credit https://twitter.com/jola_adebayor
+> 📷 photo credit [https://twitter.com/jola_adebayor](jola_adebayor)
 
 ## Joined [Natterbase](https://natterbase.com)
 
