@@ -1,6 +1,6 @@
 ---
 title: why you should learn javascript properly
-date: "2020-08-28T09:00:00.000Z"
+date: '2020-08-28T09:00:00.000Z'
 tags: -javascript, -learning, -code
 ---
 
@@ -16,9 +16,9 @@ I can't say what my Decision to learn JavaScript properly was built on but I wil
 
 - The quest of what will I end up doing for living calls out to me after my final examination from the Ladoke Akintola University of Technology.
 
-- I have failed at properly, consistently learning C#, Java and Turbo Pascal with GUI.
+- I have failed at properly, consistently learning C#,C++, Java and Turbo Pascal with GUI.
 
-I could conclude that this 3 reasons were what led me to dedicate a large chunk of my life into a thorough learning of JavaScript. As failed programmer during university days, what career will I decide to commit my life into after  university, failing from several efforts to learn something I was very interested could have made me a failure, reasons to give up. But for me Oluwasetemi, It was more than enough to prove to myself and others that I am not a failed programmer, nor will failing at learning some programming languages be a deciding factor to my life outcomes. And finally the quest of a career path where I would be happy and successful were all enough to motivate me to learn properly. This were all my reasons. Let me share with you what I meant by saying learning properly.
+I could conclude that this 3 reasons were what led me to dedicate a large chunk of my life into a thorough learning of JavaScript. As failed programmer during university days, what career will I decide to commit my life into after university, failing from several efforts to learn something I was very interested could have made me a failure, reasons to give up. But for me Oluwasetemi, It was more than enough to prove to myself and others that I am not a failed programmer, nor will failing at learning some programming languages be a deciding factor to my life outcomes. And finally the quest of a career path where I would be happy and successful were all enough to motivate me to learn properly. This were all my reasons. Let me share with you what I meant by saying learning properly.
 
 ## How do I mean 'Learn properly'
 
@@ -28,10 +28,11 @@ What I found out after I took more time to focus on understanding Learning as a 
 
 Of which years after I am still trying to answer the same question of how to learn javascript properly. So if anyone is reading this and they are learning javascript or knows someone who is planning to learn the programming language of the web, then I will be your best friend on that journey.
 
-## The answer is close and will be coming in bits over the next coming days
+## The answer is close and will be coming in bits over in my next articles
 
-I will answer in very detailed step with no focus on any material but show you a bit of the all the structure that you can put in place to learn javascript properly. I am not advertising for any material or publisher so I will avoid too much focus on a material but will try to provide a system that can sustain anyone with little or no experience writing code.
+I will answer in very detailed steps with no focus on any material but show you a bit of the all the structure that you can put in place to learn javascript properly. I am not advertising for any material or publisher so I will avoid too much focus on a material but will try to provide a system that can sustain anyone with little or no experience writing code.
 
-Here is a few tips, research well on the subject(JavaScript) before attempting to learn, Learn enough to build something, Learn JavaScript as a programming language before you learning JavaScript in the browser. Learn more about Frontend Frameworks and build something.
+Here is a few tips, research well on the subject(JavaScript) before attempting to learn, Learn enough to build something, Learn JavaScript as a programming language before you learning JavaScript in the browser. Learn more about Frontend Frameworks and build something. Learn JavaScript on the server (Nodejs).
 
+_edited on 2nd September, 2019 19:29_
 Thank you for reading and stay tunned for more on the this topic.

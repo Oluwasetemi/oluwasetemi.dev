@@ -1,7 +1,8 @@
 ---
 title: Hello World
-date: "2018-12-02T12:22:03.284Z"
+date: '2018-12-02T12:22:03.284Z'
 ---
+
 Everything in this community begins with `Hello, World` and I am excited to
 start this blog. I will tell a small story of who I am, what I do.
 

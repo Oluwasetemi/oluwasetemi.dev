@@ -1,7 +1,8 @@
 ---
 title: New Beginnings
-date: "2018-12-06T22:40:32.169Z"
+date: '2018-12-06T22:40:32.169Z'
 ---
+
 A very difficult part of life is the beginning, full of waiting. 9 month for a new baby and numerous days/months/year for fruits.
 
 Harmattan is showing up on this side of the world and it signifies a new season, the season of thanksgiving. The season of christmas and chickens. The time to boil water for to take your bath. The transition in coloration of the vegetation.

@@ -2,7 +2,6 @@
 title: 2018 - The Review!
 date: '2018-12-08T23:46:37.121Z'
 tag: ['review', '2018']
-
 ---
 
 The first full year as a full time developer - Devoting myself to the life long career of software development learning the lifestyle and writing `codes`, most importantly building several things for the web. The nights, the coffee, and bugs - the Joy and frustration engrained in the wonderful 2018 year. It was my first year as a Grad. This was another year of travelling for me. Full of taking responsibilities. I could never be less grateful.
@@ -41,9 +40,9 @@ A lot of my family associates wanted to know my next move and decision and it wa
 
 Here is a one thing I skipped in the initial draft, how managed?. The funny thing about gospellyrics is how much it had helped me to become a better person. The friends I met in the process are so wonderful, [Oluwarufus](https://mobile.twitter.com/oluwarufus) and [Ewaoluwa(Ifeoluwa I-solo)](https://mobile.twitter.com/i_am_i_solo). Before I Finished **NYSC** I started posting lyrics for fun before I loved it. (can't say why maybe i like Rufus - That's a story for another day). Then Rufus reached out and he promised a small token and that made me more happy to post more frequently and remember that I was out of service with nothing to do, just learn to code and post gospellyrics was not a bad way to get means of survival - I mean data to stay alive on the internet and keep learning.
 
-Getting to read lyrics of song over and over made me get close to the creativity of song writers and artistes, got to follow a lot of then on the social media. If only we all saw ourselves as artists, in our day to day pursuit we can unlock the art in us for the world to see. It also drew me close to God in fellowship. I posted 389 songs November 2017 to 2018 August and I was given a target of 3 songs at least per day or a total of 30 songs monthly. The learning of how to write codes become overwhelming and I could not keep up with posting the lyrics again. I had  issues with one of the website where I got most of the foreign Africa lyrics from. It was a venture that was captivating and I hope I can do more in the coming days. Thank Mr Oluwarufus and his lovely wife.
+Getting to read lyrics of song over and over made me get close to the creativity of song writers and artistes, got to follow a lot of then on the social media. If only we all saw ourselves as artists, in our day to day pursuit we can unlock the art in us for the world to see. It also drew me close to God in fellowship. I posted 389 songs November 2017 to 2018 August and I was given a target of 3 songs at least per day or a total of 30 songs monthly. The learning of how to write codes become overwhelming and I could not keep up with posting the lyrics again. I had issues with one of the website where I got most of the foreign Africa lyrics from. It was a venture that was captivating and I hope I can do more in the coming days. Thank Mr Oluwarufus and his lovely wife.
 
-I asked him to be my mentor and he chickened out on my request -  I know he is a busy man. Still I get to call him and ask him a lot of questions about software development and the tech community in lagos. I hope to get a better shot at working on a project together sometimes soon.
+I asked him to be my mentor and he chickened out on my request - I know he is a busy man. Still I get to call him and ask him a lot of questions about software development and the tech community in lagos. I hope to get a better shot at working on a project together sometimes soon.
 
 ---
 
@@ -109,7 +108,7 @@ I don't like it when I see **entitlement** engrained in me because I was trained
 
 > In my daddy's voice - ₦10 earned is better than ₦1000 given.
 
-I have the mentality that _we have to work for everything we're going to get_ so I want to lead a responsible life that is harmonious in every bandwidth of my existence. I have a demand that keeps me working late all night, that makes me want to do extra, that make me dream and that makes me hope. Providing for my family is key irrespective. Giving my children *to be a better future is important for me. Helping everyone I can is very essential for me. Above all my family demands a better version of me every time I look and think about my late mum's sacrifice for us.
+I have the mentality that _we have to work for everything we're going to get_ so I want to lead a responsible life that is harmonious in every bandwidth of my existence. I have a demand that keeps me working late all night, that makes me want to do extra, that make me dream and that makes me hope. Providing for my family is key irrespective. Giving my children \*to be a better future is important for me. Helping everyone I can is very essential for me. Above all my family demands a better version of me every time I look and think about my late mum's sacrifice for us.
 
 ---
 
@@ -137,7 +136,7 @@ If you know anyone who is looking to hire a JavaScript developer (front-end or b
 
 ### Looking Ahead
 
-I can only hope for the beautiful things to come, all I am focused on right now is how to maximize the opportunity and privilege around me to become a good software developer and get better at teaching. Building a good family should be in motion soon - *it takes two to tango* (purposeful co-pilot is wanted here).
+I can only hope for the beautiful things to come, all I am focused on right now is how to maximize the opportunity and privilege around me to become a good software developer and get better at teaching. Building a good family should be in motion soon - _it takes two to tango_ (purposeful co-pilot is wanted here).
 
 2019 I want to build more useful product with JavaScript, Node and React. Maximizing the digital revolution to reach every kid in africa with good education will make me pleased. Starting the conversion **What is school for?** and how NUC must improve the computer science curriculum. Get to reach to more new beginners and programming enthusiast, starting a podcast on computer science and web development. Get more of my thought together in writing and stay healthy and happy.
 
@@ -194,4 +193,4 @@ I listen mostly while on commute or doing chores or anytime I need to cool off w
 ![alt](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940511/2018-in-picture-7_vlytsv.jpg)
 ![alt](https://res.cloudinary.com/drnqdd87d/image/upload/v1545940385/2018-in-picture-22_nrdmls.jpg)
 
-*Thanks for Reading*
+_Thanks for Reading_

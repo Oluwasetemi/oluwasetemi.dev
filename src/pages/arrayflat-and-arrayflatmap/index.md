@@ -86,31 +86,32 @@ var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
 ```
 
 ```js
-[1, 2, [3, [4, 5]], 5, 6].flatMap(
-  (v, i) => (Array.isArray(v)
-    ? v.flat()
-    : v)
-  )
+;[1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v))
 ```
 
 The future is here not Just evenly distributed. With the two methods, we can flatten an array easily. `flatMap` combines the power of the regular map and flat together.
 
 ```js{2,5,8}
 // Infinity can be used to flatten recursively
-[1, 2, [3, [4, 5]], 5, 6].flat(Infinity)
-// [1, 2, 3, 4, 5, 5, 6]
+;[1, 2, [3, [4, 5]], 5, 6]
+  .flat(Infinity)
+  [
+    // [1, 2, 3, 4, 5, 5, 6]
 
-[1, 2, [3, [4, 5]], 5, 6].flat() // flats 1 depth level - default
-// [1, 2, 3, [4, 5], 5, 6]
+    (1, 2, [3, [4, 5]], 5, 6)
+  ].flat() // flats 1 depth level - default
+  [
+    // [1, 2, 3, [4, 5], 5, 6]
 
-[1, 2, [3, [4, 5]], 5, 6].flat(2) // flats 2 depth level
+    (1, 2, [3, [4, 5]], 5, 6)
+  ].flat(2) // flats 2 depth level
 // [1, 2, 3, [4, 5], 5, 6]
 ```
 
 The flat method removes empty slots in arrays and it will be very useful in cleaning up arrays.
 
 ```js
-const arr = [1, 2, , 4, 5];
+const arr = [1, 2, , 4, 5]
 
 arr.flat() // [1, 2, 4, 5]
 ```
@@ -121,8 +122,7 @@ It is still in the [candidate recommendation stage 3](https://tc39.github.io/pro
 
 [Nodejs does not have support for it at all](https://node.green/).
 
-**updated on 3rd January, 2019**
-
 Nodejs now supports `Array.prototype.flat`, `Array.prototype.flatMap` and `flat and flatMap in Array.prototype[@@unscopables]` in the recent nodejs version 11.15.0 release. Below is a screenshot from [Node Green](https://node.green). What is [Node Green](https://node.green)? ( Its a node version of [CanIUse](https://caniuse.com))
 
+_updated on 3rd January, 2019_
 ![A picture of the nodejs versions that supports flat and flatMap](https://res.cloudinary.com/drnqdd87d/image/upload/v1578022086/Screenshot_2020-01-03_at_04.23.39_szrwka.png).
