@@ -1,6 +1,9 @@
 ---
 title: Code Like An Introvert, Communicate Like An Extrovert
 date: '2019-05-20T09:00:00.123Z'
+tags: []
+isPublished: true
+isDraft: false
 ---
 
 A solo developer has spent most of the time as a single element with the idea that he is self made and that he thrives better doing the business of zeros and ones alone - A lone wolf. He alone, he is on top of his game. I fear many introverts fall into this category, they like it being alone and they feel more productive in their lone zone. Everyone will get to that zone at some point if you are in the business of writing codes but that is not the end, there is just so much more to it that enjoying the comfort of loneliness with programming juice. I will share some cons of being a solo developer by sharing the benefit of not being a solo developer.

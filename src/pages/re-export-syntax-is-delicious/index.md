@@ -1,7 +1,9 @@
 ---
 title: re-export syntax is delicious
 date: '2020-09-06T09:00:00.000Z'
-tags: -javascript, -learning, -code
+tags: [javascript, learning, code]
+isPublished: true
+isDraft: false
 ---
 
 Recently joined a team where I had to work with on a codebase that used the JavaScript module re-export syntax and It was such a nice, elegant and delicious syntax. I would talk about the syntax and its use case and exceptions. Sit with me and let have a ride of a lifetime.

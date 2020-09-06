@@ -38,7 +38,7 @@
   "devDependencies": {
     "eslint": "^7.7.0",
     "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^1.2.0",
+    "gh-pages": "^3.1.0",
     "prettier": "^1.14.2"
   },
   "homepage": "https://oluwasetemi.dev/",
@@ -61,6 +61,7 @@
     "build": "gatsby build",
     "clean": "gatsby clean",
     "deploy": "gatsby build && gh-pages -d public -b master",
+    "deploy:github": "npm run build && node ./scripts/deploy-github",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }

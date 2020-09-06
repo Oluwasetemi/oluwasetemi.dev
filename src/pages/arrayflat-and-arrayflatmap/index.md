@@ -1,6 +1,9 @@
 ---
 title: Array.prototype.flat and Array.prototype.flatMap
 date: '2018-12-20T23:50:00.121Z'
+tags: []
+isPublished: true
+isDraft: false
 ---
 
 A Short love story of the experimental new addition to the Array methods - the Flat and FlatMap. We can **level flat** any irregular array (an array that contains array or arrays) irrespective of the depth level plus the one opportunity to flatten and map at the same time is a very cool feature coming to JavaScript after the whole `Array.smoosh` episode.

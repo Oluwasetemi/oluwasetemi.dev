@@ -1,6 +1,9 @@
 ---
 title: summary report of the freecodecamp ibadan community
 date: '2018-12-22T06:00:00.211Z'
+tags: ['freecodecamp', 'community']
+isPublished: true
+isDraft: false
 ---
 
 > These are the source of our best memories, the moments where we moved forward and felt the chance to make a difference.

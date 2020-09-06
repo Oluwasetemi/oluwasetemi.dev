@@ -1,12 +1,14 @@
 ---
 title: why you should learn javascript properly
 date: '2020-08-28T09:00:00.000Z'
-tags: -javascript, -learning, -code
+tags: [javascript, learning, code, personal]
+isPublished: true
+isDraft: false
 ---
 
 ## My Decision
 
-Immediately after university education around December 2015, I made a solemn promise to learn and learn javascript properly. Almost 5 years after the commitment, I am not backing out on my commitment. I want to learn the language wholly, completely and will thus do everything I can to stay true to this saying of mine. Let me go straight to my reason why you should learn JavaScript properly if at all you plan or want or need to learn JavaScript.
+Immediately after university education around December 2015, I made a solemn promise to learn and learn  properly. Amost 5 yeas after the commitment, I am not backing out on my commitment. I want to learn the language wholly, completely and will thus do everything I can to stay true to this saying of mine. Let me go straight to my reason why you should learn JavaScript properly if at all you plan or want or need to learn JavaScript.
 
 ## Why and What Led me to this Decision
 
