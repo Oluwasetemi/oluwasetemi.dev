@@ -5,7 +5,7 @@ ghpages.publish(
   'public',
   {
     branch: 'master',
-    repo: 'https://github.com/oluwasetemi/oluwasetemi.github.io.git',
+    repo: 'https://github.com/oluwasetemi/oluwasetemi.dev.git',
   },
   () => {
     console.log('Deploy Complete!')

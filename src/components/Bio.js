@@ -5,7 +5,7 @@ import 'typeface-montserrat'
 import profilePic from '../assets/profile-pic.jpg'
 import { rhythm } from '../utils/typography'
 
-function Bio(props) {
+function Bio() {
   return (
     <div
       style={{
@@ -15,7 +15,7 @@ function Bio(props) {
     >
       <img
         src={profilePic}
-        alt={`Ojo Oluwasetemi`}
+        alt="Ojo Oluwasetemi"
         style={{
           marginRight: rhythm(1 / 2),
           marginBottom: 0,

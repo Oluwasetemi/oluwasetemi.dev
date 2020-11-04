@@ -4,7 +4,9 @@ import { rhythm, scale } from '../utils/typography'
 
 function Layout(props) {
   const { location, title, children } = props
+  /* eslint-disable */
   const rootPath = `${__PATH_PREFIX__}/`
+  /* eslint-enable */
   let header
 
   if (location.pathname === rootPath) {
@@ -23,7 +25,7 @@ function Layout(props) {
             textDecoration: 'none',
             color: 'inherit',
           }}
-          to={'/'}
+          to="/"
         >
           {title}
         </Link>
@@ -44,7 +46,7 @@ function Layout(props) {
             textDecoration: 'none',
             color: 'inherit',
           }}
-          to={'/'}
+          to="/"
         >
           {title}
         </Link>
