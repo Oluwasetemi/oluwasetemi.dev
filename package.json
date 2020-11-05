@@ -61,6 +61,7 @@
   ],
   "license": "MIT",
   "main": "n/a",
+  "engines" : { "node" : ">=10.14" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Oluwasetemi/Oluwasetemi.github.io.git"
