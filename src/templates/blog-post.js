@@ -51,7 +51,7 @@ function BlogPostTemplate({ data, location, pageContext }) {
           </Link>
         ))}
       </p>
-      <p className="github-edit-link" style={{ marginBottom: rhythm(1 / 4) }}>
+      <p className="github-edit-link" style={{ marginBottom: rhythm(1.5) }}>
         {`✏️ `}
         <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
           Edit this post on GitHub

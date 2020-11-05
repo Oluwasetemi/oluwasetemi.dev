@@ -35,7 +35,6 @@ function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
             <small>
               {node.frontmatter.date}
               {` • ${formatReadingTime(node.timeToRead)}`}
-              {` • ${formatReadingTime(node.timeToRead)}`}
               {node.frontmatter.tags.map(tag => (
                 <Link to={`/tags/${tag}`} key={tag}>
                   <span className="mark">{` • 🏷 ${tag}`}</span>
