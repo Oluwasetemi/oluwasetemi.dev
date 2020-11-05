@@ -2,6 +2,7 @@
   "name": "oos-blog",
   "description": "I write about modern JavaScript, web development, computer science and opinions are mine.🚀",
   "version": "1.0.0",
+  "private": "true",
   "author": "Ojo Oluwasetemi <setemiojo@gmail.com>",
   "bugs": {
     "url": "https://github.com/Oluwasetemi/Oluwasetemi.github.io/issues"
