@@ -14,6 +14,18 @@ function BlogPostTemplate({ data, location, pageContext }) {
   const siteDescription = post.excerpt
   const { previous, next } = pageContext
 
+  function getGitMarkdownUrl() {
+    const GITHUB_USERNAME = 'Oluwasetemi'
+    const GITHUB_REPO_NAME = 'oluwasetemi.dev'
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${post.fields.slug.replace(
+      /\//g,
+      ''
+    )}/index.md`
+    return editUrl
+  }
+
+  const gitMarkdownUrl = getGitMarkdownUrl()
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -34,10 +46,14 @@ function BlogPostTemplate({ data, location, pageContext }) {
         {post.frontmatter.date}
         {` • ${formatReadingTime(post.timeToRead)}`}
         {post.frontmatter.tags.map(tag => (
-          <Link to={`/tags/${tag}`}>
+          <Link to={`/tags/${tag}`} key={tag}>
             <span className="mark">{` • 🏷 ${tag}`}</span>
           </Link>
         ))}
+        {` • ✏️ `}
+        <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
+          EDIT THIS POST
+        </a>
       </p>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
       <hr
@@ -92,6 +108,7 @@ export const pageQuery = graphql`
       excerpt
       html
       timeToRead
+      fileAbsolutePath
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
