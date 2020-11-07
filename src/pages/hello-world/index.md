@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: '2018-12-02T12:22:03.284Z'
-tags: ['review', '2018']
+tags: ['intro', 'beginning']
 isPublished: true
 isDraft: false
 ---

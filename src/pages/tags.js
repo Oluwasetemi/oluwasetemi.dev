@@ -5,16 +5,41 @@ import Bio from '../components/Bio'
 import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
+import Tags from '../components/Tags'
 import { formatReadingTime } from '../utils/helpers'
+
+function flattenArray(arr) {
+  const flattened = [].concat(...arr)
+  return flattened.some(item => Array.isArray(item))
+    ? flattenArray(flattened)
+    : flattened
+}
 
 function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
   const { siteTitle, siteDescription } = site
   const posts = allMarkdownRemark.edges
 
+  // loop thru the post and count the tags
+  const tagsArrays = []
+  for (const each of posts) {
+    const { tags } = each.node.frontmatter
+    tagsArrays.push(...tags)
+  }
+
+  const tagsWithCount = tagsArrays.reduce((curr, prev) => {
+    if (curr[prev]) {
+      curr[prev] += 1
+    } else {
+      curr[prev] = 1
+    }
+    return curr
+  }, {})
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO />
       <Bio />
+      <Tags tags={tagsWithCount} all={tagsArrays.length} />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
@@ -48,7 +73,7 @@ function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query($tagsRegex: String) {
     site {
       siteMetadata {
         title
@@ -57,7 +82,9 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { isPublished: { eq: true } } }
+      filter: {
+        frontmatter: { isPublished: { eq: true }, tags: { regex: $tagsRegex } }
+      }
     ) {
       edges {
         node {

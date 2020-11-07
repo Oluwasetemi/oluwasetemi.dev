@@ -1,12 +1,11 @@
 import React from 'react'
-import { rhythm } from '../utils/typography'
 
 function Footer(props) {
   return (
     <footer
       style={{
-        marginTop: rhythm(2.5),
-        paddingTop: rhythm(1),
+        marginTop: '50px',
+        paddingTop: '50px',
       }}
     >
       <div style={{ float: 'right' }}>

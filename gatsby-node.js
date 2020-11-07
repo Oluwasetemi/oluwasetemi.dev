@@ -58,7 +58,52 @@ async function turnBlogIntoPages({ graphql, actions }) {
 async function turnTagsIntoPages({ graphql, actions }) {
   try {
     // fetch data using graphQL to get all the data to create the allTags Object
+    const { createPage } = actions
+    const tagsPage = path.resolve('./src/pages/tags.js')
+    const { data } = await graphql(
+      `
+        {
+          allMarkdownRemark(
+            sort: { fields: [frontmatter___date], order: DESC }
+            limit: 1000
+            filter: { frontmatter: { isPublished: { eq: true } } }
+          ) {
+            edges {
+              node {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  title
+                  tags
+                }
+              }
+            }
+          }
+        }
+      `
+    )
+    // Create blog posts pages.
+    const posts = data.allMarkdownRemark.edges
+
+    const tagsArrays = []
+    for (const each of posts) {
+      const { tags } = each.node.frontmatter
+      tagsArrays.push(...tags)
+    }
+    const tagsArraysUnique = Array.from(new Set(tagsArrays))
+
     // loop true the data and create the tags page
+    tagsArraysUnique.forEach(tag => {
+      createPage({
+        path: `tags/${tag}`,
+        component: tagsPage,
+        context: {
+          tag,
+          tagsRegex: `/${tag}/i`,
+        },
+      })
+    })
   } catch (error) {
     console.log(error.message)
     throw new Error(`error while creating tags ${error.message}`)

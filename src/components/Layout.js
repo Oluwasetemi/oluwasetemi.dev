@@ -1,6 +1,29 @@
 import { Link } from 'gatsby'
+import 'normalize.css'
 import React from 'react'
-import { rhythm, scale } from '../utils/typography'
+import styled from 'styled-components'
+import GlobalStyles from '../styles/GlobalStyles'
+import Typography from '../styles/Typography'
+
+const SiteBorderStyles = styled.div`
+  max-width: 1000px;
+  margin: 10rem auto 4rem auto;
+  margin-top: clamp(2rem, 10vw, 12rem);
+  padding: 5px;
+  padding: clamp(5px, 1vw, 25px);
+  background-size: 1500px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044);
+  border: 5px solid white;
+  @media (max-width: 1100px) {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+`
+
+const ContentStyles = styled.div`
+  background: white;
+  padding: 2rem;
+`
 
 function Layout(props) {
   const { location, title, children } = props
@@ -13,8 +36,7 @@ function Layout(props) {
     header = (
       <h1
         style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
+          marginBottom: '100px',
           marginTop: 0,
           color: '#800080',
         }}
@@ -33,13 +55,7 @@ function Layout(props) {
     )
   } else {
     header = (
-      <h3
-        style={{
-          fontFamily: 'Montserrat, sans-serif',
-          marginTop: 0,
-          marginBottom: rhythm(-1),
-        }}
-      >
+      <h3>
         <Link
           style={{
             boxShadow: 'none',
@@ -54,17 +70,14 @@ function Layout(props) {
     )
   }
   return (
-    <div
-      style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
-      {header}
-      {children}
-    </div>
+    <>
+      <GlobalStyles />
+      <Typography />
+      <SiteBorderStyles>
+        {header}
+        {children}
+      </SiteBorderStyles>
+    </>
   )
 }
 

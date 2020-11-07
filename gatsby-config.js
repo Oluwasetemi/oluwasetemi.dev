@@ -2,15 +2,16 @@ module.exports = {
   siteMetadata: {
     title: '{...OOS}',
     author: 'Oluwasetemi Stephen Ojo',
-    description: 'I write about modern JavaScript, web development, computer science and opinions are mine. I love teaching. Send me a DM if you want to learn web development🚀',
+    description:
+      'I write about modern JavaScript, web development, computer science and opinions are mine. I love teaching. Send me a DM if you want to learn web development🚀',
     siteUrl: 'https://oluwasetemi.dev/',
     social: {
       twitter: '@setemiojo',
       codepen: 'setemiojo',
       github: 'Oluwasetemi',
       linkedIn: 'setemiojo',
-      hackerrank: 'setemiojo'
-    }
+      hackerrank: 'setemiojo',
+    },
   },
   // pathPrefix: '/',
   plugins: [
@@ -66,11 +67,5 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: 'gatsby-plugin-typography',
-      options: {
-        pathToConfigModule: 'src/utils/typography',
-      },
-    },
   ],
 }

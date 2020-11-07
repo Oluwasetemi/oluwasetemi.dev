@@ -1,26 +1,22 @@
 import React from 'react'
-import 'typeface-merriweather'
 // Import typefaces
-import 'typeface-montserrat'
 import profilePic from '../assets/profile-pic.jpg'
-import { rhythm } from '../utils/typography'
 
 function Bio() {
   return (
     <div
       style={{
         display: 'flex',
-        marginBottom: rhythm(2.5),
       }}
     >
       <img
         src={profilePic}
         alt="Ojo Oluwasetemi"
         style={{
-          marginRight: rhythm(1 / 2),
+          marginRight: '20px',
           marginBottom: 0,
-          width: rhythm(2),
-          height: rhythm(2),
+          width: '100px',
+          height: '100px',
           borderRadius: '50%',
         }}
       />

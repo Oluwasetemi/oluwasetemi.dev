@@ -6,7 +6,6 @@ import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
-import { rhythm, scale } from '../utils/typography'
 
 function BlogPostTemplate({ data, location, pageContext }) {
   const post = data.markdownRemark
@@ -37,21 +36,20 @@ function BlogPostTemplate({ data, location, pageContext }) {
       <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
       <p
         style={{
-          ...scale(-1 / 5),
           display: 'block',
-          marginBottom: rhythm(1 / 4),
-          marginTop: rhythm(-1),
+          marginBottom: '25px',
+          marginTop: '50px',
         }}
       >
         {post.frontmatter.date}
         {` • ${formatReadingTime(post.timeToRead)}`}
         {post.frontmatter.tags.map(tag => (
           <Link to={`/tags/${tag}`} key={tag}>
-            <span className="mark">{` • 🏷 ${tag}`}</span>
+            • 🏷 <span className="mark">{`${tag}`}</span>
           </Link>
         ))}
       </p>
-      <p className="github-edit-link" style={{ marginBottom: rhythm(1.5) }}>
+      <p className="github-edit-link" style={{ marginBottom: '50px' }}>
         {`✏️ `}
         <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
           Edit this post on GitHub
@@ -76,12 +74,12 @@ function BlogPostTemplate({ data, location, pageContext }) {
         </svg>
       </p>
       <div
-        style={{ marginTop: rhythm(-1) }}
+        style={{ marginTop: '50px' }}
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
       <hr
         style={{
-          marginBottom: rhythm(1),
+          marginBottom: '50px',
         }}
       />
       <p>Comments Should Load Here😜</p>
