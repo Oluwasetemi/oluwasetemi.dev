@@ -15,31 +15,18 @@ function flattenArray(arr) {
     : flattened
 }
 
-function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
+function BlogIndex(
+  { data: { site, allMarkdownRemark }, pageContext },
+  location
+) {
   const { siteTitle, siteDescription } = site
   const posts = allMarkdownRemark.edges
-
-  // loop thru the post and count the tags
-  const tagsArrays = []
-  for (const each of posts) {
-    const { tags } = each.node.frontmatter
-    tagsArrays.push(...tags)
-  }
-
-  const tagsWithCount = tagsArrays.reduce((curr, prev) => {
-    if (curr[prev]) {
-      curr[prev] += 1
-    } else {
-      curr[prev] = 1
-    }
-    return curr
-  }, {})
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO />
       <Bio />
-      <Tags tags={tagsWithCount} all={tagsArrays.length} />
+      <Tags activeTag={pageContext.tag} />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (

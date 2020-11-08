@@ -1,8 +1,8 @@
-import { Link } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
-const ToppingsStyles = styled.div`
+const TagsStyles = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -31,19 +31,65 @@ const ToppingsStyles = styled.div`
   }
 `
 
-export default function Tags({ tags, all }) {
+export default function Tags({ activeTag }) {
+  const { posts } = useStaticQuery(graphql`
+    query {
+      posts: allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        filter: { frontmatter: { isPublished: { eq: true } } }
+      ) {
+        edges {
+          node {
+            excerpt
+            fields {
+              slug
+            }
+            timeToRead
+            frontmatter {
+              date(formatString: "dddd DD MMMM YYYY")
+              title
+              tags
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  // loop thru the post and count the tags
+  const tagsArrays = []
+  for (const each of posts.edges) {
+    const { tags } = each.node.frontmatter
+    tagsArrays.push(...tags)
+  }
+
+  const tagsWithCount = tagsArrays.reduce((curr, prev) => {
+    if (curr[prev]) {
+      curr[prev] += 1
+    } else {
+      curr[prev] = 1
+    }
+    return curr
+  }, {})
+
   return (
-    <ToppingsStyles>
+    <TagsStyles>
       <Link to="/tags">
-        <span className="name">All</span>
-        <span className="count">{all}</span>
+        <span className="name">#All</span>
+        <span className="count">#{tagsArrays.length}</span>
       </Link>
-      {Object.entries(tags).map(([tag, count], index) => (
-        <Link key={index} to={`tags/${tag}`}>
-          <span className="name">#{tag}</span>
-          <span className="count">#{count}</span>
-        </Link>
-      ))}
-    </ToppingsStyles>
+      {Object.entries(tagsWithCount).map(([tag, count], index) => {
+        return (
+          <Link
+            key={index}
+            to={`/tags/${tag}`}
+            className={tag === activeTag ? 'active' : ''}
+          >
+            <span className="name">#{tag}</span>
+            <span className="count">#{count}</span>
+          </Link>
+        )
+      })}
+    </TagsStyles>
   )
 }
