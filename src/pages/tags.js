@@ -2,29 +2,15 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Bio from '../components/Bio'
-import Footer from '../components/Footer'
-import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import Tags from '../components/Tags'
 import { formatReadingTime } from '../utils/helpers'
 
-function flattenArray(arr) {
-  const flattened = [].concat(...arr)
-  return flattened.some(item => Array.isArray(item))
-    ? flattenArray(flattened)
-    : flattened
-}
-
-function TagsPage(
-  { data: { site, allMarkdownRemark }, pageContext },
-  location
-) {
-  const { siteMetadata } = site
-  console.log(siteMetadata)
+function TagsPage({ data: { allMarkdownRemark }, pageContext }) {
   const posts = allMarkdownRemark.edges
 
   return (
-    <Layout location={location} title={siteMetadata?.title}>
+    <>
       <SEO />
       <Bio />
       <Tags activeTag={pageContext.tag} />
@@ -53,8 +39,7 @@ function TagsPage(
           </div>
         )
       })}
-      <Footer />
-    </Layout>
+    </>
   )
 }
 
@@ -62,12 +47,6 @@ export default TagsPage
 
 export const pageQuery = graphql`
   query($tagsRegex: String) {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {

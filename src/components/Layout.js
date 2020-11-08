@@ -1,9 +1,11 @@
-import { Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import 'normalize.css'
 import React from 'react'
 import styled from 'styled-components'
 import GlobalStyles from '../styles/GlobalStyles'
 import Typography from '../styles/Typography'
+import Footer from './Footer'
+import Nav from './Nav'
 
 const SiteBorderStyles = styled.div`
   max-width: 1000px;
@@ -25,57 +27,27 @@ const ContentStyles = styled.div`
   padding: 2rem;
 `
 
-function Layout(props) {
-  const { location, title, children } = props
-  /* eslint-disable */
-  const rootPath = `${__PATH_PREFIX__}/`
-  /* eslint-enable */
-  let header
+function Layout({ children }) {
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
-  if (location.pathname === rootPath) {
-    header = (
-      <h1
-        style={{
-          marginBottom: '100px',
-          marginTop: 0,
-          color: '#800080',
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3>
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
   return (
     <>
       <GlobalStyles />
       <Typography />
       <SiteBorderStyles>
-        {header}
-        {children}
+        <ContentStyles>
+          <Nav title={site.siteMetadata?.title} />
+          {children}
+          <Footer />
+        </ContentStyles>
       </SiteBorderStyles>
     </>
   )

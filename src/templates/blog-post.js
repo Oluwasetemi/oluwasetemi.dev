@@ -3,13 +3,11 @@ import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Utterance from 'react-utterances'
 import Bio from '../components/Bio'
-import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 
-function BlogPostTemplate({ data, location, pageContext }) {
+function BlogPostTemplate({ data, pageContext }) {
   const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata.title
   const siteDescription = post.excerpt
   const { previous, next } = pageContext
 
@@ -26,7 +24,7 @@ function BlogPostTemplate({ data, location, pageContext }) {
   const gitMarkdownUrl = getGitMarkdownUrl()
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <>
       <SEO
         lang="en"
         title={post.frontmatter.title}
@@ -110,7 +108,7 @@ function BlogPostTemplate({ data, location, pageContext }) {
           )}
         </li>
       </ul>
-    </Layout>
+    </>
   )
 }
 
@@ -118,12 +116,6 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       excerpt

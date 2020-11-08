@@ -2,17 +2,14 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Bio from '../components/Bio'
-import Footer from '../components/Footer'
-import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 
-function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
-  const { siteTitle, siteDescription } = site
+function BlogIndex({ data: { allMarkdownRemark } }) {
   const posts = allMarkdownRemark.edges
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <>
       <SEO />
       <Bio />
       {posts.map(({ node }) => {
@@ -40,8 +37,7 @@ function BlogIndex({ data: { site, allMarkdownRemark } }, location) {
           </div>
         )
       })}
-      <Footer />
-    </Layout>
+    </>
   )
 }
 
@@ -49,12 +45,6 @@ export default BlogIndex
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { isPublished: { eq: true } } }
