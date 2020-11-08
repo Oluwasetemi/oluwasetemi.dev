@@ -10,7 +10,7 @@ function BlogIndex({ data: { allMarkdownRemark } }) {
 
   return (
     <>
-      <SEO />
+      <SEO title="Home" />
       <Bio />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug

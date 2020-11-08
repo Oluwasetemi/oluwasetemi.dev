@@ -11,7 +11,14 @@ function TagsPage({ data: { allMarkdownRemark }, pageContext }) {
 
   return (
     <>
-      <SEO />
+      <SEO
+        title={
+          pageContext.tag
+            ? `Blog Post with ${pageContext.tag} tag`
+            : 'All Blog Post'
+        }
+        location
+      />
       <Bio />
       <Tags activeTag={pageContext.tag} />
       {posts.map(({ node }) => {

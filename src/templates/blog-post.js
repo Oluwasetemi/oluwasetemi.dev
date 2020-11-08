@@ -25,12 +25,7 @@ function BlogPostTemplate({ data, pageContext }) {
 
   return (
     <>
-      <SEO
-        lang="en"
-        title={post.frontmatter.title}
-        description={siteDescription}
-        slug={post.fields.slug}
-      />
+      <SEO title={post.frontmatter.title} description={siteDescription} />
       <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
       <p
         style={{

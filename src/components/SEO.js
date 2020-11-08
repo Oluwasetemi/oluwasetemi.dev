@@ -1,7 +1,6 @@
 import { graphql, StaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 const query = graphql`
   query GetSiteMetadata {
@@ -13,13 +12,18 @@ const query = graphql`
         siteUrl
         socials {
           twitter
+          codepen
+          github
+          linkedIn
+          hackerrank
+          codesandbox
         }
       }
     }
   }
 `
 
-function SEO({ meta, image, title, description, slug, lang = 'en' }) {
+export default function SEO({ children, location, description, title, image }) {
   return (
     <StaticQuery
       query={query}
@@ -27,86 +31,57 @@ function SEO({ meta, image, title, description, slug, lang = 'en' }) {
         const { siteMetadata } = data.site
         const metaDescription = description || siteMetadata.description
         const metaImage = image ? `${siteMetadata.siteUrl}/${image}` : null
-        const url = `${siteMetadata.siteUrl}${slug}`
+
         return (
-          <Helmet
-            htmlAttributes={{ lang }}
-            {...(title
-              ? {
-                  titleTemplate: `%s — ${siteMetadata.title}`,
-                  title,
-                }
-              : {
-                  title: `${siteMetadata.title} — A blog by Oluwasetemi Ojo`,
-                })}
-            meta={[
-              {
-                name: 'description',
-                content: metaDescription,
-              },
-              {
-                property: 'og:url',
-                content: url,
-              },
-              {
-                property: 'og:title',
-                content: title || siteMetadata.title,
-              },
-              {
-                name: 'og:description',
-                content: metaDescription,
-              },
-              {
-                name: 'twitter:card',
-                content: 'summary',
-              },
-              {
-                name: 'twitter:creator',
-                content: siteMetadata.socials.twitter,
-              },
-              {
-                name: 'twitter:title',
-                content: title || siteMetadata.title,
-              },
-              {
-                name: 'twitter:description',
-                content: metaDescription,
-              },
-            ]
-              .concat(
-                metaImage
-                  ? [
-                      {
-                        property: 'og:image',
-                        content: metaImage,
-                      },
-                      {
-                        name: 'twitter:image',
-                        content: metaImage,
-                      },
-                    ]
-                  : []
-              )
-              .concat(meta)}
-          />
+          <Helmet Helmet titleTemplate={`%s - ${siteMetadata.title}`}>
+            <html lang="en" />
+            <title>{title}</title>
+
+            {/* Fav Icons */}
+            <link rel="icon" type="image/png" href="/favicon.png" />
+            <link rel="alternate icon" href="/favicon.ico" />
+
+            {/* Meta Tags */}
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <meta charSet="utf-8" />
+            <meta name="description" content={siteMetadata.description} />
+
+            {/* Open Graph */}
+            {location && (
+              <meta property="og:url" content={window.location.href} />
+            )}
+            <meta property="og:image" content={image || '/oos.jpg'} />
+            <meta property="og:title" content={title} key="ogtitle" />
+            <meta
+              propery="og:site_name"
+              content={siteMetadata.title}
+              key="ogsitename"
+            />
+            <meta
+              property="og:description"
+              content={siteMetadata.description}
+              key="ogdesc"
+            />
+
+            {/* twitter */}
+            <meta property="twitter:card" content="summary" />
+            <meta
+              property="twitter:creator"
+              content={siteMetadata?.socials.twitter}
+            />
+            <meta
+              property="twitter:title"
+              content={title || siteMetadata?.title}
+            />
+            <meta property="twitter:description" content={metaDescription} />
+            <meta property="twitter:image" content={image || '/oos.jpg'} />
+            {children}
+          </Helmet>
         )
       }}
     />
   )
 }
-
-SEO.defaultProps = {
-  meta: [],
-  title: '',
-  slug: '',
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  image: PropTypes.string,
-  meta: PropTypes.array,
-  slug: PropTypes.string,
-  title: PropTypes.string.isRequired,
-}
-
-export default SEO
