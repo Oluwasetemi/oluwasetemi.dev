@@ -11,7 +11,7 @@ const query = graphql`
         author
         description
         siteUrl
-        social {
+        socials {
           twitter
         }
       }
@@ -62,7 +62,7 @@ function SEO({ meta, image, title, description, slug, lang = 'en' }) {
               },
               {
                 name: 'twitter:creator',
-                content: siteMetadata.social.twitter,
+                content: siteMetadata.socials.twitter,
               },
               {
                 name: 'twitter:title',

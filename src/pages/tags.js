@@ -15,15 +15,16 @@ function flattenArray(arr) {
     : flattened
 }
 
-function BlogIndex(
+function TagsPage(
   { data: { site, allMarkdownRemark }, pageContext },
   location
 ) {
-  const { siteTitle, siteDescription } = site
+  const { siteMetadata } = site
+  console.log(siteMetadata)
   const posts = allMarkdownRemark.edges
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteMetadata?.title}>
       <SEO />
       <Bio />
       <Tags activeTag={pageContext.tag} />
@@ -57,7 +58,7 @@ function BlogIndex(
   )
 }
 
-export default BlogIndex
+export default TagsPage
 
 export const pageQuery = graphql`
   query($tagsRegex: String) {

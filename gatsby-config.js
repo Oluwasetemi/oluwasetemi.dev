@@ -5,10 +5,11 @@ module.exports = {
     description:
       'I write about modern JavaScript, web development, computer science and opinions are mine. I love teaching. Send me a DM if you want to learn web development🚀',
     siteUrl: 'https://oluwasetemi.dev/',
-    social: {
+    socials: {
       twitter: '@setemiojo',
       codepen: 'setemiojo',
       github: 'Oluwasetemi',
+      codesandbox: 'Oluwasetemi',
       linkedIn: 'setemiojo',
       hackerrank: 'setemiojo',
     },

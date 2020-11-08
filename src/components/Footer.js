@@ -1,11 +1,33 @@
+import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
-function Footer(props) {
+function Footer() {
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
+          socials {
+            twitter
+            codepen
+            github
+            linkedIn
+            hackerrank
+            codesandbox
+          }
+        }
+      }
+    }
+  `)
+
+  const { siteMetadata } = site
   return (
     <footer
       style={{
         marginTop: '50px',
-        paddingTop: '50px',
+        paddingTop: '10px',
       }}
     >
       <div style={{ float: 'right' }}>
@@ -14,7 +36,7 @@ function Footer(props) {
         </a>
       </div>
       <a
-        href="https://twitter.com/setemiojo"
+        href={`https://twitter.com/${siteMetadata?.socials?.twitter}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -22,7 +44,7 @@ function Footer(props) {
       </a>{' '}
       &bull;{' '}
       <a
-        href="https://github.com/Oluwasetemi"
+        href={`https://github.com/${siteMetadata?.socials?.github}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -30,11 +52,43 @@ function Footer(props) {
       </a>{' '}
       &bull;{' '}
       <a
-        href="https://codepen.io/setemiojo"
+        href={`https://codepen.io/${siteMetadata?.socials?.codepen}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         codepen
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://www.hackerrank.com/${siteMetadata?.socials?.hackerrank}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        hackerrank
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://www.linkedin.com/in/${siteMetadata?.socials?.linkedIn}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        linkedIn
+      </a>
+      &bull;{' '}
+      <a
+        href="https://cv.oluwasetemi.dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        cv
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://codesandbox.io/u/${siteMetadata?.socials?.codesandbox}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        codesandbox
       </a>
     </footer>
   )

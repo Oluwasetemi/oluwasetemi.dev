@@ -78,18 +78,16 @@ export default function Tags({ activeTag }) {
         <span className="name">#All</span>
         <span className="count">#{tagsArrays.length}</span>
       </Link>
-      {Object.entries(tagsWithCount).map(([tag, count], index) => {
-        return (
-          <Link
-            key={index}
-            to={`/tags/${tag}`}
-            className={tag === activeTag ? 'active' : ''}
-          >
-            <span className="name">#{tag}</span>
-            <span className="count">#{count}</span>
-          </Link>
-        )
-      })}
+      {Object.entries(tagsWithCount).map(([tag, count], index) => (
+        <Link
+          key={index}
+          to={`/tags/${tag}`}
+          className={tag === activeTag ? 'active' : ''}
+        >
+          <span className="name">#{tag}</span>
+          <span className="count">#{count}</span>
+        </Link>
+      ))}
     </TagsStyles>
   )
 }
