@@ -5,7 +5,7 @@ tags: [javascript, learning, code]
 isPublished: true
 isDraft: false
 modified: true
-modifiedDate: '2020-11-05T08:09:12.044Z'
+modifiedDate: '2020-11-09T08:09:12.044Z'
 ---
 
 Recently joined a team where I had to work with on a codebase that used the JavaScript module re-export syntax and It was such a nice, elegant and delicious syntax. I would talk about the syntax and its use case and exceptions. Sit with me and let have a ride of a lifetime.
