@@ -51,7 +51,10 @@ export default function SEO({ children, location, description, title, image }) {
 
             {/* Open Graph */}
             {location && (
-              <meta property="og:url" content={window.location.href} />
+              <meta
+                property="og:url"
+                content={typeof window !== 'undefined' && window.location.href}
+              />
             )}
             <meta property="og:image" content={image || '/oos.jpg'} />
             <meta property="og:title" content={title} key="ogtitle" />
