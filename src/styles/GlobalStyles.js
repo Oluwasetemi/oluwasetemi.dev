@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 // import stripes from '../assets/images/stripes.svg';
+import './theme.css'
 
 const GlobalStyles = createGlobalStyle`
   :root {
