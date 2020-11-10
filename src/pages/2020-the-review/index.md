@@ -4,7 +4,7 @@ date: '2020-11-05T00:00:00.012Z'
 tags: ['review', '2020']
 isPublished: false
 isDraft: false
-modified: true
+modified: false
 ---
 
 Such a huge year with opportunity to prove myself as a software developer. Plenty goals, few were crushed and others I failed at. Plenty learning and lessons, plenty positives to take to the new year and focus on the thing I said was going to do during my last year review and evaluation of my journey.I enjoyed every bit of it and I am excited about what the future holds in faith now.
@@ -27,18 +27,14 @@ Meet with someone I so much admire in the Nigerian Tech Space, the one and only 
 
 > 📷 photo credit [https://twitter.com/jola_adebayor](jola_adebayor)
 
-## Joined [Natterbase](https://natterbase.com)
+## Job Hunting
 
 ![Joined Natterbase](https://res.cloudinary.com/drnqdd87d/image/upload/v1581767451/Personal/IMG_20190115_201004_747.jpg)
 
 Such a wonderful story December 2018 as I resigned from my then current engagement in Ibadan after a massive training project in òwò, ondo state, Nigeria where young secondary school student were taught how to code from scratch via a support initiate that my then employer (Mayokun) were charged with the resposibility to handle. I was not sure of where I would be working next but I waited and prepared. Rufus Oyemade did a [tweet shoutout](https://twitter.com/Oluwarufus/status/1078564443636809729?s=20) for me and boom I got an offer to resume January.
 
-<!-- tweet embed -->
-<blockquote class="twitter-tweet">
-<p lang="en" dir="ltr">A friend, <a href="https://twitter.com/setemiojo?ref_src=twsrc%5Etfw">@setemiojo</a> is relocating to Lagos in the new year &amp; looking for opportunities to work &amp; grow as a JavaScript developer (front-end or back-end).<br/><br/>He has done some amazing stuff, have a look at his CV here: <a href="https://t.co/zfnZv0vn98">https://t.co/zfnZv0vn98</a><br/><br/>A recommendation or RT would be great.</p>&mdash; Rufus Oyemade (@Oluwarufus) <a href="https://twitter.com/Oluwarufus/status/1078564443636809729?ref_src=twsrc%5Etfw">December 28, 2018</a>
-</blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-## Relocating to Lagos
+## Relocating to Osogbo
 
 From the tweet that happened 28th December to resuming 8th January, 2019. The Journey down to lagos packing and getting a prime opportunity to reunite with my big sister in her place in Lagos pending when I was okay to move to my own apartment. Move to lagos in the early part of the year and started living with my big sister. I ❤️ Travelling and travelled a lot during the year especially to Ibadan and Osogbo. Went to Abuja fewer times compared to last year. Attended some of my friends wedding ceremony as well.Met with [Faith Dike](https://twitter.com/faithiedike) from this [tweet](https://twitter.com/faithiedike/status/1078681217984278530?s=20).
 
@@ -58,7 +54,7 @@ I hope to write more TypeScript all year in 2020. Get to learn and master anothe
 
 The goal for next year is to build ton of product like [Sara Vieira](https://twitter.com/NikkitaFTW) [conference talk](https://www.youtube.com/watch?v=KauRmlffjqc) on building shit ton of project and ideas. Do more open contribution. Really do not know what to expect but I am sure I will give every thing I have within me to become better than I was in 2019. Another thing to focus on is building progression with my routine (finding consistency and good habit formation). Speak to my mentors and write more.
 
-### The book I read in 2019
+### The book I read in 2020
 
 Could not read as I would have loved since normal day to day work was very choking and I was just learning to manage day to day work as a software development.
 
@@ -99,14 +95,18 @@ The hustling and bustling of lagos has made me to desire to work remotely. I bel
 
 ### Teaching and the developer advocate in me
 
+### Exercising
+
+### Relationship and Marriage
+
+### Corona Pandemic
+
+### EndSars Protest
+
 Somehow I am asking a lot of questions about what I want, my just cause or purpose in all this coding and working. I have strong desires to live to the maximum of my God given potentials and abilities with hard work and consistency. But I stumble when I try to come to resolve of what I want from my own life. I took some weeks off towards the end of the year away from people to just thinking about the outlook I want my life to have. Coming to a resolve that I want to teach more JavaScript related and bring to public the part of me that like to explain thing to other developers, the part of me that jump on exciting technology and teach it to new engineering team to make their live and work more easy. The part of me that writes too - the kind of article I search for to find on the internet. I hope 2020 will be me doing more of teaching and advocating.
 
-### The plan for 2020
+### The plan for 2021
 
 Silently all over this blog post I written and talked about all the thing I hope to focus on this new year.
 
-Year in pictures
-
-![Working at natterbase](https://res.cloudinary.com/drnqdd87d/image/upload/v1581767686/Personal/IMG_20190705_185309_392.jpg)
-
-![Personal Picture](https://res.cloudinary.com/drnqdd87d/image/upload/v1581767507/Personal/IMG_20190211_224951.jpg)
+### Year in pictures
