@@ -38,6 +38,11 @@ export default function SEO({ children, location, description, title, image }) {
             <title>{title}</title>
 
             {/* Fav Icons */}
+            <link
+              rel="shortcut icon"
+              href="https://avatars0.githubusercontent.com/u/10030028?s=40&v=4"
+              type="image/x-icon"
+            />
             <link rel="icon" type="image/png" href="/favicon.png" />
             <link rel="alternate icon" href="/favicon.ico" />
 
