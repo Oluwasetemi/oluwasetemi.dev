@@ -56,7 +56,7 @@ export default function SEO({ children, location, description, title, image }) {
                 content={typeof window !== 'undefined' && window.location.href}
               />
             )}
-            <meta property="og:image" content={image || '/oos.jpg'} />
+            <meta property="og:image" content={image || './oos.jpg'} />
             <meta property="og:title" content={title} key="ogtitle" />
             <meta
               propery="og:site_name"
