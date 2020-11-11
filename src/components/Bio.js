@@ -62,6 +62,7 @@ function Bio() {
         </a>
         You can search through my blog using custom created
         <Link to="/tags"> tags</Link>.<br />{' '}
+        <Link to="/about">Click here to read more about me.</Link>{' '}
         <a className="link" href="/rss.xml">
           RSS feed
         </a>

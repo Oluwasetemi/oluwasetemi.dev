@@ -1,10 +1,12 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import Bio from '../components/Bio'
+import SEO from '../components/SEO'
 
 function AboutPage() {
   return (
     <>
+      <SEO title="About Me" location />
       <Bio />
       <h2>About Me 👨</h2>
       <p>I am Oluwasetemi 🇳🇬</p>
