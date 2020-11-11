@@ -38,5 +38,7 @@ I will answer in very detailed steps with no focus on any material but show you 
 
 Here is a few tips, research well on the subject(JavaScript) before attempting to learn, Learn enough to build something, Learn JavaScript as a programming language before you learning JavaScript in the browser. Learn more about Frontend Frameworks and build something. Learn JavaScript on the server (Nodejs).
 
-_edited on 10th November, 2020 01:19_
+[Check out the part 2 of this post here](https://www.oluwasetemi.dev/why-you-should-learn-javascript-2/)
+
+_edited on 11th November, 2020 01:19_
 Thank you for reading and stay tunned for more on the this topic.
