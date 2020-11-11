@@ -44,7 +44,7 @@ export default function SEO({ children, location, description, title, image }) {
             {/* Meta Tags */}
             <meta
               name="viewport"
-              content="width=device-width, initial-scale=1.0"
+              content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
             />
             <meta charSet="utf-8" />
             <meta name="description" content={siteMetadata.description} />
@@ -56,7 +56,10 @@ export default function SEO({ children, location, description, title, image }) {
                 content={typeof window !== 'undefined' && window.location.href}
               />
             )}
-            <meta property="og:image" content={image || './oos.jpg'} />
+            <meta
+              property="og:image"
+              content="https://avatars0.githubusercontent.com/u/10030028?v=3"
+            />
             <meta property="og:title" content={title} key="ogtitle" />
             <meta
               propery="og:site_name"
@@ -70,17 +73,17 @@ export default function SEO({ children, location, description, title, image }) {
             />
 
             {/* twitter */}
-            <meta property="twitter:card" content="summary" />
+            <meta name="twitter:card" content="summary" />
             <meta
-              property="twitter:creator"
+              name="twitter:creator"
               content={siteMetadata?.socials.twitter}
             />
+            <meta name="twitter:title" content={title || siteMetadata?.title} />
+            <meta name="twitter:description" content={metaDescription} />
             <meta
-              property="twitter:title"
-              content={title || siteMetadata?.title}
+              name="twitter:image:src"
+              content="https://avatars0.githubusercontent.com/u/10030028?v=3"
             />
-            <meta property="twitter:description" content={metaDescription} />
-            <meta property="twitter:image" content={image || '/oos.jpg'} />
             {children}
           </Helmet>
         )
