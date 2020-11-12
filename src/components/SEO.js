@@ -64,6 +64,10 @@ export default function SEO({ children, location, description, title, image }) {
             <meta name="apple-mobile-web-app-title" content="oluwasetemi.dev" />
             <meta name="application-name" content="oluwasetemi.dev" />
             <meta name="msapplication-TileColor" content="#800080" />
+            <meta
+              name="msapplication-TileImage"
+              content="/mstile-150x150.png"
+            />
 
             {/* Meta Tags */}
             <meta
