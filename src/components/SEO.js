@@ -17,6 +17,7 @@ const query = graphql`
           linkedIn
           hackerrank
           codesandbox
+          stackoverflow
         }
       }
     }
@@ -76,6 +77,10 @@ export default function SEO({ children, location, description, title, image }) {
             />
             <meta charSet="utf-8" />
             <meta name="description" content={siteMetadata.description} />
+            <meta
+              name="keywords"
+              content="oluwasetemi, oos, oosblog, setemiojo, javascript, reactjs, nodejs, all things javascript"
+            />
 
             {/* Open Graph */}
             {location && (

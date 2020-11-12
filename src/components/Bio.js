@@ -25,6 +25,7 @@ function Bio() {
   `)
 
   const { siteMetadata } = site
+
   return (
     <div
       style={{
