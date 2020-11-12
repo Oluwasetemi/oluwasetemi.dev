@@ -82,7 +82,10 @@ export default function SEO({ children, location, description, title, image }) {
             )}
             <meta
               property="og:image"
-              content="https://avatars0.githubusercontent.com/u/10030028?v=3"
+              content={
+                metaImage ||
+                'https://avatars0.githubusercontent.com/u/10030028?v=3'
+              }
             />
             <meta property="og:title" content={title} key="ogtitle" />
             <meta
@@ -106,7 +109,10 @@ export default function SEO({ children, location, description, title, image }) {
             <meta name="twitter:description" content={metaDescription} />
             <meta
               name="twitter:image:src"
-              content="https://avatars0.githubusercontent.com/u/10030028?v=3"
+              content={
+                metaImage ||
+                'https://avatars0.githubusercontent.com/u/10030028?v=3'
+              }
             />
             {children}
           </Helmet>
