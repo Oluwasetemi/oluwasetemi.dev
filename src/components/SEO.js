@@ -39,12 +39,31 @@ export default function SEO({ children, location, description, title, image }) {
 
             {/* Fav Icons */}
             <link
-              rel="shortcut icon"
-              href="https://avatars0.githubusercontent.com/u/10030028?s=40&v=4"
-              type="image/x-icon"
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href="/apple-touch-icon.png"
             />
-            <link rel="icon" type="image/png" href="/favicon.png" />
-            <link rel="alternate icon" href="/favicon.ico" />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/favicon-32x32.png"
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="/favicon-16x16.png"
+            />
+            {/* <link rel="manifest" href="/site.webmanifest" /> */}
+            <link
+              rel="mask-icon"
+              href="/safari-pinned-tab.svg"
+              color="#880088"
+            />
+            <meta name="apple-mobile-web-app-title" content="oluwasetemi.dev" />
+            <meta name="application-name" content="oluwasetemi.dev" />
+            <meta name="msapplication-TileColor" content="#800080" />
 
             {/* Meta Tags */}
             <meta

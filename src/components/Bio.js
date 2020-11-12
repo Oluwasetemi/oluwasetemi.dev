@@ -1,7 +1,7 @@
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import React from 'react'
 // Import typefaces
-import profilePic from '../assets/profile-pic.jpg'
+import profilePic from '../assets/images/profile-pic.jpg'
 
 function Bio() {
   const { site } = useStaticQuery(graphql`
