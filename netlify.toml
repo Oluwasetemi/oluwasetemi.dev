@@ -1,3 +1,11 @@
+[[headers]]
+  for = "/rss.xml"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
+
 [build]
   command = "yarn build"
   publish = "public"

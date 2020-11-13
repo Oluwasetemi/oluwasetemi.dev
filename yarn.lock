@@ -6882,6 +6882,15 @@
   dependencies:
     "@babel/runtime" "^7.11.2"
 
+"gatsby-image@^2.5.0":
+  "integrity" "sha512-XS57PyRHSKileshs6kBqRs3KXsRVSR1xDYiSoCipDa3C4GDgUUPUPYFz+YjWAa2lk5vCkOEYk8vWdm4d2I77zA=="
+  "resolved" "https://registry.npmjs.org/gatsby-image/-/gatsby-image-2.5.0.tgz"
+  "version" "2.5.0"
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "object-fit-images" "^3.2.4"
+    "prop-types" "^15.7.2"
+
 "gatsby-legacy-polyfills@^0.0.6":
   "integrity" "sha512-23O0orFhu1zkCluIFBs8pu8psfyyWquczfRk2NNdT2x4wW/HkZEjonWM5AkM6kjzZL9JrVCAZEgL4qf9OjgUoA=="
   "resolved" "https://registry.npmjs.org/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-0.0.6.tgz"
@@ -10835,6 +10844,11 @@
     "copy-descriptor" "^0.1.0"
     "define-property" "^0.2.5"
     "kind-of" "^3.0.3"
+
+"object-fit-images@^3.2.4":
+  "integrity" "sha512-G+7LzpYfTfqUyrZlfrou/PLLLAPNC52FTy5y1CBywX+1/FkxIloOyQXBmZ3Zxa2AWO+lMF0JTuvqbr7G5e5CWg=="
+  "resolved" "https://registry.npmjs.org/object-fit-images/-/object-fit-images-3.2.4.tgz"
+  "version" "3.2.4"
 
 "object-hash@^1.1.4":
   "integrity" "sha512-OSuu/pU4ENM9kmREg0BdNrUDIl1heYa4mBZacJc+vVWz4GtAwu7jO8s4AIt2aGRUTqxykpWzI3Oqnsm13tTMDA=="

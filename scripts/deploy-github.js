@@ -1,6 +1,7 @@
 const ghpages = require('gh-pages')
 
 // replace with your repo url
+// not used anymore
 ghpages.publish(
   'public',
   {
