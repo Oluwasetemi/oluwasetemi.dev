@@ -1,9 +1,11 @@
-import { Link } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Bio from '../components/Bio'
+import Img from '../components/Img'
 import SEO from '../components/SEO'
 
-function AboutPage() {
+function AboutPage({ data }) {
+  const { setemi } = data
   return (
     <>
       <SEO title="About Me" location />
@@ -26,6 +28,8 @@ function AboutPage() {
           Developer Advocate or Developer Experience. Any Full-Stack roles.
         </span>
       </p>
+
+      <Img image={setemi} alt="oluwasetemi" />
 
       <p>
         I took time to learn JavaScript while I finished from university, I
@@ -112,3 +116,15 @@ function AboutPage() {
 }
 
 export default AboutPage
+
+export const pageQuery = graphql`
+  query {
+    setemi: file(relativePath: { eq: "setemi.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1200, maxHeight: 500, cropFocus: CENTER, fit: FILL) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
