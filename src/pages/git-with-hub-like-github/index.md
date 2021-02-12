@@ -7,14 +7,14 @@ isDraft: false
 modified: false
 ---
 
-The field is full of so much tools and you might be overwhelmed by a new release of every new tool out there. Just like when git came about the list of version control tools. I was not even a developer then, I mean I did not know who Chris Wanstrath, Tom Preston-Werner, P J Hyett, and Scott Chacon were and how there invention will change the way I will be working. What did they all invent that changed the way developers write code, build software and ship new releases of the written code. Git is a creation of Linus Trovalds in 2005 and GitHub was invented by the 4 brilliant developers mentioned above.
+The field is full of so much tools and you might be overwhelmed by a new release of every new tool out there. Just like when `git` came aboard the list of version control tools. I was not even a developer then, I mean I did not know who Chris Wanstrath, Tom Preston-Werner, P J Hyett, and Scott Chacon were and how their invention will change the way I will be working. What did they all invent that changed the way developers write code, build software and ship new releases of the written code. Git is a creation of Linus Trovalds in 2005 and GitHub was invented by the 4 brilliant developers mentioned above. Game changer money. (It was sold to microsoft later a very ridiculous amount of money). The brilliant thing is how it maintained its open source powers.
 
 <!-- caution -->
 ## caution
 
 Before you travel too deep, this article will be of great benefit if you have little experience on how to write code and it is not an introductory guide to `git` nor is it a starter guide to `GitHub`.
 
-So what is the difference between `git` and `GitHub`? git was created by linus trovalds - (creator of linus operating system) to help manage the versions of softwares. Its a term called version control management or source control in software development cycle. Git is a distributed version control - It in simple terms help to manage the version of the code we write with things like branch, and commits.
+So what is the difference between `git` and `GitHub`? git was created by linus trovalds - (creator of linus operating system) to help manage the versions of softwares. Its a term called version control management or source control in software development cycle. Git is a distributed version control - It in simple terms helps to manage the version of the code we write with things like branch, and commits.
 
 GitHub is a software that bring `git` to developers and team alike on the web. A website where developers put their code. - A gift indeed to open source software development. It brings pull-request, remote branch, pushing, pulling, fork, clone terms to help in proper documentation of written code that becomes software and help with collaboration between a team of engineers.
 
@@ -29,9 +29,9 @@ Two major thing you should expect is `hub` extending the powers and functionalit
 
 I am learning how to use `hub` and reading its documentation is the step I am taking and I will be sharing what I learn here.
 
-To start with today (11th February, 2021), I learnt about `hub-am`, `hub-apply`, `hub-checkout`, `hub-cherry-pick`, and `hub-clone`. let me share what I learnt with you.
+To start with today (11th February, 2021), I learnt about `hub am`, `hub apply`, `hub checkout`, `hub cherry-pick`, and `hub clone`. let me share what I learnt with you.
 
-- `hub-am` - Replicate commits from a GitHub pull request locally.Imagine you have a pull request from a repository you are working with and you are wondering how to test the pr locally? I would do a checkout to the branch and it works just fine but `hub-am -3 <GitHub pull request url>` would do great work of bringing the code changes in the pr to you from GitHub. This is a great power. It work when with patch too. What is a patch right?(The next one `hub-apply` will explain more about patches). You can try it a commit url from GitHub.
+- `hub am` - Replicate commits from a GitHub pull request locally.Imagine you have a pull request from a repository you are working with and you are wondering how to test the pr locally? I would do a checkout to the branch during which you might want to run a git fetch to fetch all the necessary refspec and it works just fine but `hub am -3 <GitHub pull request url>` would do great work of bringing the code changes in the pr to you from GitHub. This is a great power. It work when with patch too. What is a patch right?(The next one `hub apply` will explain more about patches). You can try it with a commit url from GitHub.
 
 ```sh
 hub am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
@@ -39,7 +39,7 @@ hub am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
 git am --ignore-whitespace /tmp/fdb9921.patch
 ```
 
-- `hub-apply` - Download a patch from GitHub and apply it locally.Patches in git is a small changes to a git working directory that can be added to any git working directory. Some made a change to a code they only have read access to, the only was to share the changes with anyone who has write access is to create a patch from the changes. A patch contains the file changes, commits and all necessary information that can be added to the git.
+- `hub apply` - Download a patch from GitHub and apply it locally.Patches in git is a small changes to a git working directory that can be added to any git working directory. Someone made a change to a code they only have read access to, the only way to share the changes with anyone who has write access is to create a patch from the changes. A patch contains the file changes, commits and all necessary information that can be added to the git directory.
 
 ```sh
 git diff > mypatch.patch
@@ -55,8 +55,56 @@ git apply /tmp/55.patch
 
 NB -  The fork and pull request model of GitHub is a replacement for the patch model of change distribution. So I believe patches are only useful outside the context of tools like GitHub.
 
-- `hub-checkout` - Check out out the head of a pull request as a local branch.
+- `hub checkout` - Check-out the head of a pull request as a local branch.Create a new branch locally from a GitHub pull request.It in essence pull the changes from a pull request to an existing or new branch.
 
-- `hub-cherry-pick` - Cherry-pick a commit from a fork on GitHub.
+```sh
+hub checkout https://github.com/username/repo/pull/73
+OR
+# alternative method
+git remote add -f -t branchName1 remoteName git://github.com/username/repo.git
+# With -f option, git fetch <name> is run immediately after the remote information is set up.
+# With -t <branch> option, instead of the default glob refspec for the remote to track all branches under the refs/remotes/<name>/ namespace, a refspec to track only <branch> is created. You can give more than one -t <branch> to track multiple branches without grabbing all branches.
+git checkout --track -B newBranchName remote{origin/upstream}/<remote branch name>
 
-- `hub-clone` - Clone a repository from GitHub
+# create a new local branch from a PR named custom-branch-name
+hub checkout https://github.com/username/repo/pull/73 custom-branch-name
+```
+
+- `hub cherry-pick` - Cherry-pick a commit from a fork on GitHub.What the `git cherry-pick` does is to apply changes made in a commit SHA ID to the git working directory. It means what hub cherry-pick will offer you the developer is to cherry-pick a commit from GitHub and apply the changes to your code locally. it offers you lot of powers to experiment.
+
+```sh
+hub cherry-pick http://github.com/username/repo/commit/SHA
+OR
+git remote add -f remoteName git://github.com/username/REPO.git
+git cherry-pick SHA
+
+hub cherry-pick username@SHA
+OR
+# create a remote and fetch the remote immediately
+git remote add -f branchName git://github.com/username/repo.git
+git cherry-pick SHA
+
+hub cherry-pick username@SHA
+git fetch remoteName
+git cherry-pick SHA
+```
+
+- `hub clone` - Clone a repository from GitHub. Consider the following commands.
+
+```sh
+hub clone schacon/ticgit
+OR
+git clone git://github.com/schacon/ticgit.git
+
+hub clone -p schacon/ticgit
+OR
+git clone git@github.com:schacon/ticgit.git
+
+# it defaults to your GitHub username
+hub clone resque
+git clone git@github.com/YOUR_USER/resque.git
+```
+
+SHA means a GitHub sha1 commit ID, either the for 6 digit or the full commit sha1 ID.
+
+More to follow on as I learn.
