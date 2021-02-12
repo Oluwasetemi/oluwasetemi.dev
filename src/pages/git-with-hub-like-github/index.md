@@ -1,8 +1,8 @@
 ---
 title: git with hub like github
-date: '2020-11-05T00:00:00.012Z'
+date: '2021-02-12T11:34:00.012Z'
 tags: ['learning', 'git', 'hub']
-isPublished: false
+isPublished: true
 isDraft: false
 modified: false
 ---
