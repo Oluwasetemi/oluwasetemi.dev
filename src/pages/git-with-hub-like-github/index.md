@@ -29,7 +29,7 @@ Two major thing you should expect is `hub` extending the powers and functionalit
 
 I am learning how to use `hub` and reading its documentation is the step I am taking and I will be sharing what I learn here.
 
-Let's get started with using `hub` in our various command line application by installing it. I use [hyper terminal](https://hyper.is) that run a `zsh` shell. The current operating system I am using is Mac OS with homebrew installed. To install `hub` with a similar operationg system and homebrew installed run the following commands to install `hub`
+Let's get started with using `hub` in our various command line application by installing it. I use [hyper terminal](https://hyper.is) that run a `zsh` shell. The current operating system I am using is Mac OS with homebrew installed. To install `hub` with a similar operationg system and homebrew installed run the following commands to install `hub`. For more step on how to install `hub` on other operating system. check <https://github.com/github/hub>. One benefit of `hub` is its usage in your GitHub actions.
 
 ```sh
 brew install Hub

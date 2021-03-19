@@ -7,9 +7,9 @@ isDraft: false
 modified: false
 ---
 
-Such a huge year with opportunity to prove myself as a software developer. Plenty goals, few were crushed and others I failed at. Plenty learning and lessons, plenty positives to take to the new year and focus on the thing I said was going to do during my last year review and evaluation of my journey.I enjoyed every bit of it and I am excited about what the future holds in faith now.
+Such a huge year with opportunity to prove myself as a software developer. Plenty goals, few were crushed and others I failed at. Plenty learning and lessons, plenty positives to take to the new year and focus on the things I said was going to do during my last year review and evaluation of my life journey.I enjoyed every bit of it and I am excited about what the future holds in faith now. Disregard the word faith if you don't believe in one.
 
-One goal was to write code and get to build products(software) useful and usable. Put all the learning over the year into practice. All the effort of the past years and learning put them together and use more. This is my third year of coding fully as a professional and my fifth year of involvement in Tech. I am very pleased and happy to be able to share my learning with the hope to help me👦🏼 become better each new day.
+One goal was to write code and get to build products(software) useful and usable. Put all the learning over the year into practice. All the effort of the past years and learning put them together and use more. This is my third year of coding fully as a professional and my fifth year of involvement in Tech. I am very pleased and happy to be able to share my learning with the world and hope it helps me👦🏼 become better each new passing day.
 
 ![Dancing into 2020 in style](https://res.cloudinary.com/drnqdd87d/image/upload/v1578022058/76988591_526287721292875_839773037896022696_n.jpg_a2xm1a.jpg)
 
@@ -32,7 +32,6 @@ Meet with someone I so much admire in the Nigerian Tech Space, the one and only 
 ![Joined Natterbase](https://res.cloudinary.com/drnqdd87d/image/upload/v1581767451/Personal/IMG_20190115_201004_747.jpg)
 
 Such a wonderful story December 2018 as I resigned from my then current engagement in Ibadan after a massive training project in òwò, ondo state, Nigeria where young secondary school student were taught how to code from scratch via a support initiate that my then employer (Mayokun) were charged with the resposibility to handle. I was not sure of where I would be working next but I waited and prepared. Rufus Oyemade did a [tweet shoutout](https://twitter.com/Oluwarufus/status/1078564443636809729?s=20) for me and boom I got an offer to resume January.
-
 
 ## Relocating to Osogbo
 
