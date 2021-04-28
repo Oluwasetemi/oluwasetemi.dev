@@ -71,6 +71,14 @@ module.exports = {
         trackingId: `UA-130441994-1`,
       },
     },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        includeInDevelopment: true, // optional parameter to include script in development
+        id: 2374821,
+        sv: 6,
+      },
+    },
     `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
