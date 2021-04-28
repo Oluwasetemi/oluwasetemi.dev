@@ -1,8 +1,8 @@
 ---
 title: git with hub like github part 2
-date: '2021-02-12T11:34:00.012Z'
+date: '2021-03-18T11:34:00.012Z'
 tags: ['learning', 'git', 'hub']
-isPublished: false
+isPublished: true
 isDraft: false
 modified: false
 ---
@@ -10,9 +10,9 @@ modified: false
 <!-- caution -->
 ## caution
 
-Before you travel too deep, this article will be of great benefit if you have little experience on how to write code and it is not an introductory guide to `git` nor is it a starter guide to `GitHub`.
+Before you travel too deep, this article will be of great benefit if you have some experience on how to write code and this is not an introductory guide to `git` nor is it a starter guide to `GitHub`.
 
-Today (12th February, 2021), It turned out that I completed this post 18th March and I have found out that hub is no more in production just for one of the maintainer [Mislav Marohnić](https://twitter.com/mislav) who is kind and diligent to look through issues and pull-request. He is a member of another team working on something very interesting called the [official GitHub command line](https://cli.github.com) and the [GitHub repo](https://github.com/cli/cli/) (I might also read the docs and incorporate it to my workflow and write about it).  I learnt about `hub fetch`, `hub init`, `hub merge`, `hub push`, `hub remote`, and `hub submodule`. let me share what I learnt with you.
+Wrote the first Draft - Today (12th February, 2021), **It turned out that I completed this post 18th March and I have found out that hub is no more in production just for one of the maintainer [Mislav Marohnić](https://twitter.com/mislav) who is kind and diligent to look through issues and pull-request. He is a member of another team working on something very interesting called the [official GitHub command line](https://cli.github.com) and the [GitHub repo](https://github.com/cli/cli/)**. Seeing so much how `hub` has improved my workflow - saved me a couple of seconds. (I will also read the docs and incorporate it to my workflow and write about it).  I learnt about `hub fetch`, `hub init`, `hub merge`, `hub push`, `hub remote`, and `hub submodule`. let me share what I learnt with you.
 
 - `hub fetch` - Add missing remotes prior to performing git fetch. Allow space separated list of remotes you want to fetch with a flag (--multiple). You can update more than one remote with a single command.
 
@@ -160,18 +160,18 @@ hub compare other-user patch
 hub create <reponame>
 # if reponame is not added then the name of the folder is used
 [ repo created on GitHub ]
-> git remote add origin git@github.com:YOUR_USER/CURRENT_REPO.git
+git remote add origin git@github.com:YOUR_USER/CURRENT_REPO.git
 
 # with description:
-$ hub create -d 'It shall be mine, all mine!'
+hub create -d 'It shall be mine, all mine!'
 
-$ hub create recipes
+hub create recipes
 [ repo created on GitHub ]
-> git remote add origin git@github.com:YOUR_USER/recipes.git
+git remote add origin git@github.com:YOUR_USER/recipes.git
 
-$ hub create sinatra/recipes
+hub create sinatra/recipes
 [ repo created in GitHub organization ]
-> git remote add origin git@github.com:sinatra/recipes.git
+git remote add origin git@github.com:sinatra/recipes.git
 ```
 
 - `hub delete` - Delete a repository on GitHub.

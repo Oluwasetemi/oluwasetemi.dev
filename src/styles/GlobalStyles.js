@@ -10,8 +10,14 @@ const GlobalStyles = createGlobalStyle`
     --white: #fff;
     --grey: #efefef;
     --color: #800080;
-
   }
+  /* gatsby specific styles */
+  #___gatsby,#gatsby-focus-wrapper {
+    height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
   html {
     background-size: 650px;
     background-attachment: fixed;

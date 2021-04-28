@@ -2,9 +2,16 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Utterance from 'react-utterances'
+import styled from 'styled-components'
 import Bio from '../components/Bio'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
+
+const BlogPostStyles = styled.div`
+  strong {
+    text-text-decoration: underline;
+  }
+`
 
 function BlogPostTemplate({ data, pageContext }) {
   const post = data.markdownRemark
@@ -24,7 +31,7 @@ function BlogPostTemplate({ data, pageContext }) {
   const gitMarkdownUrl = getGitMarkdownUrl()
 
   return (
-    <>
+    <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
       <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
       <p
@@ -103,7 +110,7 @@ function BlogPostTemplate({ data, pageContext }) {
           )}
         </li>
       </ul>
-    </>
+    </BlogPostStyles>
   )
 }
 
