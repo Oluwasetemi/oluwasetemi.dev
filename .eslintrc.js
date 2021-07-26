@@ -1,8 +1,6 @@
 module.exports = {
-    "extends": [
-      "wesbos"
-    ],
-    "rules": {
-      "react/prop-types": 0
-    }
+  extends: ['wesbos'],
+  rules: {
+    'react/prop-types': 0,
+  },
 }
