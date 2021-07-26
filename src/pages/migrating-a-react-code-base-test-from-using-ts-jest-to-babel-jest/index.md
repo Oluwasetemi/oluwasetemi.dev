@@ -44,9 +44,9 @@ cd react-typescript-playground
 # run the npm run dev or yarn dev to start the dev server
 ```
 
-You should have a <http://localhost:3000> up and running if you have followed the steps adequately but incase you don't have <http://locahost:3000> running in you browser automatically. Just attempt to open your browser and run that into your url and press enter. If you have a simple react interface - Good, but if not,  try to go through the steps again and carefully follow through till you have the desired result if not contact me :).
+You should have a <https://localhost:3000> up and running if you have followed the steps adequately but incase you don't have <https://locahost:3000> running in you browser automatically. Just attempt to open your browser and run that into your url and press enter. If you have a simple react interface - Good, but if not,  try to go through the steps again and carefully follow through till you have the desired result if not contact me :).
 
-![Default Vite App](http://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
+![Default Vite App](https://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
 
 Now we can attempt to write test for the default counter implementation that comes with the starter. If you not familiar with what test is then you must have written one form of academic test before right? I mean you're given some question that is used to check whether you understand or have the knowledge of ( used relatively here ) what you have been taught by your teacher. So in that manner we can test what the app that we have just built does i.e it functions to the full knowledge of its features, it is not buggy 🐛. I mean test the counter to see if the app loads correctly and the increment actions are working the way you designed them to be right? ( the way vite team designed it to be 👁) - We assumed you built the great counter app.
 
