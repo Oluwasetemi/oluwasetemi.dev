@@ -26,6 +26,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 2rem;
+    line-height: 1.5;
   }
 
   fieldset {
@@ -56,10 +57,10 @@ const GlobalStyles = createGlobalStyle`
 
   /* Scrollbar Styles */
   body::-webkit-scrollbar {
-    width: 12px;
+    width: 15px;
   }
   html {
-    scrollbar-width: thin;
+    scrollbar-width: auto;
     scrollbar-color: var(--color) var(--white);
   }
   body::-webkit-scrollbar-track {
