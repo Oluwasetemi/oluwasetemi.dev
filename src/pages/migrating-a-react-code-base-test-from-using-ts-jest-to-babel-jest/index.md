@@ -136,7 +136,7 @@ it('should renders app properly', () => {
 
 We can write other test for rendering the count to be 0 when the app loads, test the increment of the app and test if the app resets to count 0 when we rerender the whole thing. Add the following to the `App.spec.tsx`.
 
-```tsx{2,4,6,10,12--13,15,19,21-23,25}
+```tsx{2,4,6,10,12-13,15,19,21-23,25}
 it('should have a count value of 0 when app loads', () => {
   const { getByText } = render(<App />);
 
