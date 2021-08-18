@@ -1,5 +1,5 @@
 ---
-title: Migrating a react code base test from using `ts-jest` to babel-jest
+title: Migrating a react code base test from using ts-jest to babel-jest
 date: '2021-07-26T20:01:05.977Z'
 tags: ['test', 'react', 'typescript']
 isPublished: true
