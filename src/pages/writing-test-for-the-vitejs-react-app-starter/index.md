@@ -70,7 +70,7 @@ yarn dev
 
 You should have an app running in your browser on the url <http://localhost:3000> and if you do not have the app running, check your terminal for any error message to debug. In case the opening of the url automatically did not work for you, you may <kbd>Ctrl/CMD</kbd> click on the url link in your terminal or  attempt to open your the url in the browser by yourself. If you have a simple react interface - Good, but if not,  try to go through the steps again and carefully follow through till you have the desired result if not contact me :).
 
-![Default Vite App](http://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
+![Default Vite App](https://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
 
 You should have a react app running and we can write test for this starter, I will run the tests using
 [jest](https://jestjs.io) and before we start writing the test I need to set it up to understand jsx. I need to install a few babel packages like `@babel/core`, `@babel/preset-env`, `@babel/preset-react` and maybe `babel-jest`. Create a `babel.config.js` file in the root folder and put in some configurations. majorly it should have a `module.exports = {}`. The empty object should have a presets key with the value of and array `presets: []`. The array should contain strings as values, this string should be the babel package we have installed previously `presets: ['@babel/preset-env', '@babel/react']`. In the end everything should look like this.
