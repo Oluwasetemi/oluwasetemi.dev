@@ -23,7 +23,7 @@ Let see an example of a small `react` `TypeScript` that I will write test for. T
 
 To create a project with vitejs, all you need to do is to copy and paste this in your command line or terminal utility. The name of the folder your app will be created in is `react-typescript-playground`.
 
-```sh{3,6,10}
+```shell{3,6,10}
 # react-typescript-playground will be the name of the project
 # I prefer yarn but if you like npm check how to use npm in place of yarn here
 # https://classic.yarnpkg.com/en/docs/migrating-from-npm/#toc-cli-commands-comparison
@@ -39,7 +39,7 @@ npm init vite@latest
 
 In a no time depending on your [internet speed](https://fast.com) you will have a project setup for you to play with. Change directory into the new create app folder and run the yarn command to install the project dependencies. For vitejs the dependencies is minimal.
 
-```sh{2-4}
+```shell{2-4}
 # cd into the folder/project
 cd react-typescript-playground
 # run npm install or yarn to install the dependencies
@@ -54,7 +54,7 @@ Now we can attempt to write test for the default counter implementation that com
 
 Before we write test we need to install `ts-jest` to transform our ts and tsx files to a format that [jest](https://jestjs.io/) ( our delightful test runner ) understands. We need to install [identity obj proxy](https://www.npmjs.com/package/identity-obj-proxy) to help jest to understand our css module file - `app.css` file and we can mock out the files (svg and others) we use in our great counter app.
 
-```sh
+```shell
 yarn add -D jest@24.x @types/jest @ts-jest@23.10.0 @testing-library/react @testing-library/js-dom
 ```
 
@@ -175,7 +175,7 @@ if you are familiar with `git` and how it works then you can git commit your cur
 
 Here is the code to commit your changes and create a new branch.
 
-```sh
+```shell
 git add .
 git commit -m "writing test using `ts-jest`"
 git checkout -b "babel-jest"
@@ -187,7 +187,7 @@ The following steps is something you can try on your own to migrate the current 
 
 * install the necessary babel packages
 
-```sh{1}
+```shell{1}
 yarn add -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-jest
 # add the @babel/plugin-transform-runtime to avoid the runtime error.
 yarn add -D @babel/plugin-transform-runtime

@@ -195,3 +195,18 @@ pre[data-line] {
 .command-line-prompt > span[data-prompt]:before {
   content: attr(data-prompt);
 }
+
+/* gatsby-remark-code-buttons */
+.gatsby-code-button-container {
+  top: 40px;
+  right: 5px;
+}
+.gatsby-code-button {
+}
+.gatsby-code-button-icon {
+  fill: white;
+}
+.gatsby-code-button-toaster {
+}
+.gatsby-code-button-toaster-text {
+}

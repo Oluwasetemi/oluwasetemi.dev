@@ -111,7 +111,7 @@ try to run this with a `jest` in your terminal and you will see the test report 
 
 Furthermore it will be good to note that our test will done using @testing-library/react supported with some extra test matcher from our package [@testing-library/jest-dom](https://github.com/testing-library/jest-dom). This two packages makes writing test significantly less burdensome.
 
-```shell=
+```shell
 yarn add @testing-library/react @testing-library/jest-dom
 ```
 

@@ -31,7 +31,7 @@ I am learning how to use `hub` and reading its documentation is the step I am ta
 
 Let's get started with using `hub` in our various command line application by installing it. I use [hyper terminal](https://hyper.is) that run a `zsh` shell. The current operating system I am using is Mac OS with homebrew installed. To install `hub` with a similar operationg system and homebrew installed run the following commands to install `hub`. For more step on how to install `hub` on other operating system. check <https://github.com/github/hub>. One benefit of `hub` is its usage in your GitHub actions.
 
-```sh
+```shell
 brew install Hub
 
 # run a check to see if hub is installed and its version
@@ -40,7 +40,7 @@ hub version
 
 Examples of task that you can do on `GitHub` that `hub` was created to make smooth. Its `GitHub` on the command line.
 
-```sh
+```shell
 # cloning of repository
 hub clone <url> or <name of the repo> - it sets the authenticated user github name as the default
 
@@ -80,7 +80,7 @@ To start with today (11th February, 2021), I learnt about `hub am`, `hub apply`,
 
 - `hub am` - Replicate commits from a GitHub pull request locally.Imagine you have a pull request from a repository you are working with and you are wondering how to test the pr locally? I would do a checkout to the branch during which you might want to run a git fetch to fetch all the necessary refspec and it works just fine but `hub am -3 <GitHub pull request url>` would do great work of bringing the code changes in the pr to you from GitHub. This is a great power. It work when with patch too. What is a patch right?(The next one `hub apply` will explain more about patches). You can try it with a commit url from GitHub.
 
-```sh
+```shell
 hub am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
 # downloads patch via API
 git am --ignore-whitespace /tmp/fdb9921.patch
@@ -88,7 +88,7 @@ git am --ignore-whitespace /tmp/fdb9921.patch
 
 - `hub apply` - Download a patch from GitHub and apply it locally.Patches in git is a small changes to a git working directory that can be added to any git working directory. Someone made a change to a code they only have read access to, the only way to share the changes with anyone who has write access is to create a patch from the changes. A patch contains the file changes, commits and all necessary information that can be added to the git directory.
 
-```sh
+```shell
 git diff > mypatch.patch
 
 git diff --cached > mypatch.patch
@@ -104,7 +104,7 @@ NB -  The fork and pull request model of GitHub is a replacement for the patch m
 
 - `hub checkout` - Check-out the head of a pull request as a local branch.Create a new branch locally from a GitHub pull request.It in essence pull the changes from a pull request to an existing or new branch.
 
-```sh
+```shell
 hub checkout https://github.com/username/repo/pull/73
 OR
 # alternative method
@@ -119,7 +119,7 @@ hub checkout https://github.com/username/repo/pull/73 custom-branch-name
 
 - `hub cherry-pick` - Cherry-pick a commit from a fork on GitHub.What the `git cherry-pick` does is to apply changes made in a commit SHA ID to the git working directory. It means what hub cherry-pick will offer you the developer is to cherry-pick a commit from GitHub and apply the changes to your code locally. it offers you lot of powers to experiment.
 
-```sh
+```shell
 hub cherry-pick http://github.com/username/repo/commit/SHA
 OR
 git remote add -f remoteName git://github.com/username/REPO.git
@@ -138,7 +138,7 @@ git cherry-pick SHA
 
 - `hub clone` - Clone a repository from GitHub. Consider the following commands.
 
-```sh
+```shell
 hub clone schacon/ticgit
 OR
 git clone git://github.com/schacon/ticgit.git
