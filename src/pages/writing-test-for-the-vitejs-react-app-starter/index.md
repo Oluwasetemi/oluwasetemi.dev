@@ -162,7 +162,7 @@ Building on the last test I can test the increment button if it work properly. T
 
 We can also try to rerender the App since react also does this very well when we have some level of changes in our App. To test the App re-render properly. The re-render should reset the counter value to 0. We will build on all we have been writing by rendering our App using the `render` api. react testing library exposes a rerender api which can be called almost instantly after the render. fire a click event on the button you query from `getByText` - queries the Document Object Model (DOM) for any thing with the text name `/count is/`. The essence of the forward slash is to use the regex option of the `getByText` query. Assert that the value of the counter has been increased by just one.
 
-```jsx
+```jsx{numberLines: true}
 it('should reset increment count value', () => {
     const { getByText, rerender } = render(<App />);
     rerender(<App />);
@@ -179,7 +179,7 @@ This is my attempt to write test for the vitejs react app starter. Maybe I shoul
 
 To run the test enter jest into the terminal and the test result and summary. We can take it further with test coverage analysis, implementation of snapshots and a lot more.
 
-# Summary
+## Summary
 
 I know that you will give writing test its importance in your next project moreover this starter will be a template for you react app tests.
 
