@@ -4,12 +4,63 @@ import React from 'react'
 import Utterance from 'react-utterances'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
+import LinkSvg from '../components/LinkSvg'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 
 const BlogPostStyles = styled.div`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 5px;
+  }
   strong {
     text-text-decoration: underline;
+  }
+  ul > li,
+  ol > li {
+    margin-bottom: 25px;
+  }
+  main p {
+    letter-spacing: 0.7px;
+  }
+  .sub-header {
+    display: flex;
+  }
+  /* @media screen and (min-width: 600px) {
+    .element {
+
+    }
+  } */
+
+  /* Tablet */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h1 {
+      font-size: 1.5em;
+    }
+    .sub-header {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .sub-header span {
+      letter-spacing: normal;
+    }
+  }
+
+  /* phones */
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    h1 {
+      font-size: 1.2em;
+    }
+    .sub-header {
+      display: grid;
+    }
+    .sub-header span {
+      letter-spacing: normal;
+    }
   }
 `
 
@@ -34,46 +85,29 @@ function BlogPostTemplate({ data, pageContext }) {
     <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
       <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
-      <p
-        style={{
-          display: 'block',
-          marginBottom: '25px',
-          marginTop: '50px',
-        }}
-      >
-        {post.frontmatter.date}
-        {` • ${formatReadingTime(post.timeToRead)}`}
-        {post.frontmatter.tags.map(tag => (
-          <Link to={`/tags/${tag}`} key={tag}>
-            • 🏷 <span className="mark">{`${tag}`}</span>
-          </Link>
-        ))}
-      </p>
-      <p className="github-edit-link" style={{ marginBottom: '50px' }}>
-        {`✏️ `}
-        <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
-          Edit this post on GitHub
-        </a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          x="0px"
-          y="0px"
-          viewBox="0 0 100 100"
-          width="15"
-          height="15"
-        >
-          <path
-            fill="currentColor"
-            d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"
-          />
-          <polygon
-            fill="currentColor"
-            points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"
-          />
-        </svg>
-      </p>
-      <div
+      <div className="sub-header">
+        <span>• 📅 {post.frontmatter.date}</span>
+
+        <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
+        <span>
+          •
+          {post.frontmatter.tags.map(tag => (
+            <Link to={`/tags/${tag}`} key={tag}>
+              🏷 <span className="mark">{`${tag}`}</span>
+            </Link>
+          ))}
+        </span>
+        <span className="github-edit-link">
+          • {`✏️ `}
+          <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
+            Edit this post on GitHub
+          </a>
+          <LinkSvg />
+        </span>
+      </div>
+
+      <main
+        className="main-content"
         style={{ marginTop: '50px' }}
         dangerouslySetInnerHTML={{ __html: post.html }}
       />

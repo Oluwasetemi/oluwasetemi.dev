@@ -17,7 +17,7 @@ const Typography = createGlobalStyle`
     font-family: FrenchFries, 'adelle', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--black);
   }
-  p, li {
+  span, p, li {
     letter-spacing: 0.5px;
     font-family: 'adelle';
   }
@@ -51,10 +51,11 @@ const Typography = createGlobalStyle`
     transform: rotate(-2deg);
   }
 
-  'a.gatsby-resp-image-link': {
+  a.gatsby-resp-image-link: {
     boxShadow: 'none',
-  },
-  'p code': {
+  }
+
+  p code: {
     fontSize: '1.1rem',
   }
 `

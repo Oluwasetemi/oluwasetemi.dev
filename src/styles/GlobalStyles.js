@@ -99,13 +99,13 @@ const GlobalStyles = createGlobalStyle`
 	transition: 0.4s all ease-out;
 }
 
-.link:hover {
-  box-shadow: inset 0 -1.7rem 0 #80008050;
-}
+  .link:hover {
+    box-shadow: inset 0 -1.7rem 0 #80008050;
+  }
 
-a {
-  color: var(--color)
-}
+  a {
+    color: var(--color)
+  }
 
 
 `

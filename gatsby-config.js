@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   siteMetadata: {
     title: '{...OOS}',
-    author: 'Oluwasetemi Stephen Ojo',
+    author: 'Oluwasetemi Ojo Stephen',
     description:
       'I write about modern JavaScript, web development, computer science and opinions are mine. I love teaching. Send me a DM if you want to learn web development🚀',
     siteUrl: 'https://oluwasetemi.dev/',
@@ -64,9 +64,9 @@ module.exports = {
               // Optional tooltip text. Defaults to ''.
               tooltipText: `copy code`,
               // Optional toaster class name. Defaults to ''.
-              toasterClass: `customToasterClass`,
+              // toasterClass: `customToasterClass`,
               // Optional toaster text class name. Defaults to ''.
-              toasterTextClass: `customToasterTextClass`,
+              // toasterTextClass: `customToasterTextClass`,
               // Optional toaster text. Defaults to ''.
               toasterText: 'code copied',
               // Optional toaster duration. Defaults to 3500.
