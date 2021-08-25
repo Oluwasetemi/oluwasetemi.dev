@@ -92,21 +92,20 @@ const GlobalStyles = createGlobalStyle`
   */
 
  .link {
-	color: #000;
-	text-decoration: none;
-	/* border-bottom: 3px solid #80008050; */
-	box-shadow: inset 0 -.5rem 0 #80008050;
-	transition: 0.4s all ease-out;
-}
+    color: #000;
+    text-decoration: none;
+    /* border-bottom: 3px solid #80008050; */
+    box-shadow: inset 0 -.5rem 0 #80008050;
+    transition: 0.4s all ease-out;
+  }
 
   .link:hover {
     box-shadow: inset 0 -1.7rem 0 #80008050;
   }
 
   a {
-    color: var(--color)
+    color: var(--color);
   }
-
 
 `
 
