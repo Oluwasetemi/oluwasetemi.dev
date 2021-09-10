@@ -14,6 +14,7 @@ const ImageStyle = styled.img`
 const BioStyles = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 30px;
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     flex-wrap: wrap;
@@ -59,24 +60,39 @@ function Bio() {
           <a
             className="link"
             href={`https://github.com/${siteMetadata?.socials?.github}`}
+            target="_blank"
+            rel="noreferrer"
           >
             {siteMetadata?.author}
           </a>{' '}
-          {siteMetadata?.title}
+          {siteMetadata?.title},
         </strong>{' '}
-        Full Stack Developer who recently relocated to Osogbo, Osun State,
-        Nigeria.🎈{' '}
+        A Full Stack Developer (Reactjs, Nodejs), currently lives in Osogbo,
+        Osun State Nigeria with my lovely and priceless Wife{' '}
+        <a
+          className="link"
+          href="https://twitter.com/BeagloOfficial"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Temidayo
+        </a>{' '}
+        .🎈
+        <br />
         <a
           className="link"
           href={`https://mobile.twitter.com/${siteMetadata?.socials?.twitter}`}
+          target="_blank"
+          rel="noreferrer"
         >
-          Say Hi to Him on Twitter.
+          Say Hi to Him on Twitter. <br />
         </a>
-        You can search through my blog using custom created
-        <Link to="/tags"> tags</Link>.<br />{' '}
-        <Link to="/about">Click here to read more about me.</Link>{' '}
-        <a className="link" href="/rss.xml">
-          RSS feed
+        <Link to="/tags">
+          You can search through my blog using custom created tags• 🏷{' '}
+        </Link>
+        .<br /> <Link to="/about">Click here to read more about me.</Link>{' '}
+        <a className="link" href="/rss.xml" target="_blank">
+          For RSS feed.🌍
         </a>
       </p>
     </BioStyles>

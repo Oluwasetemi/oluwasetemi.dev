@@ -6,8 +6,8 @@ import SEO from '../components/SEO'
 import Tags from '../components/Tags'
 import { formatReadingTime } from '../utils/helpers'
 
-function TagsPage({ data: { allMarkdownRemark }, pageContext }) {
-  const posts = allMarkdownRemark.edges
+function TagsPage({ data: { allMdx }, pageContext }) {
+  const posts = allMdx.edges
 
   return (
     <>
@@ -54,7 +54,7 @@ export default TagsPage
 
 export const pageQuery = graphql`
   query($tagsRegex: String) {
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {
         frontmatter: { isPublished: { eq: true }, tags: { regex: $tagsRegex } }

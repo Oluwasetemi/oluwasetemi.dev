@@ -9,6 +9,17 @@ const GlobalStyles = createGlobalStyle`
     --white: #fff;
     --grey: #efefef;
     --color: #800080;
+
+    --color-50: #ffe3f8;
+    --color-100: #ffb2f0;
+    --color-200: #ff80ea;
+    --color-300: #fe4ee7;
+    --color-400: #fe20e7;
+    --color-500: #e50cd5;
+    --color-600: #b204ac;
+    --color-700: #80007f;
+    --color-800: #4e0048;
+    --color-900: #1d0018;
   }
   /* gatsby specific styles */
   #___gatsby,#gatsby-focus-wrapper {
@@ -21,6 +32,27 @@ const GlobalStyles = createGlobalStyle`
     background-size: 650px;
     background-attachment: fixed;
     font-size: 10px;
+  }
+
+  blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+
+  blockquote::before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  blockquote p {
+    display: inline;
   }
 
   body {
@@ -94,7 +126,6 @@ const GlobalStyles = createGlobalStyle`
  .link {
     color: #000;
     text-decoration: none;
-    /* border-bottom: 3px solid #80008050; */
     box-shadow: inset 0 -.5rem 0 #80008050;
     transition: 0.4s all ease-out;
   }
@@ -106,7 +137,9 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: var(--color);
   }
-
+  img {
+    width: 100%;
+  }
 `
 
 export default GlobalStyles

@@ -10,7 +10,7 @@ function AboutPage({ data }) {
     <>
       <SEO title="About Me" location />
       <Bio />
-      <h2>About Me 👨</h2>
+      <h2>About Me 👨 WIP</h2>
       <p>I am Oluwasetemi 🇳🇬</p>
 
       <p>

@@ -34,7 +34,7 @@ const TagsStyles = styled.div`
 export default function Tags({ activeTag }) {
   const { posts } = useStaticQuery(graphql`
     query {
-      posts: allMarkdownRemark(
+      posts: allMdx(
         sort: { fields: [frontmatter___date], order: DESC }
         filter: { frontmatter: { isPublished: { eq: true } } }
       ) {

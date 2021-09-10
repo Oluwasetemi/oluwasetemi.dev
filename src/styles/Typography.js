@@ -56,7 +56,7 @@ const Typography = createGlobalStyle`
   }
 
   p code: {
-    fontSize: '1.1rem',
+    fontSize: 1.1rem,
   }
 `
 

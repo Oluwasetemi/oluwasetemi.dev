@@ -22,8 +22,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        path: `${__dirname}/src/pages/blog`,
+        name: 'blog',
       },
     },
     {
@@ -42,9 +42,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-code-buttons',
             options: {
@@ -163,15 +164,7 @@ module.exports = {
         trackingId: `UA-130441994-1`,
       },
     },
-    {
-      resolve: `gatsby-plugin-hotjar`,
-      options: {
-        includeInDevelopment: true, // optional parameter to include script in development
-        id: 2374821,
-        sv: 6,
-      },
-    },
-    `gatsby-plugin-feed`,
+    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

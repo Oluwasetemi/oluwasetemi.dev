@@ -13,7 +13,7 @@ async function turnBlogIntoPages({ graphql, actions }) {
     const { data } = await graphql(
       `
         {
-          allMarkdownRemark(
+          allMdx(
             sort: { fields: [frontmatter___date], order: DESC }
             limit: 1000
             filter: { frontmatter: { isPublished: { eq: true } } }
@@ -33,7 +33,7 @@ async function turnBlogIntoPages({ graphql, actions }) {
       `
     )
     // Create blog posts pages.
-    const posts = data.allMarkdownRemark.edges
+    const posts = data.allMdx.edges
 
     posts.forEach((post, index) => {
       const previous = index === posts.length - 1 ? null : posts[index + 1].node
@@ -63,7 +63,7 @@ async function turnTagsIntoPages({ graphql, actions }) {
     const { data } = await graphql(
       `
         {
-          allMarkdownRemark(
+          allMdx(
             sort: { fields: [frontmatter___date], order: DESC }
             limit: 1000
             filter: { frontmatter: { isPublished: { eq: true } } }
@@ -84,7 +84,7 @@ async function turnTagsIntoPages({ graphql, actions }) {
       `
     )
     // Create blog posts pages.
-    const posts = data.allMarkdownRemark.edges
+    const posts = data.allMdx.edges
 
     const tagsArrays = []
     for (const each of posts) {
@@ -126,7 +126,7 @@ export const onCreateNode = ({ node, actions, getNode }) => {
   // console.log('creating node from markdown files')
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,

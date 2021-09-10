@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
 import { graphql, Link } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Utterance from 'react-utterances'
 import styled from 'styled-components'
@@ -9,6 +10,7 @@ import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 
 const BlogPostStyles = styled.div`
+  color: red;
   h1,
   h2,
   h3,
@@ -52,6 +54,10 @@ const BlogPostStyles = styled.div`
     display: inline;
   }
 
+  img {
+    width: 100%;
+  }
+
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     h1 {
@@ -81,7 +87,7 @@ const BlogPostStyles = styled.div`
 `
 
 function BlogPostTemplate({ data, pageContext }) {
-  const post = data.markdownRemark
+  const post = data.mdx
   const siteDescription = post.excerpt
   const { previous, next } = pageContext
 
@@ -105,14 +111,16 @@ function BlogPostTemplate({ data, pageContext }) {
         <span>• 📅 {post.frontmatter.date}</span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
-        <span>
-          •
-          {post.frontmatter.tags.map(tag => (
-            <Link to={`/tags/${tag}`} key={tag}>
-              🏷 <span className="mark">{`${tag}`}</span>
-            </Link>
-          ))}
-        </span>
+        {post && post.frontmatter && post.frontmatter.tags.length > 0 && (
+          <span>
+            •
+            {post.frontmatter.tags.map(tag => (
+              <Link to={`/tags/${tag}`} key={tag}>
+                🏷 <span className="mark">{`${tag}`}</span>
+              </Link>
+            ))}
+          </span>
+        )}
         <span className="github-edit-link">
           • {`✏️ `}
           <a href={gitMarkdownUrl} rel="noreferrer" target="_blank">
@@ -122,11 +130,14 @@ function BlogPostTemplate({ data, pageContext }) {
         </span>
       </div>
 
-      <main
+      {/* <main
         className="main-content"
         style={{ marginTop: '50px' }}
         dangerouslySetInnerHTML={{ __html: post.html }}
-      />
+      /> */}
+      <MDXRenderer className="main-content" style={{ marginTop: '50px' }}>
+        {post.body}
+      </MDXRenderer>
       <hr
         style={{
           marginBottom: '50px',
@@ -168,10 +179,10 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt
-      html
+      body
       timeToRead
       fileAbsolutePath
       frontmatter {

@@ -6,6 +6,7 @@ const LogoStyles = styled.h1`
   margin-bottom: 50px;
   margin-top: 0px;
   color: var(--color);
+  color: #800080; /* bug blockquote styles affecting css variable */
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     margin-bottom: 25px;

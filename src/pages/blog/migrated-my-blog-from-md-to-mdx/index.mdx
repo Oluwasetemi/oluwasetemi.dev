@@ -1,0 +1,59 @@
+---
+title: Migrated My Gatsby Blog From Using Markdown Files Alone To Support Both Markdown(MD) and MarkdownX(MDX)
+date: '2021-08-25T16:00:00.200Z'
+tags: ['mdx']
+isPublished: true
+isDraft: false
+---
+
+My job as a web developer is to build things from small scale to experiment or teach myself more about the web or build large apps that people use to make their day to day experience better. To fulfil the former,i did a bit of extending to my site(digital garden) to support [mdx](https://mdxjs.com/). Why mdx? To answer that, I will need to write a long post to answer that question.
+
+To state few obvious reasons, to do more with my blog like show the power of the web with mdx and react sprinkled on everything I do since I am a web developer.
+
+## MDX
+
+I have support for both md and mdx out of the box. [For steps on how to migrate your gatsby site to support mdx.](https://www.gatsbyjs.com/docs/how-to/routing/migrate-remark-to-mdx/)
+
+
+
+Below is a short attempt at showing MDX rendered with React in action.
+
+```js
+// you can write JSX in your Markdown!
+<button onClick={(e) => {
+  let value = prompt("Enter a valid color string", "purple")
+  e.target.style.color = value;
+  e.target.style.padding = "20px";
+  e.target.style.marginLeft = "50%";
+  e.target.textContent = `a new ${value} button`
+}}}>test</button>
+```
+
+To gradually feel the mdx drip, click the button below!
+
+<button id="mybutton" onClick={(e) => {
+  let value = prompt("Enter a valid color string", "purple")
+  e.target.style.color = value;
+  e.target.style.padding = "20px";
+  e.target.style.marginLeft = "50%";
+  e.target.textContent = `a new ${value} button`
+  console.clear()
+}}>test</button>
+
+Above is a button you can click to see some javascript code run. The code will carry out the following steps:
+
+1. fire a `prompt` function which will ask you to pick a valid color.
+2. set the color you type as the color of the button if it is a valid color.
+3. add a padding of 20px to the button.
+4. add a marginLeft of 50% to the button, An attempt to center the button.
+5. change the content of the button
+
+We can end this experiment by using a range input to adjust the padding of the button.
+
+This is slick. So excited about all the possibilities we can learn with this.
+
+<input type="range" onChange={(e) => {
+  document.querySelector("#mybutton").style.padding = `${e.target.value}px`
+}} />
+
+I will write very much about mdx and its benefit soon and add the link to the blogpost.
