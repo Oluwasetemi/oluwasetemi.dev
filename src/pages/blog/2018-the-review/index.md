@@ -30,7 +30,7 @@ Staying in UCH - **University College Hospital** will get me prepared for my MSc
 
 ### Adversity and Tough Times
 
-I love to listen to [Inky Johnson](http://www.inkyjohnson.com/) a lot and I like the idea of staying positive during the period of adversities and tough times because it is in them that we are made over and over into the lasting person we desire to be - all loving human being we have dreamed to become - successful and happy.
+I love to listen to [Inky Johnson](https://www.inkyjohnson.com/) a lot and I like the idea of staying positive during the period of adversities and tough times because it is in them that we are made over and over into the lasting person we desire to be - all loving human being we have dreamed to become - successful and happy.
 
 The Idea that I was on my own made things hard for me, even the waves of the **₦19,000** coming to an end is cool enough to make one think. No source of income yet, part of my savings going into my MSc processing and travelling. I have learnt to take responsibility for certain family demands from the early days of my life.
 
@@ -132,7 +132,7 @@ I am sure of one thing, it's always good to move on when you feel too convenient
 
 As a digital nomad, I have been documenting my process of Job application in a google spread sheet that I hope I will make public soon, applying to Jobs and doing interviews have taught me a lot of things. I will update it here once I have finalized the new Job.
 
-If you know anyone who is looking to hire a JavaScript developer (front-end or back-end) kindly reach out to [me](http://cv-oluwasetemi.netlify.com).
+If you know anyone who is looking to hire a JavaScript developer (front-end or back-end) kindly reach out to [me](https://cv-oluwasetemi.netlify.com).
 
 ---
 
@@ -163,23 +163,23 @@ A list of the podcasts I love listening to:
 
 1. [Syntax fm co-hosted by Wes Bos and Scott Tolinski](https://syntax.fm)
 2. [Freecodecamp Podcast by the freecodecamp community](https://freecodecamp.libsyn.com/)
-3. [Akimbo by Seth Godin](http://www.akimbo.link/)
+3. [Akimbo by Seth Godin](https://www.akimbo.link/)
 4. [Ask Pastor John by Pastor John Piper](https://www.desiringgod.org/ask-pastor-john)
 5. [Basecs by Vaidehi Joshi & Saron Yitbarek](https://www.codenewbie.org/basecs)
 6. [Behind the Tech with Kevin Scott](https://behindthetech.libsynpro.com/)
 7. [The TIM Ferriss show by Tim Ferriss](https://tim.blog/podcast/)
 8. [The CodeNewBie](https://www.codenewbie.org/podcast)
-9. [Full Stack Radio by Adam Wathan](http://www.fullstackradio.com/)
+9. [Full Stack Radio by Adam Wathan](https://www.fullstackradio.com/)
 10. [Forloop Podcast](https://podcast.forloop.africa) by [Kolokodess](https://mobile.twitter.com/Kolokodess)
 11. [JavaScript Jabber by Charles Max Woods](https://devchat.tv/js-jabber/)
 12. [The console.log by Harry Wolff and Matthew Gerstman](https://theconsolelog.com/)
 13. [React Podcast by Chantastic](https://reactpodcast.simplecast.fm/)
 14. [Retropod](https://www.washingtonpost.com/podcasts/retropod/)
 15. [ShopTalk by Chris Coyer](https://shoptalkshow.com/)
-16. [Quote of the Day by Sean Croxton](http://quoteofthedayshow.libsyn.com/)
+16. [Quote of the Day by Sean Croxton](https://quoteofthedayshow.libsyn.com/)
 17. [Command Line Heroes](https://www.redhat.com/en/command-line-heroes)
-18. [Front end Happy Hour](http://frontendhappyhour.com/http://frontendhappyhour.com/)
-19. [FreakNomics Radio](http://freakonomics.com/)
+18. [Front end Happy Hour](https://frontendhappyhour.com/https://frontendhappyhour.com/)
+19. [FreakNomics Radio](https://freakonomics.com/)
 
 I listen mostly while on commute or doing chores or anytime I need to cool off with a walk. I encourage new devs to start a culture of listening to Podcast by using a podcast management app, I use [Pocket Casts](https://www.pocketcasts.com/). The best for me is Syntax FM.
 

@@ -6,7 +6,7 @@ isPublished: true
 isDraft: false
 ---
 
-![mentor-mentee-becoming-expert-relationship](http://res.cloudinary.com/drnqdd87d/image/upload/v1629727031/Personal/image_mrtiim.png "mentor-mentee-expert")
+![mentor-mentee-becoming-expert-relationship](https://res.cloudinary.com/drnqdd87d/image/upload/v1629727031/Personal/image_mrtiim.png "mentor-mentee-expert")
 
 I have been struggling to move to a better company for a while. I have helped people start their own software development career but I lack the cutting edge to get into foreign engineering team. Recently, I applied to a [mentoring program](https://pipeline.talentql.com/) and meeting my mentor changed my life forever.
 

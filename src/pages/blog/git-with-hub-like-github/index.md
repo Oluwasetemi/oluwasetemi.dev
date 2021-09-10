@@ -120,7 +120,7 @@ hub checkout https://github.com/username/repo/pull/73 custom-branch-name
 - `hub cherry-pick` - Cherry-pick a commit from a fork on GitHub.What the `git cherry-pick` does is to apply changes made in a commit SHA ID to the git working directory. It means what hub cherry-pick will offer you the developer is to cherry-pick a commit from GitHub and apply the changes to your code locally. it offers you lot of powers to experiment.
 
 ```shell
-hub cherry-pick http://github.com/username/repo/commit/SHA
+hub cherry-pick https://github.com/username/repo/commit/SHA
 OR
 git remote add -f remoteName git://github.com/username/REPO.git
 git cherry-pick SHA

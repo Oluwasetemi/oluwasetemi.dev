@@ -74,17 +74,17 @@ Could not read as I would have loved since normal day to day work was very choki
 
 > my pocket(app for listening to podcast) screenshot
 
-From the [last year review](https://www.oluwasetemi.dev/2018-the-review/) podcasting is my thing. I love listening to them on commute to and from work, when doing house chores, any opportunity that would not so require my full attention was dedicated to listening to podcast majorly Tech related. One faith based podcast I love listening to is [Ask Pastor John Piper - ASK PJ](https://www.desiringgod.org/ask-pastor-john) and [Quote of the day by Sean Croxton](http://quoteofthedayshow.libsyn.com/) for motivation.
+From the [last year review](https://www.oluwasetemi.dev/2018-the-review/) podcasting is my thing. I love listening to them on commute to and from work, when doing house chores, any opportunity that would not so require my full attention was dedicated to listening to podcast majorly Tech related. One faith based podcast I love listening to is [Ask Pastor John Piper - ASK PJ](https://www.desiringgod.org/ask-pastor-john) and [Quote of the day by Sean Croxton](https://quoteofthedayshow.libsyn.com/) for motivation.
 
 - [Syntax fm co-hosted by Wes Bos and Scott Tolinski](https://syntax.fm)
 - [Freecodecamp Podcast by the freecodecamp community](https://freecodecamp.libsyn.com/)
-- [Akimbo by Seth Godin](http://www.akimbo.link/)
+- [Akimbo by Seth Godin](https://www.akimbo.link/)
 - [Ask Pastor John by Pastor John Piper](https://www.desiringgod.org/ask-pastor-john)
 - [Behind the Tech with Kevin Scott](https://behindthetech.libsynpro.com/)
 - [The TIM Ferriss show by Tim Ferriss](https://tim.blog/podcast/)
-- [Full Stack Radio by Adam Wathan](http://www.fullstackradio.com/)
+- [Full Stack Radio by Adam Wathan](https://www.fullstackradio.com/)
 - [React Podcast by Chantastic](https://reactpodcast.simplecast.fm/)
-- [Quote of the Day by Sean Croxton](http://quoteofthedayshow.libsyn.com/)
+- [Quote of the Day by Sean Croxton](https://quoteofthedayshow.libsyn.com/)
 
 ### Desire to work remotely
 
