@@ -9,10 +9,20 @@ import Bio from '../components/Bio'
 import SEO from '../components/SEO'
 import { formatReadingTime } from '../utils/helpers'
 
-const OnePostSummaryStyles = styled(animated.div)`
-  margin-top: 1.5em;
-  margin-bottom: 3.5em;
+const OnePostSummaryStyles = styled(animated.article)`
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+  padding: 1.55rem 1.25em;
   cursor: grabbing;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+  h2 {
+    font-size: 2.25rem;
+  }
+  p.excerpt {
+    margin-bottom: 2rem;
+  }
 `
 
 function OnePostSummary({ node, title }) {
@@ -30,14 +40,14 @@ function OnePostSummary({ node, title }) {
       style={{ x, y }}
       key={node.fields.slug}
     >
-      <h3>
+      <h2>
         <Link
           style={{ boxShadow: 'none', color: '#800080' }}
           to={node.fields.slug}
         >
           {title}
         </Link>
-      </h3>
+      </h2>
       <small>
         {node.frontmatter.date}
         {` • ${formatReadingTime(node.timeToRead)}`}
@@ -56,7 +66,7 @@ function OnePostSummary({ node, title }) {
           style={{ boxShadow: 'none', color: '#800080' }}
           to={node.fields.slug}
         >
-          see more
+          read more
         </Link>
       </span>
     </OnePostSummaryStyles>
@@ -72,7 +82,9 @@ function BlogIndex({ data: { allMdx } }) {
       <Bio />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
-        return <OnePostSummary node={node} title={title} />
+        return (
+          <OnePostSummary key={node.fields.slug} node={node} title={title} />
+        )
       })}
     </>
   )

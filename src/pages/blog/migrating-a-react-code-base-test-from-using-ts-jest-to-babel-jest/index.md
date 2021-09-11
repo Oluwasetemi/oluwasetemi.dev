@@ -7,15 +7,16 @@ isDraft: false
 ---
 
 <!-- Migrating a react code base test from using `ts-jest` to babel-jest -->
-![ Leave no one behind]( https://images.unsplash.com/photo-1617575523032-fde690b9ad67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80)
 
-> 📷 photo credit <a href="https://unsplash.com/@etiennegirardet">Etienne Girardet</a> from splash
+Worked recently on a project where I have to use React with TypeScript and I had to write test with Jest, my first instinct was to look for "something" to transform my `tsx` to a format jest understands. [`ts-jest`](https://www.npmjs.com/package/ts-jest) was what came to mind after a bit of research. I guess it was all instinct to go ahead without looking for alternatives but it came with its challenges. Let consider the information below:
 
 * Issues with `ts-jest` includes test coverage issues, working with a certain version of jest, extra configuration.
 * Opting for `babel-jest` that comes default to jest when a babel config is present in the root of you code.
 * Beauty of `ts-jest` is that it test the types written in typescript unlike the `babel-jest` that does transformation to commmonjs.
 
-Worked recently on a project where I have to use React with TypeScript and I had to write test with Jest, my first instinct was to look for "something" to transform my `tsx` to a format jest understands. [`ts-jest`](https://www.npmjs.com/package/ts-jest) was what came to mind after a bit of research. I guess it was all instinct to go ahead without looking for alternatives well yes the choice was very instinctive but it came with its challenges.
+![ Leave no one behind]( https://images.unsplash.com/photo-1617575523032-fde690b9ad67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80)
+
+> 📷 photo credit <a href="https://unsplash.com/@etiennegirardet">Etienne Girardet</a> from splash
 
 Why do we have to use a transformer to transform our code to a format that jest understands? The only simple way I can put it - is that jest will only run our test if it understands it. Jest was built with `node` so it understands JavaScript code.  Much more with a config you can set in the jest config file `jest.config.js` in the root directory of your code to allow test for browser JavaScript using an option called `js-dom`. But the situation is very different with Typescript, because Jest will need a way to understand the code we have written in `ts` / `Typescript` or `tsx` / `Typescript React`. Basically the work of `ts-jest` is to make jest understand the code you have written in `ts` or `tsx` and add types support.
 

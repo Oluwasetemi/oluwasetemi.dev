@@ -8,11 +8,12 @@ modified: false
 ---
 
 <!-- caution -->
+
+Wrote the first Draft - Today (12th February, 2021), **It turned out that I completed this post 18th March and I have found out that hub is no more in production just for one of the maintainer [Mislav Marohnić](https://twitter.com/mislav) who is kind and diligent to look through issues and pull-request. He is a member of another team working on something very interesting called the [official GitHub command line](https://cli.github.com) and the [GitHub repo](https://github.com/cli/cli/)**. Seeing so much how `hub` has improved my workflow - saved me a couple of seconds. (I will also read the docs and incorporate it to my workflow and write about it).  I learnt about `hub fetch`, `hub init`, `hub merge`, `hub push`, `hub remote`, and `hub submodule`. let me share what I learnt with you.
+
 ## caution
 
 Before you travel too deep, this article will be of great benefit if you have some experience on how to write code and this is not an introductory guide to `git` nor is it a starter guide to `GitHub`.
-
-Wrote the first Draft - Today (12th February, 2021), **It turned out that I completed this post 18th March and I have found out that hub is no more in production just for one of the maintainer [Mislav Marohnić](https://twitter.com/mislav) who is kind and diligent to look through issues and pull-request. He is a member of another team working on something very interesting called the [official GitHub command line](https://cli.github.com) and the [GitHub repo](https://github.com/cli/cli/)**. Seeing so much how `hub` has improved my workflow - saved me a couple of seconds. (I will also read the docs and incorporate it to my workflow and write about it).  I learnt about `hub fetch`, `hub init`, `hub merge`, `hub push`, `hub remote`, and `hub submodule`. let me share what I learnt with you.
 
 - `hub fetch` - Add missing remotes prior to performing git fetch. Allow space separated list of remotes you want to fetch with a flag (--multiple). You can update more than one remote with a single command.
 
