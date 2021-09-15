@@ -163,7 +163,7 @@ Building on the last test I can test the increment button if it work properly. T
 We can also try to rerender the App since react also does this very well when we have some level of changes in our App. To test the App re-render properly. The re-render should reset the counter value to 0. We will build on all we have been writing by rendering our App using the `render` api. react testing library exposes a rerender api which can be called almost instantly after the render. fire a click event on the button you query from `getByText` - queries the Document Object Model (DOM) for any thing with the text name `/count is/`. The essence of the forward slash is to use the regex option of the `getByText` query. Assert that the value of the counter has been increased by just one.
 
 ```jsx{numberLines: true}
-it('should reset increment count value', () => {
+it('should reset count value when app rerenders', () => {
     const { getByText, rerender } = render(<App />);
     rerender(<App />);
     const count = getByText(/count is/);
@@ -200,7 +200,7 @@ The two quotes are from [Kent C Dodds](https://kentcdodds.com/). I am a good fan
     2. User interact and find the counter button -`screen.getByRole('button', { name: /count/i })` and `fireEvent.click(count)`
     3. User assert that the value of the counter has increased by one - `expect(count.textContent).toContain('1') or expect(count).toHaveTextContent(1)`
 
-* Spotted a bug in the test case that says `should reset increment count value`.
+* Spotted a bug in the test case that says `should reset count value when app rerenders`.
     1. Renamed the test case to `rerender <App /> should not change the value of counter`. When an app renders it should not loose its state in React. I implemented the test with the understanding that the value of the state should reset during rerender.(App rerenders  when passed new prop values or context value is updated or A life-cycle update with useEffect)
     2. The test above was not effective considering the two principles above. Below is a better version of the last test,  [for full test re-implemention check GitHub](https://github.com/Oluwasetemi/migrate-series/blob/default-test/src/__tests__/App.spec.tsx) - PS: press . to see a new GitHub magic of vscode in browser :
 
