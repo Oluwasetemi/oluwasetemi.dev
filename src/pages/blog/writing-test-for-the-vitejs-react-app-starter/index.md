@@ -186,3 +186,44 @@ I know that you will give writing test its importance in your next project moreo
 <hr />
 
 I hope this article was enlightening. If so, share this article and follow [@setemiojo](https://twitter.com/setemiojo) on Twitter.
+
+## Update
+
+> [The more your tests resemble the way your software is used, the more confidence they can give you.](https://testing-library.com/docs/guiding-principles)
+
+> [I don't think that anyone can argue that testing software is a waste of time. The biggest challenge is knowing what to test and how to test it in a way that gives true confidence rather than the false confidence of testing implementation details.](https://kentcdodds.com/blog/write-tests#conclusion)
+
+The two quotes are from [Kent C Dodds](https://kentcdodds.com/). I am a good fan. His love for testing has been the source of my knowledge and I agree with the two principles certainly. I call it writing **effective tests**. This made me do some adjustment to the test I have written for the App above. These are the few changes to note:
+
+* Made the test to resemble the way the app will be used:
+    1. App loads - `render(<App />`
+    2. User interact and find the counter button -`screen.getByRole('button', { name: /count/i })` and `fireEvent.click(count)`
+    3. User assert that the value of the counter has increased by one - `expect(count.textContent).toContain('1') or expect(count).toHaveTextContent(1)`
+
+* Spotted a bug in the test case that says `should reset increment count value`.
+    1. Renamed the test case to `rerender <App /> should not change the value of counter`. When an app renders it should not loose its state in React. I implemented the test with the understanding that the value of the state should reset during rerender.(App rerenders  when passed new prop values or context value is updated or A life-cycle update with useEffect)
+    2. The test above was not effective considering the two principles above. Below is a better version of the last test,  [for full test re-implemention check GitHub](https://github.com/Oluwasetemi/migrate-series/blob/default-test/src/__tests__/App.spec.tsx) - PS: press . to see a new GitHub magic of vscode in browser :
+
+```jsx
+import {screen, fireEvent, render} from '@testing-library/react' ;
+
+it('rerender <App /> should not change the value of counter', () => {
+    const { rerender } = render(<App />);
+    let count = screen.getByRole('button', { name: /count is/i });
+
+    fireEvent.click(count);
+
+    expect(count.textContent).toContain(1);
+
+    rerender(<App />);
+    
+    expect(count.textContent).toContain(1);
+
+    fireEvent.click(count);
+
+    expect(count.textContent).toContain(2);
+});
+```
+ [For the full changes to all the test check it on GitHub](https://github.com/Oluwasetemi/migrate-series/blob/default-test/src/__tests__/App.spec.tsx).
+
+Check the default-test branch of this [repo](https://github.com/Oluwasetemi/migrate-series/blob/default-test/).
