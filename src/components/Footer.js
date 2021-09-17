@@ -26,6 +26,7 @@ function Footer() {
   return (
     <footer
       style={{
+        color: 'var(--color)',
         marginTop: '50px',
         paddingTop: '10px',
       }}

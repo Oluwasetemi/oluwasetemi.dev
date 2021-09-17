@@ -32,31 +32,12 @@ const GlobalStyles = createGlobalStyle`
     background-size: 650px;
     background-attachment: fixed;
     font-size: 10px;
-  }
-
-  blockquote {
-    background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
-    quotes: "\201C""\201D""\2018""\2019";
-  }
-
-  blockquote::before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-  }
-
-  blockquote p {
-    display: inline;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color) var(--white);
   }
 
   body {
-    font-size: 2rem;
+    font-size: 16px;
     line-height: 1.5;
   }
 
@@ -66,9 +47,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button {
-    background: var(--red);
-    color: white;
-    border: 0;
+    color: var(--white);
+    border: 1px solid var(--color);
+    background: var(--color-400);
+    ${'' /* border: 0; */}
     padding: 0.6rem 1rem;
     border-radius: 2px;
     cursor: pointer;
@@ -77,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
     text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.2);
     transition: all 0.2s;
     &:hover {
-      --cast: 4px;
+      --cast: 6px;
     }
   }
 
@@ -86,19 +68,15 @@ const GlobalStyles = createGlobalStyle`
     image-rendering: pixelated;
   }
 
-  /* Scrollbar Styles */
   body::-webkit-scrollbar {
     width: 15px;
   }
-  html {
-    scrollbar-width: auto;
-    scrollbar-color: var(--color) var(--white);
-  }
+
   body::-webkit-scrollbar-track {
     background: var(--white);
   }
   body::-webkit-scrollbar-thumb {
-    background-color: var(--color) ;
+    background-color: var(--color);
     border-radius: 6px;
     border: 3px solid var(--white);
   }
@@ -119,10 +97,6 @@ const GlobalStyles = createGlobalStyle`
     display: inline-block;
   }
 
-  /* TODO: switch to Style components
-  style the link tag in the bio
-  */
-
  .link {
     color: #000;
     text-decoration: none;
@@ -139,6 +113,26 @@ const GlobalStyles = createGlobalStyle`
   }
   img {
     width: 100%;
+  }
+  blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    ${'' /* quotes: "\201C""\201D""\2018""\2019"; */}
+  }
+
+  blockquote::before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  blockquote p {
+    display: inline;
   }
 `
 

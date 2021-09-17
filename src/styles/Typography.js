@@ -30,17 +30,19 @@ const Typography = createGlobalStyle`
     margin: 0;
   }
   a {
-    color: var(--black);
+    color: var(--colors);
     text-decoration-color: var(--red);
     /* Chrome renders this weird with this font, so we turn it off */
     text-decoration-skip-ink: none;
+    ${'' /* text-decoration-thickness: 3px; */}
   }
   mark, .mark {
     background: var(--yellow);
-    padding: 0 2px 2px 2px;
+    padding: 5px 2px 5px 2px;
     margin: 0;
     display: inline;
     line-height: 1;
+    border-radius: 5px;
   }
 
   .center {

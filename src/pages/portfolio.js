@@ -1,4 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const PortfolioStyles = styled.div`
+  color: var(--color);
+`
 
 const portfolioList = [
   {
@@ -29,11 +34,11 @@ function SinglePortfolio() {
 
 export default function PortfolioPage() {
   return (
-    <div>
+    <PortfolioStyles>
       <h1>My Portfolio </h1>
       {portfolioList.map((each, i) => (
         <SinglePortfolio key={i} />
       ))}
-    </div>
+    </PortfolioStyles>
   )
 }

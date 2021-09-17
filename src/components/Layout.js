@@ -10,13 +10,13 @@ import Nav from './Nav'
 
 const SiteBorderStyles = styled.div`
   max-width: 1000px;
-  margin: 2em auto 3em auto;
-  margin-top: clamp(2em, 8vw, 2em);
-  padding: 5px;
-  padding: clamp(5px, 1vw, 15px);
+  margin: 0 auto 3em auto;
+  /* margin-top: clamp(2em, 8vw, 2em); */
+  /* padding: 5px; */
+  /* padding: clamp(5px, 1vw, 15px); */
   /* background-size: 1500px; */
-  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044);
-  border: 5px solid white;
+  /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044); */
+  /* border: 5px solid white; */
   @media (max-width: 1100px) {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
@@ -25,12 +25,8 @@ const SiteBorderStyles = styled.div`
 
 const ContentStyles = styled.div`
   /* color: red; */
-  background: white;
-  padding: 2rem;
-
-  img {
-    max-width: 100%;
-  }
+  background: transparent;
+  /* padding: 2rem; */
 `
 
 function Layout({ children }) {
@@ -50,11 +46,11 @@ function Layout({ children }) {
       <Typography />
       <SiteBorderStyles>
         <ReactTooltip place="top" type="dark" effect="float" />
-        <ContentStyles>
+        <>
           <Nav title={site.siteMetadata?.title} />
           {children}
           <Footer />
-        </ContentStyles>
+        </>
       </SiteBorderStyles>
     </>
   )

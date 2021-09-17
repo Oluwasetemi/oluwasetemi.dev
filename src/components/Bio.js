@@ -12,8 +12,10 @@ const ImageStyle = styled.img`
 `
 
 const BioStyles = styled.div`
+  color: var(--color);
   display: flex;
   align-items: center;
+  margin-top: 40px;
   margin-bottom: 30px;
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -28,7 +30,7 @@ const BioStyles = styled.div`
   }
 `
 
-function Bio() {
+function Bio({ footer }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -55,7 +57,7 @@ function Bio() {
     <BioStyles>
       <ImageStyle src={profilePic} alt="Ojo Oluwasetemi" />
       <p>
-        Written by{' '}
+        {footer ? "I ' m" : 'Written by'}{' '}
         <strong>
           <a
             className="link"
