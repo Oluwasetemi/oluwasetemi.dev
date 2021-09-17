@@ -6,6 +6,9 @@ isPublished: true
 isDraft: false
 ---
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 The first full year as a full time developer - Devoting myself to the life long career of software development learning the lifestyle and writing `codes`, most importantly building several things for the web. The nights, the coffee, and bugs - the Joy and frustration engrained in the wonderful 2018 year. It was my first year as a Grad. This was another year of travelling for me. Full of taking responsibilities. I could never be less grateful.
 
 ### Conclusion of NYSC - POST NYSC
