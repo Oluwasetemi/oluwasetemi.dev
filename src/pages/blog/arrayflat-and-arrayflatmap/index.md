@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [A little Story](#a-little-story)
+- [How do we flatten an Array Before ?](#how-do-we-flatten-an-array-before-)
+- [Deep flattens an array](#deep-flattens-an-array)
+- [Now Behold your Future](#now-behold-your-future)
+- [Specification and Support](#specification-and-support)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ---
 title: Array.prototype.flat and Array.prototype.flatMap
 date: '2018-12-20T23:50:00.121Z'

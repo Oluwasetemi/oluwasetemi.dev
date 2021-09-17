@@ -6,8 +6,27 @@ isPublished: true
 isDraft: false
 ---
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Conclusion of NYSC - POST NYSC](#conclusion-of-nysc---post-nysc)
+- [My Verdict to stay in Ibadan](#my-verdict-to-stay-in-ibadan)
+- [Adversity and Tough Times](#adversity-and-tough-times)
+- [Volunteering at SimplyGospellyricsAfrica](#volunteering-at-simplygospellyricsafrica)
+- [Rejection and Human Plans](#rejection-and-human-plans)
+- [EduLight and the Blessing of Teaching](#edulight-and-the-blessing-of-teaching)
+- [Freecodecamp Ibadan and Community Impact](#freecodecamp-ibadan-and-community-impact)
+- [My Life and Family](#my-life-and-family)
+- [Responsibility demands](#responsibility-demands)
+- [Counting my Blessings](#counting-my-blessings)
+- [Quitting my Job in Ibadan](#quitting-my-job-in-ibadan)
+- [My Search for Job](#my-search-for-job)
+- [Looking Ahead](#looking-ahead)
+- [Learning](#learning)
+- [A New Love For Podcasts](#a-new-love-for-podcasts)
+- [Moments in Pictures](#moments-in-pictures)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 The first full year as a full time developer - Devoting myself to the life long career of software development learning the lifestyle and writing `codes`, most importantly building several things for the web. The nights, the coffee, and bugs - the Joy and frustration engrained in the wonderful 2018 year. It was my first year as a Grad. This was another year of travelling for me. Full of taking responsibilities. I could never be less grateful.
 

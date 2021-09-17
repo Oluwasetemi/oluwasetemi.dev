@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [The Blessedness of learning and discovery in lone](#the-blessedness-of-learning-and-discovery-in-lone)
+- [Benefit of using the public like @swyx suggests](#benefit-of-using-the-public-like-swyx-suggests)
+- [Learning in the public](#learning-in-the-public)
+- [Opportunities](#opportunities)
+- [Working with a Team](#working-with-a-team)
+- [Final Advice](#final-advice)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ---
 title: Code Like An Introvert, Communicate Like An Extrovert
 date: '2019-05-20T09:00:00.123Z'
