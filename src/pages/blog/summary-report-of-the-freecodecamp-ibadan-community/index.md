@@ -14,7 +14,7 @@ A quotes from my [2018 in review](https://oluwasetemi.github.io/2018-the-review/
 
 ### Doing the Work that Matters
 
-Around May 2018, I set out to create a community from JavaScript developers in [Ibadan]() - _the town with the brown roof_. It seem impossible at first but by the end of the year, we had done 7 meet-ups where we met monthly to talk about becoming better and all round JavaScript developers especially accommodating newcomers.
+Around May 2018, I set out to create a community for JavaScript developers in [Ibadan]() - _the town with the brown roof_. It seem impossible at first but by the end of the year, we had done 7 meet-ups where we met monthly to talk about becoming better and all round JavaScript developers especially accommodating newcomers.
 
 They see the work to be done and the chance to help others level up. They show up with their whole selves simply to turn on lights for others.
 
