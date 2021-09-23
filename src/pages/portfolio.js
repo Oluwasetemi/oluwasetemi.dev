@@ -17,7 +17,8 @@ const AllPortfolioStyles = styled.div`
     }
 
     .card-image img {
-      width: 200px;
+      width: 330px;
+      height: auto;
     }
   }
 
@@ -27,7 +28,8 @@ const AllPortfolioStyles = styled.div`
       font-size: 1.2em;
     }
     .card-image img {
-      width: 200px;
+      min-width: 330px;
+      height: auto;
     }
   }
 `
