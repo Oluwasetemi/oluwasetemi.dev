@@ -25,7 +25,6 @@ const TopProjectStyles = styled.div`
 
     &:hover {
       border-bottom: 2px solid var(--red);
-
     }
   }
   span.count {
@@ -44,6 +43,11 @@ const TopProjectStyles = styled.div`
 `
 
 const LatestPostStyles = styled.div`
+  .latest-writing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
   padding: 40px 60px 70px;
   position: relative;
   background-color: var(--color-5000, #ffebff50);
@@ -56,19 +60,34 @@ const LatestPostStyles = styled.div`
     position: relative;
     padding-left: 689px;
   }
-`
+  /* Tablet */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h1 {
+      font-size: 1.5em;
+    }
+    .latest-writing {
+      display: block;
+    }
+  }
 
-const GridStyles = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  /* phones */
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    h1 {
+      font-size: 1.2em;
+    }
+    .latest-writing {
+      display: block;
+    }
+  }
 `
 
 function TopProject({ portfolios }) {
   return (
     <TopProjectStyles>
       <h1>
-        <Link to="/portfolio">My Portfolios <span className="count">{portfolios.length}</span>{' '}</Link>
+        <Link to="/portfolio">
+          My Portfolios <span className="count">{portfolios.length}</span>{' '}
+        </Link>
       </h1>
       {portfolios.map((portfolio, index) => {
         return (
@@ -87,14 +106,14 @@ function LatestPost({ posts }) {
   return (
     <LatestPostStyles>
       <h2 className="heading">Some of my Writings</h2>
-      <GridStyles>
+      <div className="latest-writing">
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
             <OnePostSummary key={node.fields.slug} node={node} title={title} />
           )
         })}
-      </GridStyles>
+      </div>
       <span className="more">
         <Link style={{ boxShadow: 'none', color: '#800080' }} to="blog">
           To see all of my writings.
@@ -120,7 +139,7 @@ const Typing = ({ text, delay = 550 }) => {
 }
 
 function Hero({ site }) {
-   const { siteMetadata } = site
+  const { siteMetadata } = site
   const [name, setName] = React.useState('Oluwasetemi')
   const [jobTitle, setJobTitle] = React.useState('Fullstack Developer')
   const names = ['Oluwasetemi', 'Ojo', 'Temi', 'Setemi']

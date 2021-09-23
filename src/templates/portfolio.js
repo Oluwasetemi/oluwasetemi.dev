@@ -126,14 +126,14 @@ function PortfolioTemplate({ data, pageContext }) {
       >
         <li>
           {previous && (
-            <Link to={previous.fields.slug} rel="prev">
+            <Link to={`/portfolio/${previous.frontmatter.slug}`} rel="prev">
               ← {previous.frontmatter.title}
             </Link>
           )}
         </li>
         <li>
           {next && (
-            <Link to={next.fields.slug} rel="next">
+            <Link to={`/portfolio/${next.frontmatter.slug}`} rel="next">
               {next.frontmatter.title} →
             </Link>
           )}

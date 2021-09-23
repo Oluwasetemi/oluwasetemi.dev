@@ -10,7 +10,26 @@ const PortfolioStyles = styled.div`
 `
 
 const AllPortfolioStyles = styled.div`
-  color: var(--color);
+  /* Tablet */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h1 {
+      font-size: 1.5em;
+    }
+
+    .card-image img {
+      width: 200px;
+    }
+  }
+
+  /* phones */
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    h1 {
+      font-size: 1.2em;
+    }
+    .card-image img {
+      width: 200px;
+    }
+  }
 `
 
 function AllPortfolio({ posts }) {
