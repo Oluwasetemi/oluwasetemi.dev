@@ -1,10 +1,12 @@
 ---
+
 title: Writing test for the vitejs react app starter
 date: '2021-08-17T23:01:05.977Z'
 tags: ['test', 'react', 'javascript']
 isPublished: true
 isDraft: false
 ---
+
 
 Thinking of a better way to start your new project with react and write test? I have a solution for you using the [Vitejs React Starter App](https://vitejs.dev/guide/#scaffolding-your-first-vite-project). I will walk you through a set of test that I think the [vitejs](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) scaffold should come with my default.
 

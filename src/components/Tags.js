@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const TagsStyles = styled.div`
+  color: var(--color);
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;

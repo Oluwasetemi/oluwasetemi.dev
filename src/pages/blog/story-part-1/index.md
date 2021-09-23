@@ -6,6 +6,7 @@ isPublished: true
 isDraft: false
 ---
 
+
 Going to a university of technology was a strong concern from my daddy who insisted even when a university of agriculture offered me an engineering course.Straight from secondary school I wanted Petrochemical engineering because oil was the big thing in my country. As time pass and I began to evolve, I wanted computer science after roaming for something I really want to put my energy into and turn into a career.
 
 ### Mathematics && Computer Science

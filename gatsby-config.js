@@ -29,6 +29,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        path: `${__dirname}/content/portfolio`,
+        name: 'portfolio',
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `data`,
         path: `${__dirname}/src/data/`,
         ignore: [`**/.*`], // ignore files starting with a dot
@@ -158,6 +165,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

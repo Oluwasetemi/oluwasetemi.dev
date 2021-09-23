@@ -1,10 +1,11 @@
 ---
-title: 2019 - The Review!
+title: 2019 - The Review
 date: '2019-11-30T00:00:00.012Z'
 tags: ['review', '2019']
 isPublished: true
 isDraft: false
 ---
+
 
 Such a huge year with opportunity to prove myself as a software developer. Plenty goals, few were crushed and others I failed at. Plenty learning and lessons, plenty positives to take to the new year and focus on the thing I said was going to do during my last year review and evaluation of my journey.I enjoyed every bit of it and I am excited about what the future holds in faith now.
 

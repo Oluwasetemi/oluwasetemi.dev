@@ -8,6 +8,7 @@ modified: true
 modifiedDate: '2020-11-13T14:11:12.044Z'
 ---
 
+
 ## My Decision
 
 Immediately after university education around December 2015, I made a solemn promise to learn and learn it properly. Almost 5 years after the commitment, I am not backing out on my commitment. I want to learn the language wholly, completely and will thus do everything I can to stay true to this saying of mine. Let me go straight to my reason why you should learn JavaScript if at all you plan or want or need to learn JavaScript.

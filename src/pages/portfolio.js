@@ -1,39 +1,100 @@
+import { graphql } from 'gatsby'
 import React from 'react'
+import styled from 'styled-components'
+import Bio from '../components/Bio'
+import PortfolioCard from '../components/PortfolioCard'
+import SEO from '../components/SEO'
 
-const portfolioList = [
-  {
-    name: '',
-    builtDate: '',
-    technologies: ['tech1', 'tech2'],
-    linkSourceCode: 'https://oluwasetemi.dev',
-    liveUrl: 'https://oluwasetemi.dev',
-  },
-  {
-    name: '',
-    builtDate: '',
-    technologies: ['tech1', 'tech2'],
-    linkSourceCode: 'https://oluwasetemi.dev',
-    liveUrl: 'https://oluwasetemi.dev',
-  },
-]
+const PortfolioStyles = styled.div`
+  color: var(--color);
+`
 
-function SinglePortfolio() {
-  return (
-    <>
-      <h2>Project One</h2>
+const AllPortfolioStyles = styled.div`
+  /* Tablet */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h1 {
+      font-size: 1.5em;
+    }
 
-      <p>Project One details</p>
-    </>
-  )
-}
+    .card-image img {
+      width: 330px;
+      height: auto;
+    }
+  }
 
-export default function PortfolioPage() {
+  /* phones */
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    h1 {
+      font-size: 1.2em;
+    }
+    .card-image img {
+      min-width: 330px;
+      height: auto;
+    }
+  }
+`
+
+function AllPortfolio({ posts }) {
   return (
     <div>
-      <h1>My Portfolio </h1>
-      {portfolioList.map((each, i) => (
-        <SinglePortfolio key={i} />
-      ))}
+      {posts.map((post, index) => {
+        return (
+          <AllPortfolioStyles key={`${post.slug}-${index}`}>
+            <PortfolioCard post={post} />
+          </AllPortfolioStyles>
+        )
+      })}
     </div>
   )
 }
+
+
+
+function PortfolioIndex({ data: { allMdx } }) {
+  const posts = allMdx.edges
+
+  return (
+    <PortfolioStyles>
+      <SEO title="Portfolio" />
+      <h1>Portfolio</h1>
+
+        <p className="">
+          This page details some of the project, side project, contributions to Open Source I have worked on and my role on the
+          project. It shows a little overhead details of the technology stack
+          used. You can click on individual project to read more details.
+        </p>
+      <AllPortfolio posts={posts} />
+      <Bio footer />
+    </PortfolioStyles>
+  )
+}
+
+export default PortfolioIndex
+
+export const pageQuery = graphql`
+  query {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: {
+        frontmatter: { isPublished: { eq: false } }
+        fileAbsolutePath: { regex: "//content/portfolio//" }
+      }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            date(formatString: "dddd DD MMMM YYYY")
+            title
+            url
+            slug
+            imageUrl
+            description
+            technology
+            publishedDate
+            tags
+          }
+        }
+      }
+    }
+  }
+`
