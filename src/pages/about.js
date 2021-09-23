@@ -15,15 +15,15 @@ function AboutPage({ data }) {
     <AboutPageStyles>
       <SEO title="About Me" location />
       <Bio footer />
-      <h2>About Me 👨 WIP</h2>
+      <h2>About Me 👨 </h2>
       <p>
         I'm Oluwasetemi 🇳🇬, It is pronounced SE + TE(Not TI) + ME. Most people call me Ojo. Other variant of my name is
         Temi or Setemi or Stephen. Address me with anyone that is easy for you.
       </p>
 
       <p>
-        I'm a web developer, who is passionate about the stuffs I build. I am
-        from Nigeria 🇳🇬, I love to work with JavaScript, Typescript Reactjs, Nodejs and
+        I'm a web developer, passionate about the stuffs I build
+        from Nigeria 🇳🇬 who love to work with JavaScript, Typescript Reactjs, Nodejs and
         GraphQL. I prefer to solve problems.
       </p>
 
@@ -45,12 +45,12 @@ function AboutPage({ data }) {
       <Img image={setemi} alt="oluwasetemi" />
 
       <p>
-        I took time to learn JavaScript while I finished from university, I
+        I took time to learn JavaScript after I finished from the university, I
         wrote about this in a blog,{' '}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.oluwasetemi.dev/story-part-1/"
+          href="https://www.oluwasetemi.dev/blog/story-part-1/"
         >
           you should check it out.
         </a>
@@ -63,11 +63,10 @@ function AboutPage({ data }) {
 
       <h3>More on Family</h3>
       <p>
-        I am the second of 6 children and the first male in the lineage, both
+        I am the second of 6 children out of which Adeola and Temi are my step siblings and the first male in the lineage, both
         parent are late (Blessed memory). Mum died first year in university and
         Dad died while I was serving Nigeria (country of birth) in Benue(Food
-        basket of the nation) 2017. I have 2 step siblings (Temi
-        and Adeola).{' '}
+        basket of the nation) 2017.{' '}
       </p>
 
       <p>
