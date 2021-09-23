@@ -1,24 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Job Hunting](#job-hunting)
-- [Relocating to Osogbo](#relocating-to-osogbo)
-- [Failures](#failures)
-- [Evolution](#evolution)
-  - [The book I read in 2020](#the-book-i-read-in-2020)
-  - [Podcast I listened to](#podcast-i-listened-to)
-  - [Desire to work remotely](#desire-to-work-remotely)
-  - [Teaching and the developer advocate in me](#teaching-and-the-developer-advocate-in-me)
-  - [Exercising](#exercising)
-  - [Relationship and Marriage](#relationship-and-marriage)
-  - [Corona Pandemic](#corona-pandemic)
-  - [EndSars Protest](#endsars-protest)
-  - [The plan for 2021](#the-plan-for-2021)
-  - [Year in pictures](#year-in-pictures)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: 2020 - The Review!
 date: '2020-11-05T00:00:00.012Z'

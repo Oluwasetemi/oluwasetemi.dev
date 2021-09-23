@@ -55,6 +55,61 @@ async function turnBlogIntoPages({ graphql, actions }) {
   }
 }
 
+async function turnPortfolioIntoPages({ graphql, actions }) {
+  try {
+    const { createPage } = actions
+    const portfolio = path.resolve('./src/templates/portfolio.js')
+    const { data } = await graphql(
+      `
+        {
+          allMdx(
+            sort: { fields: [frontmatter___publishedDate], order: DESC }
+            limit: 1000
+            filter: {
+              frontmatter: { isPublished: { eq: false } }
+              fileAbsolutePath: { regex: "//content/portfolio//" }
+            }
+          ) {
+            edges {
+              node {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  title
+                  slug
+                  description
+                }
+              }
+            }
+          }
+        }
+      `,
+    )
+    // Create blog posts pages.
+    const posts = data.allMdx.edges
+
+    posts.forEach((post, index) => {
+      const previous = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
+      console.log({ slug: post.node.frontmatter.slug })
+
+      createPage({
+        path: `portfolio/${post.node.frontmatter.slug}`,
+        component: portfolio,
+        context: {
+          slug: post.node.frontmatter.slug,
+          previous,
+          next,
+        },
+      })
+    })
+  } catch (error) {
+    console.log(error.message)
+    throw new Error(`error while creating portfolio ${error.message}`)
+  }
+}
+
 async function turnTagsIntoPages({ graphql, actions }) {
   try {
     // fetch data using graphQL to get all the data to create the allTags Object
@@ -119,6 +174,8 @@ export const createPages = async params => {
     turnBlogIntoPages(params),
     // 2. tags
     turnTagsIntoPages(params),
+    // 3.portfolio
+    turnPortfolioIntoPages(params),
   ])
 }
 

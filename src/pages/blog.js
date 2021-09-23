@@ -43,7 +43,7 @@ function OnePostSummary({ node, title }) {
       <h2>
         <Link
           style={{ boxShadow: 'none', color: '#800080' }}
-          to={node.fields.slug}
+          to={`/blog${node.fields.slug}`}
         >
           {title}
         </Link>
@@ -64,7 +64,7 @@ function OnePostSummary({ node, title }) {
       <span>
         <Link
           style={{ boxShadow: 'none', color: '#800080' }}
-          to={node.fields.slug}
+          to={`blog${node.fields.slug}`}
         >
           read more
         </Link>

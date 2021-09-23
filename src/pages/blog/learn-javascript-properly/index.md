@@ -1,16 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Starting From Where I left off](#starting-from-where-i-left-off)
-- [Learn enough to build something you can show others](#learn-enough-to-build-something-you-can-show-others)
-- [Learn JavaScript as a programming language](#learn-javascript-as-a-programming-language)
-- [before you learn JavaScript in the browser](#before-you-learn-javascript-in-the-browser)
-- [Learn more about Frontend Frameworks and build something](#learn-more-about-frontend-frameworks-and-build-something)
-- [Learn JavaScript on the server (Nodejs)](#learn-javascript-on-the-server-nodejs)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: learn javascript properly
 date: '2020-11-11T21:53:00.000Z'
@@ -21,9 +8,9 @@ modified: false
 modifiedDate: '2020-11-13T14:11:12.044Z'
 ---
 
-## Starting From Where I [left off](https://www.oluwasetemi.dev/why-you-should-learn-javascript/)
-
 > Here are some tips, research well on the subject(JavaScript) before attempting to learn, Learn enough to build something, Learn JavaScript as a programming language before you learning JavaScript in the browser. Learn more about Frontend Frameworks and build something. Learn JavaScript on the server (Nodejs). Learn the kind of thing people are building with JavaScript.
+
+## Starting From Where I [left off](https://www.oluwasetemi.dev/why-you-should-learn-javascript/)
 
 Doing the due diligence on the topic (JavaScript in this case) is as **important** as what *you are trying to learn* because it will go down to decide **how long** (time), **cost** it will take you during the learning process.
 

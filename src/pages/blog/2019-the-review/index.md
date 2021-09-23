@@ -1,26 +1,11 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Joined Natterbase](#joined-natterbase)
-- [Relocating to Lagos](#relocating-to-lagos)
-- [Failures](#failures)
-- [Evolution](#evolution)
-  - [The book I read in 2019](#the-book-i-read-in-2019)
-  - [Podcast I listened to](#podcast-i-listened-to)
-  - [Desire to work remotely](#desire-to-work-remotely)
-  - [Teaching and the developer advocate in me](#teaching-and-the-developer-advocate-in-me)
-  - [The plan for 2020](#the-plan-for-2020)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
-title: 2019 - The Review!
+title: 2019 - The Review
 date: '2019-11-30T00:00:00.012Z'
 tags: ['review', '2019']
 isPublished: true
 isDraft: false
 ---
+
 
 Such a huge year with opportunity to prove myself as a software developer. Plenty goals, few were crushed and others I failed at. Plenty learning and lessons, plenty positives to take to the new year and focus on the thing I said was going to do during my last year review and evaluation of my journey.I enjoyed every bit of it and I am excited about what the future holds in faith now.
 

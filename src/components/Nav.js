@@ -20,7 +20,7 @@ const LogoStyles = styled.h1`
 const NavItemsStyles = styled.div`
   margin-top: 0px;
   display: flex;
-  width: 200px;
+  width: 250px;
   justify-content: space-around;
 
   & > * {
@@ -71,7 +71,7 @@ function Logo({ title }) {
 function NavItems() {
   return (
     <NavItemsStyles>
-      {['About', 'Tags', 'Writing'].map((each, index) => (
+      {['About', 'Tags', 'Writing', 'Portfolio'].map((each, index) => (
         <Link
           key={index}
           to={`/${each === 'Writing' ? 'blog' : each.toLowerCase()}`}

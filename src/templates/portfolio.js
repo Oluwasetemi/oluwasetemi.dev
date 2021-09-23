@@ -2,7 +2,6 @@
 import { graphql, Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Utterance from 'react-utterances'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
 import LinkSvg from '../components/LinkSvg'
@@ -34,7 +33,6 @@ const BlogPostStyles = styled.div`
     flex-direction: column;
   }
 
-
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     h1 {
@@ -63,18 +61,18 @@ const BlogPostStyles = styled.div`
   }
 `
 
-function BlogPostTemplate({ data, pageContext }) {
+function PortfolioTemplate({ data, pageContext }) {
   const post = data.mdx
-  const siteDescription = post.excerpt
+  const siteDescription = post.frontmatter.description
   const { previous, next } = pageContext
 
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${post.fields.slug.replace(
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/portfolio/${post.fields.slug.replace(
       /\//g,
       ''
-    )}/index.md`
+    )}/index.mdx`
     return editUrl
   }
 
@@ -85,16 +83,16 @@ function BlogPostTemplate({ data, pageContext }) {
       <SEO title={post.frontmatter.title} description={siteDescription} />
       <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
       <div className="sub-header">
-        <span>• 📅 {post.frontmatter.date}</span>
+        <span>• 📅 {post.frontmatter.publishedDate}</span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
-        {post && post.frontmatter && post.frontmatter.tags.length > 0 && (
+        {post && post.frontmatter && post.frontmatter.technology.length > 0 && (
           <span>
             •
-            {post.frontmatter.tags.map(tag => (
-              <Link to={`/tags/${tag}`} key={tag}>
-                🏷 <span className="mark">{`${tag}`}</span>
-              </Link>
+            {post.frontmatter.technology.map((tag, index) => (
+              <React.Fragment key={tag+`-`+index}>
+                🏷 <span className="mark" key={tag - index}>{`${tag}`}</span>
+              </React.Fragment>
             ))}
           </span>
         )}
@@ -114,8 +112,7 @@ function BlogPostTemplate({ data, pageContext }) {
           marginBottom: '50px',
         }}
       />
-      <p>Comments Should Load Here😜</p>
-      <Utterance repo="Oluwasetemi/oluwasetemi.dev" type="url" />
+
       <Bio />
 
       <ul
@@ -146,20 +143,22 @@ function BlogPostTemplate({ data, pageContext }) {
   )
 }
 
-export default BlogPostTemplate
+export default PortfolioTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query PortfolioBySlug($slug: String!) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       id
-      excerpt
       body
       timeToRead
       fileAbsolutePath
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
-        tags
+        publishedDate(formatString: "MMMM DD, YYYY")
+        technology
+        description
+        slug
+
       }
       fields {
         slug

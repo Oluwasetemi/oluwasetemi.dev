@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [First Meeting](#first-meeting)
-- [My Mentor's Profile](#my-mentors-profile)
-- [Lessons during our first meeting](#lessons-during-our-first-meeting)
-- [Some useful lessons](#some-useful-lessons)
-- [Summary](#summary)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: Lessons Learnt Meeting My Mentor
 date: '2021-08-25T10:00:00.200Z'
@@ -17,6 +5,7 @@ tags: ['story', 'mentoring']
 isPublished: true
 isDraft: false
 ---
+
 
 ![mentor-mentee-becoming-expert-relationship](https://res.cloudinary.com/drnqdd87d/image/upload/v1629727031/Personal/image_mrtiim.png "mentor-mentee-expert")
 

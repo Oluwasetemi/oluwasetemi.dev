@@ -1,12 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [caution](#caution)
-  - [configuring hub](#configuring-hub)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: git with hub like github
 date: '2021-02-12T11:34:00.012Z'
@@ -15,6 +6,7 @@ isPublished: true
 isDraft: false
 modified: false
 ---
+
 
 The field is full of so much tools and you might be overwhelmed by a new release of every new tool out there. Just like when `git` came aboard the list of version control tools. I was not even a developer then, I mean I did not know who Chris Wanstrath, Tom Preston-Werner, P J Hyett, and Scott Chacon were and how their invention will change the way I will be working. What did they all invent that changed the way developers write code, build software and ship new releases of the written code. Git is a creation of Linus Trovalds in 2005 and GitHub was invented by the 4 brilliant developers mentioned above. Game changer money. (It was sold to microsoft later a very ridiculous amount of money). The brilliant thing is how it maintained its open source powers.
 

@@ -1,24 +1,12 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Technical Requirement](#technical-requirement)
-- [Here's why I always write test](#heres-why-i-always-write-test)
-- [Benefits of writing well-tested apps](#benefits-of-writing-well-tested-apps)
-- [Understanding the problem and writing our first test](#understanding-the-problem-and-writing-our-first-test)
-  - [Using @testing-library/react](#using-testing-libraryreact)
-- [Complete test using Arrange Act and Assert](#complete-test-using-arrange-act-and-assert)
-- [Summary](#summary)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
+
 title: Writing test for the vitejs react app starter
 date: '2021-08-17T23:01:05.977Z'
 tags: ['test', 'react', 'javascript']
 isPublished: true
 isDraft: false
 ---
+
 
 Thinking of a better way to start your new project with react and write test? I have a solution for you using the [Vitejs React Starter App](https://vitejs.dev/guide/#scaffolding-your-first-vite-project). I will walk you through a set of test that I think the [vitejs](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) scaffold should come with my default.
 

@@ -1,17 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Mathematics && Computer Science](#mathematics--computer-science)
-- [First Glance at Computer](#first-glance-at-computer)
-- [University](#university)
-- [First Glace at Programming](#first-glace-at-programming)
-- [HYPE and Failure](#hype-and-failure)
-- [New JavaScript Fan Boy](#new-javascript-fan-boy)
-- [Pre-Nysc Days](#pre-nysc-days)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: The Story Of My Life
 date: '2019-06-01T09:46:37.121Z'
@@ -19,6 +5,7 @@ tags: ['personal', 'story']
 isPublished: true
 isDraft: false
 ---
+
 
 Going to a university of technology was a strong concern from my daddy who insisted even when a university of agriculture offered me an engineering course.Straight from secondary school I wanted Petrochemical engineering because oil was the big thing in my country. As time pass and I began to evolve, I wanted computer science after roaming for something I really want to put my energy into and turn into a career.
 

@@ -37,6 +37,7 @@ const Typography = createGlobalStyle`
     ${'' /* text-decoration-thickness: 3px; */}
   }
   mark, .mark {
+    color: var(--black);
     background: var(--yellow);
     padding: 5px 2px 5px 2px;
     margin: 0;

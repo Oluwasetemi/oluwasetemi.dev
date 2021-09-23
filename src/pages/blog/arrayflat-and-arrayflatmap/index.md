@@ -1,26 +1,16 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [A little Story](#a-little-story)
-- [How do we flatten an Array Before ?](#how-do-we-flatten-an-array-before-)
-- [Deep flattens an array](#deep-flattens-an-array)
-- [Now Behold your Future](#now-behold-your-future)
-- [Specification and Support](#specification-and-support)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
+
 title: Array.prototype.flat and Array.prototype.flatMap
 date: '2018-12-20T23:50:00.121Z'
-tags: []
+tags: ['javascript']
 isPublished: true
 isDraft: false
 ---
 
+
 A Short love story of the experimental new addition to the Array methods - the Flat and FlatMap. We can **level flat** any irregular array (an array that contains array or arrays) irrespective of the depth level plus the one opportunity to flatten and map at the same time is a very cool feature coming to JavaScript after the whole `Array.smoosh` episode.
 
-### A little Story
+## A little Story
 
 Have you ever heard about `#SmooshGate`? TC39 the working group that works on JavaScript(ECMAScript) released ``Array.prototype.flatten` to flatten array recursively up to a specified depth. And it broke the web 😭😭😭.
 
@@ -30,7 +20,7 @@ It was renamed to `flat` after TC39 met in May 2018 and `Array.prototype.flatMap
 
 ---
 
-### How do we flatten an Array Before ?
+## How do we flatten an Array Before ?
 
 ```js{1-6,9}
 const flatten = (arr, depth = 1) =>
@@ -79,7 +69,7 @@ _.flattenDepth(array, 2)
 
 ---
 
-### Deep flattens an array
+## Deep flattens an array
 
 Use recursion. Use Array.prototype.concat() with an empty array ([]) and the spread operator (...) to flatten an array. Recursively flatten each element that is an array.
 
@@ -88,7 +78,7 @@ const deepFlatten = arr =>
   [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)))
 ```
 
-### Now Behold your Future
+## Now Behold your Future
 
 The syntax for the flat and flatMap
 
@@ -131,7 +121,7 @@ const arr = [1, 2, , 4, 5]
 arr.flat() // [1, 2, 4, 5]
 ```
 
-### Specification and Support
+## Specification and Support
 
 It is still in the [candidate recommendation stage 3](https://tc39.github.io/proposal-flatMap/#sec-Array.prototype.flat) in the TC39 Proposals meaning only very few browser will have implemented it. Google Chrome supports start from version 69 and Firefox from version 62 with Opera and Safari supporting from 56 and 12 respectively.
 

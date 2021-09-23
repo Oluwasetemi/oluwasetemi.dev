@@ -69,7 +69,7 @@ function Bio({ footer }) {
           </a>{' '}
           {siteMetadata?.title},
         </strong>{' '}
-        A Full Stack Developer (Reactjs, Nodejs), currently lives in Osogbo,
+        A FullStack Developer (Reactjs, Nodejs, Typescript), currently lives in Osogbo,
         Osun State Nigeria with my lovely and priceless Wife{' '}
         <a
           className="link"

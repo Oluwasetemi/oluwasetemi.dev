@@ -1,11 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Doing the Work that Matters](#doing-the-work-that-matters)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: summary report of the freecodecamp ibadan community
 date: '2018-12-22T06:00:00.211Z'

@@ -1,14 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [My Decision](#my-decision)
-- [Why and What Led me to this Decision](#why-and-what-led-me-to-this-decision)
-- [How do I mean 'Learn properly'](#how-do-i-mean-learn-properly)
-- [The answer is close and will be coming in bits over in my next articles](#the-answer-is-close-and-will-be-coming-in-bits-over-in-my-next-articles)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 title: why you should learn javascript
 date: '2020-08-28T09:00:00.000Z'
@@ -18,6 +7,7 @@ isDraft: false
 modified: true
 modifiedDate: '2020-11-13T14:11:12.044Z'
 ---
+
 
 ## My Decision
 

@@ -17,21 +17,21 @@ function AboutPage({ data }) {
       <Bio footer />
       <h2>About Me 👨 WIP</h2>
       <p>
-        I'm Oluwasetemi 🇳🇬, Most people call me Ojo. Other variant of my name is
-        Temi or Setemi. Feel free to call me any of the options.
+        I'm Oluwasetemi 🇳🇬, It is pronounced SE + TE(Not TI) + ME. Most people call me Ojo. Other variant of my name is
+        Temi or Setemi or Stephen. Address me with anyone that is easy for you.
       </p>
 
       <p>
         I'm a web developer, who is passionate about the stuffs I build. I am
-        from Nigeria 🇳🇬, I love to work with JavaScript, Reactjs, Nodejs and
-        GraphQL.
+        from Nigeria 🇳🇬, I love to work with JavaScript, Typescript Reactjs, Nodejs and
+        GraphQL. I prefer to solve problems.
       </p>
 
       <p>
         <span className="mark">
           I have keen interest in roles around Frontend Engineering, Backend
-          Engineering, Developer Educator, Developer Relations or Developer
-          Experience and Full-Stack roles.
+          Engineering, Developer Education, Developer Relations or Developer
+          Experience and any Full-Stack roles.
         </span>
       </p>
 
@@ -63,10 +63,10 @@ function AboutPage({ data }) {
 
       <h3>More on Family</h3>
       <p>
-        I am the second of 6 children and the first male in the lineage both
+        I am the second of 6 children and the first male in the lineage, both
         parent are late (Blessed memory). Mum died first year in university and
         Dad died while I was serving Nigeria (country of birth) in Benue(Food
-        basket of the nation) 2017. I have 2 step siblings, Lovely Girls (Temi
+        basket of the nation) 2017. I have 2 step siblings (Temi
         and Adeola).{' '}
       </p>
 
@@ -76,8 +76,8 @@ function AboutPage({ data }) {
 
       <h3>More on Technical Experience</h3>
       <p>
-        I write anything related to JavaScript fluently. I have good experience
-        with C# and Python (Flask, Django). I have write a little bit of C and
+        I write anything related to JavaScript and Typescript confidently. I have good experience
+        with C# and Python (Flask, Django). I have written a little bit of C and
         C++ (not near production experience trust me).
       </p>
       <p>
@@ -88,8 +88,8 @@ function AboutPage({ data }) {
       </p>
       <h3>More about Location</h3>
       <p>
-        Currently live in the beautify suburb of Osogbo, grew up in Ibadan ,
-        Worked 1 year in Lagos, My second home is in Abuja and{' '}
+        Currently live in the beautiful city of Osogbo, grew up in Ibadan ,
+        Worked 1 year in Lagos, Abuja is my second home and{' '}
         <abbr title="National Youth Service Corps">NYSC</abbr> Service took me
         to Benue State.I love travelling and exploring new cultures.
       </p>

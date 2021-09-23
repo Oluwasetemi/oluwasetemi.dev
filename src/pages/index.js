@@ -5,6 +5,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
 import OnePostSummary from '../components/OnePostSummary'
+import PortfolioCard from '../components/PortfolioCard'
 import SEO from '../components/SEO'
 
 const HeroStyles = styled.div`
@@ -14,6 +15,31 @@ const HeroStyles = styled.div`
   color: var(--color);
   h1 {
     font-size: 6rem;
+  }
+`
+
+const TopProjectStyles = styled.div`
+  color: var(--color);
+  h1 a {
+    text-decoration: none;
+
+    &:hover {
+      border-bottom: 2px solid var(--red);
+
+    }
+  }
+  span.count {
+    color: var(--red);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-feature-settings: 'tnum';
+    padding: 0 10px;
+    border-color: var(--color-100);
+    border-size: 2px;
+    border-style: outset;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   }
 `
 
@@ -38,6 +64,25 @@ const GridStyles = styled.div`
   gap: 15px;
 `
 
+function TopProject({ portfolios }) {
+  return (
+    <TopProjectStyles>
+      <h1>
+        <Link to="/portfolio">My Portfolios <span className="count">{portfolios.length}</span>{' '}</Link>
+      </h1>
+      {portfolios.map((portfolio, index) => {
+        return (
+          <PortfolioCard
+            size="small"
+            post={portfolio}
+            key={`${portfolio.slug}-${index}`}
+          />
+        )
+      })}
+    </TopProjectStyles>
+  )
+}
+
 function LatestPost({ posts }) {
   return (
     <LatestPostStyles>
@@ -59,7 +104,23 @@ function LatestPost({ posts }) {
   )
 }
 
-function Hero() {
+const Typing = ({ text, delay = 550 }) => {
+  const to = React.useRef()
+  const [charIndex, setCharIndex] = React.useState(0)
+
+  React.useEffect(() => {
+    if (charIndex === text.length) setCharIndex(0)
+    if (charIndex < text.length) {
+      to.current = setTimeout(() => setCharIndex(charIndex + 1), delay)
+    }
+    return () => clearTimeout(to.current) // cleanup on unmount
+  }, [charIndex, delay, text.length, text])
+
+  return text.substr(0, charIndex + 1)
+}
+
+function Hero({ site }) {
+   const { siteMetadata } = site
   const [name, setName] = React.useState('Oluwasetemi')
   const [jobTitle, setJobTitle] = React.useState('Fullstack Developer')
   const names = ['Oluwasetemi', 'Ojo', 'Temi', 'Setemi']
@@ -89,24 +150,44 @@ function Hero() {
 
   return (
     <HeroStyles>
-      <h1>I'm {name}</h1>
+      <h1>
+        I'm <Typing text={name} />
+      </h1>
       <p>
         I'm a <mark className="tilt">{jobTitle}</mark>. I make all sort of stuff
-        with JavaScript, React, Nodejs. You can find my work on GitHub and
-        CodeSandbox. I enjoy teaching and sharing about the things I build.
-        Check out my <Link to="blog">writing</Link>.
+        with Typescript, JavaScript, React, Nodejs. You can find my work on{' '}
+        <a
+          href={`https://github.com/${siteMetadata?.socials?.github}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>{' '}
+        and{' '}
+        <a
+          href={`https://github.com/${siteMetadata?.socials?.github}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CodeSandbox
+        </a>
+        . I enjoy teaching and sharing about the things I build. Check out my{' '}
+        <Link to="blog">writing</Link>.I help people learn more about web
+        development.
       </p>
     </HeroStyles>
   )
 }
 
-function BlogIndex({ data: { allMdx } }) {
-  const posts = allMdx.edges
+function BlogIndex({ data: { blog, portfolio, site } }) {
+  const posts = blog.edges
+  const projects = portfolio.edges
 
   return (
     <>
       <SEO title="Home" />
-      <Hero />
+      <Hero site={site} />
+      <TopProject portfolios={projects} />
       <LatestPost posts={posts} />
       <Bio footer />
     </>
@@ -117,10 +198,49 @@ export default BlogIndex
 
 export const pageQuery = graphql`
   query {
-    allMdx(
+    site: site {
+      siteMetadata {
+        title
+        description
+        author
+        socials {
+          twitter
+          codepen
+          github
+          linkedIn
+          hackerrank
+          codesandbox
+        }
+      }
+    }
+    portfolio: allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: {
+        frontmatter: { isPublished: { eq: false } }
+        fileAbsolutePath: { regex: "//content/portfolio//" }
+      }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            publishedDate(formatString: "dddd DD MMMM YYYY")
+            title
+            url
+            slug
+            imageUrl
+            technology
+            description
+          }
+        }
+      }
+    }
+    blog: allMdx(
       limit: 6
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { isPublished: { eq: true } } }
+      filter: {
+        frontmatter: { isPublished: { eq: true } }
+        fileAbsolutePath: { regex: "//pages/blog//" }
+      }
     ) {
       edges {
         node {
