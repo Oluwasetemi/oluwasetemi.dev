@@ -70,3 +70,7 @@ yarn-error.log
 
 # Local Netlify folder
 .netlify
+
+# cypress
+cypress/videos/
+cypress/screenshot/
