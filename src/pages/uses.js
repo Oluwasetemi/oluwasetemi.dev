@@ -7,7 +7,7 @@ const AboutPageStyles = styled.div`
   color: var(--color);
 `
 
-function UsesPage({ data }) {
+function UsesPage() {
   return (
     <AboutPageStyles>
       <SEO title="Uses" location />

@@ -1,27 +1,38 @@
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
 const PortfolioCardStyles = styled.div`
   display: flex;
   align-items: center;
+  .card-image a {
+    img {
+      min-width: ${props => {
+        return props.size === 'small' ? '' : '500px'
+      }};
+      min-height: 100%;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+          rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+      }
+    }
+  }
   .card-details {
     padding: 0px 30px 0px;
     a {
       text-decoration-color: transparent;
-    }
-    a:hover {
-      text-decoration-color: red;
-    }
-    h2 {
-      font-size: 3.5rem;
-      display: flex;
-      margin-bottom: 20px;
-      img {
-        fill: red;
-        width: 20px;
-        height: 40px;
-        margin-left: 30px;
+      &:hover {
+        text-decoration-color: red;
+      }
+      h2 {
+        font-size: 3.5rem;
+        display: flex;
+        margin-bottom: 20px;
+        img.icon {
+          width: 20px;
+          height: 40px;
+          margin-left: 30px;
+        }
       }
     }
     p {
@@ -40,16 +51,7 @@ const PortfolioCardStyles = styled.div`
       text-overflow: ellipsis;
     }
   }
-  .card-image img {
-    min-width: ${props => {
-      return props.size === 'small' ? '' : '500px'
-    }};
-    min-height: 100%;
-    &:hover {
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    }
-  }
+
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     flex-wrap: wrap;
@@ -63,7 +65,7 @@ const PortfolioCardStyles = styled.div`
   }
 `
 
-function PortfolioCard({ post, size }) {
+function PortfolioCard({post, size}) {
   const onePortfolio = post.node.frontmatter
 
   return (
@@ -76,13 +78,14 @@ function PortfolioCard({ post, size }) {
       <div className="card-details">
         <a target="_blank" rel="noopener noreferrer" href={onePortfolio.url}>
           <h2>
-            {onePortfolio.title} <img src="./exit-top-right.svg" alt="link" />
+            {onePortfolio.title}{' '}
+            <img className="icon" src="./exit-top-right.svg" alt="link" />
           </h2>
         </a>
         <div className="tech">
           {onePortfolio &&
             onePortfolio.technology.map((technology, index) => (
-              <span key={technology + `-` + index} className="mark tilt">
+              <span key={`${technology}-${index}`} className="mark tilt">
                 {technology}
               </span>
             ))}

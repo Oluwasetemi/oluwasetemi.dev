@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
-import { animated, useSpring } from '@react-spring/web'
-import { graphql, Link } from 'gatsby'
+import {animated, useSpring} from '@react-spring/web'
+import {graphql, Link} from 'gatsby'
 import React from 'react'
-import { useDrag } from 'react-use-gesture'
+import {useDrag} from 'react-use-gesture'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
 import SEO from '../components/SEO'
-import { formatReadingTime } from '../utils/helpers'
+import {formatReadingTime} from '../utils/helpers'
 
 const OnePostSummaryStyles = styled(animated.article)`
   margin-top: 1.5rem;
@@ -25,24 +25,24 @@ const OnePostSummaryStyles = styled(animated.article)`
   }
 `
 
-function OnePostSummary({ node, title }) {
-  const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
+function OnePostSummary({node, title}) {
+  const [{x, y}, api] = useSpring(() => ({x: 0, y: 0}))
 
   // Set the drag hook and define component movement based on gesture data
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    api.start({ x: down ? mx : 0, y: down ? my : 0 })
+  const bind = useDrag(({down, movement: [mx, my]}) => {
+    api.start({x: down ? mx : 0, y: down ? my : 0})
   })
 
   return (
     <OnePostSummaryStyles
       data-tip="Please Drag Me 👌"
       {...bind()}
-      style={{ x, y }}
+      style={{x, y}}
       key={node.fields.slug}
     >
       <h2>
         <Link
-          style={{ boxShadow: 'none', color: '#800080' }}
+          style={{boxShadow: 'none', color: '#800080'}}
           to={`/blog${node.fields.slug}`}
         >
           {title}
@@ -57,13 +57,10 @@ function OnePostSummary({ node, title }) {
           </Link>
         ))}
       </small>
-      <p
-        className="excerpt"
-        dangerouslySetInnerHTML={{ __html: node.excerpt }}
-      />
+      <p className="excerpt" dangerouslySetInnerHTML={{__html: node.excerpt}} />
       <span>
         <Link
-          style={{ boxShadow: 'none', color: '#800080' }}
+          style={{boxShadow: 'none', color: '#800080'}}
           to={`blog${node.fields.slug}`}
         >
           read more
@@ -73,14 +70,14 @@ function OnePostSummary({ node, title }) {
   )
 }
 
-function BlogIndex({ data: { allMdx } }) {
+function BlogIndex({data: {allMdx}}) {
   const posts = allMdx.edges
 
   return (
     <>
       <SEO title="Home" />
       <Bio />
-      {posts.map(({ node }) => {
+      {posts.map(({node}) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <OnePostSummary key={node.fields.slug} node={node} title={title} />
@@ -95,8 +92,11 @@ export default BlogIndex
 export const pageQuery = graphql`
   query {
     allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { isPublished: { eq: true } } }
+      sort: {fields: [frontmatter___date], order: DESC}
+      filter: {
+        frontmatter: {isPublished: {eq: true}}
+        fileAbsolutePath: {regex: "//pages/blog//"}
+      }
     ) {
       edges {
         node {

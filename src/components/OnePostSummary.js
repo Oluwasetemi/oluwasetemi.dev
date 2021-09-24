@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
 
-import { animated, useSpring } from '@react-spring/web'
-import { Link } from 'gatsby'
+import {animated, useSpring} from '@react-spring/web'
+import {Link} from 'gatsby'
 import React from 'react'
-import { useDrag } from 'react-use-gesture'
+import {useDrag} from 'react-use-gesture'
 import styled from 'styled-components'
-import { formatReadingTime } from '../utils/helpers'
+import {formatReadingTime} from '../utils/helpers'
 
 const OnePostSummaryStyles = styled(animated.article)`
   margin-top: 1.5rem;
@@ -25,24 +25,24 @@ const OnePostSummaryStyles = styled(animated.article)`
   }
 `
 
-function OnePostSummary({ node, title }) {
-  const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
+function OnePostSummary({node, title}) {
+  const [{x, y}, api] = useSpring(() => ({x: 0, y: 0}))
 
   // Set the drag hook and define component movement based on gesture data
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    api.start({ x: down ? mx : 0, y: down ? my : 0 })
+  const bind = useDrag(({down, movement: [mx, my]}) => {
+    api.start({x: down ? mx : 0, y: down ? my : 0})
   })
 
   return (
     <OnePostSummaryStyles
       data-tip="Please Drag Me 👌"
       {...bind()}
-      style={{ x, y }}
+      style={{x, y}}
       key={node.fields.slug}
     >
       <h2>
         <Link
-          style={{ boxShadow: 'none', color: '#800080' }}
+          style={{boxShadow: 'none', color: '#800080'}}
           to={`/blog${node.fields.slug}`}
         >
           {title}
@@ -57,13 +57,10 @@ function OnePostSummary({ node, title }) {
           </Link>
         ))}
       </small>
-      <p
-        className="excerpt"
-        dangerouslySetInnerHTML={{ __html: node.excerpt }}
-      />
+      <p className="excerpt" dangerouslySetInnerHTML={{__html: node.excerpt}} />
       <span>
         <Link
-          style={{ boxShadow: 'none', color: '#800080' }}
+          style={{boxShadow: 'none', color: '#800080'}}
           to={`/blog${node.fields.slug}`}
         >
           read more

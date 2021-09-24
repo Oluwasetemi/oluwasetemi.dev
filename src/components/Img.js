@@ -1,7 +1,8 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
+/* eslint-disable jsx-a11y/alt-text */
+import {GatsbyImage} from 'gatsby-plugin-image'
 import React from 'react'
 
-export default function Image({ image, ...theRest }) {
+export default function Image({image, ...theRest}) {
   if (!image) {
     return null
   }

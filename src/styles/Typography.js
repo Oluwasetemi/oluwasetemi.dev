@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import {createGlobalStyle} from 'styled-components'
 import general from '../assets/fonts/Adelle_LightItalic.otf'
 import font from '../assets/fonts/frenchfries.woff'
 
@@ -14,15 +14,15 @@ const Typography = createGlobalStyle`
     font-style: normal;
   }
   html {
-    font-family: FrenchFries, 'adelle', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: FrenchFries, adelle, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--black);
   }
   span, p, li {
     letter-spacing: 0.5px;
-    font-family: 'adelle';
+    font-family: adelle, sans-serif;
   }
   small {
-    font-family: 'adelle';
+    font-family: adelle, sans-serif;
 
   }
   h1,h2,h3,h4,h5,h6 {

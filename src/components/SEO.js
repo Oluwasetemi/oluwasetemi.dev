@@ -1,6 +1,6 @@
-import { graphql, StaticQuery } from 'gatsby'
+import {graphql, StaticQuery} from 'gatsby'
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import {Helmet} from 'react-helmet'
 
 const query = graphql`
   query GetSiteMetadata {
@@ -24,12 +24,12 @@ const query = graphql`
   }
 `
 
-export default function SEO({ children, location, description, title, image }) {
+export default function SEO({children, location, description, title, image}) {
   return (
     <StaticQuery
       query={query}
       render={data => {
-        const { siteMetadata } = data.site
+        const {siteMetadata} = data.site
         const metaDescription = description || siteMetadata.description
         const metaImage = image ? `${siteMetadata.siteUrl}/${image}` : null
 

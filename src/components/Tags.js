@@ -1,4 +1,4 @@
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -32,12 +32,15 @@ const TagsStyles = styled.div`
   }
 `
 
-export default function Tags({ activeTag }) {
-  const { posts } = useStaticQuery(graphql`
+export default function Tags({activeTag}) {
+  const {posts} = useStaticQuery(graphql`
     query {
       posts: allMdx(
-        sort: { fields: [frontmatter___date], order: DESC }
-        filter: { frontmatter: { isPublished: { eq: true } } }
+        sort: {fields: [frontmatter___date], order: DESC}
+        filter: {
+          frontmatter: {isPublished: {eq: true}}
+          fileAbsolutePath: {regex: "//pages/blog//"}
+        }
       ) {
         edges {
           node {
@@ -60,7 +63,7 @@ export default function Tags({ activeTag }) {
   // loop thru the post and count the tags
   const tagsArrays = []
   for (const each of posts.edges) {
-    const { tags } = each.node.frontmatter
+    const {tags} = each.node.frontmatter
     tagsArrays.push(...tags)
   }
 

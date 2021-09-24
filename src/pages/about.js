@@ -1,4 +1,4 @@
-import { graphql, Link } from 'gatsby'
+import {graphql, Link} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
@@ -9,21 +9,35 @@ const AboutPageStyles = styled.div`
   color: var(--color);
 `
 
-function AboutPage({ data }) {
-  const { setemi } = data
+function AboutPage({data}) {
+  const {setemi} = data
   return (
     <AboutPageStyles>
       <SEO title="About Me" location />
       <Bio footer />
-      <h2>About Me 👨 </h2>
+      <h2>
+        About Me{' '}
+        <span role="img" aria-label="a man">
+          👨
+        </span>{' '}
+      </h2>
       <p>
-        I'm Oluwasetemi 🇳🇬, It is pronounced SE + TE(Not TI) + ME. Most people call me Ojo. Other variant of my name is
-        Temi or Setemi or Stephen. Address me with anyone that is easy for you.
+        I&apos;m Oluwasetemi{' '}
+        <span role="img" aria-label="nigerian flag">
+          🇳🇬
+        </span>
+        , It is pronounced SE + TE(Not TI) + ME. Most people call me Ojo. Other
+        variant of my name is Temi or Setemi or Stephen. Address me with anyone
+        that is easy for you.
       </p>
 
       <p>
-        I'm a web developer, passionate about the stuffs I build
-        from Nigeria 🇳🇬 who love to work with JavaScript, Typescript Reactjs, Nodejs and
+        I&apos;m a web developer, passionate about the stuffs I build from
+        Nigeria{' '}
+        <span role="img" aria-label="nigerian flag">
+          🇳🇬
+        </span>{' '}
+        who love to work with JavaScript, Typescript Reactjs, Nodejs and
         GraphQL. I prefer to solve problems.
       </p>
 
@@ -63,21 +77,26 @@ function AboutPage({ data }) {
 
       <h3>More on Family</h3>
       <p>
-        I am the second of 6 children out of which Adeola and Temi are my step siblings and the first male in the lineage, both
-        parent are late (Blessed memory). Mum died first year in university and
-        Dad died while I was serving Nigeria (country of birth) in Benue(Food
-        basket of the nation) 2017.{' '}
+        I am the second of 6 children out of which Adeola and Temi are my step
+        siblings and the first male in the lineage, both parent are late
+        (Blessed memory). Mum died first year in university and Dad died while I
+        was serving Nigeria (country of birth) in Benue(Food basket of the
+        nation) 2017.{' '}
       </p>
 
       <p>
-        I am in love 😍 with Ajayi Temidayo Abosede. She is a gift from God.
+        I am in love{' '}
+        <span role="img" aria-label="the love blush">
+          😍
+        </span>{' '}
+        with Ajayi Temidayo Abosede. She is a gift from God.
       </p>
 
       <h3>More on Technical Experience</h3>
       <p>
-        I write anything related to JavaScript and Typescript confidently. I have good experience
-        with C# and Python (Flask, Django). I have written a little bit of C and
-        C++ (not near production experience trust me).
+        I write anything related to JavaScript and Typescript confidently. I
+        have good experience with C# and Python (Flask, Django). I have written
+        a little bit of C and C++ (not near production experience trust me).
       </p>
       <p>
         I have fierce interest in React and GraphQL and related technologies
@@ -130,9 +149,9 @@ export default AboutPage
 
 export const pageQuery = graphql`
   {
-    setemi: file(relativePath: { eq: "setemi.jpg" }) {
+    setemi: file(relativePath: {eq: "setemi.jpg"}) {
       childImageSharp {
-        gatsbyImageData(transformOptions: { fit: CONTAIN }, layout: FULL_WIDTH)
+        gatsbyImageData(transformOptions: {fit: CONTAIN}, layout: FULL_WIDTH)
       }
     }
   }

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import {createGlobalStyle} from 'styled-components'
 // import stripes from '../assets/images/stripes.svg';
 
 const GlobalStyles = createGlobalStyle`
@@ -58,11 +58,13 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: var(--cast) var(--cast) 0 var(--grey);
     text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.2);
     transition: all 0.2s;
+
     &:hover {
       --cast: 6px;
     }
   }
 
+   /* stylelint-disable value-no-vendor-prefix */
   .gatsby-image-wrapper img[src*=base64\\,] {
     image-rendering: -moz-crisp-edges;
     image-rendering: pixelated;
@@ -111,9 +113,7 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: var(--color);
   }
-  img {
-    width: 100%;
-  }
+
   blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;

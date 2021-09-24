@@ -1,8 +1,8 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import {graphql, useStaticQuery} from 'gatsby'
 import React from 'react'
 
 function Footer() {
-  const { site } = useStaticQuery(graphql`
+  const {site} = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -22,7 +22,7 @@ function Footer() {
     }
   `)
 
-  const { siteMetadata } = site
+  const {siteMetadata} = site
   return (
     <footer
       style={{
@@ -31,7 +31,7 @@ function Footer() {
         paddingTop: '10px',
       }}
     >
-      <div style={{ float: 'right' }}>
+      <div style={{float: 'right'}}>
         <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
           rss
         </a>

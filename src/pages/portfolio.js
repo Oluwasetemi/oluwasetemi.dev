@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby'
+import {graphql} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
@@ -34,7 +34,7 @@ const AllPortfolioStyles = styled.div`
   }
 `
 
-function AllPortfolio({ posts }) {
+function AllPortfolio({posts}) {
   return (
     <div>
       {posts.map((post, index) => {
@@ -48,9 +48,7 @@ function AllPortfolio({ posts }) {
   )
 }
 
-
-
-function PortfolioIndex({ data: { allMdx } }) {
+function PortfolioIndex({data: {allMdx}}) {
   const posts = allMdx.edges
 
   return (
@@ -58,11 +56,12 @@ function PortfolioIndex({ data: { allMdx } }) {
       <SEO title="Portfolio" />
       <h1>Portfolio</h1>
 
-        <p className="">
-          This page details some of the project, side project, contributions to Open Source I have worked on and my role on the
-          project. It shows a little overhead details of the technology stack
-          used. You can click on individual project to read more details.
-        </p>
+      <p className="">
+        This page details some of the project, side project, contributions to
+        Open Source I have worked on and my role on the project. It shows a
+        little overhead details of the technology stack used. You can click on
+        individual project to read more details.
+      </p>
       <AllPortfolio posts={posts} />
       <Bio footer />
     </PortfolioStyles>
@@ -74,24 +73,22 @@ export default PortfolioIndex
 export const pageQuery = graphql`
   query {
     allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: {fields: [frontmatter___date], order: DESC}
       filter: {
-        frontmatter: { isPublished: { eq: false } }
-        fileAbsolutePath: { regex: "//content/portfolio//" }
+        frontmatter: {isPublished: {eq: true}}
+        fileAbsolutePath: {regex: "//content/portfolio//"}
       }
     ) {
       edges {
         node {
           frontmatter {
-            date(formatString: "dddd DD MMMM YYYY")
+            publishedDate(formatString: "dddd DD MMMM YYYY")
             title
             url
             slug
             imageUrl
             description
             technology
-            publishedDate
-            tags
           }
         }
       }

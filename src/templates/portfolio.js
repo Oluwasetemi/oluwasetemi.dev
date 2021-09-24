@@ -1,12 +1,12 @@
 /* eslint-disable react/no-danger */
-import { graphql, Link } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import {graphql, Link} from 'gatsby'
+import {MDXRenderer} from 'gatsby-plugin-mdx'
 import React from 'react'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
 import LinkSvg from '../components/LinkSvg'
 import SEO from '../components/SEO'
-import { formatReadingTime } from '../utils/helpers'
+import {formatReadingTime} from '../utils/helpers'
 
 const BlogPostStyles = styled.div`
   color: var(--color);
@@ -19,7 +19,7 @@ const BlogPostStyles = styled.div`
     margin-bottom: 5px;
   }
   strong {
-    text-text-decoration: underline;
+    text-decoration: underline;
   }
   ul > li,
   ol > li {
@@ -61,17 +61,17 @@ const BlogPostStyles = styled.div`
   }
 `
 
-function PortfolioTemplate({ data, pageContext }) {
+function PortfolioTemplate({data, pageContext}) {
   const post = data.mdx
   const siteDescription = post.frontmatter.description
-  const { previous, next } = pageContext
+  const {previous, next} = pageContext
 
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
     const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/portfolio/${post.fields.slug.replace(
       /\//g,
-      ''
+      '',
     )}/index.mdx`
     return editUrl
   }
@@ -81,16 +81,22 @@ function PortfolioTemplate({ data, pageContext }) {
   return (
     <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
-      <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
+      <h1 style={{color: 'var(--color)'}}>{post.frontmatter.title}</h1>
       <div className="sub-header">
-        <span>• 📅 {post.frontmatter.publishedDate}</span>
+        <span>
+          •{' '}
+          <span role="img" aria-label="the world">
+            📅
+          </span>{' '}
+          {post.frontmatter.publishedDate}
+        </span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
         {post && post.frontmatter && post.frontmatter.technology.length > 0 && (
           <span>
             •
             {post.frontmatter.technology.map((tag, index) => (
-              <React.Fragment key={tag+`-`+index}>
+              <React.Fragment key={`${tag}-${index}`}>
                 🏷 <span className="mark" key={tag - index}>{`${tag}`}</span>
               </React.Fragment>
             ))}
@@ -104,7 +110,7 @@ function PortfolioTemplate({ data, pageContext }) {
           <LinkSvg />
         </span>
       </div>
-      <MDXRenderer className="main-content" style={{ marginTop: '50px' }}>
+      <MDXRenderer className="main-content" style={{marginTop: '50px'}}>
         {post.body}
       </MDXRenderer>
       <hr
@@ -147,7 +153,7 @@ export default PortfolioTemplate
 
 export const pageQuery = graphql`
   query PortfolioBySlug($slug: String!) {
-    mdx(frontmatter: { slug: { eq: $slug } }) {
+    mdx(frontmatter: {slug: {eq: $slug}}) {
       id
       body
       timeToRead
@@ -158,7 +164,6 @@ export const pageQuery = graphql`
         technology
         description
         slug
-
       }
       fields {
         slug

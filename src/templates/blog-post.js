@@ -1,13 +1,13 @@
 /* eslint-disable react/no-danger */
-import { graphql, Link } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import {graphql, Link} from 'gatsby'
+import {MDXRenderer} from 'gatsby-plugin-mdx'
 import React from 'react'
 import Utterance from 'react-utterances'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
 import LinkSvg from '../components/LinkSvg'
 import SEO from '../components/SEO'
-import { formatReadingTime } from '../utils/helpers'
+import {formatReadingTime} from '../utils/helpers'
 
 const BlogPostStyles = styled.div`
   color: var(--color);
@@ -20,7 +20,7 @@ const BlogPostStyles = styled.div`
     margin-bottom: 5px;
   }
   strong {
-    text-text-decoration: underline;
+    text-decoration: underline;
   }
   ul > li,
   ol > li {
@@ -33,7 +33,6 @@ const BlogPostStyles = styled.div`
     display: flex;
     flex-direction: column;
   }
-
 
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -63,17 +62,17 @@ const BlogPostStyles = styled.div`
   }
 `
 
-function BlogPostTemplate({ data, pageContext }) {
+function BlogPostTemplate({data, pageContext}) {
   const post = data.mdx
   const siteDescription = post.excerpt
-  const { previous, next } = pageContext
+  const {previous, next} = pageContext
 
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
     const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${post.fields.slug.replace(
       /\//g,
-      ''
+      '',
     )}/index.md`
     return editUrl
   }
@@ -83,9 +82,15 @@ function BlogPostTemplate({ data, pageContext }) {
   return (
     <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
-      <h1 style={{ color: 'var(--color)' }}>{post.frontmatter.title}</h1>
+      <h1 style={{color: 'var(--color)'}}>{post.frontmatter.title}</h1>
       <div className="sub-header">
-        <span>• 📅 {post.frontmatter.date}</span>
+        <span>
+          •{' '}
+          <span role="img" aria-label="calender">
+            📅
+          </span>{' '}
+          {post.frontmatter.date}
+        </span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
         {post && post.frontmatter && post.frontmatter.tags.length > 0 && (
@@ -106,7 +111,7 @@ function BlogPostTemplate({ data, pageContext }) {
           <LinkSvg />
         </span>
       </div>
-      <MDXRenderer className="main-content" style={{ marginTop: '50px' }}>
+      <MDXRenderer className="main-content" style={{marginTop: '50px'}}>
         {post.body}
       </MDXRenderer>
       <hr
@@ -114,7 +119,12 @@ function BlogPostTemplate({ data, pageContext }) {
           marginBottom: '50px',
         }}
       />
-      <p>Comments Should Load Here😜</p>
+      <p>
+        Comments Should Load Here {` `}
+        <span role="img" aria-label="winks">
+          😜
+        </span>
+      </p>
       <Utterance repo="Oluwasetemi/oluwasetemi.dev" type="url" />
       <Bio />
 
@@ -150,7 +160,7 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+    mdx(fields: {slug: {eq: $slug}}) {
       id
       excerpt
       body

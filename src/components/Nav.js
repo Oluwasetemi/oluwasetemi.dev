@@ -1,4 +1,4 @@
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -51,7 +51,7 @@ const NavStyles = styled.nav`
   }
 `
 
-function Logo({ title }) {
+function Logo({title}) {
   return (
     <LogoStyles>
       <Link
@@ -83,7 +83,7 @@ function NavItems() {
   )
 }
 
-function Nav({ title }) {
+function Nav({title}) {
   return (
     <NavStyles>
       <Logo title={title} />

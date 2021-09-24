@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
-import { graphql, Link } from 'gatsby'
+import {graphql, Link} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import Bio from '../components/Bio'
@@ -35,7 +35,7 @@ const TopProjectStyles = styled.div`
     font-feature-settings: 'tnum';
     padding: 0 10px;
     border-color: var(--color-100);
-    border-size: 2px;
+    border-width: 2px;
     border-style: outset;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
       rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -81,7 +81,7 @@ const LatestPostStyles = styled.div`
   }
 `
 
-function TopProject({ portfolios }) {
+function TopProject({portfolios}) {
   return (
     <TopProjectStyles>
       <h1>
@@ -102,12 +102,12 @@ function TopProject({ portfolios }) {
   )
 }
 
-function LatestPost({ posts }) {
+function LatestPost({posts}) {
   return (
     <LatestPostStyles>
       <h2 className="heading">Some of my Writings</h2>
       <div className="latest-writing">
-        {posts.map(({ node }) => {
+        {posts.map(({node}) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
             <OnePostSummary key={node.fields.slug} node={node} title={title} />
@@ -115,7 +115,7 @@ function LatestPost({ posts }) {
         })}
       </div>
       <span className="more">
-        <Link style={{ boxShadow: 'none', color: '#800080' }} to="blog">
+        <Link style={{boxShadow: 'none', color: '#800080'}} to="blog">
           To see all of my writings.
         </Link>
       </span>
@@ -123,7 +123,7 @@ function LatestPost({ posts }) {
   )
 }
 
-const Typing = ({ text, delay = 550 }) => {
+const Typing = ({text, delay = 550}) => {
   const to = React.useRef()
   const [charIndex, setCharIndex] = React.useState(0)
 
@@ -138,8 +138,8 @@ const Typing = ({ text, delay = 550 }) => {
   return text.substr(0, charIndex + 1)
 }
 
-function Hero({ site }) {
-  const { siteMetadata } = site
+function Hero({site}) {
+  const {siteMetadata} = site
   const [name, setName] = React.useState('Oluwasetemi')
   const [jobTitle, setJobTitle] = React.useState('Fullstack Developer')
   const names = ['Oluwasetemi', 'Ojo', 'Temi', 'Setemi']
@@ -170,11 +170,12 @@ function Hero({ site }) {
   return (
     <HeroStyles>
       <h1>
-        I'm <Typing text={name} />
+        I&apos;m <Typing text={name} />
       </h1>
       <p>
-        I'm a <mark className="tilt">{jobTitle}</mark>. I make all sort of stuff
-        with Typescript, JavaScript, React, Nodejs. You can find my work on{' '}
+        I&apos;m a <mark className="tilt">{jobTitle}</mark>. I make all sort of
+        stuff with Typescript, JavaScript, React, Nodejs. You can find my work
+        on{' '}
         <a
           href={`https://github.com/${siteMetadata?.socials?.github}`}
           target="_blank"
@@ -198,7 +199,7 @@ function Hero({ site }) {
   )
 }
 
-function BlogIndex({ data: { blog, portfolio, site } }) {
+function BlogIndex({data: {blog, portfolio, site}}) {
   const posts = blog.edges
   const projects = portfolio.edges
 
@@ -233,10 +234,10 @@ export const pageQuery = graphql`
       }
     }
     portfolio: allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: {fields: [frontmatter___date], order: DESC}
       filter: {
-        frontmatter: { isPublished: { eq: false } }
-        fileAbsolutePath: { regex: "//content/portfolio//" }
+        frontmatter: {isPublished: {eq: true}}
+        fileAbsolutePath: {regex: "//content/portfolio//"}
       }
     ) {
       edges {
@@ -255,10 +256,10 @@ export const pageQuery = graphql`
     }
     blog: allMdx(
       limit: 6
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: {fields: [frontmatter___date], order: DESC}
       filter: {
-        frontmatter: { isPublished: { eq: true } }
-        fileAbsolutePath: { regex: "//pages/blog//" }
+        frontmatter: {isPublished: {eq: true}}
+        fileAbsolutePath: {regex: "//pages/blog//"}
       }
     ) {
       edges {

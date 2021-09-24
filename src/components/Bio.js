@@ -1,4 +1,4 @@
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import profilePic from '../assets/images/profile-pic.jpg'
@@ -30,8 +30,8 @@ const BioStyles = styled.div`
   }
 `
 
-function Bio({ footer }) {
-  const { site } = useStaticQuery(graphql`
+function Bio({footer}) {
+  const {site} = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -51,7 +51,7 @@ function Bio({ footer }) {
     }
   `)
 
-  const { siteMetadata } = site
+  const {siteMetadata} = site
 
   return (
     <BioStyles>
@@ -69,8 +69,8 @@ function Bio({ footer }) {
           </a>{' '}
           {siteMetadata?.title},
         </strong>{' '}
-        A FullStack Developer (Reactjs, Nodejs, Typescript), currently lives in Osogbo,
-        Osun State Nigeria with my lovely and priceless Wife{' '}
+        A FullStack Developer (Reactjs, Nodejs, Typescript), currently lives in
+        Osogbo, Osun State Nigeria with my lovely and priceless Wife{' '}
         <a
           className="link"
           href="https://twitter.com/BeagloOfficial"
@@ -94,7 +94,10 @@ function Bio({ footer }) {
         </Link>
         .<br /> <Link to="/about">Click here to read more about me.</Link>{' '}
         <a className="link" href="/rss.xml" target="_blank">
-          For RSS feed.🌍
+          For RSS feed.
+          <span role="img" aria-label="the world">
+            🌍
+          </span>
         </a>
       </p>
     </BioStyles>

@@ -1,12 +1,12 @@
 /* eslint-disable react/no-danger */
-import { graphql } from 'gatsby'
+import {graphql} from 'gatsby'
 import React from 'react'
 import Bio from '../components/Bio'
 import OnePostSummary from '../components/OnePostSummary'
 import SEO from '../components/SEO'
 import Tags from '../components/Tags'
 
-function TagsPage({ data: { allMdx }, pageContext }) {
+function TagsPage({data: {allMdx}, pageContext}) {
   const posts = allMdx.edges
 
   return (
@@ -21,7 +21,7 @@ function TagsPage({ data: { allMdx }, pageContext }) {
       />
       <Bio footer />
       <Tags activeTag={pageContext.tag} />
-      {posts.map(({ node }) => {
+      {posts.map(({node}) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <OnePostSummary key={node.fields.slug} node={node} title={title} />
@@ -34,11 +34,12 @@ function TagsPage({ data: { allMdx }, pageContext }) {
 export default TagsPage
 
 export const pageQuery = graphql`
-  query($tagsRegex: String) {
+  query ($tagsRegex: String) {
     allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: {fields: [frontmatter___date], order: DESC}
       filter: {
-        frontmatter: { isPublished: { eq: true }, tags: { regex: $tagsRegex } }
+        frontmatter: {isPublished: {eq: true}, tags: {regex: $tagsRegex}}
+        fileAbsolutePath: {regex: "//pages/blog//"}
       }
     ) {
       edges {

@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import {graphql, useStaticQuery} from 'gatsby'
 import 'normalize.css'
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
@@ -23,14 +23,8 @@ const SiteBorderStyles = styled.div`
   }
 `
 
-const ContentStyles = styled.div`
-  /* color: red; */
-  background: transparent;
-  /* padding: 2rem; */
-`
-
-function Layout({ children }) {
-  const { site } = useStaticQuery(graphql`
+function Layout({children}) {
+  const {site} = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
