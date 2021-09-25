@@ -17,6 +17,7 @@ const SiteBorderStyles = styled.div`
   /* background-size: 1500px; */
   /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044); */
   /* border: 5px solid white; */
+
   @media (max-width: 1100px) {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
@@ -38,8 +39,14 @@ function Layout({children}) {
     <>
       <GlobalStyles />
       <Typography />
+      <ReactTooltip place="top" type="dark" effect="float" />
+      <div className="info">
+        <b>
+          Some blog post have its title missing. Fixing that! So Sorry for the
+          Inconvenience.{' '}
+        </b>
+      </div>
       <SiteBorderStyles>
-        <ReactTooltip place="top" type="dark" effect="float" />
         <>
           <Nav title={site.siteMetadata?.title} />
           {children}

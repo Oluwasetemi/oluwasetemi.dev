@@ -134,6 +134,16 @@ const GlobalStyles = createGlobalStyle`
   blockquote p {
     display: inline;
   }
+
+  ${'' /* added for info */}
+  .info {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--color-200);
+    color: var(--black);
+    font-weight: bold;
+    letter-spacing: 2px;;
+  }
 `
 
 export default GlobalStyles
