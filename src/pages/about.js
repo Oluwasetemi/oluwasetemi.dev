@@ -39,7 +39,7 @@ function AboutPage({data}) {
         </span>{' '}
         who loves to work with JavaScript, Typescript Reactjs, Nodejs and
         GraphQL. I love to solve problems compared to focusing of the technology
-        howbeit, I consider what technology best fits the domain of problems.
+        howbeit, I consider what technology is best fits the domain of problems.
       </p>
 
       <p>
