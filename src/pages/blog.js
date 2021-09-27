@@ -53,7 +53,7 @@ function OnePostSummary({node, title}) {
         {` • ${formatReadingTime(node.timeToRead)}`}
         {node.frontmatter.tags.map(tag => (
           <Link to={`/tags/${tag}`} key={tag}>
-            • 🏷 <span className="mark">{`${tag}`}</span>
+            • 🏷 <span>{`${tag}`}</span>
           </Link>
         ))}
       </small>

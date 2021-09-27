@@ -70,10 +70,10 @@ function BlogPostTemplate({data, pageContext}) {
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/blog/${post.fields.slug.replace(
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/main/content/blog/${post.fields.slug.replace(
       /\//g,
       '',
-    )}/index.md`
+    )}/index.mdx`
     return editUrl
   }
 

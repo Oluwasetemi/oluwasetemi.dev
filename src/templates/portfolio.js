@@ -69,7 +69,7 @@ function PortfolioTemplate({data, pageContext}) {
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/portfolio/${post.fields.slug.replace(
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/main/content/portfolio/${post.fields.slug.replace(
       /\//g,
       '',
     )}/index.mdx`
