@@ -26,9 +26,9 @@ function AboutPage({data}) {
         <span role="img" aria-label="nigerian flag">
           🇳🇬
         </span>
-        , my name is pronounced SE + TE(Not TI) + ME. People often call me Ojo,
-        Temi, Setemi or Stephen. I prefer to be addressed with anyone that is
-        easy for you.
+        , my name is pronounced SHAY + TAY(Not TI) + ME. People often call me
+        Ojo, Temi, Setemi or Stephen. I prefer to be addressed with anyone that
+        is easy for you.
       </p>
 
       <p>
