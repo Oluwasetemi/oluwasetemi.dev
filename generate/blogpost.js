@@ -55,7 +55,7 @@ async function generateBlogPost() {
     },
   ])
   const slug = slugify(title)
-  const destination = fromRoot('/src/pages/blog', slug)
+  const destination = fromRoot('/content/blog', slug)
   mkdirp.sync(destination)
 
   const bannerCredit = await getBannerPhoto(title, destination)
@@ -65,7 +65,7 @@ async function generateBlogPost() {
       slug,
       title,
       date: formatDate(new Date()),
-      author: 'Kent C. Dodds',
+      author: 'Ojo Oluwasetemi Stephen 00S',
       description: `_${description}_`,
       categories: listify(categories),
       keywords: listify(keywords),

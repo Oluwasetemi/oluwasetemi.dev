@@ -62,6 +62,7 @@ const LatestPostStyles = styled.div`
   }
   /* Tablet */
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    padding: 0;
     h1 {
       font-size: 1.5em;
     }
@@ -72,6 +73,7 @@ const LatestPostStyles = styled.div`
 
   /* phones */
   @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    padding: 0;
     h1 {
       font-size: 1.2em;
     }
@@ -234,7 +236,7 @@ export const pageQuery = graphql`
       }
     }
     portfolio: allMdx(
-      sort: {fields: [frontmatter___date], order: DESC}
+      sort: {fields: [frontmatter___publishedDate], order: DESC}
       filter: {
         frontmatter: {isPublished: {eq: true}}
         fileAbsolutePath: {regex: "//content/portfolio//"}
@@ -259,7 +261,7 @@ export const pageQuery = graphql`
       sort: {fields: [frontmatter___date], order: DESC}
       filter: {
         frontmatter: {isPublished: {eq: true}}
-        fileAbsolutePath: {regex: "//pages/blog//"}
+        fileAbsolutePath: {regex: "//content/blog//"}
       }
     ) {
       edges {

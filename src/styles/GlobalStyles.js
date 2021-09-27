@@ -144,6 +144,38 @@ const GlobalStyles = createGlobalStyle`
     font-weight: bold;
     letter-spacing: 2px;;
   }
+
+  /* 3rd Party plugin styles. */
+  /* Styles for gatsby-remark-autolink-headers plugin*/
+
+  .autolink-headers {
+    fill: var(--color-900);
+    left: -4px;
+    position: absolute;
+
+    &.before {
+      left: 0;
+      padding-right: 4px;
+      position: absolute;
+      top: 0;
+      transform: translateX(-100%);
+    }
+
+    svg {
+      visibility: hidden;
+    }
+  }
+
+  h1:hover .autolink-headers,
+  h2:hover .autolink-headers,
+  h3:hover .autolink-headers,
+  h4:hover .autolink-headers,
+  h5:hover .autolink-headers,
+  h6:hover .autolink-headers {
+    svg {
+      visibility: visible;
+    }
+  }
 `
 
 export default GlobalStyles

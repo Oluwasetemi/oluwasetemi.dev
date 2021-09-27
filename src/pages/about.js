@@ -26,9 +26,9 @@ function AboutPage({data}) {
         <span role="img" aria-label="nigerian flag">
           🇳🇬
         </span>
-        , It is pronounced SE + TE(Not TI) + ME. Most people call me Ojo. Other
-        variant of my name is Temi or Setemi or Stephen. Address me with anyone
-        that is easy for you.
+        , my name is pronounced SE + TE(Not TI) + ME. People often call me Ojo,
+        Temi, Setemi or Stephen. I prefer to be addressed with anyone that is
+        easy for you.
       </p>
 
       <p>
@@ -37,15 +37,16 @@ function AboutPage({data}) {
         <span role="img" aria-label="nigerian flag">
           🇳🇬
         </span>{' '}
-        who love to work with JavaScript, Typescript Reactjs, Nodejs and
-        GraphQL. I prefer to solve problems.
+        who loves to work with JavaScript, Typescript Reactjs, Nodejs and
+        GraphQL. I love to solve problems compared to focusing of the technology
+        howbeit, I consider what technology best fits the domain of problems.
       </p>
 
       <p>
         <span className="mark">
           I have keen interest in roles around Frontend Engineering, Backend
-          Engineering, Developer Education, Developer Relations or Developer
-          Experience and any Full-Stack roles.
+          Engineering, Developer Education, Developer Relations, Developer
+          Experience and Full-Stack roles.
         </span>
       </p>
 
@@ -72,16 +73,19 @@ function AboutPage({data}) {
 
       <p>
         Building Software products for clients is what I do when I am not
-        teaching.You can checkout my portfolios here.
+        teaching.
+        <Link to="/portfolio">You can checkout my portfolios here.</Link>{' '}
       </p>
 
       <h3>More on Family</h3>
       <p>
         I am the second of 6 children out of which Adeola and Temi are my step
-        siblings and the first male in the lineage, both parent are late
-        (Blessed memory). Mum died first year in university and Dad died while I
-        was serving Nigeria (country of birth) in Benue(Food basket of the
-        nation) 2017.{' '}
+        siblings and the first male in the lineage. Both parent are late
+        (Blessed memory), Mum died first year in university and Dad died while I
+        was serving(as a graduate in nigeria it is mandatory to serve the nation
+        for a year which involves paramilitary training and other community
+        services) Nigeria (country of birth) in Benue State (Food basket of the
+        nation), Nigeria in 2017.{' '}
       </p>
 
       <p>
@@ -89,25 +93,26 @@ function AboutPage({data}) {
         <span role="img" aria-label="the love blush">
           😍
         </span>{' '}
-        with Ajayi Temidayo Abosede. She is a gift from God.
+        with Ajayi Temidayo Abosede. She is my gift from God.
       </p>
 
       <h3>More on Technical Experience</h3>
       <p>
-        I write anything related to JavaScript and Typescript confidently. I
-        have good experience with C# and Python (Flask, Django). I have written
-        a little bit of C and C++ (not near production experience trust me).
+        I build software with JavaScript and Typescript confidently. I have good
+        experience with C# and Python (Flask, Django). I have written a little
+        bit of C and C++ (not near production experience trust me, educational
+        purpose).
       </p>
       <p>
-        I have fierce interest in React and GraphQL and related technologies
-        like Gatsbyjs (the technology I use to build this piece), Nextjs,
-        Prisma, Keystone, CMS - Contentful, Sanity, . For more technical details
-        like uses, fonts, setup and dotfiles <Link to="/uses">check here</Link>.
+        I have keen interest in React, GraphQL and related technologies like
+        Gatsbyjs (the technology I use to build this piece), Nextjs, Prisma,
+        Keystone, CMS - Contentful, Sanity, . For more technical details like
+        uses, fonts, setup and dotfiles <Link to="/uses">check here</Link>.
       </p>
       <h3>More about Location</h3>
       <p>
-        Currently live in the beautiful city of Osogbo, grew up in Ibadan ,
-        Worked 1 year in Lagos, Abuja is my second home and{' '}
+        I currently live in the beautiful city of Osogbo, grew up in Ibadan ,
+        worked 2 year in Lagos, Abuja happens to be my second home and{' '}
         <abbr title="National Youth Service Corps">NYSC</abbr> Service took me
         to Benue State.I love travelling and exploring new cultures.
       </p>

@@ -73,7 +73,7 @@ export default PortfolioIndex
 export const pageQuery = graphql`
   query {
     allMdx(
-      sort: {fields: [frontmatter___date], order: DESC}
+      sort: {fields: [frontmatter___publishedDate], order: DESC}
       filter: {
         frontmatter: {isPublished: {eq: true}}
         fileAbsolutePath: {regex: "//content/portfolio//"}

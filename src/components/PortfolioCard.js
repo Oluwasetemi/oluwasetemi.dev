@@ -7,8 +7,8 @@ const PortfolioCardStyles = styled.div`
   align-items: center;
   .card-image a {
     img {
-      min-width: ${props => {
-        return props.size === 'small' ? '' : '500px'
+      max-width: ${props => {
+        return props.size === 'small' ? '350px' : '500px'
       }};
       min-height: 100%;
       &:hover {

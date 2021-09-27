@@ -39,7 +39,7 @@ export const pageQuery = graphql`
       sort: {fields: [frontmatter___date], order: DESC}
       filter: {
         frontmatter: {isPublished: {eq: true}, tags: {regex: $tagsRegex}}
-        fileAbsolutePath: {regex: "//pages/blog//"}
+        fileAbsolutePath: {regex: "//content/blog//"}
       }
     ) {
       edges {

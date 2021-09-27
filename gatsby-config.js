@@ -62,7 +62,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages/blog`,
+        path: `${__dirname}/content/blog`,
         name: 'blog',
       },
     },
@@ -91,83 +91,31 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        // defaultLayouts: {
-        //   default: here('./src/templates/markdown-page.js'),
-        // },
         extensions: [`.mdx`, `.md`, `.markdown`],
         gatsbyRemarkPlugins: [
+          {resolve: 'gatsby-remark-copy-linked-files'},
           {
             resolve: 'gatsby-remark-autolink-headers',
             // icon: `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M14.851 11.923c-.179-.641-.521-1.246-1.025-1.749-1.562-1.562-4.095-1.563-5.657 0l-4.998 4.998c-1.562 1.563-1.563 4.095 0 5.657 1.562 1.563 4.096 1.561 5.656 0l3.842-3.841.333.009c.404 0 .802-.04 1.189-.117l-4.657 4.656c-.975.976-2.255 1.464-3.535 1.464-1.28 0-2.56-.488-3.535-1.464-1.952-1.951-1.952-5.12 0-7.071l4.998-4.998c.975-.976 2.256-1.464 3.536-1.464 1.279 0 2.56.488 3.535 1.464.493.493.861 1.063 1.105 1.672l-.787.784zm-5.703.147c.178.643.521 1.25 1.026 1.756 1.562 1.563 4.096 1.561 5.656 0l4.999-4.998c1.563-1.562 1.563-4.095 0-5.657-1.562-1.562-4.095-1.563-5.657 0l-3.841 3.841-.333-.009c-.404 0-.802.04-1.189.117l4.656-4.656c.975-.976 2.256-1.464 3.536-1.464 1.279 0 2.56.488 3.535 1.464 1.951 1.951 1.951 5.119 0 7.071l-4.999 4.998c-.975.976-2.255 1.464-3.535 1.464-1.28 0-2.56-.488-3.535-1.464-.494-.495-.863-1.067-1.107-1.678l.788-.785z"/></svg>`,
             // enableCustomId: true,
-          },
-          {resolve: 'gatsby-remark-copy-linked-files'},
-          {
-            resolve: 'gatsby-remark-prismjs',
             options: {
-              // Class prefix for <pre> tags containing syntax highlighting;
-              // defaults to 'language-' (e.g. <pre class="language-js">).
-              // If your site loads Prism into the browser at runtime,
-              // (e.g. for use with libraries like react-live),
-              // you may use this to prevent Prism from re-processing syntax.
-              // This is an uncommon use-case though;
-              // If you're unsure, it's best to use the default value.
-              classPrefix: 'language-',
-              // This is used to allow setting a language for inline code
-              // (i.e. single backticks) by creating a separator.
-              // This separator is a string and will do no white-space
-              // stripping.
-              // A suggested value for English speakers is the non-ascii
-              // character '›'.
-              inlineCodeMarker: null,
-              // This lets you set up language aliases.  For example,
-              // setting this to '{ sh: "bash" }' will let you use
-              // the language "sh" which will highlight using the
-              // bash highlighter.
-              aliases: {},
-              // This toggles the display of line numbers globally alongside the code.
-              // To use it, add the following line in gatsby-browser.js
-              // right after importing the prism color scheme:
-              //  require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-              // Defaults to false.
-              // If you wish to only show line numbers on certain code blocks,
-              // leave false and use the {numberLines: true} syntax below
-              showLineNumbers: false,
-              // If setting this to true, the parser won't handle and highlight inline
-              // code used in markdown i.e. single backtick code like `this`.
-              noInlineHighlight: false,
-              // This adds a new language definition to Prism or extend an already
-              // existing language definition. More details on this option can be
-              // found under the header "Add new language definition or extend an
-              // existing language" below.
-              languageExtensions: [
-                {
-                  language: 'superscript',
-                  extend: 'javascript',
-                  definition: {
-                    superscript_types: /(SuperType)/,
-                  },
-                  insertBefore: {
-                    function: {
-                      superscript_keywords: /(superif|superelse)/,
-                    },
-                  },
-                },
-              ],
-              // Customize the prompt used in shell output
-              // Values below are default
-              prompt: {
-                user: 'root',
-                host: 'localhost',
-                global: true,
-              },
-              // By default the HTML entities <>&'" are escaped.
-              // Add additional HTML escapes by providing a mapping
-              // of HTML entities and their escape value IE: { '}': '&#123;' }
-              escapeEntities: {},
+              offsetY: '125',
+              icon: '<svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>',
+              className: 'autolink-headers',
+              maintainCase: false,
+              removeAccents: true,
             },
           },
-
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1035,
+              backgroundColor: 'transparent',
+            },
+          },
+          {
+            resolve: 'gatsby-remark-prismjs',
+          },
           {
             resolve: 'gatsby-remark-code-buttons',
             options: {
@@ -197,12 +145,6 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1035,
-            },
-          },
-          {
             resolve: `gatsby-remark-embedder`,
             options: {
               // customTransformers: [eggheadTransformer],
@@ -214,7 +156,6 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-
           'gatsby-remark-smartypants',
         ],
       },

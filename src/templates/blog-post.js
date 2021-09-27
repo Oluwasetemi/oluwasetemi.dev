@@ -70,7 +70,7 @@ function BlogPostTemplate({data, pageContext}) {
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
     const GITHUB_REPO_NAME = 'oluwasetemi.dev'
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${post.fields.slug.replace(
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/blog/${post.fields.slug.replace(
       /\//g,
       '',
     )}/index.md`
@@ -82,6 +82,9 @@ function BlogPostTemplate({data, pageContext}) {
   return (
     <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
+      <Link to="/blog">
+        <p>&larr; Back to Writings</p>
+      </Link>
       <h1 style={{color: 'var(--color)'}}>{post.frontmatter.title}</h1>
       <div className="sub-header">
         <span>
@@ -98,7 +101,7 @@ function BlogPostTemplate({data, pageContext}) {
             •
             {post.frontmatter.tags.map(tag => (
               <Link to={`/tags/${tag}`} key={tag}>
-                🏷 <span className="mark">{`${tag}`}</span>
+                🏷 <span>{`${tag}`}</span>
               </Link>
             ))}
           </span>

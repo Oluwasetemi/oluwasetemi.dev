@@ -40,12 +40,12 @@ function Layout({children}) {
       <GlobalStyles />
       <Typography />
       <ReactTooltip place="top" type="dark" effect="float" />
-      <div className="info">
+      {/* <div className="info">
         <b>
           Some blog post have its title missing. Fixing that! So Sorry for the
           Inconvenience.{' '}
         </b>
-      </div>
+      </div> */}
       <SiteBorderStyles>
         <>
           <Nav title={site.siteMetadata?.title} />

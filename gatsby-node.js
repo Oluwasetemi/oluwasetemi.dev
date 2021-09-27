@@ -6,11 +6,6 @@ import path from 'path'
 import rimraf from 'rimraf'
 import blogUtils from './other/blog-utils'
 
-// Log out information after a build is done
-// export const onPostBuild = ({ reporter }) => {
-//   reporter.info(`Your Gatsby site has been built! http://localhost:8000`)
-// }
-
 async function turnBlogIntoPages({graphql, actions}) {
   try {
     const {createPage} = actions
@@ -23,7 +18,7 @@ async function turnBlogIntoPages({graphql, actions}) {
             limit: 1000
             filter: {
               frontmatter: {isPublished: {eq: true}}
-              fileAbsolutePath: {regex: "//pages/blog//"}
+              fileAbsolutePath: {regex: "//content/blog//"}
             }
           ) {
             edges {
@@ -42,13 +37,14 @@ async function turnBlogIntoPages({graphql, actions}) {
     )
     // Create blog posts pages.
     const posts = data.allMdx.edges
+    // require('util').inspect.defaultOptions.depth = null
 
     posts.forEach((post, index) => {
       const previous = index === posts.length - 1 ? null : posts[index + 1].node
       const next = index === 0 ? null : posts[index - 1].node
 
       createPage({
-        path: post.node.fields.slug,
+        path: `blog${post.node.fields.slug}`,
         component: blogPost,
         context: {
           slug: post.node.fields.slug,
@@ -74,7 +70,7 @@ async function turnPortfolioIntoPages({graphql, actions}) {
             sort: {fields: [frontmatter___publishedDate], order: DESC}
             limit: 1000
             filter: {
-              frontmatter: {isPublished: {eq: false}}
+              frontmatter: {isPublished: {eq: true}}
               fileAbsolutePath: {regex: "//content/portfolio//"}
             }
           ) {
@@ -130,7 +126,7 @@ async function turnTagsIntoPages({graphql, actions}) {
             limit: 1000
             filter: {
               frontmatter: {isPublished: {eq: true}}
-              fileAbsolutePath: {regex: "//pages/blog//"}
+              fileAbsolutePath: {regex: "//content/blog//"}
             }
           ) {
             edges {

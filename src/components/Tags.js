@@ -39,7 +39,7 @@ export default function Tags({activeTag}) {
         sort: {fields: [frontmatter___date], order: DESC}
         filter: {
           frontmatter: {isPublished: {eq: true}}
-          fileAbsolutePath: {regex: "//pages/blog//"}
+          fileAbsolutePath: {regex: "//content/blog//"}
         }
       ) {
         edges {

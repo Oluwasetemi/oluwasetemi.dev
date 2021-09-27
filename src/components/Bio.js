@@ -90,7 +90,7 @@ function Bio({footer}) {
           Say Hi to Him on Twitter. <br />
         </a>
         <Link to="/tags">
-          You can search through my blog using custom created tags• 🏷{' '}
+          You can search through my blog using custom tags• 🏷{' '}
         </Link>
         .<br /> <Link to="/about">Click here to read more about me.</Link>{' '}
         <a className="link" href="/rss.xml" target="_blank">

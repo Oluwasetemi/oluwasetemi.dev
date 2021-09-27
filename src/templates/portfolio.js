@@ -81,6 +81,9 @@ function PortfolioTemplate({data, pageContext}) {
   return (
     <BlogPostStyles>
       <SEO title={post.frontmatter.title} description={siteDescription} />
+      <Link to="/portfolio">
+        <p>&larr; Back to Portfolio</p>
+      </Link>
       <h1 style={{color: 'var(--color)'}}>{post.frontmatter.title}</h1>
       <div className="sub-header">
         <span>
@@ -97,7 +100,7 @@ function PortfolioTemplate({data, pageContext}) {
             •
             {post.frontmatter.technology.map((tag, index) => (
               <React.Fragment key={`${tag}-${index}`}>
-                🏷 <span className="mark" key={tag - index}>{`${tag}`}</span>
+                🏷 <span key={tag - index}>{`${tag}`}</span>
               </React.Fragment>
             ))}
           </span>
