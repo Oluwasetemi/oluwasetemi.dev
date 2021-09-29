@@ -1,13 +1,13 @@
 /* eslint-disable react/no-danger */
-import {graphql, Link} from 'gatsby'
-import {MDXRenderer} from 'gatsby-plugin-mdx'
+import Bio from 'components/Bio'
+import LinkSvg from 'components/LinkSvg'
+import SEO from 'components/seo'
+import { graphql, Link } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Utterance from 'react-utterances'
 import styled from 'styled-components'
-import Bio from '../components/Bio'
-import LinkSvg from '../components/LinkSvg'
-import SEO from '../components/SEO'
-import {formatReadingTime} from '../utils/helpers'
+import { formatReadingTime } from 'utils/helpers'
 
 const BlogPostStyles = styled.div`
   color: var(--color);

@@ -1,5 +1,6 @@
 {
   "name": "kcd-blog-post-generator",
+  "type": "module",
   "private": true,
   "devDependencies": {
     "axios": "^0.19.2",

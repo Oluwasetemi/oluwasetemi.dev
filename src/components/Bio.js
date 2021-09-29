@@ -1,7 +1,7 @@
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import profilePic from 'assets/images/profile-pic.jpg'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import profilePic from '../assets/images/profile-pic.jpg'
 
 const ImageStyle = styled.img`
   margin-right: 20px;

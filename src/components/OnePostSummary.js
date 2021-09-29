@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
 
-import {animated, useSpring} from '@react-spring/web'
-import {Link} from 'gatsby'
+import { animated, useSpring } from '@react-spring/web'
+import { Link } from 'gatsby'
 import React from 'react'
-import {useDrag} from 'react-use-gesture'
+import { useDrag } from 'react-use-gesture'
 import styled from 'styled-components'
-import {formatReadingTime} from '../utils/helpers'
+import { formatReadingTime } from 'utils/helpers'
 
 const OnePostSummaryStyles = styled(animated.article)`
   margin-top: 1.5rem;

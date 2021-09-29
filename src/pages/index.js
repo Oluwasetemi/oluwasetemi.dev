@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
-import {graphql, Link} from 'gatsby'
+import Bio from 'components/Bio'
+import OnePostSummary from 'components/OnePostSummary'
+import PortfolioCard from 'components/PortfolioCard'
+import SEO from 'components/seo'
+import { graphql, Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import Bio from '../components/Bio'
-import OnePostSummary from '../components/OnePostSummary'
-import PortfolioCard from '../components/PortfolioCard'
-import SEO from '../components/SEO'
+
 
 const HeroStyles = styled.div`
   width: 100%;

@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
+    // "allowJs": true /* Allow javascript files to be compiled. */,
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"]
     }
+    // "types": []
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

@@ -1,9 +1,9 @@
-import {graphql, Link} from 'gatsby'
+import Bio from 'components/Bio'
+import Img from 'components/Img'
+import SEO from 'components/seo'
+import { graphql, Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import Bio from '../components/Bio'
-import Img from '../components/Img'
-import SEO from '../components/SEO'
 
 const AboutPageStyles = styled.div`
   color: var(--color);

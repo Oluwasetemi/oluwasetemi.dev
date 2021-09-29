@@ -5,8 +5,9 @@ const {createProxyMiddleware} = require('http-proxy-middleware')
 const here = (...p) => path.join(__dirname, ...p)
 
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 })
+// console.log(process.env.NETLIFY_FUNCTIONS_URL)
 
 const {
   NODE_ENV,
@@ -15,7 +16,9 @@ const {
   CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env
 const isNetlifyProduction = NETLIFY_ENV === 'production'
-// const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL
+// console.log(isNetlifyProduction)
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL
+// console.log(siteUrl)
 
 module.exports = {
   developMiddleware: app => {
@@ -219,4 +222,66 @@ module.exports = {
     },
     'gatsby-plugin-sitemap',
   ],
+}
+
+function getBlogFeed({filePathRegex, blogUrl, ...overrides}) {
+  /**
+   * These RSS feeds can be quite expensive to generate. Limiting the number of
+   * posts and keeping each item's template lightweight (only using frontmatter,
+   * avoiding the html/excerpt fields) helps negate this.
+   */
+  return {
+    serialize: ({query: {allMdx}}) => {
+      const stripSlash = slug => (slug.startsWith('/') ? slug.slice(1) : slug)
+      return allMdx.edges.map(edge => {
+        const url = `${siteUrl}/${stripSlash(edge.node.fields.slug)}`
+
+        return {
+          ...edge.node.frontmatter,
+          date: edge.node.fields.date,
+          url,
+          guid: url,
+          custom_elements: [
+            {
+              'content:encoded': `<div style="width: 100%; margin: 0 auto; max-width: 800px; padding: 40px 40px;">
+                  <p>
+                    I've posted a new article <em>"${edge.node.frontmatter.title}"</em> and you can <a href="${url}">read it online</a>.
+                    <br>
+                    ${edge.node.fields.plainTextDescription}
+                    <br>
+                    You can also <a href="${siteUrl}/subscribe">subscribe</a> for weekly emails on what I'm learning, working on, and writing about.
+                  </p>
+                </div>`,
+            },
+          ],
+        }
+      })
+    },
+    query: `
+       {
+         allMdx(
+           limit: 25,
+           filter: {
+             frontmatter: {published: {ne: false}}
+             fileAbsolutePath: {regex: "${filePathRegex}"}
+           }
+           sort: { order: DESC, fields: [frontmatter___date] }
+         ) {
+           edges {
+             node {
+               fields {
+                 slug
+                 date
+                 plainTextDescription
+               }
+               frontmatter {
+                 title
+               }
+             }
+           }
+         }
+       }
+     `,
+    ...overrides,
+  }
 }

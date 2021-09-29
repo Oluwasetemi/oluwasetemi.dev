@@ -1,7 +1,7 @@
+import Bio from 'components/Bio'
+import SEO from 'components/seo'
 import React from 'react'
 import styled from 'styled-components'
-import Bio from '../components/Bio'
-import SEO from '../components/SEO'
 
 const AboutPageStyles = styled.div`
   color: var(--color);

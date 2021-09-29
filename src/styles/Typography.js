@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import general from '../assets/fonts/Adelle_LightItalic.otf'
 import font from '../assets/fonts/frenchfries.woff'
 

@@ -1,10 +1,10 @@
-import {graphql, useStaticQuery} from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import 'normalize.css'
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
-import GlobalStyles from '../styles/GlobalStyles'
-import Typography from '../styles/Typography'
+import GlobalStyles from 'styles/GlobalStyles'
+import Typography from 'styles/Typography'
 import Footer from './Footer'
 import Nav from './Nav'
 
@@ -40,12 +40,17 @@ function Layout({children}) {
       <GlobalStyles />
       <Typography />
       <ReactTooltip place="top" type="dark" effect="float" />
-      {/* <div className="info">
+      <div className="info">
         <b>
-          Some blog post have its title missing. Fixing that! So Sorry for the
-          Inconvenience.{' '}
+          A new blog post just dropped{' '}
+          <Link to="/blog/generators-in-java-script">
+            <span role="img" aria-label="speak loud">
+              📣
+            </span>{' '}
+            Click here to read it.
+          </Link>{' '}
         </b>
-      </div> */}
+      </div>
       <SiteBorderStyles>
         <>
           <Nav title={site.siteMetadata?.title} />

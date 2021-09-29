@@ -1,10 +1,10 @@
 /* eslint-disable react/no-danger */
-import {graphql} from 'gatsby'
+import Bio from 'components/Bio'
+import OnePostSummary from 'components/OnePostSummary'
+import SEO from 'components/seo'
+import Tags from 'components/Tags'
+import { graphql } from 'gatsby'
 import React from 'react'
-import Bio from '../components/Bio'
-import OnePostSummary from '../components/OnePostSummary'
-import SEO from '../components/SEO'
-import Tags from '../components/Tags'
 
 function TagsPage({data: {allMdx}, pageContext}) {
   const posts = allMdx.edges

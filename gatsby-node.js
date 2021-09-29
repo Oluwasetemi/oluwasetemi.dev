@@ -1,7 +1,7 @@
-import {zipFunctions} from '@netlify/zip-it-and-ship-it'
-import {spawnSync} from 'child_process'
+import { zipFunctions } from '@netlify/zip-it-and-ship-it'
+import { spawnSync } from 'child_process'
 import fs from 'fs'
-import {createFilePath} from 'gatsby-source-filesystem'
+import { createFilePath } from 'gatsby-source-filesystem'
 import path from 'path'
 import rimraf from 'rimraf'
 import blogUtils from './other/blog-utils'
@@ -183,6 +183,14 @@ export const createPages = async params => {
     // 3.portfolio
     turnPortfolioIntoPages(params),
   ])
+}
+
+export const onCreateWebpackConfig = ({actions}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
+  })
 }
 
 export const onCreateNode = ({node, actions, getNode}) => {

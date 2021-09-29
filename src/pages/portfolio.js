@@ -1,9 +1,9 @@
-import {graphql} from 'gatsby'
+import Bio from 'components/Bio'
+import PortfolioCard from 'components/PortfolioCard'
+import SEO from 'components/seo'
+import { graphql } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import Bio from '../components/Bio'
-import PortfolioCard from '../components/PortfolioCard'
-import SEO from '../components/SEO'
 
 const PortfolioStyles = styled.div`
   color: var(--color);

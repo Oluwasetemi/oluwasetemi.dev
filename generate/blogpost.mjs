@@ -1,21 +1,31 @@
-const path = require('path')
-const fs = require('fs')
-const util = require('util')
-const jsToYaml = require('json-to-pretty-yaml')
-const mkdirp = require('mkdirp')
-const fakeUa = require('fake-useragent')
-const opn = require('opn')
-const axios = require('axios')
-const slugify = require('@sindresorhus/slugify')
-const inquirer = require('inquirer')
-const prettier = require('prettier')
-const tinify = require('tinify')
-const ora = require('ora')
-require('dotenv').config({
-  path: path.join(__dirname, '.env'),
-})
+import slugify from '@sindresorhus/slugify'
+import axios from 'axios'
+import dotenv from 'dotenv'
+import fakeUa from 'fake-useragent'
+import fs from 'fs'
+import inquirer from 'inquirer'
+import jsToYaml from 'json-to-pretty-yaml'
+import mkdirp from 'mkdirp'
+import { createRequire } from 'module'
+import opn from 'opn'
+import ora from 'ora'
+import path, { dirname } from 'path'
+import prettier from 'prettier'
+import tinify from 'tinify'
+import { fileURLToPath } from 'url'
+import util from 'util'
 
-const fromRoot = (...p) => path.join(__dirname, '..', ...p)
+
+
+
+// Get the root path to our project (Like `__dirname`).
+const root = dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url)
+
+dotenv.config({
+  path: path.join(root, '.env'),
+})
+const fromRoot = (...p) => path.join(root, '..', ...p)
 
 tinify.key = process.env.TINY_PNG_API_KEY
 
@@ -32,7 +42,7 @@ const listify = a =>
     : null
 
 async function generateBlogPost() {
-  const {title, description, categories, keywords} = await inquirer.prompt([
+  const {title, description, tags, isPublished} = await inquirer.prompt([
     {
       type: 'input',
       name: 'title',
@@ -45,15 +55,21 @@ async function generateBlogPost() {
     },
     {
       type: 'input',
-      name: 'categories',
-      message: 'Categories (comma separated)',
+      name: 'tags',
+      message: 'Tags (comma separated)',
     },
     {
-      type: 'input',
-      name: 'keywords',
-      message: 'Keywords (comma separated)',
+      type: 'confirm',
+      name: 'isPublished',
+      message: 'Do you want to publish?',
     },
+    // {
+    //   type: 'input',
+    //   name: 'keywords',
+    //   message: 'Keywords (comma separated)',
+    // },
   ])
+  console.log(tags)
   const slug = slugify(title)
   const destination = fromRoot('/content/blog', slug)
   mkdirp.sync(destination)
@@ -62,13 +78,14 @@ async function generateBlogPost() {
 
   const yaml = jsToYaml.stringify(
     removeEmpty({
-      slug,
       title,
       date: formatDate(new Date()),
       author: 'Ojo Oluwasetemi Stephen 00S',
       description: `_${description}_`,
-      categories: listify(categories),
-      keywords: listify(keywords),
+      tags: listify(tags),
+      // keywords: listify(keywords),
+      isPublished,
+      isDraft: !isPublished,
       banner: './images/banner.jpg',
       bannerCredit,
     }),
@@ -77,12 +94,14 @@ async function generateBlogPost() {
     ...require('../prettier.config'),
     parser: 'mdx',
   })
+
   fs.writeFileSync(path.join(destination, 'index.mdx'), markdown)
 
   console.log(`${destination.replace(process.cwd(), '')} is all ready for you`)
 }
 
 async function getBannerPhoto(title, destination) {
+
   const imagesDestination = path.join(destination, 'images')
 
   await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
@@ -99,7 +118,7 @@ async function getBannerPhoto(title, destination) {
   mkdirp.sync(imagesDestination)
 
   if (unsplashPhotoId) {
-    const source = tinify
+    const source = await tinify
       .fromUrl(
         `https://unsplash.com/photos/${unsplashPhotoId}/download?force=true`,
       )

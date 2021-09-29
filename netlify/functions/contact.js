@@ -43,9 +43,9 @@ owWithMessage(
 )
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.mailgun.org',
+  host: 'in-v3.mailjet.com',
   port: 587,
-  secure: false,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
@@ -127,7 +127,7 @@ async function handler(event) {
 
   const message = {
     from: sender,
-    to: `"Kent C. Dodds" <me@kentcdodds.com>`,
+    to: `"Ojo Oluwasetemi Stephen" <me@oluwasetemi.dev>`,
     subject,
     text,
     html: await markdownToHtml(text),

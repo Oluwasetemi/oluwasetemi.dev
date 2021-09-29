@@ -14,6 +14,7 @@
     "jsx-a11y/label-has-for": "off",
     "max-lines-per-function": "off",
     "babel/quotes": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "import/extensions": "off"
   }
 }
