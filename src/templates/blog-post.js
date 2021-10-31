@@ -81,7 +81,12 @@ function BlogPostTemplate({data, pageContext}) {
 
   return (
     <BlogPostStyles>
-      <SEO title={post.frontmatter.title} description={siteDescription} />
+      <SEO
+        title={post.frontmatter.title}
+        description={
+          post.frontmatter.title || post.excerpt || siteDescription
+        }
+      />
       <Link to="/blog">
         <p>&larr; Back to Writings</p>
       </Link>
@@ -171,6 +176,7 @@ export const pageQuery = graphql`
       fileAbsolutePath
       frontmatter {
         title
+        description
         date(formatString: "MMMM DD, YYYY")
         tags
       }
