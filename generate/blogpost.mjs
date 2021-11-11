@@ -7,7 +7,7 @@ import inquirer from 'inquirer'
 import jsToYaml from 'json-to-pretty-yaml'
 import mkdirp from 'mkdirp'
 import { createRequire } from 'module'
-import opn from 'opn'
+import open from 'open'
 import ora from 'ora'
 import path, { dirname } from 'path'
 import prettier from 'prettier'
@@ -104,7 +104,7 @@ async function getBannerPhoto(title, destination) {
 
   const imagesDestination = path.join(destination, 'images')
 
-  await opn(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
+  await open(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
     wait: false,
   })
 

@@ -1,6 +1,6 @@
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import 'normalize.css'
-import React from 'react'
+import * as React from 'react'
 import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
 import GlobalStyles from 'styles/GlobalStyles'
@@ -36,14 +36,14 @@ function Layout({children}) {
   `)
 
   return (
-    <>
+    <React.Fragment>
       <GlobalStyles />
       <Typography />
       <ReactTooltip place="top" type="dark" effect="float" />
       <div className="info">
         <b>
           A new blog post just dropped{' '}
-          <Link to="/blog/generators-in-java-script">
+          <Link to="/blog/mentorship-series-kolade-will-not-just-give-up/">
             <span role="img" aria-label="speak loud">
               📣
             </span>{' '}
@@ -58,7 +58,7 @@ function Layout({children}) {
           <Footer />
         </>
       </SiteBorderStyles>
-    </>
+    </React.Fragment>
   )
 }
 
