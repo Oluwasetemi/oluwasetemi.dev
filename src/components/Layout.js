@@ -43,7 +43,7 @@ function Layout({children}) {
       <div className="info">
         <b>
           A new blog post just dropped{' '}
-          <Link to="/blog/mentorship-series-kolade-will-not-just-give-up/">
+          <Link to="/blog/developer-experience-with-command-line-interface-cli-tools/">
             <span role="img" aria-label="speak loud">
               📣
             </span>{' '}
