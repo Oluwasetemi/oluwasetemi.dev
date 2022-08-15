@@ -130,7 +130,7 @@
   "license": "MIT",
   "main": "n/a",
   "engines": {
-    "node": ">=10.14"
+    "node": ">=14"
   },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=\"-r esm\" gatsby develop",
