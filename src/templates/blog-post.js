@@ -2,12 +2,12 @@
 import Bio from 'components/Bio'
 import LinkSvg from 'components/LinkSvg'
 import SEO from 'components/seo'
-import { graphql, Link } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import {graphql, Link} from 'gatsby'
+import {MDXRenderer} from 'gatsby-plugin-mdx'
+import * as React from 'react'
 import Utterance from 'react-utterances'
 import styled from 'styled-components'
-import { formatReadingTime } from 'utils/helpers'
+import {formatReadingTime} from 'utils/helpers'
 
 const BlogPostStyles = styled.div`
   color: var(--color);
@@ -66,6 +66,8 @@ function BlogPostTemplate({data, pageContext}) {
   const post = data.mdx
   const siteDescription = post.excerpt
   const {previous, next} = pageContext
+  const previousSlug = `/blog${previous?.fields.slug}`
+  const nextSlug = `/blog${next?.fields.slug}`
 
   function getGitMarkdownUrl() {
     const GITHUB_USERNAME = 'Oluwasetemi'
@@ -83,9 +85,7 @@ function BlogPostTemplate({data, pageContext}) {
     <BlogPostStyles>
       <SEO
         title={post.frontmatter.title}
-        description={
-          post.frontmatter.title || post.excerpt || siteDescription
-        }
+        description={post.frontmatter.title || post.excerpt || siteDescription}
       />
       <Link to="/blog">
         <p>&larr; Back to Writings</p>
@@ -147,14 +147,14 @@ function BlogPostTemplate({data, pageContext}) {
       >
         <li>
           {previous && (
-            <Link to={previous.fields.slug} rel="prev">
+            <Link to={previousSlug} rel="prev">
               ← {previous.frontmatter.title}
             </Link>
           )}
         </li>
         <li>
           {next && (
-            <Link to={next.fields.slug} rel="next">
+            <Link to={nextSlug} rel="next">
               {next.frontmatter.title} →
             </Link>
           )}
