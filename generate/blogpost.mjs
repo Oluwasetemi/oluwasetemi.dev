@@ -69,7 +69,7 @@ async function generateBlogPost() {
     //   message: 'Keywords (comma separated)',
     // },
   ])
-  console.log(tags)
+  // console.log(tags)
   const slug = slugify(title)
   const destination = fromRoot('/content/blog', slug)
   mkdirp.sync(destination)

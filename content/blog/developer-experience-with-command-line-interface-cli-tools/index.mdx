@@ -116,7 +116,7 @@ including access to `gh api` itself. All the API endpoints both the rest version
 developer experience. The `gh` command is among my top 10 most used CLI
 commands. Let me share some of the `gh` command i cannot do without.
 
-```sh=
+```bash
 # install Github CLI today, right away.
 # https://cli.github.com/ and start saving time.
 
@@ -141,7 +141,7 @@ directly from my terminal using the netlify-cli or ntl for short.
 
 Here are some of the command line I run with netlify-cli.
 
-```sh=
+```bash
 ntl open:admin
 
 ntl open:sites
@@ -165,13 +165,13 @@ transformations and optimizations.
 
 I need to upload an image and get a URL copied to my clipboard.
 
-```sh=
+```bash
 cld uploader upload bejamas.png folder=personal use_filename=true | jq '.url' | pbcopy
 ```
 
 Showing few commands on how to set up cld on your computer.
 
-```sh
+```bash
 pip3 install cloudinary-cli
 # requires python to be installed
 
@@ -204,7 +204,7 @@ helps me to install and manage several versions of nodejs.
 
 [For installation of nvm on your computer check this link](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-```sh
+```bash
 $ nvm use 16
 Now using node v16.9.1 (npm v7.21.1)
 $ node -v
@@ -223,7 +223,7 @@ The common use case I run into always is having globally installed packages that
 I need to carry along to a new version installed. The script below helps me to
 do this conveniently.
 
-```sh
+```bash
 # allow me to carry over my global npm package after any change of version
 
 nvm_use (){
@@ -259,7 +259,7 @@ get talked about a lot of time but it helps you save time on repeated commands.
 
 To alias git with g:
 
-```sh
+```bash
 alias g='git'
 alias ga='git add'
 alias gaa='git add .'
@@ -268,7 +268,7 @@ alias gaa='git add .'
 Instead of git, I can type g and it will behave like I used git. For file and
 folder manipulations try this.
 
-```sh
+```bash
 alias ~='cd ~'
 alias .='cd ..'
 alias ..='cd ../..'
@@ -290,7 +290,7 @@ This helps me abstract git add, git commit and git push. It was taken from one
 of the open-source works of [Ahmad Awais](https://github.com/ahmadawais) called
 [emoji-log](https://github.com/ahmadawais/Emoji-Log).
 
-```sh
+```bash
 # Git commit, Add all
 function gcaz() {
     git add . && git commit -m "$*"
@@ -308,7 +308,7 @@ have used before but cannot remember. It saves you the effort of googling. You
 may increase the history size to increase the number of commands that can be
 saved.
 
-```sh
+```bash
 # history size
 HISTSIZE=7000
 HISTFILESIZE=14000
@@ -328,7 +328,7 @@ setopt HIST_IGNORE_DUPS
 
 This function will return a list of frequently used cli commands.
 
-```sh
+```bash
 # List the 10 most frequently used command
 function historyTop () { history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 }
 

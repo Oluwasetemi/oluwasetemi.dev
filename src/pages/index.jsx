@@ -248,7 +248,7 @@ export const pageQuery = graphql`
       }
     }
     portfolio: allMdx(
-      sort: {frontmatter: {date: ASC}}
+      sort: {frontmatter: {publishedDate: DESC}}
       filter: {
         frontmatter: {isPublished: {eq: true}}
         internal: {contentFilePath: {regex: "//content/portfolio//"}}
@@ -270,7 +270,7 @@ export const pageQuery = graphql`
     }
     blog: allMdx(
       limit: 6
-      sort: {frontmatter: {date: ASC}}
+      sort: {frontmatter: {date: DESC}}
       filter: {
         frontmatter: {isPublished: {eq: true}}
         internal: {contentFilePath: {regex: "//content/blog//"}}
@@ -279,6 +279,7 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt(pruneLength: 280)
+          timeToRead
           fields {
             slug
           }

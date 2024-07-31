@@ -62,12 +62,7 @@ const BlogPostStyles = styled.div`
 `
 
 function BlogPostTemplate({data, pageContext, children}) {
-  console.log('data', data)
-  console.log('pageContext', pageContext)
-  console.log('children', children)
-
   const post = data.mdx
-  const siteDescription = post.excerpt
   const {previous, next} = pageContext
   const previousSlug = `/blog${previous?.fields.slug}`
   const nextSlug = `/blog${next?.fields.slug}`
@@ -167,7 +162,7 @@ function BlogPostTemplate({data, pageContext, children}) {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String) {
     mdx(fields: {slug: {eq: $slug}}) {
       id
       excerpt

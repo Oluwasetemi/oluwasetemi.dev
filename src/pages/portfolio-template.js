@@ -93,7 +93,7 @@ function PortfolioTemplate({data, pageContext, children}) {
         </span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
-        {post && post.frontmatter && post.frontmatter.technology.length > 0 && (
+        {post && post.frontmatter && post?.frontmatter?.technology?.length > 0 && (
           <span>
             •
             {post.frontmatter.technology.map((tag, index) => (
@@ -153,7 +153,7 @@ function PortfolioTemplate({data, pageContext, children}) {
 export default PortfolioTemplate
 
 export const pageQuery = graphql`
-  query PortfolioBySlug($slug: String!) {
+  query PortfolioBySlug($slug: String) {
     mdx(frontmatter: {slug: {eq: $slug}}) {
       id
       timeToRead

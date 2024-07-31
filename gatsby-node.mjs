@@ -194,7 +194,6 @@ export const createSchemaCustomization = ({ actions }) => {
 }
 
 export const createPages = async (params) => {
-  console.log(params)
   // console.log('creating new page')
 
   // create pages dynamically

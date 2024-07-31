@@ -69,7 +69,7 @@ following commands to install `hub`. For more step on how to install `hub` on
 other operating system. check &lt;https://github.com/github/hub&gt;. One benefit
 of `hub` is its usage in your GitHub actions.
 
-```sh
+```bash
 brew install Hub
 
 # run a check to see if hub is installed and its version
@@ -79,7 +79,7 @@ hub version
 Examples of task that you can do on `GitHub` that `hub` was created to make
 smooth. Its `GitHub` on the command line.
 
-```sh
+```bash
 # cloning of repository
 hub clone <url> or <name of the repo> - it sets the authenticated user github name as the default
 
@@ -133,7 +133,7 @@ with you.
   one `hub apply` will explain more about patches). You can try it with a commit
   url from GitHub.
 
-```sh
+```bash
 hub am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
 # downloads patch via API
 git am --ignore-whitespace /tmp/fdb9921.patch
@@ -146,7 +146,7 @@ git am --ignore-whitespace /tmp/fdb9921.patch
   create a patch from the changes. A patch contains the file changes, commits
   and all necessary information that can be added to the git directory.
 
-```sh
+```bash
 git diff > mypatch.patch
 
 git diff --cached > mypatch.patch
@@ -166,7 +166,7 @@ context of tools like GitHub.
   a new branch locally from a GitHub pull request.It in essence pull the changes
   from a pull request to an existing or new branch.
 
-```sh
+```bash
 hub checkout https://github.com/username/repo/pull/73
 OR
 # alternative method
@@ -185,7 +185,7 @@ hub checkout https://github.com/username/repo/pull/73 custom-branch-name
   is to cherry-pick a commit from GitHub and apply the changes to your code
   locally. it offers you lot of powers to experiment.
 
-```sh
+```bash
 hub cherry-pick https://github.com/username/repo/commit/SHA
 OR
 git remote add -f remoteName git://github.com/username/REPO.git
@@ -204,7 +204,7 @@ git cherry-pick SHA
 
 - `hub clone` - Clone a repository from GitHub. Consider the following commands.
 
-```sh
+```bash
 hub clone schacon/ticgit
 OR
 git clone git://github.com/schacon/ticgit.git
