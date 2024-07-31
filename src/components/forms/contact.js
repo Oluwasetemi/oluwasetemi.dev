@@ -1,4 +1,4 @@
-import { navigate } from 'gatsby'
+import {navigate} from 'gatsby'
 import * as React from 'react'
 
 function SubjectSelector({options, noSelectionUi, label, value, ...rest}) {
@@ -67,7 +67,10 @@ function CountupTextarea({
   )
 }
 
-const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
+const callAll =
+  (...fns) =>
+  (...args) =>
+    fns.forEach(fn => fn && fn(...args))
 
 function StoredFormControl({
   children,
@@ -199,7 +202,7 @@ function ContactForm() {
     <form
       name="contact"
       onSubmit={handleSubmit}
-      css={{
+      style={{
         display: 'grid',
         gridGap: 20,
       }}
@@ -218,7 +221,7 @@ function ContactForm() {
           <input id="email-input" type="email" name="email" required />
         </StoredFormControl>
       </div>
-      <div css={{display: 'grid', gridGap: 20}}>
+      <div style={{display: 'grid', gridGap: 20}}>
         <StoredFormControl defaultValue="workshop">
           <SubjectSelector
             label="Email Type"
@@ -237,7 +240,7 @@ function ContactForm() {
                           id="company-name-input"
                           name="company"
                           required
-                          css={{width: '100%'}}
+                          style={{width: '100%'}}
                         />
                       </StoredFormControl>
                     </div>
@@ -251,7 +254,7 @@ function ContactForm() {
                           id="subject-input"
                           name="subject"
                           required
-                          css={{width: '100%'}}
+                          style={{width: '100%'}}
                         />
                       </StoredFormControl>
                     </div>
@@ -280,7 +283,7 @@ function ContactForm() {
                           name="subject"
                           id="subject-input"
                           required
-                          css={{width: '100%'}}
+                          style={{width: '100%'}}
                         />
                       </StoredFormControl>
                     </div>
@@ -288,7 +291,7 @@ function ContactForm() {
                       <label htmlFor="link-input">
                         {`Link to testimonial (tweet/blog post/etc.)`}
                       </label>
-                      <small css={{marginLeft: 6}}>
+                      <small style={{marginLeft: 6}}>
                         {`(optional, but `}
                         <a
                           target="_blank"
@@ -301,7 +304,7 @@ function ContactForm() {
                       </small>
                       <br />
                       <StoredFormControl lsKey="lsfc:testimonial-url">
-                        <input type="url" name="link" css={{width: '100%'}} />
+                        <input type="url" name="link" style={{width: '100%'}} />
                       </StoredFormControl>
                     </div>
                   </>
@@ -337,7 +340,7 @@ function ContactForm() {
                           name="subject"
                           id="subject-input"
                           required
-                          css={{width: '100%'}}
+                          style={{width: '100%'}}
                           defaultValue="I need some special consulting"
                         />
                       </StoredFormControl>
@@ -378,7 +381,7 @@ function ContactForm() {
                           name="subject"
                           id="subject-input"
                           required
-                          css={{width: '100%'}}
+                          style={{width: '100%'}}
                           defaultValue="I need help"
                         />
                       </StoredFormControl>
@@ -398,7 +401,7 @@ function ContactForm() {
                         name="subject"
                         id="subject-input"
                         required
-                        css={{width: '100%'}}
+                        style={{width: '100%'}}
                       />
                     </StoredFormControl>
                   </div>
@@ -411,7 +414,7 @@ function ContactForm() {
       <div>
         <div>
           <label htmlFor="body-textarea">Email body</label>
-          <small css={{marginLeft: 6}}>(**markdown** _supported_)</small>
+          <small style={{marginLeft: 6}}>(**markdown** _supported_)</small>
         </div>
         <CountupTextarea
           id="body-textarea"
@@ -427,9 +430,9 @@ function ContactForm() {
         <button type="submit" disabled={fetching}>
           Send
         </button>
-        {fetching ? <span css={{marginLeft: 10}}>...</span> : null}
+        {fetching ? <span style={{marginLeft: 10}}>...</span> : null}
         {error ? (
-          <div role="alert" css={{color: 'red'}}>
+          <div role="alert" style={{color: 'red'}}>
             {error.message ? (
               <>
                 <div>Something went wrong:</div>
@@ -445,7 +448,7 @@ function ContactForm() {
             ) : (
               <div>
                 {`Something went wrong, but I'm not quite sure what. Feel free to `}
-                <a href="https://twitter.com/kentcdodds">ping me on twitter</a>
+                <a href="https://twitter.com/setemiojo">ping me on twitter</a>
               </div>
             )}
           </div>

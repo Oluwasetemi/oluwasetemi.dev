@@ -18,7 +18,7 @@ GitHub was invented by the 4 brilliant developers mentioned above. Game changer
 money. (It was sold to microsoft later a very ridiculous amount of money). The
 brilliant thing is how it maintained its open source powers.
 
-<!-- caution -->
+{/* <!-- caution --> */}
 
 ## caution
 
@@ -51,7 +51,7 @@ will not have to deal with the web interface every time when we need to interact
 with `GitHub`.
 
 > Hub is a tool that wraps git in order to extend it with extra functionality
-> that makes it better when working with GitHub. <https://hub.github.com>
+> that makes it better when working with GitHub. &lt;https://hub.github.com&gt;
 
 Two major thing you should expect is `hub` extending the powers and
 functionality of `git` and giving us new commands that bring GitHub close to
@@ -66,10 +66,10 @@ installing it. I use [hyper terminal](https://hyper.is) that run a `zsh` shell.
 The current operating system I am using is Mac OS with homebrew installed. To
 install `hub` with a similar operationg system and homebrew installed run the
 following commands to install `hub`. For more step on how to install `hub` on
-other operating system. check <https://github.com/github/hub>. One benefit of
-`hub` is its usage in your GitHub actions.
+other operating system. check &lt;https://github.com/github/hub&gt;. One benefit
+of `hub` is its usage in your GitHub actions.
 
-```shell
+```sh
 brew install Hub
 
 # run a check to see if hub is installed and its version
@@ -79,7 +79,7 @@ hub version
 Examples of task that you can do on `GitHub` that `hub` was created to make
 smooth. Its `GitHub` on the command line.
 
-```shell
+```sh
 # cloning of repository
 hub clone <url> or <name of the repo> - it sets the authenticated user github name as the default
 
@@ -133,7 +133,7 @@ with you.
   one `hub apply` will explain more about patches). You can try it with a commit
   url from GitHub.
 
-```shell
+```sh
 hub am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
 # downloads patch via API
 git am --ignore-whitespace /tmp/fdb9921.patch
@@ -146,7 +146,7 @@ git am --ignore-whitespace /tmp/fdb9921.patch
   create a patch from the changes. A patch contains the file changes, commits
   and all necessary information that can be added to the git directory.
 
-```shell
+```sh
 git diff > mypatch.patch
 
 git diff --cached > mypatch.patch
@@ -166,7 +166,7 @@ context of tools like GitHub.
   a new branch locally from a GitHub pull request.It in essence pull the changes
   from a pull request to an existing or new branch.
 
-```shell
+```sh
 hub checkout https://github.com/username/repo/pull/73
 OR
 # alternative method
@@ -185,7 +185,7 @@ hub checkout https://github.com/username/repo/pull/73 custom-branch-name
   is to cherry-pick a commit from GitHub and apply the changes to your code
   locally. it offers you lot of powers to experiment.
 
-```shell
+```sh
 hub cherry-pick https://github.com/username/repo/commit/SHA
 OR
 git remote add -f remoteName git://github.com/username/REPO.git
@@ -204,7 +204,7 @@ git cherry-pick SHA
 
 - `hub clone` - Clone a repository from GitHub. Consider the following commands.
 
-```shell
+```sh
 hub clone schacon/ticgit
 OR
 git clone git://github.com/schacon/ticgit.git

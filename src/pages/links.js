@@ -1,4 +1,5 @@
 import * as React from 'react'
+import SEO from '../components/seo'
 
 export default function contact() {
   return (
@@ -7,3 +8,5 @@ export default function contact() {
     </div>
   )
 }
+
+export const Head = () => <SEO title="Links to my creation" />

@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-danger */
-import { animated, useSpring } from '@react-spring/web'
-import Bio from 'components/Bio'
-import SEO from 'components/seo'
-import { graphql, Link } from 'gatsby'
+import {animated, useSpring} from '@react-spring/web'
+import Bio from '../components/Bio'
+import SEO from '../components/seo'
+import {graphql, Link} from 'gatsby'
 import React from 'react'
-import { useDrag } from 'react-use-gesture'
+import {useDrag} from 'react-use-gesture'
 import styled from 'styled-components'
-import { formatReadingTime } from 'utils/helpers'
+import {formatReadingTime} from '../utils/helpers'
 
 const OnePostSummaryStyles = styled(animated.article)`
   margin-top: 1.5rem;
@@ -75,7 +75,6 @@ function BlogIndex({data: {allMdx}}) {
 
   return (
     <>
-      <SEO title="Home" />
       <Bio />
       {posts.map(({node}) => {
         const title = node.frontmatter.title || node.fields.slug
@@ -92,10 +91,10 @@ export default BlogIndex
 export const pageQuery = graphql`
   query {
     allMdx(
-      sort: {fields: [frontmatter___date], order: DESC}
+      sort: {frontmatter: {date: DESC}}
       filter: {
         frontmatter: {isPublished: {eq: true}}
-        fileAbsolutePath: {regex: "//content/blog//"}
+        internal: {contentFilePath: {regex: "//content/blog//"}}
       }
     ) {
       edges {
@@ -104,7 +103,6 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-          timeToRead
           frontmatter {
             date(formatString: "dddd DD MMMM YYYY")
             title
@@ -115,3 +113,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export const Head = () => <SEO title="Blog Posts" />

@@ -36,10 +36,10 @@ export default function Tags({activeTag}) {
   const {posts} = useStaticQuery(graphql`
     query {
       posts: allMdx(
-        sort: {fields: [frontmatter___date], order: DESC}
+        sort: {frontmatter: {date: DESC}}
         filter: {
           frontmatter: {isPublished: {eq: true}}
-          fileAbsolutePath: {regex: "//content/blog//"}
+          internal: {contentFilePath: {regex: "//content/blog//"}}
         }
       ) {
         edges {
@@ -48,7 +48,6 @@ export default function Tags({activeTag}) {
             fields {
               slug
             }
-            timeToRead
             frontmatter {
               date(formatString: "dddd DD MMMM YYYY")
               title

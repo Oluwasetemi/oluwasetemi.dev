@@ -6,7 +6,7 @@ isPublished: true
 isDraft: false
 ---
 
-<!-- Migrating a react code base test from using `ts-jest` to babel-jest -->
+{/* <!-- Migrating a react code base test from using `ts-jest` to babel-jest --> */}
 
 Worked recently on a project where I have to use React with TypeScript and I had
 to write test with Jest, my first instinct was to look for "something" to
@@ -52,7 +52,7 @@ To create a project with vitejs, all you need to do is to copy and paste this in
 your command line or terminal utility. The name of the folder your app will be
 created in is `react-typescript-playground`.
 
-```shell{3,6,10}
+```sh{3,6,10}
 # react-typescript-playground will be the name of the project
 # I prefer yarn but if you like npm check how to use npm in place of yarn here
 # https://classic.yarnpkg.com/en/docs/migrating-from-npm/#toc-cli-commands-comparison
@@ -71,19 +71,19 @@ a project setup for you to play with. Change directory into the new create app
 folder and run the yarn command to install the project dependencies. For vitejs
 the dependencies is minimal.
 
-```shell{2-4}
+```sh{2-4}
 # cd into the folder/project
 cd react-typescript-playground
 # run npm install or yarn to install the dependencies
 # run the npm run dev or yarn dev to start the dev server
 ```
 
-You should have a <https://localhost:3000> up and running if you have followed
-the steps up until now but incase you don't have <https://locahost:3000> running
-in you browser automatically. Please attempt to open your browser and run the
-localhost url. If you have a simple react interface - Good, but if not, try to
-go through the steps again and carefully follow through till you have the
-desired result if not contact me :).
+You should have a &lt;https://localhost:3000&gt; up and running if you have
+followed the steps up until now but incase you don't have
+&lt;https://locahost:3000&gt; running in you browser automatically. Please
+attempt to open your browser and run the localhost url. If you have a simple
+react interface - Good, but if not, try to go through the steps again and
+carefully follow through till you have the desired result if not contact me :).
 
 ![Default Vite App](https://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
 
@@ -105,7 +105,7 @@ understands. We need to install
 jest to understand our css module file - `app.css` file and we can mock out the
 files (svg and others) we use in our great counter app.
 
-```shell
+```sh
 yarn add -D jest@24.x @types/jest @ts-jest@23.10.0 @testing-library/react @testing-library/js-dom
 ```
 
@@ -250,7 +250,7 @@ start migrating to setup with babel-jest.
 
 Here is the code to commit your changes and create a new branch.
 
-```shell
+```sh
 git add .
 git commit -m "writing test using `ts-jest`"
 git checkout -b "babel-jest"
@@ -267,7 +267,7 @@ frontend app you can plan to write one. it increases your confidence.
 
 - install the necessary babel packages
 
-```shell{1}
+```sh{1}
 yarn add -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-jest
 # add the @babel/plugin-transform-runtime to avoid the runtime error.
 yarn add -D @babel/plugin-transform-runtime

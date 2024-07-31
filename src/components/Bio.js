@@ -1,5 +1,5 @@
-import profilePic from 'assets/images/profile-pic.jpg'
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import profilePic from '../assets/images/profile-pic.jpg'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -70,7 +70,7 @@ function Bio({footer}) {
           {siteMetadata?.title},
         </strong>{' '}
         A FullStack Developer (Reactjs, Nodejs, Typescript), currently lives in
-        Osogbo, Osun State Nigeria with my lovely and priceless Wife{' '}
+        Kingston, Jamaica with my lovely Wife{' '}
         <a
           className="link"
           href="https://twitter.com/BeagloOfficial"
@@ -79,7 +79,7 @@ function Bio({footer}) {
         >
           Temidayo
         </a>{' '}
-        .🎈
+        and beautiful daughter Esther .🎈
         <br />
         <a
           className="link"

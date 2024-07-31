@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-disabled-tests */
-import { render, screen } from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import * as React from 'react'
 import Subscribe from '../subscribe'
 

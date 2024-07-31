@@ -1,22 +1,24 @@
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import {graphql, useStaticQuery} from 'gatsby'
 import 'normalize.css'
 import * as React from 'react'
-import ReactTooltip from 'react-tooltip'
+import {Tooltip as ReactTooltip} from 'react-tooltip'
 import styled from 'styled-components'
-import GlobalStyles from 'styles/GlobalStyles'
-import Typography from 'styles/Typography'
+import GlobalStyles from '../styles/GlobalStyles'
+import Typography from '../styles/Typography'
 import Footer from './Footer'
 import Nav from './Nav'
 
 const SiteBorderStyles = styled.div`
   max-width: 1000px;
   margin: 0 auto 3em auto;
-  /* margin-top: clamp(2em, 8vw, 2em); */
-  /* padding: 5px; */
-  /* padding: clamp(5px, 1vw, 15px); */
-  /* background-size: 1500px; */
-  /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044); */
-  /* border: 5px solid white; */
+  ${
+    '' /* margin-top: clamp(2em, 8vw, 2em);
+  padding: 5px;
+  padding: clamp(5px, 1vw, 15px);
+  background-size: 1500px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044);
+  border: 5px solid white; */
+  }
 
   @media (max-width: 1100px) {
     margin-left: 1.5rem;
@@ -40,7 +42,7 @@ function Layout({children}) {
       <GlobalStyles />
       <Typography />
       <ReactTooltip place="top" type="dark" effect="float" />
-      <div className="info">
+      {/* <div className="info">
         <b>
           A new blog post just dropped{' '}
           <Link to="/blog/developer-experience-with-command-line-interface-cli-tools/">
@@ -50,7 +52,7 @@ function Layout({children}) {
             Click here to read it.
           </Link>{' '}
         </b>
-      </div>
+      </div> */}
       <SiteBorderStyles>
         <>
           <Nav title={site.siteMetadata?.title} />

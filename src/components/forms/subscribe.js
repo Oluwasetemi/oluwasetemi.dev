@@ -1,13 +1,11 @@
 import * as React from 'react'
 import {Formik, Field, Form, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
-import {css} from '@emotion/core'
 import theme from '../../../config/theme'
-import styled from '@emotion/styled'
-import {rhythm} from '../../lib/typography'
+import styled from 'styled-components'
 import {bpMaxSM} from '../../lib/breakpoints'
-import Message from '../confirm-message/message'
-import {PleaseConfirmIllustration} from '../confirm-message/illustrations'
+// import Message from '../confirm-message/message'
+// import {PleaseConfirmIllustration} from '../confirm-message/illustrations'
 
 const SubscribeSchema = Yup.object().shape({
   email_address: Yup.string()
@@ -16,24 +14,24 @@ const SubscribeSchema = Yup.object().shape({
   first_name: Yup.string(),
 })
 
-function PostSubmissionMessage() {
-  return (
-    <div
-      css={css`
-        h2 {
-          color: white !important;
-        }
-      `}
-    >
-      <Message
-        illustration={PleaseConfirmIllustration}
-        title="Great, one last thing..."
-        body="I just sent you an email with the confirmation link. 
-          **Please check your inbox!**"
-      />
-    </div>
-  )
-}
+// const PostSubmissionMessageStyles = styled.div`
+//   h2 {
+//     color: white !important;
+//   }
+// `
+
+// function PostSubmissionMessage() {
+//   return (
+//     <PostSubmissionMessageStyles>
+//       <Message
+//         illustration={PleaseConfirmIllustration}
+//         title="Great, one last thing..."
+//         body="I just sent you an email with the confirmation link.
+//           **Please check your inbox!**"
+//       />
+//     </PostSubmissionMessageStyles>
+//   )
+// }
 
 const SubscribeFormWrapper = styled.div({
   color: 'white',
@@ -45,7 +43,7 @@ const SubscribeFormWrapper = styled.div({
   borderRadius: '5px',
 })
 
-const formCss = css`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -79,11 +77,39 @@ const formCss = css`
     font-size: 16px;
   }
 `
-const StyledForm = styled.form`
-  ${formCss}
-`
 const StyledFormikForm = styled(Form)`
-  ${formCss}
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  label {
+    margin: 10px 0;
+  }
+  .field-error {
+    display: block;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 80%;
+  }
+  input,
+  label {
+    width: 100%;
+    font-size: 16px;
+  }
+  ${bpMaxSM} {
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    label,
+    input {
+      margin: 5px 0 0 0 !important;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  button {
+    margin-top: 20px;
+    font-size: 16px;
+  }
 `
 
 export function TinyLetterSubscribe() {
@@ -103,11 +129,11 @@ export function TinyLetterSubscribe() {
         }}
       >
         <h3
-          css={css`
-            margin-bottom: ${rhythm(1)};
-            margin-top: 0;
-            color: white;
-          `}
+          style={{
+            marginBottom: 10,
+            marginTop: '0',
+            color: 'white',
+          }}
         >
           Join the Writing Newsletter
         </h3>
@@ -183,7 +209,7 @@ function Subscribe({style, tags = [], header = 'Join the Newsletter'}) {
   })
 
   const errorMessage = error ? 'Something went wrong!' : null
-  const submitted = Boolean(response)
+  // const submitted = Boolean(response)
 
   const successful = response && response.status === 'success'
 
@@ -191,11 +217,11 @@ function Subscribe({style, tags = [], header = 'Join the Newsletter'}) {
     <SubscribeFormWrapper style={style}>
       {!successful && (
         <h3
-          css={css`
-            margin-bottom: ${rhythm(1)};
-            margin-top: 0;
-            color: white;
-          `}
+          style={{
+            marginBottom: 10,
+            marginTop: 0,
+            color: 'white',
+          }}
         >
           {header}
         </h3>
@@ -215,11 +241,11 @@ function Subscribe({style, tags = [], header = 'Join the Newsletter'}) {
             <StyledFormikForm>
               <label htmlFor="first_name">
                 <div
-                  css={css`
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                  `}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
                 >
                   First Name
                   <ErrorMessage
@@ -238,11 +264,11 @@ function Subscribe({style, tags = [], header = 'Join the Newsletter'}) {
               />
               <label htmlFor="email">
                 <div
-                  css={css`
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                  `}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
                 >
                   Email
                   <ErrorMessage
@@ -267,7 +293,7 @@ function Subscribe({style, tags = [], header = 'Join the Newsletter'}) {
           )}
         </Formik>
       )}
-      {submitted && !pending && <PostSubmissionMessage response={response} />}
+      {/* {submitted && !pending && <PostSubmissionMessage response={response} />} */}
       {errorMessage && <div>{errorMessage}</div>}
     </SubscribeFormWrapper>
   )

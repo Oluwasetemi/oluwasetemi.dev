@@ -5,10 +5,13 @@ import styled from 'styled-components'
 const PortfolioCardStyles = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    display: block;
+  }
   .card-image a {
     img {
       max-width: ${props => {
-        return props.size === 'small' ? '350px' : '500px'
+        return props.size === 'small' ? '450px' : '500px'
       }};
       min-height: 100%;
       &:hover {
@@ -84,7 +87,7 @@ function PortfolioCard({post, size}) {
         </a>
         <div className="tech">
           {onePortfolio &&
-            onePortfolio.technology.map((technology, index) => (
+            onePortfolio.technology?.map((technology, index) => (
               <span key={`${technology}-${index}`} className="mark tilt">
                 {technology}
               </span>

@@ -1,7 +1,7 @@
-import Bio from 'components/Bio'
-import Img from 'components/Img'
-import SEO from 'components/seo'
-import { graphql, Link } from 'gatsby'
+import Bio from '../components/Bio'
+import Img from '../components/Img'
+import SEO from '../components/seo'
+import {graphql, Link} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -13,7 +13,6 @@ function AboutPage({data}) {
   const {setemi} = data
   return (
     <AboutPageStyles>
-      <SEO title="About Me" location />
       <Bio footer />
       <h2>
         About Me{' '}
@@ -79,13 +78,12 @@ function AboutPage({data}) {
 
       <h3>More on Family</h3>
       <p>
-        I am the second of 6 children out of which Adeola and Temi are my step
-        siblings and the first male in the lineage. Both parent are late
-        (Blessed memory), Mum died first year in university and Dad died while I
-        was serving(as a graduate in nigeria it is mandatory to serve the nation
-        for a year which involves paramilitary training and other community
-        services) Nigeria (country of birth) in Benue State (Food basket of the
-        nation), Nigeria in 2017.{' '}
+        I am the second of 6 children and the first male in the lineage. Both
+        parent are late (Blessed memory), Mum died first year in university and
+        Dad died while I was serving(as a graduate in nigeria it is mandatory to
+        serve the nation for a year which involves paramilitary training and
+        other community services) Nigeria (country of birth) in Benue State
+        (Food basket of the nation), Nigeria in 2017.{' '}
       </p>
 
       <p>
@@ -161,3 +159,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export const Head = () => <SEO title="About Me" location />

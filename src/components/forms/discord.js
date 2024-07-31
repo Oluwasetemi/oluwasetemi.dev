@@ -1,15 +1,13 @@
 import * as React from 'react'
 import {Formik, Field, Form, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
-import {css} from '@emotion/core'
 import {useAsync} from 'lib/use-async'
 import {client} from 'lib/api-client'
 import theme from '../../../config/theme'
-import styled from '@emotion/styled'
-import {rhythm} from '../../lib/typography'
+import styled from 'styled-components'
 import {bpMaxSM} from '../../lib/breakpoints'
-import Message from '../confirm-message/message'
-import {PleaseConfirmIllustration} from '../confirm-message/illustrations'
+// import Message from '../confirm-message/message'
+// import {PleaseConfirmIllustration} from '../confirm-message/illustrations'
 
 const SubscribeSchema = Yup.object().shape({
   email_address: Yup.string()
@@ -19,27 +17,27 @@ const SubscribeSchema = Yup.object().shape({
   acceptedCoC: Yup.bool().oneOf([true], 'Required'),
 })
 
-function PostSubmissionMessage({convertKitResponse}) {
-  return (
-    <div
-      css={css`
-        h2 {
-          color: white !important;
-        }
-      `}
-    >
-      <Message
-        illustration={PleaseConfirmIllustration}
-        title="Great, one last thing..."
-        body={
-          convertKitResponse.status === 'quarantined'
-            ? `[Please click here](${convertKitResponse.url}) to verify you are a human.`
-            : 'I just sent you an email with the confirmation link. **Please check your inbox!**'
-        }
-      />
-    </div>
-  )
-}
+// const PostSubmissionMessageStyles = styled.div`
+//   h2 {
+//     color: white !important;
+//   }
+// `
+
+// function PostSubmissionMessage({convertKitResponse}) {
+//   return (
+//     <PostSubmissionMessageStyles>
+//       <Message
+//         illustration={PleaseConfirmIllustration}
+//         title="Great, one last thing..."
+//         body={
+//           convertKitResponse.status === 'quarantined'
+//             ? `[Please click here](${convertKitResponse.url}) to verify you are a human.`
+//             : 'I just sent you an email with the confirmation link. **Please check your inbox!**'
+//         }
+//       />
+//     </PostSubmissionMessageStyles>
+//   )
+// }
 
 const SubscribeFormWrapper = styled.div({
   color: 'white',
@@ -52,7 +50,7 @@ const SubscribeFormWrapper = styled.div({
   borderRadius: '5px',
 })
 
-const formCss = css`
+const StyledFormikForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -87,13 +85,9 @@ const formCss = css`
   }
 `
 
-const StyledFormikForm = styled(Form)`
-  ${formCss}
-`
-
 function Subscribe({style}) {
-  const {run, data, isLoading, error, isError, isSuccess} = useAsync()
-  const [convertKitResponse] = data ?? []
+  const {run, isLoading, error, isError, isSuccess} = useAsync()
+  // const [convertKitResponse] = data ?? []
 
   function handleSubmit(values) {
     run(
@@ -107,11 +101,11 @@ function Subscribe({style}) {
   }
 
   const errorMessage = isError ? (
-    <div css={{marginTop: 10}}>
+    <div style={{marginTop: 10}}>
       <div>
         Something went wrong! Try again, or hit me up on Twitter @kentcdodds
       </div>
-      <div css={{fontFamily: 'monospace', fontWeight: 'bold', marginTop: 5}}>
+      <div style={{fontFamily: 'monospace', fontWeight: 'bold', marginTop: 5}}>
         {error.message}
       </div>
     </div>
@@ -121,11 +115,11 @@ function Subscribe({style}) {
     <SubscribeFormWrapper style={style}>
       {isSuccess ? null : (
         <h3
-          css={css`
-            margin-bottom: ${rhythm(1)};
-            margin-top: 0;
-            color: white;
-          `}
+          style={{
+            marginBottom: 10,
+            marginTop: 0,
+            color: 'white',
+          }}
         >
           Join the KCD Discord Community
         </h3>
@@ -145,11 +139,11 @@ function Subscribe({style}) {
             <StyledFormikForm>
               <label htmlFor="first_name">
                 <div
-                  css={css`
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                  `}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
                 >
                   First Name
                   <ErrorMessage
@@ -168,11 +162,11 @@ function Subscribe({style}) {
               />
               <label htmlFor="email">
                 <div
-                  css={css`
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                  `}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
                 >
                   Email
                   <ErrorMessage
@@ -190,7 +184,7 @@ function Subscribe({style}) {
                 type="email"
               />
               <div
-                css={{
+                style={{
                   display: 'flex',
                   alignItems: 'center',
                   width: '100%',
@@ -205,12 +199,12 @@ function Subscribe({style}) {
                 />
                 <label htmlFor="acceptedCoC">
                   <div
-                    css={css`
-                      margin-left: 10px;
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: flex-end;
-                    `}
+                    style={{
+                      marginLeft: '10px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-end',
+                    }}
                   >
                     <span>
                       Will you follow the{' '}
@@ -231,9 +225,11 @@ function Subscribe({style}) {
           )}
         </Formik>
       )}
-      {isSuccess ? (
-        <PostSubmissionMessage convertKitResponse={convertKitResponse} />
-      ) : null}
+      {isSuccess
+        ? {
+            /* <PostSubmissionMessage convertKitResponse={convertKitResponse} /> */
+          }
+        : null}
       {isError ? <div>{errorMessage}</div> : null}
     </SubscribeFormWrapper>
   )

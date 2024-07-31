@@ -1,6 +1,6 @@
-import {css} from '@emotion/core'
+import {css} from 'styled-components'
 import theme from '../../config/theme'
-import typography, {fonts} from '../lib/typography'
+// import typography, {fonts} from '../lib/typography'
 
 const reset = css`
   form {
@@ -10,7 +10,7 @@ const reset = css`
   ol {
     list-style-position: inside;
     margin-left: 0;
-    font-size: ${typography.baseFontSize};
+    ${'' /* font-size: ${typography.baseFontSize}; */}
   }
   *,
   *:before,
@@ -19,7 +19,7 @@ const reset = css`
   }
   html,
   body {
-    font-family: ${fonts.regular}, sans-serif;
+    ${'' /* font-family: ${fonts.regular}, sans-serif; */}
     font-style: normal;
     padding: 0;
     margin: 0;

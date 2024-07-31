@@ -1,9 +1,9 @@
 /* eslint-disable react/no-danger */
-import Bio from 'components/Bio'
-import OnePostSummary from 'components/OnePostSummary'
-import SEO from 'components/seo'
-import Tags from 'components/Tags'
-import { graphql } from 'gatsby'
+import Bio from '../components/Bio'
+import OnePostSummary from '../components/OnePostSummary'
+import SEO from '../components/seo'
+import Tags from '../components/Tags'
+import {graphql} from 'gatsby'
 import React from 'react'
 
 function TagsPage({data: {allMdx}, pageContext}) {
@@ -11,16 +11,8 @@ function TagsPage({data: {allMdx}, pageContext}) {
 
   return (
     <>
-      <SEO
-        title={
-          pageContext.tag
-            ? `Blog Post with ${pageContext.tag} tag`
-            : 'All Blog Post'
-        }
-        location
-      />
-      <Bio footer />
-      <Tags activeTag={pageContext.tag} />
+      <Bio footer={true} />
+      <Tags />
       {posts.map(({node}) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
@@ -36,10 +28,10 @@ export default TagsPage
 export const pageQuery = graphql`
   query ($tagsRegex: String) {
     allMdx(
-      sort: {fields: [frontmatter___date], order: DESC}
+      sort: {frontmatter: {date: DESC}}
       filter: {
         frontmatter: {isPublished: {eq: true}, tags: {regex: $tagsRegex}}
-        fileAbsolutePath: {regex: "//content/blog//"}
+        internal: {contentFilePath: {regex: "//content/blog//"}}
       }
     ) {
       edges {
@@ -48,7 +40,6 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-          timeToRead
           frontmatter {
             date(formatString: "dddd DD MMMM YYYY")
             title
@@ -59,3 +50,16 @@ export const pageQuery = graphql`
     }
   }
 `
+export const Head = ({data, pageContext}) => {
+  const count = data?.allMdx?.edges?.length
+  const tag = pageContext?.tag
+  return (
+    <SEO
+      title={
+        tag
+          ? `${count} Blog Post with ${tag} tag${count > 1 ? 's' : ''}`
+          : 'All Blog Post'
+      }
+    />
+  )
+}

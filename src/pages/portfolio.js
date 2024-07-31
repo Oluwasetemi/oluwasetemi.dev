@@ -1,7 +1,7 @@
-import Bio from 'components/Bio'
-import PortfolioCard from 'components/PortfolioCard'
-import SEO from 'components/seo'
-import { graphql } from 'gatsby'
+import Bio from '../components/Bio'
+import PortfolioCard from '../components/PortfolioCard'
+import SEO from '../components/seo'
+import {graphql} from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -53,7 +53,6 @@ function PortfolioIndex({data: {allMdx}}) {
 
   return (
     <PortfolioStyles>
-      <SEO title="Portfolio" />
       <h1>Portfolio</h1>
 
       <p className="">
@@ -73,10 +72,10 @@ export default PortfolioIndex
 export const pageQuery = graphql`
   query {
     allMdx(
-      sort: {fields: [frontmatter___publishedDate], order: DESC}
+      sort: {frontmatter: {date: DESC}}
       filter: {
         frontmatter: {isPublished: {eq: true}}
-        fileAbsolutePath: {regex: "//content/portfolio//"}
+        internal: {contentFilePath: {regex: "//content/portfolio//"}}
       }
     ) {
       edges {
@@ -95,3 +94,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export const Head = () => <SEO title="Portfolio" />
