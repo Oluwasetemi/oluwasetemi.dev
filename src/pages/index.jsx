@@ -175,8 +175,8 @@ function Hero({site}) {
         I&apos;m <Typing text={name} />
       </h1>
       <p>
-        I&apos;m a <mark className="ibm-plex-mono-bold-italic">{jobTitle}</mark>
-        . I specialize in TypeScript, JavaScript, React, and Node.js. You can
+        I&apos;m a <mark className="ibm-plex-mono-regular-italic">{jobTitle}</mark>
+        . I specialize in building web applications with TypeScript, JavaScript, React, and Node.js. You can
         explore my projects on{' '}
         <a
           href={`https://github.com/${siteMetadata?.socials?.github}`}

@@ -55,6 +55,7 @@ function Logo({title}) {
   return (
     <LogoStyles>
       <Link
+        className='ibm-plex-mono-bold-italic'
         style={{
           boxShadow: 'none',
           textDecoration: 'none',
