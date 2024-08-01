@@ -6,7 +6,7 @@ import Tags from '../components/Tags'
 import {graphql} from 'gatsby'
 import React from 'react'
 
-function TagsPage({data: {allMdx}, pageContext}) {
+function TagsPage({data: {allMdx}}) {
   const posts = allMdx.edges
 
   return (
@@ -36,6 +36,7 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
+          timeToRead
           excerpt(pruneLength: 280)
           fields {
             slug

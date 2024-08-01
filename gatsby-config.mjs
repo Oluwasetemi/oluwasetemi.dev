@@ -32,7 +32,7 @@ const config = {
     titleAlt: 'The personal website of Ojo Oluwasetemi Stephen',
     author: 'Oluwasetemi Ojo Stephen',
     description:
-      "I’m a Fullstack Engineer at fluna.co and a Frontend Engineering Instructor at AltSchoolAfrica. I specialize in TypeScript, JavaScript, React, and Node.js. You can explore my projects on GitHub and Stackblitz. I have a passion for teaching and sharing insights about web development, helping others learn and grow in this field. Check out my writing for more tips and tutorials.",
+      "I’m a Fullstack Engineer at fluna.co and a Frontend Engineering Instructor at AltSchoolAfrica. I specialize in builting web application with TypeScript, JavaScript, React, and Node.js. You can explore my projects on GitHub and Stackblitz. I have a passion for teaching and sharing insights about web development, helping others learn and grow in this field. Check out my writing for more tips and tutorials.",
     siteUrl: process.env.ROOT_URL || 'https://oluwasetemi.dev/',
     siteLogo: 'static/favicon-32x32.png', // Used for SEO and manifest, path to your image you placed in the 'static' folder
     minibio: `
@@ -58,9 +58,16 @@ const config = {
     },
   },
   flags: {
-    DEV_SSR: false,
+    DEV_SSR: true,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -160,6 +167,7 @@ const config = {
           },
           'gatsby-remark-smartypants',
         ],
+
       },
     },
     `gatsby-plugin-sharp`,

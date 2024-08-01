@@ -95,7 +95,7 @@ function BlogPostTemplate({data, pageContext, children}) {
         </span>
 
         <span>{` • ${formatReadingTime(post.timeToRead)}`}</span>
-        {post && post.frontmatter && post.frontmatter.tags.length > 0 && (
+        {post && post?.frontmatter && post?.frontmatter?.tags?.length > 0 && (
           <span>
             •
             {post.frontmatter.tags.map(tag => (

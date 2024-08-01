@@ -127,7 +127,7 @@ const Typography = createGlobalStyle`
     display: inline;
     line-height: 1;
     border-radius: 5px;
-    font-family: "IBM Plex Mono", monospace,
+    font-family: "IBM Plex Mono", monospace;
   }
 
   .center {
