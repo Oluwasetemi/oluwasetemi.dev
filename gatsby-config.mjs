@@ -53,7 +53,7 @@ const config = {
       hackerrank: 'setemiojo',
       stackoverflow: '/users/4330745/oluwasetemi',
       stackblitz: '@oluwasetemi',
-      youtube: 'https://www.youtube.com/@setemiojo',
+      youtube: '@setemiojo',
       rss: 'https://oluwasetemi.dev/rss.xml',
     },
   },
