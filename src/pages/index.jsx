@@ -40,6 +40,13 @@ const TopProjectStyles = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
       rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   }
+
+  /* phones */
+  @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    h1 {
+      margin-top: 30rem;
+    }
+  }
 `
 
 const LatestPostStyles = styled.div`
@@ -175,9 +182,10 @@ function Hero({site}) {
         I&apos;m <Typing text={name} />
       </h1>
       <p>
-        I&apos;m a <mark className="ibm-plex-mono-regular-italic">{jobTitle}</mark>
-        . I specialize in building web applications with TypeScript, JavaScript, React, and Node.js. You can
-        explore my projects on{' '}
+        I&apos;m a{' '}
+        <mark className="ibm-plex-mono-regular-italic">{jobTitle}</mark>. I
+        specialize in building web applications with TypeScript, JavaScript,
+        React, and Node.js. You can explore my projects on{' '}
         <a
           href={`https://github.com/${siteMetadata?.socials?.github}`}
           target="_blank"

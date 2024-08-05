@@ -3,7 +3,7 @@ import axios from 'axios'
 import dotenv from 'dotenv'
 import fakeUa from 'fake-useragent'
 import fs from 'fs'
-import inquirer from 'inquirer'
+import prompts from 'prompts'
 import jsToYaml from 'json-to-pretty-yaml'
 import mkdirp from 'mkdirp'
 import { createRequire } from 'module'
@@ -14,9 +14,6 @@ import prettier from 'prettier'
 import tinify from 'tinify'
 import { fileURLToPath } from 'url'
 import util from 'util'
-
-
-
 
 // Get the root path to our project (Like `__dirname`).
 const root = dirname(fileURLToPath(import.meta.url));
@@ -42,19 +39,37 @@ const listify = a =>
     : null
 
 async function generateBlogPost() {
-  const {title, description, tags, isPublished} = await inquirer.prompt([
+
+  // create a prompt for blog post or youtube video post
+  const {postType} = await prompts([
     {
-      type: 'input',
+      type: 'select',
+      name: 'postType',
+      message: 'What type of post do you want to create?',
+      choices: [
+        {title: 'Blog Post', value: 'blog'},
+        {title: 'YouTube Video', value: 'youtube'},
+      ],
+    },
+  ])
+
+  console.log(postType)
+
+  // process.exit(0)
+
+  const {title, description, tags, isPublished} = await prompts([
+    {
+      type: 'text',
       name: 'title',
       message: 'Title',
     },
     {
-      type: 'input',
+      type: 'text',
       name: 'description',
       message: 'Description',
     },
     {
-      type: 'input',
+      type: 'text',
       name: 'tags',
       message: 'Tags (comma separated)',
     },
@@ -64,7 +79,7 @@ async function generateBlogPost() {
       message: 'Do you want to publish?',
     },
     // {
-    //   type: 'input',
+    //   type: 'text',
     //   name: 'keywords',
     //   message: 'Keywords (comma separated)',
     // },
@@ -74,7 +89,10 @@ async function generateBlogPost() {
   const destination = fromRoot('/content/blog', slug)
   mkdirp.sync(destination)
 
-  const bannerCredit = await getBannerPhoto(title, destination)
+  let bannerCredit = null
+  if (postType !== 'youtube') {
+    bannerCredit = await getBannerPhoto(title, destination)
+  }
 
   const yaml = jsToYaml.stringify(
     removeEmpty({
@@ -108,9 +126,9 @@ async function getBannerPhoto(title, destination) {
     wait: false,
   })
 
-  const {unsplashPhotoId} = await inquirer.prompt([
+  const {unsplashPhotoId} = await prompts([
     {
-      type: 'input',
+      type: 'text',
       name: 'unsplashPhotoId',
       message: `What's the Unsplash Photo ID for the banner for this post?`,
     },

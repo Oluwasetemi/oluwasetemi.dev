@@ -18,6 +18,11 @@ const PortfolioCardStyles = styled.div`
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
           rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
       }
+      /* phones */
+      @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+        max-width: 300px;
+        height: 100%;
+      }
     }
   }
   .card-details {
