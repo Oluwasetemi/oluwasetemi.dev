@@ -284,7 +284,8 @@ function getBlogFeed({ filePathRegex, blogUrl, ...overrides }) {
     serialize: ({ query: { allMdx } }) => {
       const stripSlash = slug => (slug.startsWith('/') ? slug.slice(1) : slug)
       return allMdx.edges.map(edge => {
-        const url = `${siteUrl}/${stripSlash(edge.node.fields.slug)}`
+        const url = `${siteUrl}/blog/${stripSlash(edge.node.fields.slug)}`
+        
 
         return {
           ...edge.node.frontmatter,
