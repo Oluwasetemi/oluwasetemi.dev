@@ -16,6 +16,9 @@ function Footer() {
             linkedIn
             hackerrank
             codesandbox
+            youtube
+            stackoverflow
+            stackblitz
           }
         }
       }
@@ -90,6 +93,30 @@ function Footer() {
         rel="noopener noreferrer"
       >
         codesandbox
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://stackoverflow.com/${siteMetadata?.socials?.stackoverflow}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        stackoverflow
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://www.youtube.com/${siteMetadata?.socials?.youtube}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        youtube
+      </a>
+      &bull;{' '}
+      <a
+        href={`https://stackblitz.com/${siteMetadata?.socials?.stackblitz}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        stackblitz
       </a>
     </footer>
   )
