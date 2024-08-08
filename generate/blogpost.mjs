@@ -53,10 +53,6 @@ async function generateBlogPost() {
     },
   ])
 
-  console.log(postType)
-
-  // process.exit(0)
-
   const {title, description, tags, isPublished} = await prompts([
     {
       type: 'text',
@@ -104,7 +100,7 @@ async function generateBlogPost() {
       // keywords: listify(keywords),
       isPublished,
       isDraft: !isPublished,
-      banner: './images/banner.jpg',
+      banner: postType !== 'youtube' && './images/banner.jpg',
       bannerCredit,
     }),
   )
@@ -119,7 +115,6 @@ async function generateBlogPost() {
 }
 
 async function getBannerPhoto(title, destination) {
-
   const imagesDestination = path.join(destination, 'images')
 
   await open(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
@@ -133,6 +128,7 @@ async function getBannerPhoto(title, destination) {
       message: `What's the Unsplash Photo ID for the banner for this post?`,
     },
   ])
+
   mkdirp.sync(imagesDestination)
 
   if (unsplashPhotoId) {
@@ -154,6 +150,7 @@ async function getBannerPhoto(title, destination) {
     const bannerCredit = await getPhotoCredit(unsplashPhotoId)
     return bannerCredit
   }
+
   return null
 }
 
