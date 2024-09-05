@@ -23,6 +23,8 @@
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
     "@react-spring/web": "^9.7.4",
+    "@sentry/gatsby": "^8.28.0",
+    "@sentry/webpack-plugin": "^2.22.4",
     "babel-plugin-styled-components": "^2.1.4",
     "deepmerge": "^4.3.1",
     "dotenv": "^16.4.5",
