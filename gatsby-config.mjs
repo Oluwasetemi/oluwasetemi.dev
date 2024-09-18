@@ -3,6 +3,7 @@ import path from 'path'
 import {fileURLToPath} from 'url'
 import dotenv from 'dotenv'
 
+
 dotenv.config({
   path: `.env`,
 })
@@ -217,6 +218,13 @@ const config = {
         icon: `src/assets/images/apple-touch-icon.png`,
       },
     },
+    {
+      resolve: "@sentry/gatsby",
+      options: {
+        org: "personal-dfp",
+        project: "oluwasetemidev",
+      }
+    },
     'gatsby-plugin-twitter',
     'gatsby-plugin-catch-links',
     `gatsby-plugin-offline`,
@@ -285,7 +293,7 @@ function getBlogFeed({ filePathRegex, blogUrl, ...overrides }) {
       const stripSlash = slug => (slug.startsWith('/') ? slug.slice(1) : slug)
       return allMdx.edges.map(edge => {
         const url = `${siteUrl}/blog/${stripSlash(edge.node.fields.slug)}`
-        
+
 
         return {
           ...edge.node.frontmatter,

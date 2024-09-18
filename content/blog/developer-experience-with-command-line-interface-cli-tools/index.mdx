@@ -18,106 +18,116 @@ bannerCredit:
   'Photo by [Gabriel Heinzer](https://unsplash.com/photos/4Mw7nkQDByk)'
 ---
 
-I think my job is about writing code, but that's not true. My job is actually
-typing and making each keystroke count. Trying to save keystrokes every time by
-using keyboard shortcuts or tools that make the work faster and better is a
-niche I find very and worthwhile researching about.
+My job is about writing code, but that's not true. My job is typing and making
+each keystroke count. Trying to save keystrokes every time by using keyboard
+shortcuts or tools that make the work faster and better is a niche I find very
+worthwhile researching.
 
 My aim with this article is to help you save keystrokes by adopting better
-tooling and also improving your productivity and developer experience with some
-command-line interface CLI tools. All because I care to help the developer save
-more time by automating some repetitive tasks in their everyday tasks.
+tooling and also improve your productivity and developer experience with some
+command-line interface CLI tools. I care about helping developers save more time
+by automating repetitive tasks in their everyday tasks.
 
-Embracing the new wave of CLI tools will give you great improvement in the
-amount of time you spend clicking around to make things happen.
+Embracing the new wave of CLI tools will significantly reduce the time you spend
+clicking around to make things happen.
 
 ## Prerequisites
 
-Things you need to know to understand this article includes:
+Things you need to know to understand this article include:
 
-- Familiarity with terminals from the Powershell, CMD and gitbash for windows
-  operating system to Bash, FISH, zsh, iterm on Mac and Linux respectively.
+- Familiarity with Powershell, CMD, and git bash terminals for Windows operating
+  systems, as well as Bash, FISH, zsh, and items on Mac and Linux, respectively.
 - Access to CLI environments.
 
 ## Scope
 
 I will show you how I use CLI tools to improve my developer experience (DX) when
-creating a new GitHub repository, to uploading images to Cloudinary, to reducing
-the size of image files with tinify API, to doing all my netlify related tasks.
+creating a new GitHub repository, uploading images to Cloudinary, reducing the
+size of image files with Tinify API, and doing all my Netlify-related tasks.
 
-At the end of this post you will be able:
+At the end of this post, you will be able to:
 
-- to save more time by automating repeated tasks.
-- making life easy for you by avoiding long and boring styles of handling
+- Save time by automating repeated tasks.
+- Make life easy for you by avoiding lengthy and tedious styles of handling
   repetitive tasks.
-- bring more joy to your workflow as you do those repetitive tasks you go
-  through every now and then.
-
-![terminal user interface](./images/banner.jpg)
+- Bring more joy to your workflow as you do those repetitive tasks you go
+  through now and then.
 
 ## Introduction
 
-CLI is a new wave of change considering the amount of tools that get released
-every day in the programming ecosystem.
+CLI—Command Line Interface is a new wave of change, considering the number of
+tools released daily in the programming ecosystem. It's a prompt always
+black(dark) in the background, where you give the computer an instruction in
+code to do the normal tasks computers are capable of doing.
 
-Companies creating their own CLI manage the interaction with their service is
-gaining adoption lately. GitHub created hub and then gh. Netlify created
-netlify-CLI(ntl), Heroku has its own CLI's for managing its services. The node
-package manager has tools like npm, npx, yarn, pnpm to get the best out of their
-services. There is cloudinary CLI as well, which you can use to interact with
-Cloudinary related services.
+```sh
+osascript -e 'tell application "Google Chrome" to return URL of active tab of front window'
+```
 
-There is a whole range of starter files generators that runs on the CLI -
+Can you guess what that instruction will do to the computer for mac users only?
+
+It will display the URL of the active tab of your google Chrome.
+
+Companies creating their own CLI to manage interactions with their services are
+gaining adoption lately. GitHub created `hub` and then `gh`. Netlify created
+`netlify-cli`(`ntl`). Heroku has its CLI to operate its services. The node
+package manager has tools like npm, npx, yarn, and pnpm to get the most out of
+its services. There is also a Cloudinary CLI, which you can use to interact with
+Cloudinary-related services.
+
+A wide range of starter file generators run on the CLI:
 [create-react-app](https://create-react-app.dev/docs/getting-started),
 [create-keystone-app](https://keystonejs.com/docs/walkthroughs/getting-started-with-create-keystone-app),
 [vue-cli](https://cli.vuejs.org/guide/),
-[vitejs starter](https://vitejs.dev/guide/) and a lot more.
+[vite starter,](https://vitejs.dev/guide/) and many more.
 
 ## Improvement In Service Delivery
 
-One thing that is common with all the tools I've listed above is that they did
-not start their business of service delivery with just CLI alone. They have
-built successful businesses on the web that many developers enjoy a lot. To
-reach more people and make life easy for them, they created these CLI tools
-which they believe will improve the Developer Experience (DX) of people using
-their service. Let us examine some of these tools one after the other.
+One common thing with all the tools I've listed above is that they did not start
+their service delivery business with CLI alone. They have built successful web
+businesses that many developers enjoy. To reach more people and make life easy
+for them, they created these CLI tools, which they believe will improve the
+Developer Experience (DX) of people using their service. Let us examine some of
+these tools one after the other.
 
 ## [gh - GitHub on Steriods](https://cli.github.com/)
 
-I wrote two articles about [hub](https://hub.github.com/) and how it provides an
-extremely fast way for me to access GitHub from my terminal. Check it out
-[here](https://www.oluwasetemi.dev/blog/git-with-hub-like-github/). `hub browse`
-command saves me about 2 to 5 seconds of navigating to a browser and inputting a
-GitHub URL and waiting for that URL to load. What does `hub browse` command do?
-It opens the remote URL of the project you're in the terminal.
-[For more on hub commands check out my post](https://www.oluwasetemi.dev/blog/git-with-hub-like-github-part-2/).
+I wrote two articles about [Hub](https://hub.github.com/) and how it provides an
+extremely fast way to access GitHub from my terminal. Check them out
+[here](https://www.oluwasetemi.dev/blog/git-with-hub-like-github/).
+`The hub browse` command saves me about 2 to 5 seconds of navigating to a
+browser, inputting a GitHub URL, and waiting for that URL to load. What does the
+`hub browse` command do? It opens the remote URL of the project you're in the
+terminal.
+[For more on hub commands, check out my post](https://www.oluwasetemi.dev/blog/git-with-hub-like-github-part-2/).
 
-Hub brings GitHub to your terminal by extending `git`. They call it an extension
-to the git commands you run. In the real sense `hub` was more of extending `git`
-giving you access to do more git and GitHub commands.
+Hub brings GitHub to your terminal by extending `Git`. They call it an extension
+to the git commands you run, but in the real sense, `Hub` was more of an
+extension of `git,` giving you access to more git and GitHub commands.
 
-After a while, a tool was announced by the GitHub team which they called
-[GitHub CLI](https://cli.github.com). Two of its selling preposition includes
+After a while, the GitHub team announced a tool called
+[GitHub CLI](https://cli.github.com). Two of its selling prepositions include
 `taking GitHub to the command line` and
 `👋 goodbye context switching, hello 👋 terminal`. Let us imagine a scenario
-together, John needs to create a GitHub repository for a new project he plans to
-share with his Manager at work the next day. He initializes a git repository and
-goes off to the browser to create a repository and then comes back to the
-terminal where he has been working to add the GitHub URL of the repository to
-the local git history as git remote. Now he can push the code to GitHub. How
-many minutes do you think John used to get a sharable GitHub URL containing his
-code? When at least 5 minutes I assume.
+together: John needs to create a GitHub repository for a new project he plans to
+share with his Manager at work the next day. He initializes a git repository,
+goes off to the browser to create a repository, and then returns to the terminal
+where he has been working on adding the GitHub URL of the repository to the
+local git history as git remote. Now, he can push the code to GitHub. How many
+minutes do you think John used to get a sharable GitHub URL containing his code?
+Well, at least 5 minutes, I assume.
 
 Going back to the beginning of John's story, instead of the context switching to
 a browser to create a repository, you can do all that and more with just a CLI
-command called `gh`. This command gives you access to all things GitHub
-including access to `gh api` itself. All the API endpoints both the rest version
-4 and the graphql API. That is a lot of power yet in little time with great
-developer experience. The `gh` command is among my top 10 most used CLI
-commands. Let me share some of the `gh` command i cannot do without.
+command called `gh`. This command gives you access to all things GitHub,
+including access to `gh api` itself. All the API endpoints, both the rest
+version 4 and the graphql API. That is a lot of power, yet in little time, with
+excellent developer experience. The `gh` command is among my top 10 most used
+CLI commands. Let me share some of the `gh` commands I cannot do without.
 
-```bash
-# install Github CLI today, right away.
+```sh
+# install Github CLI today right away.
+
 # https://cli.github.com/ and start saving time.
 
 gh repo create user/repo
@@ -135,13 +145,13 @@ What is [Netlify](https://www.netlify.com/)? It is a static site hosting
 powerhouse with lots of sweetness. A CI/CD from access to host directly from
 your GitHub account. Any push or pull request will rebuild your site instantly.
 They believe the future will be JAMstack on the edge with serverless functions
-to list a few. So imagine a CLI to access netlify services. I can go to my admin
+to list a few. So imagine a CLI to access Netlify services. I can go to my admin
 dashboard with just a command. I can even host a static or JAMstack website
-directly from my terminal using the netlify-cli or ntl for short.
+directly from my terminal using the netlify-cli or `ntl` for short.
 
 Here are some of the command line I run with netlify-cli.
 
-```bash
+```sh
 ntl open:admin
 
 ntl open:sites
@@ -158,90 +168,122 @@ ntl link
 ## [cld - Cloudinary On The Terminal](https://cloudinary.com/documentation/cloudinary_cli)
 
 A need to upload images happens to us all in this field, this CLI from
-Cloudinary is an important tool in the box of any developers with the ease of
-uploading images. You can perform Admin operations, the CLI gives me access to
-helper tools that make it possible to use the Cloudinary offering features like
+Cloudinary is a vital tool in the box of any developers with the ease of
+uploading photos. You can perform Admin operations, the CLI gives me access to
+helper tools that make it possible to use the Cloudinary, offering features like
 transformations and optimizations.
 
 I need to upload an image and get a URL copied to my clipboard.
 
-```bash
-cld uploader upload bejamas.png folder=personal use_filename=true | jq '.url' | pbcopy
-```
+`cld uploader upload bejamas.png folder=personal use_filename=true | jq '.url' | pbcopy`
 
-Showing few commands on how to set up cld on your computer.
+The command above is a shell command that uploads an image (bejamas.png) to a
+cloud storage service using the cld uploader, processes the response with jq,
+and then copies the resulting URL to the clipboard. Here’s a further breakdown
+of each part:
 
-```bash
-pip3 install cloudinary-cli
+`cld uploader upload bejamas.png folder=personal use_filename=true`: This
+command uploads the file `bejamas.png` to a folder named `personal` on the
+cloud. The option `use_filename=true` ensures that the original filename
+(bejamas.png) is preserved in the upload.
+
+`| jq '.url'`: After the upload, the JSON response from the cld uploader is
+piped into jq, a tool that processes JSON data. This command extracts the URL of
+the uploaded file by accessing the .url field in the JSON response.
+
+`| pbcopy`: Finally, the resulting URL is piped into pbcopy, a macOS command
+that copies the output (in this case, the URL) to the clipboard. Use `clip` is
+you are on Windows.
+
+It shows a few commands on how to set up CLD on your computer.
+
+```sh
+pip3 install Cloudinary-cli
+
 # requires python to be installed
 
 # set up your config with cloudinary secrets
+
 # windows
 set CLOUDINARY_URL=cloudinary://123456789012345:abcdefghijklmnopqrstuvwxyzA@cloud_name
+
 
 # mac or linux
 export CLOUDINARY_URL=cloudinary://123456789012345:abcdefghijklmnopqrstuvwxyzA@cloud_name
 
-cld config #show your config
-
+#show your config
+cld config
 
 cld search --help #search api
-cld uploader #upload api
-cld admin #admin operations
-cld --help #show a usage helper
-cld utils #show utils
 
+cld uploader #upload api
+
+cld admin #admin operations
+
+cld --help #show a usage helper
+
+cld utils #show utils
 ```
 
-In overall, Cloudinary CLI will offer a lot of developer experience benefit to
-anyone who loves Cloudinary services.
+Overall, Cloudinary CLI will offer many developer experience benefits to anyone
+who loves Cloudinary services.
 
 ## [Nodejs Package Managers](https://nodejs.org/en/download/package-manager/)
 
-Node Package Managers are tools used to manage different Nodejs versions
-installed on a local computer. I use a variant named nvm, nodejs version manager
-helps me to install and manage several versions of nodejs.
+Node Package Managers are tools for managing different Nodejs versions installed
+on a local computer. I use a variant named nvm. The Nodejs version manager helps
+me install and manage several versions of Nodejs.
 
-[For installation of nvm on your computer check this link](https://github.com/nvm-sh/nvm#installing-and-updating).
+[For installation of nvm on your computer, check this link](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-```bash
-$ nvm use 16
-Now using node v16.9.1 (npm v7.21.1)
-$ node -v
+```sh
+nvm use 16
+
+# Now using node v16.9.1 (npm v7.21.1)
+
+node -v
+
 v16.9.1
-$ nvm use 14
-Now using node v14.18.0 (npm v6.14.15)
-$ node -v
-v14.18.0
-$ nvm install 12
-Now using node v12.22.6 (npm v6.14.5)
-$ node -v
-v12.22.6
+
+nvm use 14
+
+# Now using node v14.18.0 (npm v6.14.15)
+
+node -v
+
+# v14.18.0
+
+nvm install 12
+
+# Now using node v12.22.6 (npm v6.14.5)
+
+node -v
+
+# v12.22.6
 ```
 
-The common use case I run into always is having globally installed packages that
-I need to carry along to a new version installed. The script below helps me to
-do this conveniently.
+The typical use case I run into is always having globally installed packages
+that I must carry to a new version installed. The script below helps me to do
+this conveniently.
 
-```bash
-# allow me to carry over my global npm package after any change of version
+```sh
+# allow me to carry over my global npm package after any change of the version
 
-nvm_use (){
+nvm_use() {
   NODE_NEW=$1
 
-  PREVIOUS_PACKAGES=$(npm ls -g --parseable --depth=0)
+  PREVIOUS_PACKAGES=$(npm ls --location=global --parseable --depth=0)
 
   nvm use ${NODE_NEW}
 
-  ALL_PACKAGES=$(npm ls -g --depth=0)
+  ALL_PACKAGES=$(npm ls --location=global --depth=0)
 
-  for PACKAGE in $(echo "$PREVIOUS_PACKAGES" | grep "/node_modules/[^npm]");
-  do
-          PACKAGE_NAME=${PACKAGE##*/}
-          PACKAGE_IN_CURRENT_VERSION=$(echo "$ALL_PACKAGES" | grep $PACKAGE_NAME)
-          if [ "$PACKAGE_IN_CURRENT_VERSION" = "" ]; then
-                  npm i -g $PACKAGE_NAME
-          fi
+  for PACKAGE in $(echo "$PREVIOUS_PACKAGES" | grep "/node_modules/[^npm]"); do
+    PACKAGE_NAME=${PACKAGE##*/}
+    PACKAGE_IN_CURRENT_VERSION=$(echo "$ALL_PACKAGES" | grep $PACKAGE_NAME)
+    if [ "$PACKAGE_IN_CURRENT_VERSION" = "" ]; then
+      npm i --location=global $PACKAGE_NAME
+    fi
   done
 }
 ```
@@ -252,107 +294,132 @@ zsh and git alias will make life easy for you as a developer because you can
 encapsulate recurring command line instructions you run repeatedly into shorter
 versions with an alias.
 
-I choose to alias git with g because it saves me 2 keystrokes in the end. 2
-keystrokes are saved from git aliasing with g multiplied by the number of times
-I run a git command on a daily basis. This type of Developer Experience doesn't
-get talked about a lot of time but it helps you save time on repeated commands.
+I choose to alias git with g because it saves me two keystrokes. The two
+keystrokes saved from git aliasing with g are multiplied by the number of times
+I run a git command daily. This type of Developer Experience doesn't get talked
+about much, but it helps you save time on repeated commands.
 
 To alias git with g:
 
-```bash
+```sh
 alias g='git'
+
 alias ga='git add'
+
 alias gaa='git add .'
 ```
 
-Instead of git, I can type g and it will behave like I used git. For file and
-folder manipulations try this.
+Instead of git, I can type g, which will behave like I used git. For file and
+folder manipulations, try this.
 
-```bash
+```sh
 alias ~='cd ~'
+
 alias .='cd ..'
+
 alias ..='cd ../..'
+
 alias ...='cd ../../..'
+
 alias ....='cd ../../../..'
-alias -- -='cd -'
+
+alias --='cd -'
+
 alias ..l="cd ../ && ll"
+
 alias cd..='cd ../'
+
 alias ll="ls -1a"
+
 alias la="ls -la"
 ```
 
 ## zsh functions
 
-We can take zsh alias further with functions. They abstract little processes in
-line with bash or zsh commands to callable functions.
+We can take the zsh alias further with functions. Functions are abstract little
+processes in line of bash or zsh commands.
 
-This helps me abstract git add, git commit and git push. It was taken from one
-of the open-source works of [Ahmad Awais](https://github.com/ahmadawais) called
+This helps me abstract git add, git commit, and git push. It was taken from
+Ahmad Awais's open-source work,
 [emoji-log](https://github.com/ahmadawais/Emoji-Log).
 
-```bash
+```sh
 # Git commit, Add all
+
 function gcaz() {
-    git add . && git commit -m "$*"
+  git add . && git commit \-m "$*"
 }
+
 # NEW.
+
 function gnew() {
-    gcaz "📦 NEW: $@"
+  gcaz "📦 NEW: $@"
 }
 ```
 
 ## Searching Through Your Terminal History
 
-Searching through your command line history will help you reach commands you
-have used before but cannot remember. It saves you the effort of googling. You
-may increase the history size to increase the number of commands that can be
-saved.
+Searching your command line history will help you reach commands you have used
+before but cannot remember. It saves you the effort of googling. You may
+increase the history size to increase the number of commands that can be saved.
 
-```bash
+```sh
 # history size
+
 HISTSIZE=7000
+
 HISTFILESIZE=14000
 
 SAVEHIST=10000
-setopt EXTENDED_HISTORY
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+
+setopt EXTENDED\_HISTORY
+
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh\_history
+
 # share history across multiple zsh sessions
-setopt SHARE_HISTORY
+
+setopt SHARE\_HISTORY
+
 # append to history
-setopt APPEND_HISTORY
+
+setopt APPEND\_HISTORY
+
 # adds commands as they are typed, not at shell exit
-setopt INC_APPEND_HISTORY
+
+setopt INC\_APPEND\_HISTORY
+
 # do not store duplications
-setopt HIST_IGNORE_DUPS
+
+setopt HIST\_IGNORE\_DUPS
 ```
 
 This function will return a list of frequently used cli commands.
 
-```bash
 # List the 10 most frequently used command
-function historyTop () { history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 }
+
+```sh!
+function historyTop () { history | awk '{print $2}' | sort | uniq \-c | sort \-rn | head \-10 }
 
 hg () {
-    grep "$1" ~/.zsh_history
+  grep "$1" \~/.zsh\_history
 }
-alias h='HISTTIMEFORMAT= history 10 | cut -c8-'
+
+alias h='HISTTIMEFORMAT= history 10 | cut \-c8-'
 ```
 
 ## Learn How to Create CLI Apps
 
-This deserves a worthy mention in terms of the tools creation process and
-automating workflow with command-line apps. You can become a command-line
-developer as well - I mean one who is focused on creating tools that people use
-on the command line.
-[Check out Node Cli course by Ahmad Awais](https://nodecli.com/) for learning.
+This deserves a mention in terms of the tool creation process and automating
+workflow with command-line apps. You can become a command-line developer as
+well—I mean one who is focused on creating tools that people use on the command
+line. Check out Ahmad Awais's Node Cli course for learning.
 [He created a tool to help automate the creation of CLI apps.](https://github.com/ahmadawais/create-node-cli)
 
 ## Conclusion
 
 Improving Developer Experience with tools is becoming a fast domain, I just
-showed you some of the tools I use regularly to improve my dev experience and
+showed you some of the tools I use regularly to enhance my dev experience and
 save time (saving keystrokes).
 
-If you have some tools that you use regularly that has improved your developer
-experience kindly share them with me with comments or social media.th comments
-or social media.
+If you have some tools that you use regularly that have improved your developer
+experience, kindly share them with me in the comments or on social media.
