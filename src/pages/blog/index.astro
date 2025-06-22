@@ -1,0 +1,135 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog'))
+	.filter(post => post.data.isPublished !== false && post.data.isDraft !== true)
+	.sort((a, b) => {
+		const dateA = a.data.pubDate || a.data.date;
+		const dateB = b.data.pubDate || b.data.date;
+		if (!dateA || !dateB) return 0;
+		return dateB.valueOf() - dateA.valueOf();
+	});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+			.page-header {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			.page-header h1 {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+				background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+			}
+			ul {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				background: white;
+				border-radius: 12px;
+				padding: 1.5rem;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				border: 1px solid #e5e7eb;
+			}
+			ul li:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			}
+			ul li a {
+				display: block;
+				text-decoration: none;
+			}
+			.title {
+				margin: 0 0 0.5rem 0;
+				color: #333;
+				line-height: 1.3;
+				font-size: 1.25rem;
+			}
+			.date {
+				margin: 0 0 1rem 0;
+				color: #666;
+				font-size: 0.9rem;
+			}
+			.tags {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-top: 1rem;
+			}
+			.tag {
+				background: #f3f4f6;
+				color: #374151;
+				padding: 0.25rem 0.5rem;
+				border-radius: 4px;
+				font-size: 0.8rem;
+			}
+			ul li a:hover .title {
+				color: #667eea;
+			}
+			@media (max-width: 768px) {
+				ul {
+					grid-template-columns: 1fr;
+				}
+				.page-header h1 {
+					font-size: 2rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1>My Blog</h1>
+				<p>Thoughts on web development, technology, and learning</p>
+			</div>
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.slug}/`}>
+									<h4 class="title">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate || post.data.date} />
+									</p>
+									{post.data.tags && (
+										<div class="tags">
+											{post.data.tags.map((tag) => (
+												<span class="tag">{tag}</span>
+											))}
+										</div>
+									)}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
