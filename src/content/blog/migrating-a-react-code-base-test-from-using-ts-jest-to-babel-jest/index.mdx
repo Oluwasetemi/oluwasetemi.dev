@@ -1,7 +1,7 @@
 ---
 title: Migrating a react code base test from using ts-jest to babel-jest
-date: '2021-07-26T20:01:05.977Z'
-tags: ['test', 'react', 'typescript']
+date: "2021-07-26T20:01:05.977Z"
+tags: ["test", "react", "typescript"]
 isPublished: true
 isDraft: false
 ---
@@ -132,21 +132,21 @@ I will show the support for the 2 options with code samples.
 // add this to a jest.config.js file
 module.exports = {
   // a set of setting that give typescript support to jest
-  preset: 'ts-jest',
+  preset: "ts-jest",
 
   // transform ts|tsx to a jest understandable format
   transform: {
-    '.ts|tsx': 'ts-jest',
+    ".ts|tsx": "ts-jest",
   },
   // mocking and transforming of css modules and other files
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/src/__mocks__/fileMock.js',
-    '\\.(css|less)$': 'identity-obj-proxy',
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/src/__mocks__/fileMock.js",
+    "\\.(css|less)$": "identity-obj-proxy",
   },
   // important to expose all the jest-dom api globally in each test
-  setupFilesAfterEnv: ['@testing-library/jest-dom/'],
-}
+  setupFilesAfterEnv: ["@testing-library/jest-dom/"],
+};
 ```
 
 `package.json` does not support comments. Comments were written for clearer
@@ -279,12 +279,12 @@ yarn add -D @babel/plugin-transform-runtime
 ```js
 module.exports = {
   presets: [
-    '@babel/preset-env',
-    '@babel/preset-typescript',
-    '@babel/preset-react',
+    "@babel/preset-env",
+    "@babel/preset-typescript",
+    "@babel/preset-react",
   ],
-  plugins: ['@babel/plugin-transform-runtime'],
-}
+  plugins: ["@babel/plugin-transform-runtime"],
+};
 ```
 
 <blockquote>

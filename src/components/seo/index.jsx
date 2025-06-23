@@ -1,5 +1,4 @@
-import React from 'react'
-import {useSiteMetadata} from '../../hooks/use-site-metadata'
+import { useSiteMetadata } from "../../hooks/use-site-metadata";
 
 export default function SEO({
   children,
@@ -9,20 +8,20 @@ export default function SEO({
   image,
   pathname,
 }) {
-  const siteMetadata = useSiteMetadata()
+  const siteMetadata = useSiteMetadata();
   const {
     title: defaultTitle,
     description: defaultDescription,
     siteUrl,
-  } = siteMetadata
+  } = siteMetadata;
 
   const seo = {
     ...siteMetadata,
-    title: `${title ? `${title} |` : ''} ${defaultTitle}`,
+    title: `${title ? `${title} |` : ""} ${defaultTitle}`,
     description: description || defaultDescription,
     // image: `${siteUrl}${image}`,
     url: `${siteUrl}${pathname || ``}`,
-  }
+  };
 
   return (
     <>
@@ -69,19 +68,18 @@ export default function SEO({
       {location && (
         <meta
           property="og:url"
-          content={typeof window !== 'undefined' && window.location.href}
+          content={typeof window !== "undefined" && window.location.href}
         />
       )}
       <meta
         property="og:image"
         content={
-          image || 'https://avatars0.githubusercontent.com/u/10030028?v=3'
+          image || "https://avatars0.githubusercontent.com/u/10030028?v=3"
         }
       />
       <meta property="og:title" content={seo.title} key="ogtitle" />
       <meta
-        // eslint-disable-next-line react/no-unknown-property
-        propery="og:site_name"
+        property="og:site_name"
         content={seo.title}
         key="ogsitename"
       />
@@ -95,10 +93,10 @@ export default function SEO({
       <meta
         name="twitter:image:src"
         content={
-          image || 'https://avatars0.githubusercontent.com/u/10030028?v=3'
+          image || "https://avatars0.githubusercontent.com/u/10030028?v=3"
         }
       />
       {children}
     </>
-  )
+  );
 }

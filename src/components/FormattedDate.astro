@@ -1,6 +1,6 @@
 ---
 interface Props {
-	date: Date | string | undefined;
+  date: Date | string | undefined;
 }
 
 const { date } = Astro.props;
@@ -9,16 +9,16 @@ const { date } = Astro.props;
 const dateObj = date ? (date instanceof Date ? date : new Date(date)) : null;
 ---
 
-{dateObj ? (
-	<time datetime={dateObj.toISOString()}>
-		{
-			dateObj.toLocaleDateString('en-us', {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric',
-			})
-		}
-	</time>
-) : (
-	<time>Date not available</time>
-)}
+{
+  dateObj ? (
+    <time datetime={dateObj.toISOString()}>
+      {dateObj.toLocaleDateString("en-us", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })}
+    </time>
+  ) : (
+    <time>Date not available</time>
+  )
+}

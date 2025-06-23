@@ -1,5 +1,6 @@
-import {css} from 'styled-components'
-import theme from '../../config/theme'
+import { css } from "styled-components";
+
+import theme from "../../config/theme";
 // import typography, {fonts} from '../lib/typography'
 
 const reset = css`
@@ -10,7 +11,7 @@ const reset = css`
   ol {
     list-style-position: inside;
     margin-left: 0;
-    ${'' /* font-size: ${typography.baseFontSize}; */}
+    ${"" /* font-size: ${typography.baseFontSize}; */}
   }
   *,
   *:before,
@@ -19,7 +20,7 @@ const reset = css`
   }
   html,
   body {
-    ${'' /* font-family: ${fonts.regular}, sans-serif; */}
+    ${"" /* font-family: ${fonts.regular}, sans-serif; */}
     font-style: normal;
     padding: 0;
     margin: 0;
@@ -72,7 +73,7 @@ const reset = css`
       line-height: 1.3 !important;
     }
   }
-  [tabindex='-1']:focus {
+  [tabindex="-1"]:focus {
     outline: none !important;
   }
   details {
@@ -86,8 +87,9 @@ const reset = css`
   }
   pre,
   code {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-      'Courier New', monospace;
+    font-family:
+      SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+      monospace;
   }
   figure {
     margin: 0 0 1rem 0;
@@ -95,13 +97,13 @@ const reset = css`
   img {
     vertical-align: middle;
   }
-  [role='button'] {
+  [role="button"] {
     cursor: pointer;
   }
   a,
   area,
   button,
-  [role='button'],
+  [role="button"],
   input,
   label,
   select,
@@ -137,10 +139,10 @@ const reset = css`
   textarea {
     line-height: inherit;
   }
-  input[type='date'],
-  input[type='time'],
-  input[type='datetime-local'],
-  input[type='month'] {
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"] {
     -webkit-appearance: listbox;
   }
   textarea {
@@ -160,7 +162,7 @@ const reset = css`
     font-size: 1.5rem;
     line-height: inherit;
   }
-  input[type='search'] {
+  input[type="search"] {
     -webkit-appearance: none;
   }
   output {
@@ -173,6 +175,6 @@ const reset = css`
   [hidden] {
     display: none !important;
   }
-`
+`;
 
-export default reset
+export default reset;

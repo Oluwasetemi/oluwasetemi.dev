@@ -1,135 +1,139 @@
-import slugify from '@sindresorhus/slugify'
-import axios from 'axios'
-import dotenv from 'dotenv'
-import fakeUa from 'fake-useragent'
-import fs from 'fs'
-import prompts from 'prompts'
-import jsToYaml from 'json-to-pretty-yaml'
-import mkdirp from 'mkdirp'
-import { createRequire } from 'module'
-import open from 'open'
-import ora from 'ora'
-import path, { dirname } from 'path'
-import prettier from 'prettier'
-import tinify from 'tinify'
-import { fileURLToPath } from 'url'
-import util from 'util'
+import slugify from "@sindresorhus/slugify";
+import axios from "axios";
+import dotenv from "dotenv";
+import fakeUa from "fake-useragent";
+import jsToYaml from "json-to-pretty-yaml";
+import mkdirp from "mkdirp";
+import fs from "node:fs";
+import { createRequire } from "node:module";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import util from "node:util";
+import open from "open";
+import ora from "ora";
+import prettier from "prettier";
+import prompts from "prompts";
+import tinify from "tinify";
 
 // Get the root path to our project (Like `__dirname`).
 const root = dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url)
+const require = createRequire(import.meta.url);
 
 dotenv.config({
-  path: path.join(root, '.env'),
-})
-const fromRoot = (...p) => path.join(root, '..', ...p)
+  path: path.join(root, ".env"),
+});
+const fromRoot = (...p) => path.join(root, "..", ...p);
 
-tinify.key = process.env.TINY_PNG_API_KEY
+tinify.key = process.env.TINY_PNG_API_KEY;
 
-const padLeft0 = n => n.toString().padStart(2, '0')
-const formatDate = d =>
-  `${d.getFullYear()}-${padLeft0(d.getMonth() + 1)}-${padLeft0(d.getDate())}`
+const padLeft0 = n => n.toString().padStart(2, "0");
+function formatDate(d) {
+  return `${d.getFullYear()}-${padLeft0(d.getMonth() + 1)}-${padLeft0(d.getDate())}`;
+}
 
-const listify = a =>
-  a && a.trim().length
+function listify(a) {
+  return a && a.trim().length
     ? a
-        .split(',')
+        .split(",")
         .map(s => s.trim())
         .filter(Boolean)
-    : null
+    : null;
+}
 
 async function generateBlogPost() {
-
   // create a prompt for blog post or youtube video post
-  const {postType} = await prompts([
+  const { postType } = await prompts([
     {
-      type: 'select',
-      name: 'postType',
-      message: 'What type of post do you want to create?',
+      type: "select",
+      name: "postType",
+      message: "What type of post do you want to create?",
       choices: [
-        {title: 'Blog Post', value: 'blog'},
-        {title: 'YouTube Video', value: 'youtube'},
+        { title: "Blog Post", value: "blog" },
+        { title: "YouTube Video", value: "youtube" },
       ],
     },
-  ])
+  ]);
 
-  const {title, description, tags, isPublished} = await prompts([
+  const { title, description, tags, isPublished } = await prompts([
     {
-      type: 'text',
-      name: 'title',
-      message: 'Title',
+      type: "text",
+      name: "title",
+      message: "Title",
     },
     {
-      type: 'text',
-      name: 'description',
-      message: 'Description',
+      type: "text",
+      name: "description",
+      message: "Description",
     },
     {
-      type: 'text',
-      name: 'tags',
-      message: 'Tags (comma separated)',
+      type: "text",
+      name: "tags",
+      message: "Tags (comma separated)",
     },
     {
-      type: 'confirm',
-      name: 'isPublished',
-      message: 'Do you want to publish?',
+      type: "confirm",
+      name: "isPublished",
+      message: "Do you want to publish?",
     },
     // {
     //   type: 'text',
     //   name: 'keywords',
     //   message: 'Keywords (comma separated)',
     // },
-  ])
+  ]);
   // console.log(tags)
-  const slug = slugify(title)
-  const destination = fromRoot('/content/blog', slug)
-  mkdirp.sync(destination)
+  const slug = slugify(title);
+  const destination = fromRoot("/content/blog", slug);
+  mkdirp.sync(destination);
 
-  let bannerCredit = null
-  if (postType !== 'youtube') {
-    bannerCredit = await getBannerPhoto(title, destination)
+  let bannerCredit = null;
+  if (postType !== "youtube") {
+    bannerCredit = await getBannerPhoto(title, destination);
   }
 
   const yaml = jsToYaml.stringify(
     removeEmpty({
       title,
       date: formatDate(new Date()),
-      author: 'Ojo Oluwasetemi Stephen 00S',
+      author: "Ojo Oluwasetemi Stephen 00S",
       description: `_${description}_`,
       tags: listify(tags),
       // keywords: listify(keywords),
       isPublished,
       isDraft: !isPublished,
-      banner: postType !== 'youtube' && './images/banner.jpg',
+      banner: postType !== "youtube" && "./images/banner.jpg",
       bannerCredit,
     }),
-  )
+  );
   const markdown = prettier.format(`---\n${yaml}\n---\n`, {
-    ...require('../prettier.config'),
-    parser: 'mdx',
-  })
+    ...require("../prettier.config"),
+    parser: "mdx",
+  });
 
-  fs.writeFileSync(path.join(destination, 'index.mdx'), markdown)
+  fs.writeFileSync(path.join(destination, "index.mdx"), markdown);
 
-  console.log(`${destination.replace(process.cwd(), '')} is all ready for you`)
+  console.log(`${destination.replace(process.cwd(), "")} is all ready for you`);
 }
 
 async function getBannerPhoto(title, destination) {
-  const imagesDestination = path.join(destination, 'images')
+  const imagesDestination = path.join(destination, "images");
 
-  await open(`https://unsplash.com/search/photos/${encodeURIComponent(title)}`, {
-    wait: false,
-  })
-
-  const {unsplashPhotoId} = await prompts([
+  await open(
+    `https://unsplash.com/search/photos/${encodeURIComponent(title)}`,
     {
-      type: 'text',
-      name: 'unsplashPhotoId',
+      wait: false,
+    },
+  );
+
+  const { unsplashPhotoId } = await prompts([
+    {
+      type: "text",
+      name: "unsplashPhotoId",
       message: `What's the Unsplash Photo ID for the banner for this post?`,
     },
-  ])
+  ]);
 
-  mkdirp.sync(imagesDestination)
+  mkdirp.sync(imagesDestination);
 
   if (unsplashPhotoId) {
     const source = await tinify
@@ -137,45 +141,45 @@ async function getBannerPhoto(title, destination) {
         `https://unsplash.com/photos/${unsplashPhotoId}/download?force=true`,
       )
       .resize({
-        method: 'scale',
+        method: "scale",
         width: 2070,
-      })
+      });
 
-    const spinner = ora('compressing the image with tinypng.com').start()
+    const spinner = ora("compressing the image with tinypng.com").start();
     await util
       .promisify(source.toFile)
-      .call(source, path.join(imagesDestination, 'banner.jpg'))
-    spinner.text = 'compressed the image with tinypng.com'
-    spinner.stop()
-    const bannerCredit = await getPhotoCredit(unsplashPhotoId)
-    return bannerCredit
+      .call(source, path.join(imagesDestination, "banner.jpg"));
+    spinner.text = "compressed the image with tinypng.com";
+    spinner.stop();
+    const bannerCredit = await getPhotoCredit(unsplashPhotoId);
+    return bannerCredit;
   }
 
-  return null
+  return null;
 }
 
 async function getPhotoCredit(unsplashPhotoId) {
   const response = await axios({
     url: `https://unsplash.com/photos/${unsplashPhotoId}`,
-    headers: {'User-Agent': fakeUa()},
-  })
+    headers: { "User-Agent": fakeUa() },
+  });
   const {
-    groups: {name},
+    groups: { name },
   } = response.data.match(/Photo by (?<name>.*?) on Unsplash/) || {
-    groups: {name: 'Unknown'},
-  }
-  return `Photo by [${name}](https://unsplash.com/photos/${unsplashPhotoId})`
+    groups: { name: "Unknown" },
+  };
+  return `Photo by [${name}](https://unsplash.com/photos/${unsplashPhotoId})`;
 }
 
 function removeEmpty(obj) {
   return Object.entries(obj).reduce((o, [key, value]) => {
     if (value) {
-      o[key] = value
+      o[key] = value;
     }
-    return o
-  }, {})
+    return o;
+  }, {});
 }
 
-generateBlogPost()
+generateBlogPost();
 
 /* eslint no-console:0 */

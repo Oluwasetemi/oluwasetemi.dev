@@ -1,11 +1,11 @@
 ---
 title: re-export syntax is delicious
-date: '2020-09-06T09:00:00.000Z'
+date: "2020-09-06T09:00:00.000Z"
 tags: [javascript, learning, code]
 isPublished: true
 isDraft: false
 modified: true
-modifiedDate: '2020-11-09T08:09:12.044Z'
+modifiedDate: "2020-11-09T08:09:12.044Z"
 ---
 
 Recently joined a team where I had to work with on a codebase that used the
@@ -30,10 +30,10 @@ Imagine a sum and subtract function in a separate file below:
 
 ```js
 // assume this code is in ./math.js
-const sum = (a, b) => a + b
-const subtract = (a, b) => a - b
+const sum = (a, b) => a + b;
+const subtract = (a, b) => a - b;
 
-export {sum, subtract}
+export { sum, subtract };
 ```
 
 The above is a `named export` i.e you can export functions, variable and class
@@ -77,7 +77,7 @@ default export of `mul`. We can import using both the `default import` and a
 
 ```js
 // assume this code use ./math3.js
-import mul, {sum, subtract} from './math3'
+import mul, { sum, subtract } from "./math3";
 ```
 
 Other examples of the various use of modules in JavaScript are shown below.

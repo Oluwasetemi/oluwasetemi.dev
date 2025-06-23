@@ -1,7 +1,7 @@
 ---
 title: Writing test for the vitejs react app starter
-date: '2021-08-17T23:01:05.977Z'
-tags: ['test', 'react', 'javascript']
+date: "2021-08-17T23:01:05.977Z"
+tags: ["test", "react", "javascript"]
 isPublished: true
 isDraft: false
 ---
@@ -25,19 +25,19 @@ will be of great advantage to anyone building apps with the starters to have
 test include. It will be a way to see writing test as part of the journey of the
 product they are building.
 
-
-{/* ```jsx
+{/\* ```jsx
 import {render, screen} from '@testing-library/react'
 import App from './App'
 
 test('renders learn react link', () => {
-  render(<App />)
+render(<App />)
 
-  const linkElement = screen.getByText(/learn react/i)
+const linkElement = screen.getByText(/learn react/i)
 
-  expect(linkElement).toBeInTheDocument()
+expect(linkElement).toBeInTheDocument()
 })
-``` */}
+
+````*/}
 
 
 <figcaption>
@@ -101,7 +101,7 @@ yarn create vite
 
 # or run this if you use npm
 npm init vite@latest
-```
+````
 
 In a no time depending on your [internet speed](https://fast.com) you will have
 a project setup for you. Change directory into the new created app and run the
@@ -126,11 +126,7 @@ yourself. If you have a simple react interface - Good, but if not, try to go
 through the steps again and carefully follow through till you have the desired
 result if not contact me `:)`.
 
-
-
 ![Default Vite App](https://res.cloudinary.com/drnqdd87d/image/upload/v1627035711/Personal/vite-default_yfbtrv.png)
-
-
 
 You should have a react app running and we can write test for this starter, I
 will run the tests using [jest](https://jestjs.io) and before we start writing
@@ -146,8 +142,8 @@ look like this.
 
 ```javascript
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
-}
+  presets: ["@babel/preset-env", "@babel/preset-react"],
+};
 ```
 
 To confirm that this is working correctly we should create a folder for our test
@@ -160,13 +156,13 @@ function with either the traditional function or an arrow function. In code it
 looks like this.
 
 ```javascript
-test('a simple test', function () {
+test("a simple test", function () {
   // content of our test with here
-})
+});
 
-it('a simple test with arrow function', () => {
+it("a simple test with arrow function", () => {
   // content of our test with here
-})
+});
 ```
 
 try to run this with a `jest` in your terminal and you will see the test report
@@ -175,7 +171,7 @@ showing the details of the test you just ran.
 ### Using @testing-library/react
 
 Furthermore it will be good to note that our test will done using
-@testing-library/react supported with some extra test matcher from our package  [@testing-library/jest-dom](https://github.com/testing-library/jest-dom). This
+@testing-library/react supported with some extra test matcher from our package [@testing-library/jest-dom](https://github.com/testing-library/jest-dom). This
 two packages makes writing test significantly less burdensome.
 
 ```bash
@@ -197,17 +193,17 @@ package whose work it is to confirm if the element that will be return by the
 `getByText` query is in the render document. It should look like:
 
 ```jsx
-it('should renders app properly', () => {
-  const {getByText} = render(<App />)
+it("should renders app properly", () => {
+  const { getByText } = render(<App />);
 
-  const count = getByText(/count is/)
-  const react = getByText(/learn react/i)
-  const vite = getByText(/hello vite/i)
+  const count = getByText(/count is/);
+  const react = getByText(/learn react/i);
+  const vite = getByText(/hello vite/i);
 
-  expect(count).toBeInTheDocument()
-  expect(react).toBeInTheDocument()
-  expect(vite).toBeInTheDocument()
-})
+  expect(count).toBeInTheDocument();
+  expect(react).toBeInTheDocument();
+  expect(vite).toBeInTheDocument();
+});
 ```
 
 Moreover I will test the counter implementation in the starter. To test the
@@ -219,14 +215,14 @@ if the text content of the element return contain 0. The code will look like
 this:
 
 ```jsx
-it('should have a count value of 0 when app loads', () => {
-  const {getByText} = render(<App />)
+it("should have a count value of 0 when app loads", () => {
+  const { getByText } = render(<App />);
 
-  const count = getByText(/count is/)
+  const count = getByText(/count is/);
 
-  expect(count).toHaveTextContent(0)
-  expect(count.textContent).toContain('0')
-})
+  expect(count).toHaveTextContent(0);
+  expect(count.textContent).toContain("0");
+});
 ```
 
 Building on the last test I can test the increment button if it work properly.
@@ -241,15 +237,15 @@ the events the `fireEvent` api support and for more information on event use the
 Assert that the value of the counter has increased by 1.
 
 ```jsx
-it('should increment count value', () => {
-  const {getByText} = render(<App />)
-  const count = getByText(/count is/)
+it("should increment count value", () => {
+  const { getByText } = render(<App />);
+  const count = getByText(/count is/);
 
-  fireEvent.click(count)
+  fireEvent.click(count);
 
-  expect(count).toHaveTextContent(1)
-  expect(count.textContent).toContain('1')
-})
+  expect(count).toHaveTextContent(1);
+  expect(count.textContent).toContain("1");
+});
 ```
 
 We can also try to rerender the App since react also does this very well when we
@@ -326,24 +322,24 @@ the few changes to note:
      PS: press . to see a new GitHub magic of vscode in browser :
 
 ```jsx
-import {screen, fireEvent, render} from '@testing-library/react'
+import { screen, fireEvent, render } from "@testing-library/react";
 
-it('rerender <App /> should not change the value of counter', () => {
-  const {rerender} = render(<App />)
-  let count = screen.getByRole('button', {name: /count is/i})
+it("rerender <App /> should not change the value of counter", () => {
+  const { rerender } = render(<App />);
+  let count = screen.getByRole("button", { name: /count is/i });
 
-  fireEvent.click(count)
+  fireEvent.click(count);
 
-  expect(count.textContent).toContain(1)
+  expect(count.textContent).toContain(1);
 
-  rerender(<App />)
+  rerender(<App />);
 
-  expect(count.textContent).toContain(1)
+  expect(count.textContent).toContain(1);
 
-  fireEvent.click(count)
+  fireEvent.click(count);
 
-  expect(count.textContent).toContain(2)
-})
+  expect(count.textContent).toContain(2);
+});
 ```
 
 [For the full changes to all the test check it on GitHub](https://github.com/Oluwasetemi/migrate-series/blob/default-test/src/__tests__/App.spec.tsx).

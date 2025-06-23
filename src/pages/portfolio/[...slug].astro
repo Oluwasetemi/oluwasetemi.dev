@@ -1,18 +1,18 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE } from '../../consts';
+import { type CollectionEntry, getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE } from "../../consts";
 
-type Props = CollectionEntry<'portfolio'>;
+type Props = CollectionEntry<"portfolio">;
 
 export async function getStaticPaths() {
-	const portfolios = await getCollection('portfolio');
-	return portfolios.map((portfolio) => ({
-		params: { slug: portfolio.slug },
-		props: portfolio,
-	}));
+  const portfolios = await getCollection("portfolio");
+  return portfolios.map((portfolio) => ({
+    params: { slug: portfolio.slug },
+    props: portfolio,
+  }));
 }
 
 const portfolio = Astro.props;
@@ -21,117 +21,128 @@ const { Content } = await portfolio.render();
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`${portfolio.data.title} - ${SITE_TITLE}`} description={portfolio.data.description || `Portfolio project: ${portfolio.data.title}`} />
-		<style>
-			main {
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 2rem;
-			}
-			.portfolio-header {
-				margin-bottom: 3rem;
-				text-align: center;
-			}
-			.portfolio-header h1 {
-				font-size: 3rem;
-				margin-bottom: 1rem;
-				background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-			}
-			.portfolio-meta {
-				display: flex;
-				justify-content: center;
-				gap: 2rem;
-				margin-bottom: 2rem;
-				flex-wrap: wrap;
-			}
-			.portfolio-links {
-				display: flex;
-				justify-content: center;
-				gap: 1rem;
-				margin-bottom: 2rem;
-				flex-wrap: wrap;
-			}
-			.portfolio-links a {
-				background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-				color: white;
-				padding: 0.75rem 1.5rem;
-				border-radius: 6px;
-				text-decoration: none;
-				font-weight: 500;
-				transition: transform 0.2s ease;
-			}
-			.portfolio-links a:hover {
-				transform: translateY(-2px);
-			}
-			.portfolio-tags {
-				display: flex;
-				justify-content: center;
-				gap: 0.5rem;
-				flex-wrap: wrap;
-				margin-bottom: 2rem;
-			}
-			.tag {
-				background: #f3f4f6;
-				color: #374151;
-				padding: 0.25rem 0.5rem;
-				border-radius: 4px;
-				font-size: 0.9rem;
-			}
-			.portfolio-content {
-				line-height: 1.8;
-				color: #333;
-			}
-			.portfolio-content h2 {
-				margin-top: 2rem;
-				margin-bottom: 1rem;
-				color: #667eea;
-			}
-			@media (max-width: 768px) {
-				.portfolio-header h1 {
-					font-size: 2rem;
-				}
-				.portfolio-meta {
-					flex-direction: column;
-					gap: 1rem;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class="portfolio-header">
-				<h1>{portfolio.data.title}</h1>
-				{portfolio.data.description && (
-					<p>{portfolio.data.description}</p>
-				)}
-			</div>
+  <head>
+    <BaseHead
+      title={`${portfolio.data.title} - ${SITE_TITLE}`}
+      description={portfolio.data.description || `Portfolio project: ${portfolio.data.title}`}
+    />
+    <style>
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .portfolio-header {
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+      .portfolio-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .portfolio-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .portfolio-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .portfolio-links a {
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: transform 0.2s ease;
+      }
+      .portfolio-links a:hover {
+        transform: translateY(-2px);
+      }
+      .portfolio-tags {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+      .tag {
+        background: #f3f4f6;
+        color: #374151;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .portfolio-content {
+        line-height: 1.8;
+        color: #333;
+      }
+      .portfolio-content h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #667eea;
+      }
+      @media (max-width: 768px) {
+        .portfolio-header h1 {
+          font-size: 2rem;
+        }
+        .portfolio-meta {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="portfolio-header">
+        <h1>{portfolio.data.title}</h1>
+        {portfolio.data.description && <p>{portfolio.data.description}</p>}
+      </div>
 
-			<div class="portfolio-links">
-				{portfolio.data.url && (
-					<a href={portfolio.data.url} target="_blank" rel="noopener noreferrer">Live Demo</a>
-				)}
-				{portfolio.data.github && (
-					<a href={portfolio.data.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-				)}
-			</div>
+      <div class="portfolio-links">
+        {
+          portfolio.data.url && (
+            <a href={portfolio.data.url} target="_blank" rel="noopener noreferrer">
+              Live Demo
+            </a>
+          )
+        }
+        {
+          portfolio.data.github && (
+            <a href={portfolio.data.github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          )
+        }
+      </div>
 
-			{portfolio.data.tags && (
-				<div class="portfolio-tags">
-					{portfolio.data.tags.map((tag: string) => (
-						<span class="tag">{tag}</span>
-					))}
-				</div>
-			)}
+      {
+        portfolio.data.tags && (
+          <div class="portfolio-tags">
+            {portfolio.data.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
 
-			<div class="portfolio-content">
-				<Content />
-			</div>
-		</main>
-		<Footer />
-	</body>
+      <div class="portfolio-content">
+        <Content />
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>

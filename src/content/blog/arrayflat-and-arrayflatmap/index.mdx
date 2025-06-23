@@ -1,7 +1,7 @@
 ---
 title: Array.prototype.flat and Array.prototype.flatMap
-date: '2018-12-20T23:50:00.121Z'
-tags: ['javascript']
+date: "2018-12-20T23:50:00.121Z"
+tags: ["javascript"]
 isPublished: true
 isDraft: false
 ---
@@ -92,8 +92,8 @@ spread operator (...) to flatten an array. Recursively flatten each element that
 is an array.
 
 ```js
-const deepFlatten = arr =>
-  [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)))
+const deepFlatten = (arr) =>
+  [].concat(...arr.map((v) => (Array.isArray(v) ? deepFlatten(v) : v)));
 ```
 
 ## Now Behold your Future
@@ -109,7 +109,7 @@ var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
 ```
 
 ```js
-;[1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v))
+[1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v));
 ```
 
 The future is here not Just evenly distributed. With the two methods, we can
@@ -137,9 +137,9 @@ The flat method removes empty slots in arrays and it will be very useful in
 cleaning up arrays.
 
 ```js
-const arr = [1, 2, , 4, 5]
+const arr = [1, 2, , 4, 5];
 
-arr.flat() // [1, 2, 4, 5]
+arr.flat(); // [1, 2, 4, 5]
 ```
 
 ## Specification and Support

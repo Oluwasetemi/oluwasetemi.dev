@@ -1,11 +1,17 @@
 /**
  * Based on copypasta from Remy Bach and Sarah Drasner
  */
-code[class*='language-'],
-pre[class*='language-'] {
+code[class*="language-"],
+pre[class*="language-"] {
   color: white;
   background: none;
-  font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-family:
+    Consolas,
+    Menlo,
+    Monaco,
+    source-code-pro,
+    Courier New,
+    monospace;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -22,47 +28,47 @@ pre[class*='language-'] {
   hyphens: none;
 }
 
-pre[class*='language-'],
-:not(pre) > code[class*='language-'] {
+pre[class*="language-"],
+:not(pre) > code[class*="language-"] {
   background: #011627;
 }
 
 /* Code blocks */
-pre[class*='language-'] {
+pre[class*="language-"] {
   border-radius: 10px;
   overflow: auto;
   padding: 1em;
 }
 
-pre[class*='language-']::-moz-selection {
+pre[class*="language-"]::-moz-selection {
   /* Firefox */
   background: hsl(207, 4%, 16%);
 }
 
-pre[class*='language-']::selection {
+pre[class*="language-"]::selection {
   /* Safari */
   background: hsl(207, 4%, 16%);
 }
 
 /* Text Selection colour */
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
   text-shadow: none;
   background: hsla(0, 0%, 93%, 0.15);
 }
 
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
   text-shadow: none;
   background: hsla(0, 0%, 93%, 0.15);
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-'] {
+:not(pre) > code[class*="language-"] {
   border-radius: 0.3em;
   background: rgba(255, 229, 100, 0.2);
   color: #1a1a1a;
@@ -106,7 +112,7 @@ code[class*='language-'] ::selection {
 .token.selector,
 .token.doctype {
   color: rgb(199, 146, 234);
-  font-style: 'italic';
+  font-style: "italic";
 }
 
 .token.class-name {
@@ -154,7 +160,7 @@ pre[data-line] {
   background: #011627;
 }
 
-.gatsby-highlight pre[class*='language-'] {
+.gatsby-highlight pre[class*="language-"] {
   float: left;
   min-width: 100%;
 }
@@ -169,7 +175,7 @@ pre[data-line] {
  * If you only want to use line numbering
  */
 
-.gatsby-highlight pre[class*='language-'].line-numbers {
+.gatsby-highlight pre[class*="language-"].line-numbers {
   padding: 0;
   padding-left: 2.8em;
   overflow: initial;
@@ -177,19 +183,19 @@ pre[data-line] {
 
 .command-line-prompt > span:before {
   color: #999;
-  content: ' ';
+  content: " ";
   display: block;
   padding-right: 0.8em;
 }
 
 /* Prompt for all users */
 .command-line-prompt > span[data-user]:before {
-  content: '[' attr(data-user) '@' attr(data-host) '] $';
+  content: "[" attr(data-user) "@" attr(data-host) "] $";
 }
 
 /* Prompt for root */
-.command-line-prompt > span[data-user='root']:before {
-  content: '[' attr(data-user) '@' attr(data-host) '] #';
+.command-line-prompt > span[data-user="root"]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] #";
 }
 
 .command-line-prompt > span[data-prompt]:before {

@@ -1,14 +1,13 @@
 ---
-title: 'Generators In JavaScript'
-date: '2021-09-27'
-author: 'Ojo Oluwasetemi Stephen 00S'
+title: "Generators In JavaScript"
+date: "2021-09-27"
+author: "Ojo Oluwasetemi Stephen 00S"
 description:
-  '_A function can only return a single value. Generators `function*` helps to
-  return more than one value, one after another, and on-demand in JavaScript._'
-banner: './images/banner.jpg'
-bannerCredit:
-  'Photo by [Mohammad Rahmani](https://unsplash.com/photos/8qEB0fTe9Vw)'
-tags: ['typescript', 'react', 'javascript']
+  "_A function can only return a single value. Generators `function*` helps to
+  return more than one value, one after another, and on-demand in JavaScript._"
+banner: "./images/banner.jpg"
+bannerCredit: "Photo by [Mohammad Rahmani](https://unsplash.com/photos/8qEB0fTe9Vw)"
+tags: ["typescript", "react", "javascript"]
 isPublished: true
 isDraft: false
 ---
@@ -41,37 +40,37 @@ type generators,
 ```javascript
 function myName() {
   // i can return a string, number, array, object or promise that resolve to all the listed data types
-  return 'ojo'
+  return "ojo";
 }
-myName()
+myName();
 ```
 
 ```javascript
 function* myNameAgeGithubUsername() {
-  yield 'ojo'
-  yield 28
-  yield 'Oluwasetemi'
+  yield "ojo";
+  yield 28;
+  yield "Oluwasetemi";
 }
-let generator = myNameAgeGithubUsername()
+let generator = myNameAgeGithubUsername();
 
-console.log(generator) // {[ Generator]}
+console.log(generator); // {[ Generator]}
 
-console.log(generator.toString()) // [object Generator]
+console.log(generator.toString()); // [object Generator]
 
-let name = generator.next()
-console.log(name)
-let age = generator.next()
-console.log(age)
-let githubUsername = generator.next()
-console.log(githubUsername)
+let name = generator.next();
+console.log(name);
+let age = generator.next();
+console.log(age);
+let githubUsername = generator.next();
+console.log(githubUsername);
 
 // you can use a for of loop on this generator
 for (let each of myNameAgeGithubUsername()) {
-  console.log(each) // ojo, 28
+  console.log(each); // ojo, 28
 }
 // you can spread the value like an array
-let arrayLike = [...myNameAgeGithubUsername()]
-console.log(arrayLike)
+let arrayLike = [...myNameAgeGithubUsername()];
+console.log(arrayLike);
 ```
 
 ## Explaining the Keywords
@@ -82,11 +81,11 @@ sequence, that is, returning of consistent value one after another. If I say a
 string value is iterable, it means it can be loopped/iterated.
 
 ```javascript
-let name = 'generator'
+let name = "generator";
 
 for (let each = 0; each < name.length; each += 1) {
   // looping through the string;
-  console.log(name[each]) // prints each letter in the string
+  console.log(name[each]); // prints each letter in the string
 }
 ```
 
@@ -115,29 +114,29 @@ and `function*`.
 
 ```javascript
 function makeEvenRangeIterator(start = 2, end = Infinity, step = 2) {
-  let nextIndex = start
-  let iterationCount = 0
+  let nextIndex = start;
+  let iterationCount = 0;
 
   const rangeIterator = {
     next: function () {
-      let result
+      let result;
       if (nextIndex < end) {
-        result = {value: nextIndex, done: false}
-        nextIndex += step
-        iterationCount++
-        return result
+        result = { value: nextIndex, done: false };
+        nextIndex += step;
+        iterationCount++;
+        return result;
       }
-      return {value: undefined, done: true, count: iterationCount}
+      return { value: undefined, done: true, count: iterationCount };
     },
-  }
-  return rangeIterator
+  };
+  return rangeIterator;
 }
 
-let it = makeEvenRangeIterator(2, 10)
-let result = it.next()
+let it = makeEvenRangeIterator(2, 10);
+let result = it.next();
 while (!result.done) {
-  console.log(result.value) // 2, 4, 6, 8, 10
-  result = it.next()
+  console.log(result.value); // 2, 4, 6, 8, 10
+  result = it.next();
 }
 // adapted from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators)
 ```
@@ -150,10 +149,10 @@ while (!result.done) {
 const evenRange = {
   from: 2,
   to: 10,
-}
+};
 
 evenRange[Symbol.iterator] = function () {
-  console.log(this.from)
+  console.log(this.from);
   return {
     current: this.from,
     last: this.to,
@@ -161,18 +160,18 @@ evenRange[Symbol.iterator] = function () {
 
     next() {
       if (this.current < this.last) {
-        this.count++
-        return {done: false, value: (this.current += 2)}
+        this.count++;
+        return { done: false, value: (this.current += 2) };
       } else {
-        return {done: true, count: this.count}
+        return { done: true, count: this.count };
       }
     },
-  }
-}
+  };
+};
 
 // you can loop with the traditional for of loop
 for (let i of evenRange) {
-  console.log(i)
+  console.log(i);
 }
 ```
 
@@ -202,10 +201,10 @@ let rangeGenerator = {
   *[Symbol.iterator]() {
     // a shorthand for [Symbol.iterator]: function*()
     for (let value = this.from; value <= this.to; value++) {
-      yield value
+      yield value;
     }
   },
-}
+};
 
 // this can be used in any for of loop, arrayLike, like an iterator.
 // Please pause and write how this can be used as
@@ -224,30 +223,30 @@ composition is a special feature of generators that allows transparent
 
 ```javascript
 function* generateSequenceCompose(start, end) {
-  for (let i = start; i <= end; i++) yield i
+  for (let i = start; i <= end; i++) yield i;
 }
 
 function* generatePasswordCodes() {
   // 0..9
   // for (let i = 48; i <= 57; i++) yield i;
-  yield* generateSequenceCompose(48, 57)
+  yield* generateSequenceCompose(48, 57);
 
   // A..Z
   // for (let i = 65; i <= 90; i++) yield i;
-  yield* generateSequenceCompose(65, 90)
+  yield* generateSequenceCompose(65, 90);
 
   // a..z
   // for (let i = 97; i <= 122; i++) yield i;
-  yield* generateSequenceCompose(97, 122)
+  yield* generateSequenceCompose(97, 122);
 }
 
 // used
-let str = ''
+let str = "";
 
 for (let code of generatePasswordCodes()) {
-  str += String.fromCharCode(code)
+  str += String.fromCharCode(code);
 }
-console.log(str) // 0..9A..Za..z
+console.log(str); // 0..9A..Za..z
 
 // copied from https://javascript.info/generators
 ```
@@ -259,9 +258,9 @@ yield. It is passed an error object, let's consider an example:
 
 ```javascript
 function* myGen() {
-  yield 1
+  yield 1;
 }
-myGen().throw(new Error('throw error using the generator.throw'))
+myGen().throw(new Error("throw error using the generator.throw"));
 ```
 
 Use cases for using `.throw` might be limited but it is a good tool to have if
@@ -276,13 +275,13 @@ value passed to the `generator.return` Let consider am example:
 
 ```javascript
 function* myGen() {
-  yield 1
-  yield 2
+  yield 1;
+  yield 2;
 }
-let gen = myGen()
-console.log(gen.next()) // return {done: false: value: 1}
-console.log(gen.return('I am done')) // {done: true, value: 'I am done'}
-gen.next() // {done: true, value: undefined}
+let gen = myGen();
+console.log(gen.next()); // return {done: false: value: 1}
+console.log(gen.return("I am done")); // {done: true, value: 'I am done'}
+gen.next(); // {done: true, value: undefined}
 ```
 
 I cannot think of any use cases for this method, please share any in the comment
@@ -300,17 +299,17 @@ to the generator function to make it an async generator function.
 
 ```javascript
 async function* asyncGeneratorOneTwo() {
-  yield new Promise(resolve => resolve(1))
-  yield new Promise(resolve => resolve(2))
+  yield new Promise((resolve) => resolve(1));
+  yield new Promise((resolve) => resolve(2));
 }
 
-let asyncGen = asyncGeneratorOneTwo()
+let asyncGen = asyncGeneratorOneTwo();
 
-;(async () => {
+(async () => {
   for await (let each of asyncGen) {
-    console.log(each) // 1,2
+    console.log(each); // 1,2
   }
-})()
+})();
 ```
 
 ## TypeScript Example
@@ -326,34 +325,34 @@ random strings.
 
 ```typescript
 function delay(ms: number): Promise<void> {
-  return new Promise<void>(resolve => {
-    setTimeout(resolve, ms)
-  })
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 function getRandomSetChars(): string {
-  const random = 1 + Math.floor(Math.random() * 5)
-  let wordString = ''
+  const random = 1 + Math.floor(Math.random() * 5);
+  let wordString = "";
   for (let i = 0; i < random; i++) {
-    const letter = 97 + Math.floor(Math.random() * 26)
-    wordString += String.fromCharCode(letter)
+    const letter = 97 + Math.floor(Math.random() * 26);
+    wordString += String.fromCharCode(letter);
   }
-  return wordString
+  return wordString;
 }
 // Step 3
 async function* getRandomSetsChars(): AsyncIterableIterator<string> {
   for (let i = 0; i < 10; i++) {
-    yield getRandomSetChars() // return a random set of char
-    await delay(200) // wait
-    yield* [getRandomSetChars(), getRandomSetChars()] // return two random sets of char
+    yield getRandomSetChars(); // return a random set of char
+    await delay(200); // wait
+    yield* [getRandomSetChars(), getRandomSetChars()]; // return two random sets of char
   }
 }
 // Step 4
 async function addWordsAsynchronously() {
   for await (const x of getRandomSetsChars()) {
-    console.log('Iterator loop:' + x)
+    console.log("Iterator loop:" + x);
   }
 }
-addWordsAsynchronously()
+addWordsAsynchronously();
 ```
 
 ## Real World Use Case With GitHub API
@@ -374,43 +373,43 @@ paginated resource. The example is adapted from
 
 ```javascript
 async function* fetchCommits(repo) {
-  let url = `https://api.github.com/repos/${repo}/commits`
+  let url = `https://api.github.com/repos/${repo}/commits`;
 
   while (url) {
     const response = await fetch(url, {
       // (1)
-      headers: {'User-Agent': 'Our script'}, // github requires user-agent header
-    })
+      headers: { "User-Agent": "Our script" }, // github requires user-agent header
+    });
 
-    const body = await response.json() // (2) response is JSON (array of commits)
+    const body = await response.json(); // (2) response is JSON (array of commits)
 
     // (3) the URL of the next page is in the headers, extract it
-    let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/)
-    nextPage = nextPage && nextPage[1]
+    let nextPage = response.headers.get("Link").match(/<(.*?)>; rel="next"/);
+    nextPage = nextPage && nextPage[1];
 
-    url = nextPage
+    url = nextPage;
 
     for (let commit of body) {
       // (4) yield commits one by one, until the page ends
-      yield commit
+      yield commit;
     }
   }
 }
 
-;(async () => {
-  let count = 0
+(async () => {
+  let count = 0;
 
   for await (const commit of fetchCommits(
-    'javascript-tutorial/en.javascript.info',
+    "javascript-tutorial/en.javascript.info",
   )) {
-    console.log(commit.author.login)
+    console.log(commit.author.login);
 
     if (++count == 100) {
       // let's stop at 100 commits
-      break
+      break;
     }
   }
-})()
+})();
 ```
 
 ## Conclusion
@@ -427,15 +426,15 @@ answers in the comment section.
 
 ```javascript
 function* myNameAgeGithubUsernameA() {
-  yield 'ojo'
-  yield 28
-  yield 'Oluwasetemi'
+  yield "ojo";
+  yield 28;
+  yield "Oluwasetemi";
 }
 
 function* myNameAgeGithubUsernameB() {
-  yield 'ojo'
-  yield 28
-  return 'Oluwasetemi'
+  yield "ojo";
+  yield 28;
+  return "Oluwasetemi";
 }
 ```
 

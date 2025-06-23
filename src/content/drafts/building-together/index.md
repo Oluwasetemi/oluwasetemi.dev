@@ -1,6 +1,6 @@
 ---
 title: building together
-date: '1992-09-11T09:00:00.200Z'
+date: "1992-09-11T09:00:00.200Z"
 tags: []
 isPublished: false
 isDraft: true

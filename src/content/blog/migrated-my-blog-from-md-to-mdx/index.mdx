@@ -1,9 +1,8 @@
 ---
-title:
-  Migrated My Blog From Using Markdown To Support Both Markdown(MD) and
+title: Migrated My Blog From Using Markdown To Support Both Markdown(MD) and
   MarkdownX(MDX)
-date: '2021-09-10T05:00:00.200Z'
-tags: ['mdx']
+date: "2021-09-10T05:00:00.200Z"
+tags: ["mdx"]
 isPublished: true
 isDraft: false
 ---
@@ -39,13 +38,13 @@ To gradually feel the mdx drip, click the button below!
 
 <button
   id="mybutton"
-  onClick={e => {
-    let value = prompt('Enter a valid color string', 'purple')
-    e.target.style.color = value
-    e.target.style.padding = '20px'
-    e.target.style.marginLeft = '50%'
-    e.target.textContent = `a new ${value} button`
-    console.clear()
+  onClick={(e) => {
+    let value = prompt("Enter a valid color string", "purple");
+    e.target.style.color = value;
+    e.target.style.padding = "20px";
+    e.target.style.marginLeft = "50%";
+    e.target.textContent = `a new ${value} button`;
+    console.clear();
   }}
 >
   test
@@ -67,8 +66,8 @@ This is slick. So excited about all the possibilities we can learn with this.
 
 <input
   type="range"
-  onChange={e => {
-    document.querySelector('#mybutton').style.padding = `${e.target.value}px`
+  onChange={(e) => {
+    document.querySelector("#mybutton").style.padding = `${e.target.value}px`;
   }}
 />
 

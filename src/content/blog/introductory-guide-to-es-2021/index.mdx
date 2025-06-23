@@ -1,18 +1,17 @@
 ---
-title: 'Introductory Guide to ES2021'
-date: '2024-09-17'
-author: 'Ojo Oluwasetemi Stephen 00S'
+title: "Introductory Guide to ES2021"
+date: "2024-09-17"
+author: "Ojo Oluwasetemi Stephen 00S"
 description:
   "_Keeping up with programming language updates can be demanding. JavaScript's
   ubiquitous nature is a reason the language is experiencing very consistent,
   fast, and frequent updates._"
 tags:
-  - 'javascript'
-  - 'es2021'
+  - "javascript"
+  - "es2021"
 isPublished: true
-banner: './images/banner.jpg'
-bannerCredit:
-  'Photo by [Mohammad Rahmani](https://unsplash.com/photos/8qEB0fTe9Vw)'
+banner: "./images/banner.jpg"
+bannerCredit: "Photo by [Mohammad Rahmani](https://unsplash.com/photos/8qEB0fTe9Vw)"
 ---
 
 # Introductory Guide to ES2021
@@ -43,13 +42,13 @@ combined with `String.prototype.replace`.
 
 ```javascript
 // regex approach
-let str = 'my name is ojo'
-str.replace(/\s/g, '#')
+let str = "my name is ojo";
+str.replace(/\s/g, "#");
 // 'my#name#is#ojo'
 
 // loop approach
 while (/\s/g.test(str)) {
-  str = str.replace(' ', '#')
+  str = str.replace(" ", "#");
   // 'my#name#is#ojo'
 }
 ```
@@ -69,8 +68,8 @@ You can polyfill with
 > access to the features while they might not be ready in modern browsers.
 
 ```javascript
-let str = 'my name is ojo'
-str.replaceAll(' ', '#')
+let str = "my name is ojo";
+str.replaceAll(" ", "#");
 ```
 
 ## Promise.any
@@ -84,21 +83,21 @@ code snippet.
 
 ```javascript
 const promises = [
-  fetch('/endpoint-a').then(() => 'a'),
-  fetch('/endpoint-b').then(() => 'b'),
-  fetch('/endpoint-c').then(() => 'c'),
-]
+  fetch("/endpoint-a").then(() => "a"),
+  fetch("/endpoint-b").then(() => "b"),
+  fetch("/endpoint-c").then(() => "c"),
+];
 
 try {
-  const first = await Promise.any(promises)
+  const first = await Promise.any(promises);
   // Any of the promises was fulfilled.
-  console.log(first)
+  console.log(first);
   // → e.g. 'b'
 } catch (error) {
   // All of the promises were rejected.
-  console.assert(error instanceof AggregateError)
+  console.assert(error instanceof AggregateError);
   // Log the rejection values:
-  console.log(error.errors)
+  console.log(error.errors);
   // → [
   //     <TypeError: Failed to fetch /endpoint-a>,
   //     <TypeError: Failed to fetch /endpoint-b>,
@@ -119,8 +118,8 @@ It comprises of Number literals support for Decimals and Binary, Hex, Octal,
 BigInt literal support. Let consider the following examples.
 
 ```javascript
-let num = 1_000_000
-console.log(num)
+let num = 1_000_000;
+console.log(num);
 ```
 
 ## WeakRefs and Logical Assignments Operators
@@ -144,19 +143,19 @@ Consider the following code snippet for the `&&=` and `??=` usecases.
 
 ```javascript
 // "And And Equals"
-a &&= b
-a && (a = b) // if a is true then assign b to a
+a &&= b;
+a && (a = b); // if a is true then assign b to a
 if (a) {
-  a = b
+  a = b;
 }
 
 // "Or Or Equals"
-a ||= b
-a || (a = b) // if a is false then assign b to a
+a ||= b;
+a || (a = b); // if a is false then assign b to a
 
 // "QQ Equals"
-a ??= b
-a ?? (a = b) // if a is null or undefined then assign b to a
+a ??= b;
+a ?? (a = b); // if a is null or undefined then assign b to a
 ```
 
 They are called the logical or assignment, logical and assignment and logical
