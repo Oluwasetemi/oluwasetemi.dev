@@ -1,5 +1,3 @@
-import React from "react";
-
 import me from "../data/me.json";
 
 type BioProps = {

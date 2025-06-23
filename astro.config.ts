@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
@@ -7,7 +8,16 @@ import UnoCSS from "unocss/astro";
 // https://astro.build/config
 export default defineConfig({
   site: "https://oluwasetemi.dev",
-  integrations: [mdx(), UnoCSS(), react(), sitemap()],
+
+  integrations: [
+    mdx(),
+    UnoCSS(),
+    react({
+      include: ["**/*.{jsx,tsx}"],
+    }),
+    sitemap(),
+  ],
+
   vite: {
     build: {
       rollupOptions: {
@@ -26,13 +36,21 @@ export default defineConfig({
         ],
         onwarn(warning, warn) {
           // Suppress constructor function warnings
-          if (warning.code === 'TYPESCRIPT_WARNING' && 
-              warning.message?.includes('constructor function may be converted to a class')) {
+          if (warning.code === "TYPESCRIPT_WARNING"
+            && warning.message?.includes("constructor function may be converted to a class")) {
             return;
           }
           warn(warning);
         },
       },
     },
+    ssr: {
+      noExternal: ["react", "react-dom"],
+    },
   },
+
+  output: "server",
+  adapter: netlify({
+    edgeMiddleware: false,
+  }),
 });

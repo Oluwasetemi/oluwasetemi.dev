@@ -1,7 +1,21 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "strictNullChecks": true
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["react", "react-dom"],
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ],
   "exclude": ["generate/**/*"]
 }

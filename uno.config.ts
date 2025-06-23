@@ -6,7 +6,7 @@ export default defineConfig({
       "text-transparent bg-clip-text bg-gradient-to-tl from-green-300 via-teal-400 to-purple-500",
     "bg-main": "bg-white text-[#181818] dark:(bg-[#121212] text-[#ddd])",
     "text-common": "text-[#5D8392]",
-    "logo": "i-logos-react w-6em h-6em transform transition-800 hover:rotate-180",
+    "logo": "i-ri-reactjs-fill w-6em h-6em transform transition-800 hover:rotate-180",
     "btn": "px-4 py-1 bg-blue-500 text-white rounded",
     "card": "p-4 shadow-md border rounded-lg",
     "input":

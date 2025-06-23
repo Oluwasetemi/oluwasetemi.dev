@@ -4,9 +4,17 @@ for = "/rss.xml"
 [headers.values]
 Access-Control-Allow-Origin = "*"
 
-[[plugins]]
-package = "netlify-plugin-gatsby-cache"
 
 [build]
-command = "npm run build"
-publish = "public"
+command = "bun install && bun run build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "lts"
+NPM_FLAGS = "--version"
+
+# Redirects configuration to prevent adapter errors
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
