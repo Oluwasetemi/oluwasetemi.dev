@@ -22,9 +22,17 @@ export default defineConfig({
           "dotenv",
           "fake-useragent",
           "json-to-pretty-yaml",
-          "prompts"
-        ]
-      }
-    }
-  }
+          "prompts",
+        ],
+        onwarn(warning, warn) {
+          // Suppress constructor function warnings
+          if (warning.code === 'TYPESCRIPT_WARNING' && 
+              warning.message?.includes('constructor function may be converted to a class')) {
+            return;
+          }
+          warn(warning);
+        },
+      },
+    },
+  },
 });

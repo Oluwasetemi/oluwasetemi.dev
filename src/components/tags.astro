@@ -24,7 +24,7 @@ const tagsWithCount = tags.reduce(
     <span class="count">#{tags.length}</span>
   </a>
   {
-    Object.entries(tagsWithCount).map(([tag, count], index) => (
+    Object.entries(tagsWithCount).map(([tag, count]) => (
       <a href={`/tags/${tag}`} class={tag === activeTag ? "active" : ""}>
         <span class="name">#{tag}</span>
         <span class="count">#{count}</span>
