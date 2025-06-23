@@ -10,8 +10,7 @@ command = "bun install && bun run build"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "lts"
-NPM_FLAGS = "--version"
+NODE_VERSION = "20"
 
 # Redirects configuration to prevent adapter errors
 [[redirects]]
