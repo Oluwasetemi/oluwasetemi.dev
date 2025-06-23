@@ -1,0 +1,61 @@
+---
+const today = new Date();
+import { SITE_TITLE, SOCIALS, SITE_AUTHOR } from "../consts";
+---
+
+<footer>
+  &copy; {today.getFullYear()}
+  {SITE_AUTHOR}. All rights reserved.
+  <div class="social-links">
+    <a href={`https://x.com/${SOCIALS.twitter}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on Twitter</span>
+      <div class="i-ri-twitter-fill"></div>
+    </a>
+    <a href={`https://github.com/${SOCIALS.github}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on GitHub</span>
+      <div class="i-ri-github-fill"></div>
+    </a>
+    <a href={`https://linkedin.com/in/${SOCIALS.linkedIn}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on LinkedIn</span>
+      <div class="i-ri-linkedin-box-fill"></div>
+    </a>
+    <a href={`https://codepen.io/${SOCIALS.codepen}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on Codepen</span>
+      <div class="i-ri-codepen-fill"></div>
+    </a>
+
+    <a href={SOCIALS.stackoverflow} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on Stackoverflow</span>
+      <div class="i-ri-stack-overflow-fill"></div>
+    </a>
+    <a href={`https://youtube.com/${SOCIALS.youtube}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on YouTube</span>
+      <div class="i-ri-youtube-fill"></div>
+    </a>
+    <a href={`https://stackblitz.com/${SOCIALS.stackblitz}`} target="_blank">
+      <span class="sr-only">Follow {SITE_AUTHOR} on Stackblitz</span>
+      <div class="i-ri-flashlight-fill"></div>
+    </a>
+  </div>
+</footer>
+<style>
+  footer {
+    padding: 2em 1em 6em 1em;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    color: rgb(var(--gray));
+    text-align: center;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  .social-links a {
+    text-decoration: none;
+    color: rgb(var(--gray));
+  }
+  .social-links a:hover {
+    color: rgb(var(--gray-dark));
+  }
+</style>

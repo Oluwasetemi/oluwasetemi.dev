@@ -1,0 +1,178 @@
+---
+import Layout from "../layouts/blogpost.astro";
+---
+
+<Layout
+  title="About Me"
+  description="Learn more about Oluwasetemi Ojo - Full Stack Developer from Nigeria"
+  pubDate={new Date()}
+  heroImage="/images/setemi.jpg"
+>
+  <div class="about-content">
+    <h2>
+      About Me
+      <span role="img" aria-label="a man">👨</span>
+    </h2>
+
+    <p>
+      I'm Oluwasetemi
+      <span role="img" aria-label="nigerian flag">🇳🇬</span>, my name is pronounced SHAY + TAY(Not TI) + ME. People often
+      call me Ojo, Temi, Setemi or Stephen. I prefer to be addressed with anyone that is easy for you.
+    </p>
+
+    <p>
+      I'm a web developer, passionate about the stuffs I build from Nigeria
+      <span role="img" aria-label="nigerian flag">🇳🇬</span>
+      who loves to work with JavaScript, Typescript Reactjs, Nodejs and GraphQL. I love to solve problems compared to focusing
+      of the technology howbeit, I consider what technology is best fits the domain of problems.
+    </p>
+
+    <p>
+      I teach programming and web development related courses to entry level developers. I focus on all the stuffs that
+      will make the difference and make learning interesting. I have a special way of making complex concept simple and
+      easy to grasp.
+    </p>
+
+    <!-- <img src="/images/setemi.jpg" alt="oluwasetemi" class="profile-image" /> -->
+
+    <p>
+      I took time to learn JavaScript after I finished from the university, I wrote about this in a blog,
+      <a target="_blank" rel="noopener noreferrer" href="https://www.oluwasetemi.dev/blog/story-part-1/">
+        you should check it out.
+      </a>
+    </p>
+
+    <p>
+      Building Software products for clients is what I do when I am not teaching.
+      <a href="/portfolio">You can checkout my portfolios here.</a>
+    </p>
+
+    <h3>More on Family</h3>
+    <p>
+      I am the second of 6 children and the first male in the lineage. Both parent are late (Blessed memory), Mum died
+      first year in university and Dad died while I was serving(as a graduate in nigeria it is mandatory to serve the
+      nation for a year which involves paramilitary training and other community services) Nigeria (country of birth) in
+      Benue State (Food basket of the nation), Nigeria in 2017.
+    </p>
+
+    <p>
+      I am in love
+      <span role="img" aria-label="the love blush">😍</span>
+      with Ajayi Temidayo Abosede. She is my gift from God.
+    </p>
+
+    <h3>More on Technical Experience</h3>
+    <p>
+      I build software with JavaScript and Typescript confidently. I have good experience with C# and Python (Flask,
+      Django). I have written a little bit of C and C++ (not near production experience trust me, educational purpose).
+    </p>
+    <p>
+      I have keen interest in React, GraphQL and related technologies like Gatsbyjs (the technology I use to build this
+      piece), Nextjs, Prisma, Keystone, CMS - Contentful, Sanity. For more technical details like uses, fonts, setup and
+      dotfiles
+      <a href="/uses">check here</a>.
+    </p>
+
+    <h3>More about Location</h3>
+    <p>
+      I currently live in the beautiful city of Osogbo, grew up in Ibadan , worked 2 year in Lagos, Abuja happens to be
+      my second home and
+      <abbr title="National Youth Service Corps">NYSC</abbr>
+      Service took me to Benue State.I love travelling and exploring new cultures.
+    </p>
+
+    <h3>More Links</h3>
+    <p>
+      <a href="/contact">Contact</a>
+      - Contact me!
+    </p>
+    <p>
+      <a href="/links">Links</a>
+      - a bunch of links to stuff I work on.
+    </p>
+    <p>
+      <a href="/uses">Uses</a>
+      - all the stuffs I use from fonts, vscode theme to IDE and dotfiles.
+    </p>
+    <p>
+      <a href="https://discord.gg/tHf84svv" target="_blank" rel="noopener noreferrer"> Discord Server </a>
+      - Join our discord community!.
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .about-content {
+    color: var(--color);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .about-content h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .about-content h3 {
+    margin: 2rem 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .mark {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+  }
+
+  .profile-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    margin: 2rem auto;
+    display: block;
+    box-shadow: var(--box-shadow);
+  }
+
+  .about-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+
+  .about-content a:hover {
+    color: var(--accent-hover);
+  }
+
+  .about-content abbr {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    cursor: help;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .about-content {
+      padding: 1rem;
+    }
+
+    .about-content h2 {
+      font-size: 1.75rem;
+    }
+
+    .about-content h3 {
+      font-size: 1.25rem;
+    }
+  }
+</style>

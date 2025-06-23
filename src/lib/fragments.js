@@ -1,11 +1,11 @@
-import {graphql} from 'gatsby'
+import { graphql } from "gatsby";
 
 export const bannerImage = graphql`
   fragment bannerImage260 on File {
     childImageSharp {
       gatsbyImageData(
         width: 260
-        traceSVG: {color: "#573ede"}
+        traceSVG: { color: "#573ede" }
         quality: 50
         placeholder: TRACED_SVG
         layout: CONSTRAINED
@@ -17,7 +17,7 @@ export const bannerImage = graphql`
     childImageSharp {
       gatsbyImageData(
         width: 640
-        traceSVG: {color: "#573ede"}
+        traceSVG: { color: "#573ede" }
         placeholder: TRACED_SVG
         layout: CONSTRAINED
       )
@@ -28,14 +28,14 @@ export const bannerImage = graphql`
     childImageSharp {
       gatsbyImageData(
         width: 720
-        traceSVG: {color: "#573ede"}
+        traceSVG: { color: "#573ede" }
         quality: 75
         placeholder: TRACED_SVG
         layout: CONSTRAINED
       )
     }
   }
-`
+`;
 
 export const ImageFields = graphql`
   fragment ImageFields on File {
@@ -46,4 +46,4 @@ export const ImageFields = graphql`
       gatsbyImageData(width: 700, layout: CONSTRAINED)
     }
   }
-`
+`;

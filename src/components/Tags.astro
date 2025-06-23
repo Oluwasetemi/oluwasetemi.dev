@@ -1,0 +1,72 @@
+---
+interface Props {
+  tags?: string[];
+  activeTag?: string;
+}
+
+const { tags = [], activeTag } = Astro.props;
+
+// Count occurrences of each tag
+const tagsWithCount = tags.reduce(
+  (acc, tag) => {
+    if (tag) {
+      acc[tag] = (acc[tag] || 0) + 1;
+    }
+    return acc;
+  },
+  {} as Record<string, number>,
+);
+---
+
+<div class="tags">
+  <a href="/tags">
+    <span class="name">#All</span>
+    <span class="count">#{tags.length}</span>
+  </a>
+  {
+    Object.entries(tagsWithCount).map(([tag, count], index) => (
+      <a href={`/tags/${tag}`} class={tag === activeTag ? "active" : ""}>
+        <span class="name">#{tag}</span>
+        <span class="count">#{count}</span>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .tags {
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .tags a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1rem;
+    align-items: center;
+    padding: 5px;
+    background: #f3f4f6;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: clamp(1.5rem, 1.4vw, 2.5rem);
+    transition: background-color 0.2s ease;
+  }
+
+  .tags a:hover {
+    background: #e5e7eb;
+  }
+
+  .tags a.active,
+  .tags a[aria-current="page"] {
+    background: #fbbf24;
+  }
+
+  .count {
+    background: white;
+    padding: 2px 5px;
+    border-radius: 2px;
+  }
+</style>

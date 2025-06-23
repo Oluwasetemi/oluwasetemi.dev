@@ -1,0 +1,162 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
+import { getCollection } from "astro:content";
+
+const portfolios = await getCollection("portfolio");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Portfolio - ${SITE_TITLE}`} description="My portfolio of web development projects and work" />
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .page-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+      .portfolio-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        border: 1px solid #e5e7eb;
+      }
+      .portfolio-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      .portfolio-card h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+      }
+      .portfolio-card h2 a {
+        color: #333;
+        text-decoration: none;
+      }
+      .portfolio-card h2 a:hover {
+        color: #667eea;
+      }
+      .portfolio-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+      .portfolio-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      .tag {
+        background: #f3f4f6;
+        color: #374151;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+      .portfolio-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .portfolio-links a {
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: transform 0.2s ease;
+      }
+      .portfolio-links a:hover {
+        transform: translateY(-1px);
+      }
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #666;
+      }
+      @media (max-width: 768px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="page-header">
+        <h1>My Portfolio</h1>
+        <p>A collection of projects I've worked on</p>
+      </div>
+
+      {
+        portfolios.length > 0 ? (
+          <div class="portfolio-grid">
+            {portfolios.map((portfolio) => (
+              <article class="portfolio-card">
+                <h2>
+                  <a href={`/portfolio/${portfolio.slug}/`}>{portfolio.data.title}</a>
+                </h2>
+                {portfolio.data.description && <p class="portfolio-description">{portfolio.data.description}</p>}
+                {portfolio.data.tags && (
+                  <div class="portfolio-tags">
+                    {portfolio.data.tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <div class="portfolio-links">
+                  <a href={`/portfolio/${portfolio.slug}/`}>View Details</a>
+                  {portfolio.data.url && (
+                    <a href={portfolio.data.url} target="_blank" rel="noopener noreferrer">
+                      Live Demo
+                    </a>
+                  )}
+                  {portfolio.data.github && (
+                    <a href={portfolio.data.github} target="_blank" rel="noopener noreferrer">
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="empty-state">
+            <h2>Portfolio Coming Soon</h2>
+            <p>I'm currently working on showcasing my projects. Check back soon!</p>
+          </div>
+        )
+      }
+    </main>
+    <Footer />
+  </body>
+</html>
