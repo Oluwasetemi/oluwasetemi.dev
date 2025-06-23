@@ -8,4 +8,23 @@ import UnoCSS from "unocss/astro";
 export default defineConfig({
   site: "https://oluwasetemi.dev",
   integrations: [mdx(), UnoCSS(), react(), sitemap()],
+  vite: {
+    build: {
+      rollupOptions: {
+        external: [
+          "tinify",
+          "prettier",
+          "ora",
+          "open",
+          "mkdirp",
+          "axios",
+          "@sindresorhus/slugify",
+          "dotenv",
+          "fake-useragent",
+          "json-to-pretty-yaml",
+          "prompts"
+        ]
+      }
+    }
+  }
 });
