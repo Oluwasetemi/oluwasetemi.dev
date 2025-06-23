@@ -12,9 +12,12 @@ export default defineConfig({
   integrations: [
     mdx(),
     UnoCSS(),
-    react({
-      include: ["**/*.{jsx,tsx}"],
-    }),
+    react(
+      {
+        include: ["**/*.{jsx,tsx}"],
+        experimentalReactChildren: true,
+      },
+    ),
     sitemap(),
   ],
 
@@ -44,8 +47,9 @@ export default defineConfig({
         },
       },
     },
-    ssr: {
-      noExternal: ["react", "react-dom"],
+    define: {
+      // eslint-disable-next-line node/no-process-env
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     },
   },
 

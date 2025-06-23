@@ -2,6 +2,10 @@
   "name": "new",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "bun@latest",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -22,8 +26,8 @@
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "astro": "^5.10.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {

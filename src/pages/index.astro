@@ -18,7 +18,14 @@ const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .slice(0, 4);
 
 // Get portfolio items
-const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfolio")).slice(0, 3);
+const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfolio"))
+  .sort((a: CollectionEntry<"portfolio">, b: CollectionEntry<"portfolio">) => {
+    const dateA = a.data.publishedDate;
+    const dateB = b.data.publishedDate;
+    if (!dateA || !dateB) return 0;
+    return dateB.valueOf() - dateA.valueOf();
+  })
+  .slice(0, 3);
 ---
 
 <!doctype html>
@@ -41,7 +48,6 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
       .hero p {
         font-size: 1.2rem;
         line-height: 1.6;
-        max-width: 600px;
       }
       .hero mark {
         background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
@@ -153,8 +159,8 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
         <p>
           I'm a <mark
             >Fullstack Engineer who works as a Tutor @TripleTen and Frontend Engineering Instructor @AltSchoolAfrica</mark
-          >. I specialize in building web applications with TypeScript, JavaScript, React, and Node.js. You can explore
-          my projects on
+          >. I specialize in building web applications and teaching web development with TypeScript, JavaScript, React,
+          and Node.js. You can explore my projects on
           <a href={`https://github.com/${SOCIALS.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>
           and
           <a href={`https://stackblitz.com/${SOCIALS.stackblitz}`} target="_blank" rel="noopener noreferrer"
@@ -178,6 +184,7 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
                     <a href={`/portfolio/${portfolio.slug}/`}>{portfolio.data.title}</a>
                   </h3>
                   {portfolio.data.description && <p>{portfolio.data.description}</p>}
+                  {console.log(portfolios)}
                   {portfolio.data.tags && (
                     <div class="post-tags">
                       {portfolio.data.tags.map((tag: string) => (

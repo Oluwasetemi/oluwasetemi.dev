@@ -4,7 +4,22 @@ description: Hire Oluwasetemi, ask a question, submit a testimonial, or provide 
 ---
 
 import ContactForm from "../../components/contact-form.astro";
+import Layout from "../../layouts/blogpost.astro";
 
-You can contact me by filling out the form below:
+<Layout
+  title="Contact Me"
+  description="Get in touch with Oluwasetemi Ojo - Full Stack Developer from Nigeria"
+  pubDate={new Date()}
+  heroImage="/images/contact.jpg"
+>
+  <div class="contact-content">
+    <h2>
+      Contact Me
+      <span role="img" aria-label="envelope">📧</span>
+    </h2>
 
-<ContactForm />
+    <p>You can contact me by filling out the form below:</p>
+
+    <ContactForm />
+  </div>
+</Layout>

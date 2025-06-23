@@ -39,6 +39,7 @@ export default defineConfig({
         strong: "Rubik Iso",
         fast: "Ubuntu",
         hand: "Caveat",
+        special: "Operator Mono",
         mono: {
           name: "IBM Plex Mono",
           italic: true,

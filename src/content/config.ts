@@ -29,6 +29,9 @@ const portfolio = defineCollection({
     url: z.string().optional(),
     github: z.string().optional(),
     tech: z.array(z.string()).optional(),
+    isPublished: z.boolean().optional(),
+    isDraft: z.boolean().optional(),
+    publishedDate: z.coerce.date().optional(),
   }),
 });
 

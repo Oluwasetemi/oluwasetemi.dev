@@ -120,34 +120,40 @@ const portfolios = await getCollection("portfolio");
       {
         portfolios.length > 0 ? (
           <div class="portfolio-grid">
-            {portfolios.map((portfolio) => (
-              <article class="portfolio-card">
-                <h2>
-                  <a href={`/portfolio/${portfolio.slug}/`}>{portfolio.data.title}</a>
-                </h2>
-                {portfolio.data.description && <p class="portfolio-description">{portfolio.data.description}</p>}
-                {portfolio.data.tags && (
-                  <div class="portfolio-tags">
-                    {portfolio.data.tags.map((tag) => (
-                      <span class="tag">{tag}</span>
-                    ))}
+            {portfolios
+              .sort((a, b) => {
+                const dateA = new Date(a.data.publishedDate as Date);
+                const dateB = new Date(b.data.publishedDate as Date);
+                return dateB.getTime() - dateA.getTime();
+              })
+              .map((portfolio) => (
+                <article class="portfolio-card">
+                  <h2>
+                    <a href={`/portfolio/${portfolio.slug}/`}>{portfolio.data.title}</a>
+                  </h2>
+                  {portfolio.data.description && <p class="portfolio-description">{portfolio.data.description}</p>}
+                  {portfolio.data.tags && (
+                    <div class="portfolio-tags">
+                      {portfolio.data.tags.map((tag) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  <div class="portfolio-links">
+                    <a href={`/portfolio/${portfolio.slug}/`}>View Details</a>
+                    {portfolio.data.url && (
+                      <a href={portfolio.data.url} target="_blank" rel="noopener noreferrer">
+                        Live Demo
+                      </a>
+                    )}
+                    {portfolio.data.github && (
+                      <a href={portfolio.data.github} target="_blank" rel="noopener noreferrer">
+                        GitHub
+                      </a>
+                    )}
                   </div>
-                )}
-                <div class="portfolio-links">
-                  <a href={`/portfolio/${portfolio.slug}/`}>View Details</a>
-                  {portfolio.data.url && (
-                    <a href={portfolio.data.url} target="_blank" rel="noopener noreferrer">
-                      Live Demo
-                    </a>
-                  )}
-                  {portfolio.data.github && (
-                    <a href={portfolio.data.github} target="_blank" rel="noopener noreferrer">
-                      GitHub
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
           </div>
         ) : (
           <div class="empty-state">

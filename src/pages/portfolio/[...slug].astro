@@ -9,10 +9,17 @@ type Props = CollectionEntry<"portfolio">;
 
 export async function getStaticPaths() {
   const portfolios = await getCollection("portfolio");
-  return portfolios.map((portfolio) => ({
-    params: { slug: portfolio.slug },
-    props: portfolio,
-  }));
+  return portfolios
+    .map((portfolio) => ({
+      params: { slug: portfolio.slug },
+      props: portfolio,
+    }))
+    .sort((a, b) => {
+      const dateA = new Date(a.props.data.publishedDate as Date);
+      const dateB = new Date(b.props.data.publishedDate as Date);
+      return dateA.getTime() - dateB.getTime();
+    })
+    .filter((portfolio) => portfolio.props.data.isPublished);
 }
 
 const portfolio = Astro.props;
