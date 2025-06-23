@@ -25,7 +25,7 @@ will be of great advantage to anyone building apps with the starters to have
 test include. It will be a way to see writing test as part of the journey of the
 product they are building.
 
-{/\* ```jsx
+{/* ```jsx
 import {render, screen} from '@testing-library/react'
 import App from './App'
 
@@ -37,7 +37,7 @@ const linkElement = screen.getByText(/learn react/i)
 expect(linkElement).toBeInTheDocument()
 })
 
-````*/}
+``` */}
 
 
 <figcaption>
@@ -258,7 +258,7 @@ Document Object Model (DOM) for any thing with the text name `/count is/`. The
 essence of the forward slash is to use the regex option of the `getByText`
 query. Assert that the value of the counter has been increased by just one.
 
-```jsx{numberLines: true}
+```jsx
 it('should reset count value when app rerenders', () => {
     const { getByText, rerender } = render(<App />);
     rerender(<App />);

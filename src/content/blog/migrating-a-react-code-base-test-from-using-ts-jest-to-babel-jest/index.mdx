@@ -52,7 +52,7 @@ To create a project with vitejs, all you need to do is to copy and paste this in
 your command line or terminal utility. The name of the folder your app will be
 created in is `react-typescript-playground`.
 
-```bash{3,6,10}
+```bash
 # react-typescript-playground will be the name of the project
 # I prefer yarn but if you like npm check how to use npm in place of yarn here
 # https://classic.yarnpkg.com/en/docs/migrating-from-npm/#toc-cli-commands-comparison
@@ -71,7 +71,7 @@ a project setup for you to play with. Change directory into the new create app
 folder and run the yarn command to install the project dependencies. For vitejs
 the dependencies is minimal.
 
-```bash{2-4}
+```bash
 # cd into the folder/project
 cd react-typescript-playground
 # run npm install or yarn to install the dependencies
@@ -186,7 +186,7 @@ the element exist inside the document using our matcher. For more on matchers
 your can check the [expect API](https://jestjs.io/docs/expect) or
 [jest-dom matchers](https://testing-library.com/docs/ecosystem-jest-dom/)
 
-```tsx{2,4-6,8-10}
+```tsx
 it('should renders app properly', () => {
   const { debug, getByText } = render(<App />);
 
@@ -204,7 +204,7 @@ We can write other test for rendering the count to be 0 when the app loads, test
 the increment of the app and test if the app resets to count 0 when we rerender
 the whole thing. Add the following to the `App.spec.tsx`.
 
-```tsx{2,4,6,10,12-13,15,19,21-23,25}
+```tsx
 it('should have a count value of 0 when app loads', () => {
   const { getByText } = render(<App />);
 
@@ -267,7 +267,7 @@ frontend app you can plan to write one. it increases your confidence.
 
 - install the necessary babel packages
 
-```bash{1}
+```bash
 yarn add -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-jest
 # add the @babel/plugin-transform-runtime to avoid the runtime error.
 yarn add -D @babel/plugin-transform-runtime

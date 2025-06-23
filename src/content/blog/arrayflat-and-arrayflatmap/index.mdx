@@ -32,7 +32,7 @@ It was renamed to `flat` after TC39 met in May 2018 and
 
 ## How do we flatten an Array Before ?
 
-```js{1-6,9}
+```js
 const flatten = (arr, depth = 1) =>
   arr.reduce(
     (a, v) =>
@@ -65,7 +65,7 @@ array a single level deep. `flattenDeep` recursively flattens an
 array.`flattenDepth` also recursively flatten an array up to depth that defaults
 to 1.
 
-```js{3,6,11,14}
+```js
 import _ from 'lodash'
 
 _.flatten([1, [2, [3, [4]], 5]])
@@ -116,7 +116,7 @@ The future is here not Just evenly distributed. With the two methods, we can
 flatten an array easily. `flatMap` combines the power of the regular map and
 flat together.
 
-```js{2,5,8}
+```js
 // Infinity can be used to flatten recursively
 ;[1, 2, [3, [4, 5]], 5, 6]
   .flat(Infinity)
