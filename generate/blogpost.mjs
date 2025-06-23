@@ -24,6 +24,7 @@ dotenv.config({
 });
 const fromRoot = (...p) => path.join(root, "..", ...p);
 
+// eslint-disable-next-line node/no-process-env
 tinify.key = process.env.TINY_PNG_API_KEY;
 
 const padLeft0 = n => n.toString().padStart(2, "0");
