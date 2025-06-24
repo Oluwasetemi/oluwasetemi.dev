@@ -21,7 +21,7 @@ export async function GET(context) {
           ...post.data,
           title: post.data.title,
           link: `/blog/${post.slug}/`,
-          date: post.data.date || post.data.pubDate || post.data.publishDate,
+          pubDate: post.data.date ? new Date(post.data.date) : new Date(),
           description: post.data.description || post.data.excerpt || "",
           categories: post.data.tags || [],
         };
