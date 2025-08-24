@@ -25,9 +25,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
   </head>
   <body>
     <Header />
-    <main>
-      <slot />
-    </main>
+    <slot />
     <footer class="text-center py-8 text-gray-600 text-sm">
       <p>&copy; {new Date().getFullYear()} Oluwasetemi. All rights reserved.</p>
     </footer>

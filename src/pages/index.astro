@@ -28,15 +28,15 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="max-w-6xl mx-auto px-8 py-8">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
     <!-- Hero Section -->
-    <section class="py-12 text-left">
+    <section class="py-8 sm:py-12 text-left">
       <h1
-        class="text-6xl md:text-4xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
+        class="text-4xl sm:text-5xl lg:text-6xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
       >
         I'm Oluwasetemi
       </h1>
-      <p class="text-xl leading-relaxed">
+      <p class="text-lg sm:text-xl leading-relaxed">
         I'm a <mark class="bg-gradient-to-r from-pink-400 to-red-500 text-white px-2 py-1 rounded"
           >Fullstack Engineer who works as a Tutor @TripleTen and Frontend Engineering Instructor @AltSchoolAfrica</mark
         >. I specialize in building web applications and teaching web development with TypeScript, JavaScript, React,
@@ -60,28 +60,28 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
     <!-- Portfolio Section -->
     {
       portfolios.length > 0 && (
-        <section class="my-20">
-          <div class="text-center mb-12">
-            <h2 class="text-5xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+        <section class="my-12 sm:my-16 lg:my-20">
+          <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
               My Portfolios
             </h2>
-            <p class="text-xl text-gray-600 mb-6">Showcasing my latest projects and work</p>
-            <div class="flex items-center justify-center gap-4">
+            <p class="text-lg sm:text-xl text-gray-600 mb-6">Showcasing my latest projects and work</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <a
                 href="/portfolio"
-                class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 inline-flex items-center gap-2"
+                class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 inline-flex items-center gap-2 text-sm sm:text-base"
               >
                 View All Projects
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
               </a>
-              <span class="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
+              <span class="bg-gradient-to-r from-pink-500 to-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold shadow-md">
                 {portfolios.length} Projects
               </span>
             </div>
           </div>
-          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none m-0 p-0">
             {portfolios.map((portfolio) => (
               <PortfolioCard portfolio={portfolio} />
             ))}
@@ -91,19 +91,19 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
     }
 
     <!-- Latest Posts Section -->
-    <section class="my-16">
+    <section class="my-12 sm:my-16">
       <h2
-        class="text-5xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
       >
         Some of my Writings
       </h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 list-none m-0 p-0">
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 list-none m-0 p-0">
         {allPosts.map((post) => <BlogPostCard post={post} />)}
       </ul>
       <div class="text-center mt-8">
         <a
           href="/blog"
-          class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-3 rounded-full no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200"
+          class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm sm:text-base"
           >To see all of my writings</a
         >
       </div>

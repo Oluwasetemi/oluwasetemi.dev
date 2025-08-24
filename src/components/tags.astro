@@ -18,55 +18,25 @@ const tagsWithCount = tags.reduce(
 );
 ---
 
-<div class="tags">
-  <a href="/tags">
-    <span class="name">#All</span>
-    <span class="count">#{tags.length}</span>
+<div class="flex flex-wrap gap-4 mb-16 text-gray-800">
+  <a
+    href="/tags"
+    class="grid grid-cols-[auto_1fr] gap-4 items-center px-2 py-1 bg-gray-100 rounded text-sm sm:text-base lg:text-2xl no-underline transition-colors duration-200 hover:bg-gray-200"
+  >
+    <span class="font-medium">#All</span>
+    <span class="bg-white px-1 py-0.5 rounded text-xs sm:text-sm lg:text-base">#{tags.length}</span>
   </a>
   {
     Object.entries(tagsWithCount).map(([tag, count]) => (
-      <a href={`/tags/${tag}`} class={tag === activeTag ? "active" : ""}>
-        <span class="name">#{tag}</span>
-        <span class="count">#{count}</span>
+      <a
+        href={`/tags/${tag}`}
+        class={`grid grid-cols-[auto_1fr] gap-4 items-center px-2 py-1 rounded text-sm sm:text-base lg:text-2xl no-underline transition-colors duration-200 ${
+          tag === activeTag ? "bg-amber-300 hover:bg-amber-400" : "bg-gray-100 hover:bg-gray-200"
+        }`}
+      >
+        <span class="font-medium">#{tag}</span>
+        <span class="bg-white px-1 py-0.5 rounded text-xs sm:text-sm lg:text-base">#{count}</span>
       </a>
     ))
   }
 </div>
-
-<style>
-  .tags {
-    color: #333;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 4rem;
-  }
-
-  .tags a {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0 1rem;
-    align-items: center;
-    padding: 5px;
-    background: #f3f4f6;
-    border-radius: 2px;
-    text-decoration: none;
-    font-size: clamp(1.5rem, 1.4vw, 2.5rem);
-    transition: background-color 0.2s ease;
-  }
-
-  .tags a:hover {
-    background: #e5e7eb;
-  }
-
-  .tags a.active,
-  .tags a[aria-current="page"] {
-    background: #fbbf24;
-  }
-
-  .count {
-    background: white;
-    padding: 2px 5px;
-    border-radius: 2px;
-  }
-</style>
