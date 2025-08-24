@@ -3,9 +3,11 @@ import HeaderLink from "./headerlink.astro";
 import { SITE_TITLE, SOCIALS } from "../consts";
 ---
 
-<header>
-  <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+<header class="m-0 px-4 bg-white shadow-md">
+  <nav class="flex items-center justify-between">
+    <h2 class="m-0 text-base">
+      <a href="/" class="no-underline">{SITE_TITLE}</a>
+    </h2>
     <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
@@ -13,8 +15,13 @@ import { SITE_TITLE, SOCIALS } from "../consts";
       <HeaderLink href="/about">About</HeaderLink>
       <!-- <HeaderLink href="/contact">Contact</HeaderLink> -->
     </div>
-    <div class="social-links">
-      <a href={`https://twitter.com/${SOCIALS.twitter}`} target="_blank" rel="noopener noreferrer">
+    <div class="social-links hidden md:flex gap-4">
+      <a
+        href={`https://twitter.com/${SOCIALS.twitter}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-2 text-gray-700 hover:text-blue-500 transition-colors"
+      >
         <span class="sr-only">Follow {SOCIALS.twitter} on Twitter</span>
         <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
           ><path
@@ -23,7 +30,12 @@ import { SITE_TITLE, SOCIALS } from "../consts";
           ></path></svg
         >
       </a>
-      <a href={`https://github.com/${SOCIALS.github}`} target="_blank" rel="noopener noreferrer">
+      <a
+        href={`https://github.com/${SOCIALS.github}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-2 text-gray-700 hover:text-gray-900 transition-colors"
+      >
         <span class="sr-only">Go to {SOCIALS.github} GitHub profile</span>
         <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
           ><path
@@ -32,7 +44,12 @@ import { SITE_TITLE, SOCIALS } from "../consts";
           ></path></svg
         >
       </a>
-      <a href={`https://linkedin.com/in/${SOCIALS.linkedIn}`} target="_blank" rel="noopener noreferrer">
+      <a
+        href={`https://linkedin.com/in/${SOCIALS.linkedIn}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-2 text-gray-700 hover:text-blue-700 transition-colors"
+      >
         <span class="sr-only">Connect on LinkedIn</span>
         <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
           <path
@@ -44,44 +61,3 @@ import { SITE_TITLE, SOCIALS } from "../consts";
     </div>
   </nav>
 </header>
-<style>
-  header {
-    margin: 0;
-    padding: 0 1em;
-    background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
-  }
-  h2 {
-    margin: 0;
-    font-size: 1em;
-  }
-
-  h2 a,
-  h2 a.active {
-    text-decoration: none;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  nav a {
-    padding: 1em 0.5em;
-    color: var(--black);
-    border-bottom: 4px solid transparent;
-    text-decoration: none;
-  }
-  nav a.active {
-    text-decoration: none;
-    border-bottom-color: var(--accent);
-  }
-  .social-links,
-  .social-links a {
-    display: flex;
-  }
-  @media (max-width: 720px) {
-    .social-links {
-      display: none;
-    }
-  }
-</style>

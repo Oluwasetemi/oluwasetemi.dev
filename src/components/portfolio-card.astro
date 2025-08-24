@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  portfolio: CollectionEntry<"portfolio">;
+}
+
+const { portfolio } = Astro.props;
+---
+
+<li
+  class="group bg-white rounded-2xl p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden relative flex flex-col h-full"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+  >
+  </div>
+  <div class="relative z-10 flex flex-col h-full">
+    <div class="flex-grow">
+      <h3 class="text-2xl font-bold mb-3 group-hover:text-indigo-600 transition-colors duration-200">
+        <a href={`/portfolio/${portfolio.slug}/`} class="no-underline">
+          {portfolio.data.title}
+        </a>
+      </h3>
+      {
+        portfolio.data.description && (
+          <p class="text-gray-600 mb-6 leading-relaxed text-lg">{portfolio.data.description}</p>
+        )
+      }
+      {
+        portfolio.data.tags && (
+          <div class="flex gap-2 flex-wrap">
+            {portfolio.data.tags.map((tag: string) => (
+              <span class="bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium border border-indigo-200">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+    <div class="mt-6 pt-4 border-t border-gray-100 flex-shrink-0">
+      <a
+        href={`/portfolio/${portfolio.slug}/`}
+        class="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:text-indigo-800 transition-colors duration-200"
+      >
+        View Project
+        <svg
+          class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</li>

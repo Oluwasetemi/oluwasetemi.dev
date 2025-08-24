@@ -4,7 +4,6 @@ export default antfu({
   ignores: ["node_modules", "**/node_modules/**", "public", "**/public/**", "backup", "**/backup/**"],
   formatters: true,
   astro: true,
-  unocss: true,
   stylistic: {
     indent: 2,
     semi: true,
@@ -28,7 +27,7 @@ export default antfu({
       "error",
       {
         case: "kebabCase",
-        ignore: ["README.md"],
+        ignore: ["README.md", "Layout.astro"],
       },
     ],
   },

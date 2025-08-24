@@ -1,0 +1,35 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <Layout /> component.
+import "../styles/global.css";
+import type { HTMLAttributes } from "astro/types";
+import Header from "../components/header.astro";
+import BaseHead from "../components/basehead.astro";
+
+interface Props extends HTMLAttributes<"html"> {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string | URL;
+  type?: "website" | "article";
+}
+
+const { title, description, image = "/blog-placeholder-1.jpg", canonical, type = "website", ...props } = Astro.props;
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" {...props}>
+  <head>
+    <BaseHead title={title} description={description} image={image} canonical={canonicalURL} type={type} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <footer class="text-center py-8 text-gray-600 text-sm">
+      <p>&copy; {new Date().getFullYear()} Oluwasetemi. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

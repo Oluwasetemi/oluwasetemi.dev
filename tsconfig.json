@@ -5,7 +5,7 @@
     "jsxImportSource": "react",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "types": ["react", "react-dom"],
+    "types": ["react", "react-dom", "tailwindcss"],
     "allowImportingTsExtensions": true,
     "strictNullChecks": true,
     "noEmit": true,

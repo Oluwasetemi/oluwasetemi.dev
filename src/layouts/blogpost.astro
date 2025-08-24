@@ -4,82 +4,41 @@ import BaseHead from "../components/basehead.astro";
 import Header from "../components/header.astro";
 import Footer from "../components/footer.astro";
 import FormattedDate from "../components/formatteddate.astro";
+import Layout from "./Layout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, date, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description || `Blog post: ${title}`} />
-    <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
-      .hero-image {
-        width: 100%;
-      }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
-      .prose {
-        width: 1080px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
-      }
-      .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        text-align: center;
-        line-height: 1;
-      }
-      .title h1 {
-        margin: 0 0 0.5em 0;
-      }
-      .date {
-        margin-bottom: 0.5em;
-        color: rgb(var(--gray));
-      }
-      .last-updated-on {
-        font-style: italic;
-      }
-    </style>
-  </head>
-
-  <body>
-    <Header />
-    <main>
-      <article>
-        <div class="hero-image">
-          {heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-        </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={date} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <!-- <h1>{title}</h1> -->
-            <hr />
+<Layout title={title} description={description || `Blog post: ${title}`}>
+  <main class="w-full max-w-full m-0">
+    <article>
+      <div class="w-full">
+        {
+          heroImage && (
+            <img width={1020} height={510} src={heroImage} alt="" class="block mx-auto rounded-xl shadow-lg" />
+          )
+        }
+      </div>
+      <div class="max-w-4xl mx-auto px-4 py-8 text-gray-800">
+        <div class="mb-8 py-8 text-center leading-tight">
+          <div class="mb-4 text-gray-600">
+            <FormattedDate date={date} />
+            {
+              updatedDate && (
+                <div class="italic">
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              )
+            }
           </div>
-          <slot />
+          <!-- <h1 class="m-0 mb-4">{title}</h1> -->
+          <hr class="border-gray-200" />
         </div>
-      </article>
-    </main>
-    <Footer />
-  </body>
-</html>
+        <slot />
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

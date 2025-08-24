@@ -7,11 +7,11 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  canonical: string | URL;
+  type?: "website" | "article";
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+const { title, description, image = "/blog-placeholder-1.jpg", canonical, type = "website" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -25,7 +25,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonical} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

@@ -2,8 +2,8 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
-import UnoCSS from "unocss/astro";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,7 +11,6 @@ export default defineConfig({
 
   integrations: [
     mdx(),
-    UnoCSS(),
     react(
       {
         include: ["**/*.{jsx,tsx}"],
@@ -47,10 +46,13 @@ export default defineConfig({
         },
       },
     },
+
     define: {
       // eslint-disable-next-line node/no-process-env
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     },
+
+    plugins: [tailwindcss()],
   },
 
   output: "server",

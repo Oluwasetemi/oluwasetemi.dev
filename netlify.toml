@@ -4,7 +4,6 @@ for = "/rss.xml"
 [headers.values]
 Access-Control-Allow-Origin = "*"
 
-
 [build]
 command = "bun install && bun run build"
 publish = "dist"
@@ -14,6 +13,6 @@ NODE_VERSION = "20"
 
 # Redirects configuration to prevent adapter errors
 [[redirects]]
-  from = "/*"
-  to = "/404"
-  status = 404
+from = "/*"
+to = "/404"
+status = 404
