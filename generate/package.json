@@ -1,15 +1,21 @@
 {
-  "name": "kcd-blog-post-generator",
+  "name": "oos-blog-post-generator",
   "type": "module",
   "private": true,
-  "dependencies": {
-    "ora": "^4.0.4"
-  },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "@sindresorhus/slugify": "^2.2.1",
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
     "fake-useragent": "^1.0.1",
     "json-to-pretty-yaml": "^1.2.2",
-    "open": "^7.0.4",
-    "tinify": "^1.6.0-beta.2"
+    "mkdirp": "^3.0.1",
+    "open": "^10.2.0",
+    "ora": "^8.2.0",
+    "prettier": "^3.6.2",
+    "prompts": "^2.4.2",
+    "tinify": "^1.8.1"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
   }
 }

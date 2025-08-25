@@ -9,10 +9,12 @@ import path, { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import util from "node:util";
 import open from "open";
-import ora from "ora";
+import ora, { Ora } from "ora";
 import prettier from "prettier";
 import prompts from "prompts";
 import tinify from "tinify";
+
+import { processImageWithFallback } from "./wasm-image-processor.js";
 
 // Types
 type PostType = "blog" | "youtube";
@@ -79,11 +81,44 @@ async function getPhotoCredit(unsplashPhotoId: string): Promise<string> {
   return `Photo by [${name}](https://unsplash.com/photos/${unsplashPhotoId})`;
 }
 
+function extractUnsplashPhotoId(input: string): string {
+  // Pattern for Unsplash photo ID (10-11 alphanumeric characters)
+  // Most Unsplash IDs are mixed case alphanumeric strings
+  const idPattern = /[A-Z0-9]{10,11}(?![A-Z0-9])/i;
+
+  // 1️⃣ Handle URLs: https://unsplash.com/photos/...
+  const urlMatch = input.match(/unsplash\.com\/photos\/([^/?]+)/i);
+  if (urlMatch) {
+    const afterPhotos = urlMatch[1]; // e.g. "a-bottle-of-blue-liquid-next-to-a-rock-RMUSYeC4r5I"
+
+    // First check if there's an ID at the end after a dash
+    const segments = afterPhotos.split("-");
+    const lastSegment = segments[segments.length - 1];
+    if (idPattern.test(lastSegment)) {
+      return lastSegment;
+    }
+
+    // If no ID found after dash, check if the whole path segment is an ID
+    if (idPattern.test(afterPhotos)) {
+      return afterPhotos;
+    }
+  }
+
+  // 2️⃣ Handle plain strings: look for ID pattern anywhere in the string
+  const matches = input.match(idPattern);
+  if (matches) {
+    return matches[0];
+  }
+
+  // If no ID pattern is found, return empty string
+  return "";
+}
+
 async function getBannerPhoto(title: string, destination: string): Promise<string | null> {
   const imagesDestination = path.join(destination, "images");
 
   await open(
-    `https://unsplash.com/search/photos/${encodeURIComponent(title)}`,
+    `https://unsplash.com/s/photos/${encodeURIComponent(title)}`,
     {
       wait: false,
     },
@@ -93,31 +128,92 @@ async function getBannerPhoto(title: string, destination: string): Promise<strin
     {
       type: "text",
       name: "unsplashPhotoId",
-      message: `What's the Unsplash Photo ID for the banner for this post?`,
+      message: `What's the Unsplash Photo URL for the banner? (e.g., 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ)`,
     },
   ]) as { unsplashPhotoId?: string };
 
   mkdirpSync(imagesDestination);
 
   if (unsplashPhotoId) {
-    const source = await tinify
-      .fromUrl(
-        `https://unsplash.com/photos/${unsplashPhotoId}/download?force=true`,
-      )
-      .resize({
-        method: "scale",
+    const spinner = ora("🔄 Processing banner image...").start();
+    try {
+      // Extract and clean the photo ID
+      const cleanPhotoId = extractUnsplashPhotoId(unsplashPhotoId);
+      if (!cleanPhotoId) {
+        spinner.fail("❌ Invalid Unsplash photo ID");
+        return null;
+      }
+      spinner.text = `🔄 Found photo ID: ${cleanPhotoId}`;
+
+      const unsplashDownloadUrl = `https://unsplash.com/photos/${cleanPhotoId}/download?force=true&w=2070`;
+
+      spinner.text = "🔄 Processing image with fallback...";
+
+      // Create TinyPNG processor function
+      const tinyPngProcessor = async (url: string, outputPath: string, options: any) => {
+        // eslint-disable-next-line node/no-process-env
+        tinify.key = process.env.TINY_PNG_API_KEY || "";
+        if (!tinify.key) {
+          throw new Error("No TinyPNG API key configured");
+        }
+
+        const source = await tinify.fromUrl(url);
+        const resized = source.resize({
+          method: "scale",
+          width: options.width || 2070,
+        });
+
+        const result = await resized.result();
+        const buffer = await result.toBuffer();
+        await fs.promises.writeFile(outputPath, buffer);
+        return outputPath;
+      };
+
+      // Output path
+      const outputPath = path.join(imagesDestination, "banner.jpg");
+
+      // Use the integrated fallback approach
+      await processImageWithFallback(unsplashDownloadUrl, outputPath, {
         width: 2070,
-      });
+        quality: 90,
+        format: "jpeg",
+      }, tinyPngProcessor);
 
-    const spinner = ora("compressing the image with tinypng.com").start();
-    await util
-      .promisify(source.toFile)
-      .call(source, path.join(imagesDestination, "banner.jpg"));
-    spinner.text = "compressed the image with tinypng.com";
-    spinner.stop();
+      // Verify the file was saved
+      if (!fs.existsSync(outputPath)) {
+        throw new Error("Failed to save the image");
+      }
 
-    const bannerCredit = await getPhotoCredit(unsplashPhotoId);
-    return bannerCredit;
+      // Get photo credit
+      spinner.text = "🔄 Getting photo credit...";
+      const bannerCredit = await getPhotoCredit(cleanPhotoId);
+
+      spinner.succeed("✅ Banner image processed successfully with fallback");
+      return bannerCredit;
+    }
+    catch (error) {
+      console.error("❌ Error processing image:", error);
+
+      if (error instanceof Error) {
+        if (error.message.includes("401") || error.message.includes("Invalid API key")) {
+          console.error("🔑 TinyPNG API issue (falling back to WebAssembly processing)");
+        }
+        else if (error.message.includes("429")) {
+          console.error("📊 TinyPNG monthly limit reached (using WebAssembly fallback)");
+        }
+        else if (error.message.includes("403") || error.message.includes("400") || error.message.includes("404")) {
+          console.error("🌐 Unsplash URL access issue (WebAssembly fallback should handle this)");
+          console.log("💡 Try using a different Unsplash photo ID or check if the image is publicly accessible");
+          console.log("📝 Example photo ID format: 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ");
+        }
+        else if (error.message.includes("download")) {
+          console.error("🌐 Network error downloading image. Please check your internet connection");
+        }
+      }
+      spinner?.fail("❌ Error processing image");
+
+      return null;
+    }
   }
 
   return null;
@@ -143,6 +239,7 @@ async function generateBlogPost(): Promise<void> {
         type: "text",
         name: "title",
         message: "Title",
+        validate: value => (value && value.trim().length > 0) ? true : "Title cannot be empty",
       },
       {
         type: "text",
@@ -162,7 +259,7 @@ async function generateBlogPost(): Promise<void> {
     ]) as { title: string; description: string; tags: string; isPublished: boolean };
 
     const slug = slugify(title);
-    const destination = fromRoot("/content/blog", slug);
+    const destination = fromRoot("/src/content/blog", slug);
     mkdirpSync(destination);
 
     let bannerCredit: string | null = null;
