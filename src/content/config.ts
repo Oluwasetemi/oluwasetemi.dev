@@ -2,19 +2,23 @@ import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
   type: "content",
-  // Type-check frontmatter using a schema
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    // Transform string to Date object - supporting both 'date' and 'pubDate'
-    date: z.coerce.date().optional(),
-    pubDate: z.coerce.date().optional(),
-    updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    isPublished: z.boolean().optional(),
-    isDraft: z.boolean().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      // Transform string to Date object - supporting both 'date' and 'pubDate'
+      date: z.coerce.date().optional(),
+      pubDate: z.coerce.date().optional(),
+      updatedDate: z.coerce.date().optional(),
+      modified: z.boolean().optional(),
+      modifiedDate: z.coerce.date().optional(),
+      heroImage: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+      isPublished: z.boolean().optional(),
+      isDraft: z.boolean().optional(),
+      banner: image().optional(), // This allows images in the content directory
+      bannerCredit: z.string().optional(),
+    }),
 });
 
 const portfolio = defineCollection({

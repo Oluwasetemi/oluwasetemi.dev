@@ -8,18 +8,14 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
   site: "https://oluwasetemi.dev",
-
   integrations: [
     mdx(),
-    react(
-      {
-        include: ["**/*.{jsx,tsx}"],
-        experimentalReactChildren: true,
-      },
-    ),
+    react({
+      include: ["**/*.{jsx,tsx}"],
+      experimentalReactChildren: true,
+    }),
     sitemap(),
   ],
-
   vite: {
     build: {
       rollupOptions: {
@@ -38,23 +34,20 @@ export default defineConfig({
         ],
         onwarn(warning, warn) {
           // Suppress constructor function warnings
-          if (warning.code === "TYPESCRIPT_WARNING"
-            && warning.message?.includes("constructor function may be converted to a class")) {
+          if (
+            warning.code === "TYPESCRIPT_WARNING" &&
+            warning.message?.includes(
+              "constructor function may be converted to a class",
+            )
+          ) {
             return;
           }
           warn(warning);
         },
       },
     },
-
-    define: {
-      // eslint-disable-next-line node/no-process-env
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-    },
-
     plugins: [tailwindcss()],
   },
-
   output: "server",
   adapter: netlify({
     edgeMiddleware: false,

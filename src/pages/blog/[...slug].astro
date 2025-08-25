@@ -17,6 +17,6 @@ const { Content } = await post.render();
 export const prerender = true;
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} banner={post.data.banner as ImageMetadata} bannerCredit={post.data.bannerCredit}>
   <Content />
 </BlogPost>
