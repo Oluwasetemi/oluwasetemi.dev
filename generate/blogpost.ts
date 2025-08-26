@@ -7,9 +7,8 @@ import { mkdirpSync } from "mkdirp";
 import fs from "node:fs";
 import path, { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import util from "node:util";
 import open from "open";
-import ora, { Ora } from "ora";
+import ora from "ora";
 import prettier from "prettier";
 import prompts from "prompts";
 import tinify from "tinify";
@@ -53,7 +52,7 @@ function listify(a: string | undefined): string[] | null {
   return a && a.trim().length
     ? a
         .split(",")
-        .map(s => s.trim())
+        .map((s) => s.trim())
         .filter(Boolean)
     : null;
 }
@@ -77,7 +76,9 @@ async function getPhotoCredit(unsplashPhotoId: string): Promise<string> {
     groups: { name: "Unknown" },
   };
 
-  const { groups: { name } } = match;
+  const {
+    groups: { name },
+  } = match;
   return `Photo by [${name}](https://unsplash.com/photos/${unsplashPhotoId})`;
 }
 
@@ -114,23 +115,23 @@ function extractUnsplashPhotoId(input: string): string {
   return "";
 }
 
-async function getBannerPhoto(title: string, destination: string): Promise<string | null> {
+async function getBannerPhoto(
+  title: string,
+  destination: string,
+): Promise<string | null> {
   const imagesDestination = path.join(destination, "images");
 
-  await open(
-    `https://unsplash.com/s/photos/${encodeURIComponent(title)}`,
-    {
-      wait: false,
-    },
-  );
+  await open(`https://unsplash.com/s/photos/${encodeURIComponent(title)}`, {
+    wait: false,
+  });
 
-  const { unsplashPhotoId } = await prompts([
+  const { unsplashPhotoId } = (await prompts([
     {
       type: "text",
       name: "unsplashPhotoId",
       message: `What's the Unsplash Photo URL for the banner? (e.g., 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ)`,
     },
-  ]) as { unsplashPhotoId?: string };
+  ])) as { unsplashPhotoId?: string };
 
   mkdirpSync(imagesDestination);
 
@@ -150,7 +151,11 @@ async function getBannerPhoto(title: string, destination: string): Promise<strin
       spinner.text = "🔄 Processing image with fallback...";
 
       // Create TinyPNG processor function
-      const tinyPngProcessor = async (url: string, outputPath: string, options: any) => {
+      const tinyPngProcessor = async (
+        url: string,
+        outputPath: string,
+        options: any,
+      ) => {
         // eslint-disable-next-line node/no-process-env
         tinify.key = process.env.TINY_PNG_API_KEY || "";
         if (!tinify.key) {
@@ -173,11 +178,16 @@ async function getBannerPhoto(title: string, destination: string): Promise<strin
       const outputPath = path.join(imagesDestination, "banner.jpg");
 
       // Use the integrated fallback approach
-      await processImageWithFallback(unsplashDownloadUrl, outputPath, {
-        width: 2070,
-        quality: 90,
-        format: "jpeg",
-      }, tinyPngProcessor);
+      await processImageWithFallback(
+        unsplashDownloadUrl,
+        outputPath,
+        {
+          width: 2070,
+          quality: 90,
+          format: "jpeg",
+        },
+        tinyPngProcessor,
+      );
 
       // Verify the file was saved
       if (!fs.existsSync(outputPath)) {
@@ -190,24 +200,39 @@ async function getBannerPhoto(title: string, destination: string): Promise<strin
 
       spinner.succeed("✅ Banner image processed successfully with fallback");
       return bannerCredit;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("❌ Error processing image:", error);
 
       if (error instanceof Error) {
-        if (error.message.includes("401") || error.message.includes("Invalid API key")) {
-          console.error("🔑 TinyPNG API issue (falling back to WebAssembly processing)");
-        }
-        else if (error.message.includes("429")) {
-          console.error("📊 TinyPNG monthly limit reached (using WebAssembly fallback)");
-        }
-        else if (error.message.includes("403") || error.message.includes("400") || error.message.includes("404")) {
-          console.error("🌐 Unsplash URL access issue (WebAssembly fallback should handle this)");
-          console.log("💡 Try using a different Unsplash photo ID or check if the image is publicly accessible");
-          console.log("📝 Example photo ID format: 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ");
-        }
-        else if (error.message.includes("download")) {
-          console.error("🌐 Network error downloading image. Please check your internet connection");
+        if (
+          error.message.includes("401") ||
+          error.message.includes("Invalid API key")
+        ) {
+          console.error(
+            "🔑 TinyPNG API issue (falling back to WebAssembly processing)",
+          );
+        } else if (error.message.includes("429")) {
+          console.error(
+            "📊 TinyPNG monthly limit reached (using WebAssembly fallback)",
+          );
+        } else if (
+          error.message.includes("403") ||
+          error.message.includes("400") ||
+          error.message.includes("404")
+        ) {
+          console.error(
+            "🌐 Unsplash URL access issue (WebAssembly fallback should handle this)",
+          );
+          console.log(
+            "💡 Try using a different Unsplash photo ID or check if the image is publicly accessible",
+          );
+          console.log(
+            "📝 Example photo ID format: 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ",
+          );
+        } else if (error.message.includes("download")) {
+          console.error(
+            "🌐 Network error downloading image. Please check your internet connection",
+          );
         }
       }
       spinner?.fail("❌ Error processing image");
@@ -222,7 +247,7 @@ async function getBannerPhoto(title: string, destination: string): Promise<strin
 async function generateBlogPost(): Promise<void> {
   try {
     // create a prompt for blog post or youtube video post
-    const { postType } = await prompts([
+    const { postType } = (await prompts([
       {
         type: "select",
         name: "postType",
@@ -232,14 +257,15 @@ async function generateBlogPost(): Promise<void> {
           { title: "YouTube Video", value: "youtube" },
         ],
       },
-    ]) as { postType: PostType };
+    ])) as { postType: PostType };
 
-    const { title, description, tags, isPublished } = await prompts([
+    const { title, description, tags, isPublished } = (await prompts([
       {
         type: "text",
         name: "title",
         message: "Title",
-        validate: value => (value && value.trim().length > 0) ? true : "Title cannot be empty",
+        validate: (value) =>
+          value && value.trim().length > 0 ? true : "Title cannot be empty",
       },
       {
         type: "text",
@@ -256,7 +282,12 @@ async function generateBlogPost(): Promise<void> {
         name: "isPublished",
         message: "Do you want to publish?",
       },
-    ]) as { title: string; description: string; tags: string; isPublished: boolean };
+    ])) as {
+      title: string;
+      description: string;
+      tags: string;
+      isPublished: boolean;
+    };
 
     const slug = slugify(title);
     const destination = fromRoot("/src/content/blog", slug);
@@ -287,9 +318,10 @@ async function generateBlogPost(): Promise<void> {
 
     await fs.promises.writeFile(path.join(destination, "index.mdx"), markdown);
 
-    console.log(`${destination.replace(process.cwd(), "")} is all ready for you`);
-  }
-  catch (error) {
+    console.log(
+      `${destination.replace(process.cwd(), "")} is all ready for you`,
+    );
+  } catch (error) {
     console.error("Error generating blog post:", error);
     process.exit(1);
   }
