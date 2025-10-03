@@ -1,3 +1,6 @@
+// TODO: should have a cache to remember the last uncompleted post generation and resume from there
+// Also, I need a better image generation workflow, the current one is not efficient, and while its free, I wanna go cost-effective.
+
 import slugify from "@sindresorhus/slugify";
 import axios from "axios";
 import dotenv from "dotenv";
