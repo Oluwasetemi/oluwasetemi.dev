@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "./headerlink.astro";
+import VisitorCount from "./visitor-count.astro";
 import { SITE_TITLE, SOCIALS } from "../consts";
 ---
 
@@ -17,7 +18,8 @@ import { SITE_TITLE, SOCIALS } from "../consts";
       <HeaderLink href="/uses">Uses</HeaderLink>
       <!-- <HeaderLink href="/contact">Contact</HeaderLink> -->
     </div>
-    <div class="social-links hidden md:flex gap-4">
+    <div class="social-links hidden md:flex gap-4 items-center">
+      <VisitorCount />
       <a
         href={`https://twitter.com/${SOCIALS.twitter}`}
         target="_blank"
