@@ -61,6 +61,9 @@ typings/
 # gatsby files
 .cache/
 
+# blogpost generator cache
+generate/.cache-blogpost.json
+
 # Mac files
 .DS_Store
 
@@ -79,3 +82,5 @@ cypress/videos/
 cypress/screenshot/
 # Sentry Config File
 .env.sentry-build-plugin
+./claude/*
+.playwright-mcp/*
