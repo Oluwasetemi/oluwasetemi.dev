@@ -1,9 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { SITE_TITLE, SITE_DESCRIPTION, SOCIALS } from "../consts";
-import { getCollection, type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection } from "astro:content";
+
 import BlogPostCard from "../components/blog-post-card.astro";
 import PortfolioCard from "../components/portfolio-card.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, SOCIALS } from "../consts";
+import Layout from "../layouts/Layout.astro";
 
 // Get latest blog posts (limit to 4)
 const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog"))
@@ -11,7 +14,8 @@ const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
     const dateA = a.data.pubDate || a.data.date;
     const dateB = b.data.pubDate || b.data.date;
-    if (!dateA || !dateB) return 0;
+    if (!dateA || !dateB)
+return 0;
     return dateB.valueOf() - dateA.valueOf();
   })
   .slice(0, 4);
@@ -21,7 +25,8 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
   .sort((a: CollectionEntry<"portfolio">, b: CollectionEntry<"portfolio">) => {
     const dateA = a.data.publishedDate;
     const dateB = b.data.publishedDate;
-    if (!dateA || !dateB) return 0;
+    if (!dateA || !dateB)
+return 0;
     return dateB.valueOf() - dateA.valueOf();
   })
   .slice(0, 3);
@@ -37,22 +42,23 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
         I'm Oluwasetemi
       </h1>
       <p class="text-lg sm:text-xl leading-relaxed">
-        I'm a <mark class="bg-gradient-to-r from-pink-400 to-red-500 text-white px-2 py-1 rounded"
-          >Fullstack Engineer who works as a Tutor @TripleTen and Frontend Engineering Instructor @AltSchoolAfrica</mark
+        I'm a <mark class="bg-gradient-to-r from-pink-400 to-red-500 text-white px-2 py-1 rounded">Fullstack Engineer who works as a Frontend Engineering Instructor @AltSchoolAfrica</mark
         >. I specialize in building web applications and teaching web development with TypeScript, JavaScript, React,
         and Node.js. You can explore my projects on
         <a
           href={`https://github.com/${SOCIALS.github}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline">GitHub</a
+          class="text-blue-600 hover:text-blue-800 underline"
+        >GitHub</a
         >
         and
         <a
           href={`https://stackblitz.com/${SOCIALS.stackblitz}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline">StackBlitz</a
+          class="text-blue-600 hover:text-blue-800 underline"
+        >StackBlitz</a
         >.
       </p>
     </section>
@@ -82,7 +88,7 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
             </div>
           </div>
           <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none m-0 p-0">
-            {portfolios.map((portfolio) => (
+            {portfolios.map(portfolio => (
               <PortfolioCard portfolio={portfolio} />
             ))}
           </ul>
@@ -98,13 +104,13 @@ const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfol
         Some of my Writings
       </h2>
       <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 list-none m-0 p-0">
-        {allPosts.map((post) => <BlogPostCard post={post} />)}
+        {allPosts.map(post => <BlogPostCard post={post} />)}
       </ul>
       <div class="text-center mt-8">
         <a
           href="/blog"
           class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm sm:text-base"
-          >To see all of my writings</a
+        >To see all of my writings</a
         >
       </div>
     </section>
