@@ -1,0 +1,380 @@
+---
+title: "building-apollo-server-hono-integration"
+date: "2025-10-16"
+author: "Ojo Oluwasetemi Stephen 00S"
+description: "_Turn a Graphql server into a route in an existing Hono Backend_"
+tags:
+  - "nodejs"
+  - "hono"
+  - "graphql"
+isPublished: true
+banner: "./images/banner.jpg"
+bannerCredit: "Photo by [Rahul Mishra](https://unsplash.com/@rahuulmiishra?utm_source=oluwasetemi.dev&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=oluwasetemi.dev&utm_medium=referral)"
+---
+
+# Turn a Graphql server into a route in an existing Hono Backend
+
+This is focused on Apollo Server when creating a Graphql server. The goal of this post is to make turning a route in your existing hono api to power a graphql infrastructure. From this [page](https://orm.drizzle.team/docs/graphql) in the drizzle docs its easy to create a Graphql server with from your drizzle schema with just one line of code.
+
+```typescript=
+const { schema } = buildSchema(db);
+```
+
+> Please Note: It assumes you have a drizzle db object created from combining the drizzle client and schema. It creates a GraphQL schema that can be passed to `ApolloServer` and `startStandaloneServer` or `createYoga` and `createServer` from Apollo Server or GraphlQL Yoga to create a graphql server.
+
+My problem Statement goes as follows: I need to create an api with both REST and GraphQL and I could not serve the GraphQL service from a single route like `/graphql`.
+
+All the docs on `drizzle-graphql` and `apollo server` was not sufficient to help me. They all tracked a single server but none provided a middleware that could take the hono service and merge the request with apollo server service to manage the graphql routes.
+
+I set out to build something to solve this problem and I arrived at this `startServerAndCreateHonoHandler`.
+
+```typescript!
+const graphqlHandler = startServerAndCreateHonoHandler(server, {
+  context: async ({ req, c }) => ({
+    user: await getUserFromRequest(req),
+    db: getDatabaseConnection(),
+    // other context params
+  }),
+});
+
+// Use in Hono app
+app.post('/graphql', graphqlHandler);
+```
+
+## `startServerAndCreateHonoHandler` Function Explanation
+
+This function creates a bridge between Apollo Server (GraphQL) and Hono (HTTP framework). Let me break down how it works:
+
+### Function Signature
+
+```typescript!
+export function startServerAndCreateHonoHandler<TContext extends BaseContext = BaseContext>(
+  server: ApolloServer<TContext>,
+  options?: HonoIntegrationOptions<TContext>,
+)
+```
+
+The TypeScript generics `<TContext extends BaseContext = BaseContext>` is a generic type definition that creates a flexible interface for Apollo Server integration with Hono. The generic ensures that whatever context type you define is properly typed throughout your GraphQL resolvers. It permits flexibility and customization of the context object.
+
+```typescript!
+// Default usage (TContext = BaseContext)
+const defaultOptions: HonoIntegrationOptions = {
+  context: ({ req, c }) => ({ /* BaseContext properties */ })
+};
+
+// Custom context type
+interface MyCustomContext extends BaseContext {
+  user: User;
+  db: any;
+  permissions: string[];
+}
+
+const customOptions: HonoIntegrationOptions<MyCustomContext> = {
+  context: ({ req, c }) => ({
+    user: getUserFromRequest(req),
+    db: getDB(req),
+    permissions: getUserPermissions(req),
+    // ... other BaseContext properties
+  })
+};
+```
+
+Back to the explanation of the `startServerAndCreateHonoHandler`, the function parameters are explained below.
+
+**Parameters:**
+
+- `server`: An Apollo Server instance with a specific context type
+- `options`: Optional configuration for context creation
+
+**Returns:** A Hono handler function that can process GraphQL requests.
+
+### Key Components
+
+**1. Server Startup Management**
+
+```typescript
+let started = false;
+
+const ensureStarted = async () => {
+  if (!started) {
+    await server.start();
+    started = true;
+  }
+};
+```
+
+- Ensures Apollo Server is started only once
+- Prevents multiple startup attempts
+- Apollo Server must be started before handling requests
+
+**2. Request Body Handling**
+
+```typescript
+if (
+  req.method !== "GET" &&
+  req.header("content-type")?.includes("application/json")
+) {
+  try {
+    body = await req.json();
+  } catch (e) {
+    return c.json(
+      { errors: [{ message: "Invalid JSON in request body" }] },
+      400,
+    );
+  }
+}
+```
+
+- Only parses JSON for non-GET requests
+- Handles malformed JSON gracefully
+- Returns proper GraphQL error format
+
+**3. Header Conversion**
+
+```typescript
+const headerMap = new Map<string, string>();
+req.raw.headers.forEach((value, key) => {
+  headerMap.set(key, value);
+});
+```
+
+- Converts Hono's headers to Apollo Server's expected format
+- Apollo Server expects a `Map` for headers
+
+**4. GraphQL Request Creation**
+
+```typescript
+const httpGraphQLRequest: HTTPGraphQLRequest = {
+  method: req.method as "GET" | "POST",
+  headers: headerMap as any,
+  search: new URL(req.url).search,
+  body,
+};
+```
+
+- Creates the standardized GraphQL request object
+- Includes method, headers, query parameters, and body
+
+**5. Context Creation**
+
+```typescript
+const contextValue = options?.context
+  ? await options.context({ req, c })
+  : ({} as TContext);
+```
+
+- Uses custom context function if provided
+- Falls back to empty object if no context function
+- Maintains type safety with `TContext`
+
+**6. GraphQL Execution**
+
+```typescript
+const response = await server.executeHTTPGraphQLRequest({
+  httpGraphQLRequest,
+  context: async () => contextValue,
+});
+```
+
+- Executes the GraphQL request through Apollo Server
+- Passes the context as a function (Apollo Server requirement)
+
+**7. Response Handling**
+
+```typescript
+// Set response headers
+for (const [key, value] of response.headers) {
+  c.header(key, value);
+}
+
+// Handle response body (streaming or complete)
+let payload = "";
+if (response.body.kind === "complete") {
+  payload = response.body.string;
+} else {
+  for await (const chunk of response.body.asyncIterator) {
+    payload += chunk;
+  }
+}
+
+return c.newResponse(payload, (response.status ?? 200) as any);
+```
+
+- Copies Apollo Server response headers to Hono response
+- Handles both complete and streaming responses
+- Returns the final response with proper status code
+
+### Usage Example
+
+```typescript
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+const graphqlHandler = startServerAndCreateHonoHandler(server, {
+  context: async ({ req, c }) => ({
+    user: await getUserFromRequest(req),
+    db: getDatabaseConnection(),
+  }),
+});
+
+// Use in Hono app
+app.post("/graphql", graphqlHandler);
+```
+
+This integration allows anyone to use Apollo Server's powerful GraphQL features within a Hono application while maintaining proper type safety and error handling.
+
+Below is the full code of the function:
+
+```typescript!
+export function startServerAndCreateHonoHandler<TContext extends BaseContext = BaseContext>(
+  server: ApolloServer<TContext>,
+  options?: HonoIntegrationOptions<TContext>,
+) {
+  let started = false;
+
+  const ensureStarted = async () => {
+    if (!started) {
+      await server.start();
+      started = true;
+    }
+  };
+
+  return async (c: Context) => {
+    try {
+      await ensureStarted();
+
+      const req = c.req;
+      let body: any;
+
+      // Handle request body
+      if (
+        req.method !== "GET"
+        && req.header("content-type")?.includes("application/json")
+      ) {
+        try {
+          body = await req.json();
+        }
+        catch (e) {
+          // eslint-disable-next-line no-console
+          console.log(e);
+          return c.json(
+            { errors: [{ message: "Invalid JSON in request body" }] },
+            400,
+          );
+        }
+      }
+
+      // Create HeaderMap compatible object
+      const headerMap = new Map<string, string>();
+      req.raw.headers.forEach((value, key) => {
+        headerMap.set(key, value);
+      });
+
+      // Create HTTPGraphQLRequest
+      const httpGraphQLRequest: HTTPGraphQLRequest = {
+        method: req.method as "GET" | "POST",
+        headers: headerMap as any, // Cast to satisfy Apollo Server's HeaderMap type
+        search: new URL(req.url).search,
+        body,
+      };
+
+      // Create context
+      const contextValue = options?.context
+        ? await options.context({ req, c })
+        : ({} as TContext);
+
+      const response = await server.executeHTTPGraphQLRequest({
+        httpGraphQLRequest,
+        context: async () => contextValue,
+      });
+
+      // Set response headers
+      for (const [key, value] of response.headers) {
+        c.header(key, value);
+      }
+
+      // Handle response body
+      let payload = "";
+      if (response.body.kind === "complete") {
+        payload = response.body.string;
+      }
+      else {
+        for await (const chunk of response.body.asyncIterator) {
+          payload += chunk;
+        }
+      }
+
+      return c.newResponse(payload, (response.status ?? 200) as any);
+    }
+    catch (error) {
+      console.error("GraphQL execution error:", error);
+      return c.json({ errors: [{ message: "Internal server error" }] }, 500);
+    }
+  };
+}
+```
+
+It is used like this:
+
+```typescript=
+router.all("/graphql", graphqlRateLimiter, graphqlHandler);
+```
+
+And the `graphqlHandler` looks like this:
+
+```typescript
+const graphqlHandler = startServerAndCreateHonoHandler(server, {
+  context: async ({ req, c }) => {
+    try {
+      let user = null;
+      const authHeader = req.header("authorization");
+      // ...
+
+      return {
+        db,
+        user,
+        honoContext: c,
+      };
+    } catch (error) {
+      console.error("Error creating GraphQL context:", error);
+      throw error;
+    }
+  },
+});
+```
+
+I later found this npm package from an organization called [ltv](https://github.com/ltv), they create a published npm package to make it easy for developers like me. [Here is there implementation](https://github.com/ltv/apollo-server-integration-hono/blob/main/src/index.ts) and this is the [npm package](https://www.npmjs.com/package/apollo-server-integration-hono). Its more comprehensive and handle many more use cases and its well tested to a point.
+
+This function made it possible for me to have `/graphql` on my [https://api.oluwasetemi.dev](https://api.oluwasetemi.dev). It you visit the [endpoint](https://api.oluwasetemi.dev/graphql) in any graphql explorer you have access to the graphql service built on hono using Apollo server and drizzle-graphql.
+
+Another beauty to this implementation is that it is compatible with GraphQL Yoga as well.
+
+```typescript
+// Handle all GraphQL requests
+app.all("/graphql", async (c) => {
+  // Convert Hono request to standard Request
+  const request = c.req.raw;
+
+  // Let Yoga handle the GraphQL request
+  const response = await yoga.handleRequest(request, {
+    request: c.req,
+    // Add Hono context if needed
+  });
+
+  // Convert Response to Hono response
+  const body = await response.text();
+
+  // Copy headers
+  response.headers.forEach((value, key) => {
+    c.header(key, value);
+  });
+
+  return c.newResponse(body, response.status);
+});
+```
+
+When we have a foundational understanding on how things work it will be easier to build on the first principle knowledge when trying to solve problems.
+
+I will write more about the implementation of subscription on this project using websockets and pubsub. Overall, its a good learning point. You should play with the api if you are learning more about API's in general.
