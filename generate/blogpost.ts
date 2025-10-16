@@ -1,10 +1,8 @@
-// TODO: should have a cache to remember the last uncompleted post generation and resume from there
-// Also, I need a better image generation workflow, the current one is not efficient, and while its free, I wanna go cost-effective.
+// TODO: I need a better image generation workflow, the current one is not efficient, and while its free, I wanna go cost-effective.
 
 import slugify from "@sindresorhus/slugify";
 import axios from "axios";
 import dotenv from "dotenv";
-import fakeUa from "fake-useragent";
 import jsToYaml from "json-to-pretty-yaml";
 import { mkdirpSync } from "mkdirp";
 import fs from "node:fs";
@@ -33,6 +31,16 @@ type BlogPostData = {
   bannerCredit?: string | null;
 };
 
+type CachedFormData = {
+  postType: PostType;
+  title: string;
+  description: string;
+  tags: string;
+  isPublished: boolean;
+  unsplashPhotoId?: string;
+  timestamp: number;
+};
+
 // Get the root path to our project (Like `__dirname`).
 const root = dirname(fileURLToPath(import.meta.url));
 
@@ -41,6 +49,7 @@ dotenv.config({
 });
 
 const fromRoot = (...p: string[]): string => path.join(root, "..", ...p);
+const cacheFilePath = path.join(root, ".cache-blogpost.json");
 
 // eslint-disable-next-line node/no-process-env
 tinify.key = process.env.TINY_PNG_API_KEY || "";
@@ -69,26 +78,74 @@ function removeEmpty<T extends Record<string, any>>(obj: T): Partial<T> {
   }, {} as Partial<T>);
 }
 
-async function getPhotoCredit(unsplashPhotoId: string): Promise<string> {
+async function getPhotoDetails(unsplashPhotoId: string): Promise<{
+  downloadUrl: string;
+  credit: string;
+}> {
+  // eslint-disable-next-line node/no-process-env
+  const accessKey = process.env.UNSPLASH_ACCESS_KEY;
+  if (!accessKey) {
+    throw new Error("UNSPLASH_ACCESS_KEY not found in environment variables");
+  }
+
   const response = await axios({
-    url: `https://unsplash.com/photos/${unsplashPhotoId}`,
-    headers: { "User-Agent": fakeUa() },
+    url: `https://api.unsplash.com/photos/${unsplashPhotoId}`,
+    headers: {
+      Authorization: `Client-ID ${accessKey}`,
+    },
   });
 
-  const match = response.data.match(/Photo by (?<name>.*?) on Unsplash/) || {
-    groups: { name: "Unknown" },
-  };
+  const { urls, user, links } = response.data;
 
-  const {
-    groups: { name },
-  } = match;
-  return `Photo by [${name}](https://unsplash.com/photos/${unsplashPhotoId})`;
+  // Trigger download tracking (required by Unsplash API guidelines)
+  await axios({
+    url: links.download_location,
+    headers: {
+      Authorization: `Client-ID ${accessKey}`,
+    },
+  });
+
+  return {
+    downloadUrl: `${urls.raw}&w=2070&q=90&fm=jpg`,
+    credit: `Photo by [${user.name}](${user.links.html}?utm_source=oluwasetemi.dev&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=oluwasetemi.dev&utm_medium=referral)`,
+  };
+}
+
+// Cache management functions
+function loadCache(): CachedFormData | null {
+  try {
+    if (fs.existsSync(cacheFilePath)) {
+      const cacheData = fs.readFileSync(cacheFilePath, "utf-8");
+      return JSON.parse(cacheData);
+    }
+  } catch (error) {
+    console.error("⚠️ Error loading cache:", error);
+  }
+  return null;
+}
+
+function saveCache(data: CachedFormData): void {
+  try {
+    fs.writeFileSync(cacheFilePath, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error("⚠️ Error saving cache:", error);
+  }
+}
+
+function clearCache(): void {
+  try {
+    if (fs.existsSync(cacheFilePath)) {
+      fs.unlinkSync(cacheFilePath);
+    }
+  } catch (error) {
+    console.error("⚠️ Error clearing cache:", error);
+  }
 }
 
 function extractUnsplashPhotoId(input: string): string {
-  // Pattern for Unsplash photo ID (10-11 alphanumeric characters)
-  // Most Unsplash IDs are mixed case alphanumeric strings
-  const idPattern = /[A-Z0-9]{10,11}(?![A-Z0-9])/i;
+  // Pattern for Unsplash photo ID (10-11 characters: alphanumeric, underscores, hyphens)
+  // Examples: "MGXSVqffa_Y", "RMUSYeC4r5I", "abc-def_123"
+  const idPattern = /[\w-]{10,11}(?![\w-])/;
 
   // 1️⃣ Handle URLs: https://unsplash.com/photos/...
   const urlMatch = input.match(/unsplash\.com\/photos\/([^/?]+)/i);
@@ -121,20 +178,30 @@ function extractUnsplashPhotoId(input: string): string {
 async function getBannerPhoto(
   title: string,
   destination: string,
+  cachedPhotoId?: string,
 ): Promise<string | null> {
   const imagesDestination = path.join(destination, "images");
 
-  await open(`https://unsplash.com/s/photos/${encodeURIComponent(title)}`, {
-    wait: false,
-  });
+  let unsplashPhotoId: string | undefined = cachedPhotoId;
 
-  const { unsplashPhotoId } = (await prompts([
-    {
-      type: "text",
-      name: "unsplashPhotoId",
-      message: `What's the Unsplash Photo URL for the banner? (e.g., 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ)`,
-    },
-  ])) as { unsplashPhotoId?: string };
+  // Only prompt if no cached photo ID
+  if (!cachedPhotoId) {
+    await open(`https://unsplash.com/s/photos/${encodeURIComponent(title)}`, {
+      wait: false,
+    });
+
+    const response = (await prompts([
+      {
+        type: "text",
+        name: "unsplashPhotoId",
+        message: `What's the Unsplash Photo URL for the banner? (e.g., 'EidIT3cPydQ' from https://unsplash.com/photos/description-EidIT3cPydQ)`,
+      },
+    ])) as { unsplashPhotoId?: string };
+
+    unsplashPhotoId = response.unsplashPhotoId;
+  } else {
+    console.log(`📷 Using cached photo ID: ${cachedPhotoId}`);
+  }
 
   mkdirpSync(imagesDestination);
 
@@ -149,7 +216,18 @@ async function getBannerPhoto(
       }
       spinner.text = `🔄 Found photo ID: ${cleanPhotoId}`;
 
-      const unsplashDownloadUrl = `https://unsplash.com/photos/${cleanPhotoId}/download?force=true&w=2070`;
+      // Save photo ID to cache for retry
+      const cachedData = loadCache();
+      if (cachedData) {
+        saveCache({
+          ...cachedData,
+          unsplashPhotoId: cleanPhotoId,
+        });
+      }
+
+      // Get photo details from Unsplash API
+      spinner.text = "🔄 Fetching photo from Unsplash API...";
+      const { downloadUrl, credit } = await getPhotoDetails(cleanPhotoId);
 
       spinner.text = "🔄 Processing image with fallback...";
 
@@ -182,7 +260,7 @@ async function getBannerPhoto(
 
       // Use the integrated fallback approach
       await processImageWithFallback(
-        unsplashDownloadUrl,
+        downloadUrl,
         outputPath,
         {
           width: 2070,
@@ -197,9 +275,7 @@ async function getBannerPhoto(
         throw new Error("Failed to save the image");
       }
 
-      // Get photo credit
-      spinner.text = "🔄 Getting photo credit...";
-      const bannerCredit = await getPhotoCredit(cleanPhotoId);
+      const bannerCredit = credit;
 
       spinner.succeed("✅ Banner image processed successfully with fallback");
       return bannerCredit;
@@ -249,48 +325,110 @@ async function getBannerPhoto(
 
 async function generateBlogPost(): Promise<void> {
   try {
-    // create a prompt for blog post or youtube video post
-    const { postType } = (await prompts([
-      {
-        type: "select",
-        name: "postType",
-        message: "What type of post do you want to create?",
-        choices: [
-          { title: "Blog Post", value: "blog" },
-          { title: "YouTube Video", value: "youtube" },
-        ],
-      },
-    ])) as { postType: PostType };
+    // Check for cached data
+    const cachedData = loadCache();
+    let shouldResume = false;
 
-    const { title, description, tags, isPublished } = (await prompts([
-      {
-        type: "text",
-        name: "title",
-        message: "Title",
-        validate: (value) =>
-          value && value.trim().length > 0 ? true : "Title cannot be empty",
-      },
-      {
-        type: "text",
-        name: "description",
-        message: "Description",
-      },
-      {
-        type: "text",
-        name: "tags",
-        message: "Tags (comma separated)",
-      },
-      {
-        type: "confirm",
-        name: "isPublished",
-        message: "Do you want to publish?",
-      },
-    ])) as {
-      title: string;
-      description: string;
-      tags: string;
-      isPublished: boolean;
-    };
+    if (cachedData) {
+      const ageInMinutes = Math.floor(
+        (Date.now() - cachedData.timestamp) / 1000 / 60,
+      );
+      console.log(
+        `📦 Found cached data from ${ageInMinutes} minute${ageInMinutes !== 1 ? "s" : ""} ago`,
+      );
+      console.log(`   Title: "${cachedData.title}"`);
+
+      const { resume } = (await prompts([
+        {
+          type: "confirm",
+          name: "resume",
+          message: "Do you want to resume from cached data?",
+          initial: true,
+        },
+      ])) as { resume: boolean };
+
+      shouldResume = resume;
+
+      if (!shouldResume) {
+        clearCache();
+      }
+    }
+
+    // Get form data (either from cache or prompts)
+    let postType: PostType;
+    let title: string;
+    let description: string;
+    let tags: string;
+    let isPublished: boolean;
+
+    if (shouldResume && cachedData) {
+      // Use cached data
+      postType = cachedData.postType;
+      title = cachedData.title;
+      description = cachedData.description;
+      tags = cachedData.tags;
+      isPublished = cachedData.isPublished;
+      console.log("✅ Using cached data");
+    } else {
+      // Collect new data
+      const postTypeResponse = (await prompts([
+        {
+          type: "select",
+          name: "postType",
+          message: "What type of post do you want to create?",
+          choices: [
+            { title: "Blog Post", value: "blog" },
+            { title: "YouTube Video", value: "youtube" },
+          ],
+        },
+      ])) as { postType: PostType };
+      postType = postTypeResponse.postType;
+
+      const formResponse = (await prompts([
+        {
+          type: "text",
+          name: "title",
+          message: "Title",
+          validate: (value) =>
+            value && value.trim().length > 0 ? true : "Title cannot be empty",
+        },
+        {
+          type: "text",
+          name: "description",
+          message: "Description",
+        },
+        {
+          type: "text",
+          name: "tags",
+          message: "Tags (comma separated)",
+        },
+        {
+          type: "confirm",
+          name: "isPublished",
+          message: "Do you want to publish?",
+        },
+      ])) as {
+        title: string;
+        description: string;
+        tags: string;
+        isPublished: boolean;
+      };
+
+      title = formResponse.title;
+      description = formResponse.description;
+      tags = formResponse.tags;
+      isPublished = formResponse.isPublished;
+
+      // Save cache after collecting form data
+      saveCache({
+        postType,
+        title,
+        description,
+        tags,
+        isPublished,
+        timestamp: Date.now(),
+      });
+    }
 
     const slug = slugify(title);
     const destination = fromRoot("/src/content/blog", slug);
@@ -298,7 +436,11 @@ async function generateBlogPost(): Promise<void> {
 
     let bannerCredit: string | null = null;
     if (postType !== "youtube") {
-      bannerCredit = await getBannerPhoto(title, destination);
+      bannerCredit = await getBannerPhoto(
+        title,
+        destination,
+        cachedData?.unsplashPhotoId,
+      );
     }
 
     const postData: BlogPostData = {
@@ -321,11 +463,26 @@ async function generateBlogPost(): Promise<void> {
 
     await fs.promises.writeFile(path.join(destination, "index.mdx"), markdown);
 
-    console.log(
-      `${destination.replace(process.cwd(), "")} is all ready for you`,
-    );
+    // Clear cache only if everything succeeded
+    // For blog posts, image must have succeeded (bannerCredit not null)
+    // For youtube posts, no image is needed
+    const shouldClearCache =
+      postType === "youtube" || (postType === "blog" && bannerCredit !== null);
+
+    if (shouldClearCache) {
+      clearCache();
+      console.log(
+        `${destination.replace(process.cwd(), "")} is all ready for you`,
+      );
+    } else {
+      console.log(
+        `${destination.replace(process.cwd(), "")} is all ready for you`,
+      );
+      console.log("⚠️ Image processing failed - cache kept for retry");
+    }
   } catch (error) {
     console.error("Error generating blog post:", error);
+    console.log("💾 Cache saved - run again to resume");
     process.exit(1);
   }
 }

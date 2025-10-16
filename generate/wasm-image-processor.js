@@ -20,24 +20,32 @@ export class WASMImageProcessor {
           return;
         }
 
-        https.get(currentUrl, (response) => {
-          // Handle redirects
-          if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
-            const redirectUrl = response.headers.location;
-            console.log(`📍 Redirecting to: ${redirectUrl}`);
-            downloadWithRedirects(redirectUrl, redirectCount + 1);
-            return;
-          }
+        https
+          .get(currentUrl, (response) => {
+            // Handle redirects
+            if (
+              response.statusCode >= 300 &&
+              response.statusCode < 400 &&
+              response.headers.location
+            ) {
+              const redirectUrl = response.headers.location;
+              // console.log(`📍 Redirecting to: ${redirectUrl}`);
+              downloadWithRedirects(redirectUrl, redirectCount + 1);
+              return;
+            }
 
-          if (response.statusCode !== 200) {
-            reject(new Error(`Failed to download image: ${response.statusCode}`));
-            return;
-          }
-          const chunks = [];
-          response.on("data", chunk => chunks.push(chunk));
-          response.on("end", () => resolve(Buffer.concat(chunks)));
-          response.on("error", reject);
-        }).on("error", reject);
+            if (response.statusCode !== 200) {
+              reject(
+                new Error(`Failed to download image: ${response.statusCode}`),
+              );
+              return;
+            }
+            const chunks = [];
+            response.on("data", (chunk) => chunks.push(chunk));
+            response.on("end", () => resolve(Buffer.concat(chunks)));
+            response.on("error", reject);
+          })
+          .on("error", reject);
       };
 
       downloadWithRedirects(url);
@@ -55,26 +63,20 @@ export class WASMImageProcessor {
    * @returns {Promise<Buffer>} Processed image buffer
    */
   async resizeImage(imageUrl, options = {}) {
-    const {
-      width,
-      height,
-      quality = 85,
-      format = "jpeg",
-    } = options;
+    const { width, height, quality = 85, format = "jpeg" } = options;
 
     try {
-      console.log(`🌐 Downloading image from: ${imageUrl}`);
+      // console.log(`🌐 Downloading image from: ${imageUrl}`);
       const imageBuffer = await this.downloadImage(imageUrl);
 
-      console.log(`📐 Processing image with Sharp (${format}, quality: ${quality})`);
+      // console.log(`📐 Processing image with Sharp (${format}, quality: ${quality})`);
 
       let sharpInstance = sharp(imageBuffer);
 
       // Configure resize options
       if (height) {
         sharpInstance = sharpInstance.resize(width, height);
-      }
-      else {
+      } else {
         sharpInstance = sharpInstance.resize(width);
       }
 
@@ -97,10 +99,9 @@ export class WASMImageProcessor {
 
       const processedBuffer = await sharpInstance.toBuffer();
 
-      console.log(`✅ Sharp processing complete`);
+      // console.log(`✅ Sharp processing complete`);
       return processedBuffer;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("❌ Sharp image processing failed:", error);
       throw error;
     }
@@ -116,10 +117,9 @@ export class WASMImageProcessor {
     try {
       const processedBuffer = await this.resizeImage(imageUrl, options);
       await fs.writeFile(outputPath, processedBuffer);
-      console.log(`💾 Saved processed image to: ${outputPath}`);
+      // console.log(`💾 Saved processed image to: ${outputPath}`);
       return outputPath;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("❌ Failed to process and save image:", error);
       throw error;
     }
@@ -133,29 +133,28 @@ export class WASMImageProcessor {
  * @param {object} options - Processing options
  * @param {Function} tinyPngProcessor - TinyPNG processing function (optional)
  */
-export async function processImageWithFallback(imageUrl, outputPath, options = {}, tinyPngProcessor = null) {
+export async function processImageWithFallback(
+  imageUrl,
+  outputPath,
+  options = {},
+  tinyPngProcessor = null,
+) {
   // Try TinyPNG first if processor provided
   if (tinyPngProcessor) {
     try {
-      console.log("🔧 Attempting TinyPNG processing...");
+      // console.log("🔧 Attempting TinyPNG processing...");
       return await tinyPngProcessor(imageUrl, outputPath, options);
-    }
-    catch (error) {
-      console.log("⚠️ TinyPNG failed, falling back to WebAssembly:", error.message);
+    } catch (error) {
+      console.warn(
+        "⚠️ TinyPNG failed, falling back to WebAssembly:",
+        error.message,
+      );
     }
   }
 
   // Fallback to Sharp (WebAssembly-powered)
-  console.log("🔄 Using Sharp fallback...");
+  // console.log("🔄 Using Sharp fallback...");
   const processor = new WASMImageProcessor();
 
-  try {
-    const result = await processor.processAndSave(imageUrl, outputPath, options);
-    await processor.close();
-    return result;
-  }
-  catch (error) {
-    await processor.close();
-    throw error;
-  }
+  return await processor.processAndSave(imageUrl, outputPath, options);
 }

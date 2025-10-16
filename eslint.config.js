@@ -10,7 +10,7 @@ export default setemiojo(
       "backup",
       "**/backup/**",
     ],
-    formatters: true,
+    formatters: false,
     astro: true,
     stylistic: {
       indent: 2,
@@ -46,6 +46,15 @@ export default setemiojo(
     rules: {
       "style/brace-style": "off",
       "format/prettier": "off",
+    },
+  },
+  {
+    files: ["**/*.js"],
+    rules: {
+      "style/brace-style": "off",
+      "format/prettier": "off",
+      "style/operator-linebreak": "off",
+      "style/arrow-parens": "off",
     },
   },
 );
