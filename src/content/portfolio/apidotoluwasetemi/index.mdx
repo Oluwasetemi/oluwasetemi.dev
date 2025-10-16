@@ -2,46 +2,71 @@
 title: API.OLUWASETEMI.DEV
 imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/chooselife_ajndqs.png
 url: https://api.oluwasetemi.dev
-description:
-  "A comprehensive personal API repository built with Hono.js, featuring dual authentication systems (JWT & Better Auth), GraphQL endpoint with Apollo Server, real-time analytics, OpenAPI documentation with Scalar, and a modern tech stack including Drizzle ORM, Zod validation, and comprehensive testing."
-technology: ["hono", "typescript", "drizzle", "graphql", "apollo-server", "zod", "vitest", "sqlite", "openapi", "pino", "better-auth", "analytics", "jwt"]
+description: "A comprehensive personal API repository that serves as a full-featured backend solution demonstrating modern development practices. Built with Hono.js for high performance, the platform features dual authentication systems, real-time analytics, interactive API documentation, websocket for real-time communication, pubsub for graphql subscription and a powerful GraphQL endpoint."
+technology:
+  [
+    "hono",
+    "typescript",
+    "drizzle",
+    "graphql",
+    "apollo-server",
+    "zod",
+    "vitest",
+    "sqlite",
+    "openapi",
+    "pino",
+    "better-auth",
+    "analytics",
+    "jwt",
+    "websocket",
+    "webhooks",
+  ]
 isPublished: true
 publishedDate: "2025-06-23T00:00:00.000Z"
 isDraft: false
 updated: true
-updatedDate: "2025-08-23T23:26:59.999Z"
+updatedDate: "2025-10-16T15:47:59.999Z"
 ---
 
 # API.OLUWASETEMI.DEV
 
-A comprehensive personal API repository that serves as a full-featured backend solution demonstrating modern development practices. Built with Hono.js for high performance, the platform features dual authentication systems, real-time analytics, interactive API documentation, and a powerful GraphQL endpoint.
+A comprehensive personal API repository that serves as a full-featured backend solution demonstrating modern development practices. Built with Hono.js for high performance, the platform features dual authentication systems, real-time analytics, interactive API documentation, websocket for real-time communication, pubsub for graphql subscription and a powerful GraphQL endpoint.
 
 ## Key Features
 
 ### **Dual Authentication Systems**
+
 - **Legacy JWT Authentication**: Traditional JWT-based auth with register, login, refresh, and protected routes
 - **Better Auth Integration**: Modern authentication with email/password, session management, and enhanced security
 - **Protected Routes**: Comprehensive route protection with middleware
 
 ### **Real-Time Analytics**
+
 - **Request Tracking**: Comprehensive logging of all API requests with performance metrics
 - **Analytics Endpoints**: `/analytics/requests` and `/analytics/counts` for detailed insights
 - **Filtering & Grouping**: Advanced analytics with date ranges, method filtering, and grouping by day/path/method
 - **Performance Optimized**: Minimal overhead (~1-2ms per request) with non-blocking database writes
+- **Webhooks**: Webhooks are used to send notifications to the clients when a mutation is created. It is used to send notifications to the clients when a mutation(s) is created, can also receive notifications from the clients in the expected webhook standard for GitHub and Stripe.
 
 ### **GraphQL Integration**
+
 - **Auto-generated Schema**: Database tables automatically exposed as GraphQL types
 - **Authentication Support**: Complete auth mutations (register, login, refreshToken) and queries (me)
 - **Custom Queries**: Advanced analytics queries with filtering and grouping capabilities
 - **Interactive Playground**: Development playground at `/playground` for testing queries
+- **Subscriptions**: GraphQL subscriptions help user to listen to mutations for instant notification(works only when you use REST api to create the mutation)
+- **PubSub**: PubSub is used to publish and subscribe to events in the graphql server. It is used to send notifications to the clients when a mutation is created.
+- **Websocket**: Websocket is used to send notifications to the clients when a mutation is created. It is used to send notifications to the clients when a mutation is created.
 
 ### **Comprehensive Documentation**
-- **OpenAPI Specification**: Full API documentation with `/doc` endpoint
-- **Scalar Documentation**: Interactive API documentation at `/reference`
+
+- **OpenAPI Specification**: Full API documentation(json) with `/doc` endpoint
+- **Scalar Documentation**: Interactive API documentation at `https://api.oluwasetemi.dev/reference` and `https://api.oluwasetemi.dev/api/auth/docs`
 - **Type-Safe Routes**: All endpoints documented using @hono/zod-openapi
 - **Live Examples**: Working examples and testing interface
 
 ### **Database & ORM**
+
 - **Drizzle ORM**: Type-safe database operations with SQLite
 - **Schema Management**: Single source of truth for database schemas
 - **Migrations**: Proper database migration system
@@ -49,34 +74,9 @@ A comprehensive personal API repository that serves as a full-featured backend s
 
 ## API Endpoints
 
-### Authentication
-- `POST /auth/register` - Legacy JWT registration
-- `POST /auth/login` - Legacy JWT login
-- `POST /auth/refresh` - Token refresh
-- `GET /auth/me` - Get current user (protected)
-- `POST /api/auth/sign-up/email` - Better Auth registration
-- `POST /api/auth/sign-in/email` - Better Auth login
-- `POST /api/auth/sign-out` - Sign out
-- `GET /api/auth/get-session` - Get session info
+Visit the [API Base URL](https://api.oluwasetemi.dev) to see the available endpoints.
 
-### Core API
-- `GET /tasks` - List all tasks (paginated)
-- `POST /tasks` - Create a task
-- `GET /tasks/{id}` - Get task by ID
-- `PATCH /tasks/{id}` - Update task
-- `DELETE /tasks/{id}` - Delete task
-
-### Analytics & Monitoring
-- `GET /analytics/requests` - Paginated request logs
-- `GET /analytics/counts` - Aggregated analytics
-- `GET /graphql` - GraphQL endpoint
-- `GET /playground` - GraphQL playground (dev)
-
-### Documentation
-- `GET /doc` - OpenAPI specification
-- `GET /reference` - Scalar API documentation
-
-## My Role on the Project
+## My Role on the Project(AI assisted)
 
 - **Full-Stack Architecture**: Designed and implemented the entire API architecture from scratch
 - **Authentication Systems**: Implemented both JWT and Better Auth with comprehensive security
@@ -86,11 +86,12 @@ A comprehensive personal API repository that serves as a full-featured backend s
 - **API Documentation**: Implemented comprehensive OpenAPI documentation with Scalar interface
 - **Testing Strategy**: Established comprehensive testing patterns with Vitest
 - **DevOps & Deployment**: Configured deployment pipeline and hosted at api.oluwasetemi.dev
-- **Code Quality**: Implemented ESLint configuration with @antfu/eslint-config
+- **Code Quality**: Implemented ESLint configuration with @setemiojo/eslint-config
 
 ## Technical Architecture
 
 ### **Core Technologies**
+
 - **Framework**: Hono.js for high-performance web framework
 - **Database**: SQLite with Drizzle ORM for type-safe operations
 - **Authentication**: Dual JWT and Better Auth systems
@@ -100,8 +101,9 @@ A comprehensive personal API repository that serves as a full-featured backend s
 - **Testing**: Vitest for comprehensive testing with proper organization
 
 ### **Development Tools**
+
 - **Package Manager**: pnpm with workspace configuration
-- **Code Quality**: ESLint with @antfu/eslint-config
+- **Code Quality**: ESLint with @setemiojo/eslint-config
 - **Type Safety**: Full TypeScript integration
 - **Process Management**: PM2 ecosystem configuration
 - **Documentation**: Scalar for interactive API docs
@@ -125,3 +127,5 @@ This project serves as both a practical personal API and a comprehensive showcas
 - **Modern Practices**: Latest development tools and best practices
 
 The API is publicly available at [api.oluwasetemi.dev](https://api.oluwasetemi.dev) with interactive documentation at [api.oluwasetemi.dev/reference](https://api.oluwasetemi.dev/reference). The graphql endpoint is available at [api.oluwasetemi.dev/graphql](https://api.oluwasetemi.dev/graphql).
+
+Updated on 16th October 2025 for the new features like products, posts, websocket, websocket testing client and webhooks.
