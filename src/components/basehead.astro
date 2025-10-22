@@ -3,13 +3,13 @@
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
 
-interface Props {
+type Props = {
   title: string;
   description: string;
   image?: string;
   canonical: string | URL;
   type?: "website" | "article";
-}
+};
 
 const { title, description, image = "/blog-placeholder-1.jpg", canonical } = Astro.props;
 ---

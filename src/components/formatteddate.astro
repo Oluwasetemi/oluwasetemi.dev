@@ -1,7 +1,7 @@
 ---
-interface Props {
+type Props = {
   date: Date | string | undefined;
-}
+};
 
 const { date } = Astro.props;
 
@@ -10,7 +10,8 @@ const dateObj = date ? (date instanceof Date ? date : new Date(date)) : null;
 ---
 
 {
-  dateObj ? (
+  dateObj
+? (
     <time datetime={dateObj.toISOString()}>
       {dateObj.toLocaleDateString("en-us", {
         year: "numeric",
@@ -18,7 +19,8 @@ const dateObj = date ? (date instanceof Date ? date : new Date(date)) : null;
         day: "numeric",
       })}
     </time>
-  ) : (
+  )
+: (
     <time>Date not available</time>
   )
 }

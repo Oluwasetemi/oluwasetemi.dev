@@ -1,29 +1,31 @@
 ---
-import Footer from "../../components/footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
+
 import BlogPostCard from "../../components/blog-post-card.astro";
+import Footer from "../../components/footer.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
-    .filter((post) => post.data.isPublished !== false && post.data.isDraft !== true);
+    .filter(post => post.data.isPublished !== false && post.data.isDraft !== true);
 
   // Collect all unique tags
   const tags = new Set<string>();
   posts.forEach((post) => {
-    post.data.tags?.forEach((tag) => tags.add(tag));
+    post.data.tags?.forEach(tag => tags.add(tag));
   });
 
   // Create a path for each tag
   return Array.from(tags).map((tag) => {
-    const slug = tag.toLowerCase().replace(/\s+/g, '-');
+    const slug = tag.toLowerCase().replace(/\s+/g, "-");
     const filteredPosts = posts
-      .filter((post) => post.data.tags?.includes(tag))
+      .filter(post => post.data.tags?.includes(tag))
       .sort((a, b) => {
         const dateA = a.data.pubDate || a.data.date;
         const dateB = b.data.pubDate || b.data.date;
-        if (!dateA || !dateB) return 0;
+        if (!dateA || !dateB)
+return 0;
         return dateB.valueOf() - dateA.valueOf();
       });
 
@@ -50,11 +52,11 @@ export const prerender = true;
       >
         Posts tagged "{tag}"
       </h1>
-      <p class="text-xl text-gray-600">{posts.length} {posts.length === 1 ? 'post' : 'posts'} found</p>
+      <p class="text-xl text-gray-600">{posts.length} {posts.length === 1 ? "post" : "posts"} found</p>
     </div>
     <section>
       <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
-        {posts.map((post) => <BlogPostCard post={post} />)}
+        {posts.map(post => <BlogPostCard post={post} />)}
       </ul>
     </section>
   </main>

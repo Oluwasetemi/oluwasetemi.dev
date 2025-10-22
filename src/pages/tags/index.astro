@@ -1,11 +1,12 @@
 ---
-import Footer from "../../components/footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
+
+import Footer from "../../components/footer.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
 const posts = (await getCollection("blog"))
-  .filter((post) => post.data.isPublished !== false && post.data.isDraft !== true);
+  .filter(post => post.data.isPublished !== false && post.data.isDraft !== true);
 
 // Collect all tags with their post counts
 const tagCounts = new Map<string, number>();
@@ -33,7 +34,7 @@ const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => a[0].localeCom
       <div class="flex flex-wrap gap-4 justify-center">
         {sortedTags.map(([tag, count]) => (
           <a
-            href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`}
+            href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
             class="bg-white rounded-lg px-6 py-3 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border border-gray-200 no-underline group"
           >
             <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600 transition-colors">

@@ -1,6 +1,6 @@
-import setemiojo from "@setemiojo/eslint-config";
+import antfu from "@setemiojo/eslint-config";
 
-export default setemiojo(
+export default antfu(
   {
     ignores: [
       "node_modules",
@@ -10,8 +10,9 @@ export default setemiojo(
       "backup",
       "**/backup/**",
     ],
-    formatters: false,
+    formatters: true,
     astro: true,
+    typescript: true,
     stylistic: {
       indent: 2,
       semi: true,

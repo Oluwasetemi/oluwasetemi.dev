@@ -1,14 +1,17 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection } from "astro:content";
+
 import { SITE_TITLE } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
 
 type Props = CollectionEntry<"portfolio">;
 
 export async function getStaticPaths() {
   const portfolios = await getCollection("portfolio");
   return portfolios
-    .map((portfolio) => ({
+    .map(portfolio => ({
       params: { slug: portfolio.slug },
       props: portfolio,
     }))
@@ -17,7 +20,7 @@ export async function getStaticPaths() {
       const dateB = new Date(b.props.data.publishedDate as Date);
       return dateA.getTime() - dateB.getTime();
     })
-    .filter((portfolio) => portfolio.props.data.isPublished);
+    .filter(portfolio => portfolio.props.data.isPublished);
 }
 
 const portfolio = Astro.props;

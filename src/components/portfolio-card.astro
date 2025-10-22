@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-interface Props {
+type Props = {
   portfolio: CollectionEntry<"portfolio">;
-}
+};
 
 const { portfolio } = Astro.props;
 ---

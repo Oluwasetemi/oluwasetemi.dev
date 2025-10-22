@@ -1,5 +1,5 @@
 ---
-interface Props {
+type Props = {
   portfolio: {
     slug: string;
     data: {
@@ -13,7 +13,7 @@ interface Props {
     };
   };
   size?: "small" | "large";
-}
+};
 
 const { portfolio, size = "large" } = Astro.props;
 const { data } = portfolio;
@@ -41,7 +41,7 @@ const { data } = portfolio;
     {
       (data.tech || data.tags) && (
         <div class="tech">
-          {(data.tech || data.tags)?.map((technology) => (
+          {(data.tech || data.tags)?.map(technology => (
             <span class="tech-tag">{technology}</span>
           ))}
         </div>
