@@ -5,26 +5,37 @@ import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 export async function GET(context) {
-  const posts = await getCollection("blog", ({ data }) => data.date);
+  const posts = await getCollection("blog");
+
+  // Filter and sort published posts
+  const publishedPosts = posts
+    .filter((post) => {
+      // Only include published posts that are not drafts
+      return post.data.isPublished !== false && post.data.isDraft !== true;
+    })
+    .filter((post) => {
+      // Only include posts with a date
+      return post.data.date || post.data.pubDate;
+    })
+    .sort((a, b) => {
+      const dateA = a.data.pubDate || a.data.date;
+      const dateB = b.data.pubDate || b.data.date;
+      return new Date(dateB) - new Date(dateA);
+    });
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    site: context.site,
-    items: posts
-      .filter(post => post.data.isPublished)
-      .sort((a, b) => {
-        return new Date(b.data.date) - new Date(a.data.date);
-      })
-      .map((post) => {
-        return {
-          ...post.data,
-          title: post.data.title,
-          link: `/blog/${post.slug}/`,
-          pubDate: post.data.date ? new Date(post.data.date) : new Date(),
-          description: post.data.description || post.data.excerpt || "",
-          categories: post.data.tags || [],
-        };
-      }),
+    site: context.site || "https://oluwasetemi.dev",
+    items: publishedPosts.map((post) => {
+      const postDate = post.data.pubDate || post.data.date;
+      return {
+        title: post.data.title,
+        link: `/blog/${post.slug}/`,
+        pubDate: new Date(postDate),
+        description: post.data.description || "",
+        categories: post.data.tags || [],
+      };
+    }),
   });
 }

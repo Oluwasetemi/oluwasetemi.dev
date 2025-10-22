@@ -23,7 +23,13 @@ const { post } = Astro.props;
       post.data.tags && (
         <div class="flex gap-2 flex-wrap mt-4">
           {post.data.tags.map((tag) => (
-            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">{tag}</span>
+            <a
+              href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`}
+              class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
+              onclick={(e: Event) => e.stopPropagation()}
+            >
+              {tag}
+            </a>
           ))}
         </div>
       )

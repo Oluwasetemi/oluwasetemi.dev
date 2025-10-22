@@ -7,7 +7,7 @@ import Layout from "./Layout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate } = Astro.props;
+const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags } = Astro.props;
 ---
 
 <Layout title={title} description={description || `Blog post: ${title}`}>
@@ -41,6 +41,23 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
           <hr class="border-gray-200" />
         </div>
         <slot />
+        {
+          tags && tags.length > 0 && (
+            <div class="mt-12 pt-8 border-t border-gray-200">
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">Tags</h3>
+              <div class="flex gap-2 flex-wrap">
+                {tags.map((tag) => (
+                  <a
+                    href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`}
+                    class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
       </div>
     </article>
   </main>

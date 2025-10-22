@@ -1,0 +1,49 @@
+---
+import Footer from "../../components/footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.isPublished !== false && post.data.isDraft !== true);
+
+// Collect all tags with their post counts
+const tagCounts = new Map<string, number>();
+posts.forEach((post) => {
+  post.data.tags?.forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+// Sort tags alphabetically
+const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+---
+
+<Layout title={`Tags - ${SITE_TITLE}`} description={`Browse all tags on ${SITE_DESCRIPTION}`}>
+  <main class="max-w-6xl mx-auto px-8 py-8">
+    <div class="text-center mb-12">
+      <h1
+        class="text-5xl md:text-3xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
+      >
+        All Tags
+      </h1>
+      <p class="text-xl text-gray-600">Browse posts by topic</p>
+    </div>
+    <section>
+      <div class="flex flex-wrap gap-4 justify-center">
+        {sortedTags.map(([tag, count]) => (
+          <a
+            href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`}
+            class="bg-white rounded-lg px-6 py-3 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border border-gray-200 no-underline group"
+          >
+            <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600 transition-colors">
+              {tag}
+            </span>
+            <span class="ml-2 text-sm text-gray-500">({count})</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
