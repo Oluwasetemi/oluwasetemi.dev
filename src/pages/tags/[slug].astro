@@ -1,0 +1,62 @@
+---
+import Footer from "../../components/footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import BlogPostCard from "../../components/blog-post-card.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((post) => post.data.isPublished !== false && post.data.isDraft !== true);
+
+  // Collect all unique tags
+  const tags = new Set<string>();
+  posts.forEach((post) => {
+    post.data.tags?.forEach((tag) => tags.add(tag));
+  });
+
+  // Create a path for each tag
+  return Array.from(tags).map((tag) => {
+    const slug = tag.toLowerCase().replace(/\s+/g, '-');
+    const filteredPosts = posts
+      .filter((post) => post.data.tags?.includes(tag))
+      .sort((a, b) => {
+        const dateA = a.data.pubDate || a.data.date;
+        const dateB = b.data.pubDate || b.data.date;
+        if (!dateA || !dateB) return 0;
+        return dateB.valueOf() - dateA.valueOf();
+      });
+
+    return {
+      params: { slug },
+      props: { tag, posts: filteredPosts },
+    };
+  });
+}
+
+const { tag, posts } = Astro.props;
+
+export const prerender = true;
+---
+
+<Layout title={`Posts tagged "${tag}" - ${SITE_TITLE}`} description={`All posts tagged with ${tag} on ${SITE_DESCRIPTION}`}>
+  <main class="max-w-6xl mx-auto px-8 py-8">
+    <div class="text-center mb-12">
+      <div class="mb-4">
+        <a href="/tags/" class="text-indigo-600 hover:text-indigo-800 no-underline">← All Tags</a>
+      </div>
+      <h1
+        class="text-5xl md:text-3xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
+      >
+        Posts tagged "{tag}"
+      </h1>
+      <p class="text-xl text-gray-600">{posts.length} {posts.length === 1 ? 'post' : 'posts'} found</p>
+    </div>
+    <section>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
+        {posts.map((post) => <BlogPostCard post={post} />)}
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>
