@@ -1,6 +1,6 @@
-import antfu from "@setemiojo/eslint-config";
+import setemiojo from "@setemiojo/eslint-config";
 
-export default antfu(
+export default setemiojo(
   {
     ignores: [
       "node_modules",
