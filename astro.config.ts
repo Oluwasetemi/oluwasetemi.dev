@@ -35,6 +35,7 @@ export default defineConfig({
         onwarn(warning, warn) {
           // Suppress constructor function warnings
           if (
+            // eslint-disable-next-line style/operator-linebreak
             warning.code === "TYPESCRIPT_WARNING" &&
             warning.message?.includes(
               "constructor function may be converted to a class",
