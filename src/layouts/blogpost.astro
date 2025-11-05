@@ -14,7 +14,7 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
 
 <Layout title={title} description={description || `Blog post: ${title}`}>
   <main class="w-full max-w-full m-0">
-    <article>
+    <article class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
       <figure class="w-full mt-4">
         {
           banner && (
