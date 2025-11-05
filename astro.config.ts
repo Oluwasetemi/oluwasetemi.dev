@@ -5,11 +5,21 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
+import expressiveCode from "astro-expressive-code";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://oluwasetemi.dev",
+  markdown: {
+    syntaxHighlight: false, // Disable Astro's built-in syntax highlighting
+  },
   integrations: [
-    mdx(),
+    expressiveCode({
+      themes: ["dracula", "github-light"],
+    }),
+    mdx({
+      syntaxHighlight: false, // Also disable for MDX
+    }),
     react({
       include: ["**/*.{jsx,tsx}"],
       experimentalReactChildren: true,
