@@ -1,6 +1,7 @@
 ---
 title: "Designing Data-Intensive Applications - What I Learned from Part 1: Foundations of Data Systems"
 date: "2025-10-30"
+updatedDate: "2025-11-05"
 author: "Ojo Oluwasetemi Stephen 00S"
 description: '_A practical summary of "Designing Data-Intensive Applications" Part 1, translated for frontend engineers building production-grade, real-time experiences._'
 tags:
@@ -58,7 +59,7 @@ These aren't just backend concerns. Let me show you:
 
 **Reliability in Frontend:**
 
-```typescript
+```ts title="reliability-patterns.ts"
 // Network failures → optimistic updates, retry logic
 // Race conditions → request deduplication
 // Partial failures → error boundaries, fallback UI
@@ -68,7 +69,7 @@ These aren't just backend concerns. Let me show you:
 
 **Scalability in Frontend:**
 
-```typescript
+```typescript title="scalability-patterns.ts"
 // Bundle size → tree shaking, compression, code splitting
 // State complexity → normalized state, memoization
 // Real-time updates → efficient diffing, virtualization
@@ -77,7 +78,7 @@ These aren't just backend concerns. Let me show you:
 
 **Maintainability in Frontend:**
 
-```typescript
+```typescript title="maintainability-patterns.ts"
 // Code quality → ESLint, Prettier
 // Type safety → TypeScript, Zod
 // Component architecture → composition patterns
@@ -127,7 +128,7 @@ Chapter 2 explores how we structure and query data:
 
 The book uses a brilliant example: representing a LinkedIn profile. This decision exists in frontend daily:
 
-```typescript
+```ts title="data-models.ts"
 // Document style (nested)
 const user = {
   id: 251,
@@ -170,7 +171,7 @@ The book introduces a critical concept: **normalization vs. duplication**
 
 This is EXACTLY the decision you face with Redux state structure or any similar state management tool:
 
-```typescript
+```typescript title="normalization-decision.ts"
 // When to normalize?
 // Frequent updates to individual entities
 // Shared references (same user in multiple places)
@@ -186,7 +187,7 @@ This is EXACTLY the decision you face with Redux state structure or any similar 
 
 GraphQL isn't just a query language—it's a graph traversal system:
 
-```graphql
+```graphql title="graph-query.graphql"
 query {
   user(id: "1") {
     friends {
@@ -217,7 +218,7 @@ Every time you design a Redux store or use the reducer state pattern or decide h
 
 Chapter 3 demystifies storage engines with a brilliantly simple example:
 
-```bash
+```bash title="simple-database.sh"
 # The world's simplest database
 db_set () {
   echo "$1,$2" >> database
@@ -243,7 +244,7 @@ This illustrates the fundamental tradeoff in storage systems.
 
 Sound familiar?
 
-```typescript
+```ts title="expensive-component.ts"
 // Frontend parallel: Memoization
 const ExpensiveComponent = ({ data }) => {
   // Without memoization (no index) - recompute every render
@@ -261,7 +262,7 @@ const ExpensiveComponent = ({ data }) => {
 
 Redux DevTools, Reducer pattern or a WebSocket client is literally an append-only log!
 
-```typescript
+```typescript title="append-only-log.ts"
 const actions = [
   { type: "SET_USER", payload: { id: 1, name: "Alice" } },
   { type: "SET_USER", payload: { id: 1, name: "Alice Smith" } }, // Append!
@@ -275,7 +276,7 @@ const actions = [
 
 JavaScript Maps are hash indexes:
 
-```typescript
+```typescript title="hash-index.ts"
 // O(1) lookup - exactly like database hash index
 const index = new Map([
   ["user:1", { offset: 0, length: 50 }],
@@ -291,7 +292,7 @@ React's component keys? Hash indexes for reconciliation.
 
 IndexedDB is built on LevelDB, which uses SSTables! This is why IndexedDB supports range queries:
 
-```typescript
+```typescript title="sstables-indexeddb.ts"
 // Range query - only possible with sorted data
 const recentPosts = await db.getAllFromIndex(
   "posts",
@@ -306,7 +307,7 @@ const recentPosts = await db.getAllFromIndex(
 
 Code splitting is segmentation:
 
-```typescript
+```typescript title="code-splitting.ts"
 // Instead of one giant bundle
 // main.js (2MB)
 
@@ -323,7 +324,7 @@ The book emphasizes: "Sequential writes are much faster than random writes."
 
 This applies to frontend too:
 
-```typescript
+```typescript title="sequential-writes.ts"
 // SLOW: Random writes
 for (let i = 0; i < 1000; i++) {
   await db.put("store", { id: i, data: Math.random() });
@@ -376,7 +377,7 @@ Kleppmann explains why trying to make network calls look like local function cal
 
 **This is your daily reality as a frontend engineer:**
 
-```typescript
+```typescript title="network-reality.ts"
 // Treating network like local function (BAD)
 function getUser(id) {
   return fetch(`/api/users/${id}`).then((r) => r.json());
@@ -411,7 +412,7 @@ Message brokers (RabbitMQ, Kafka) provide asynchronous communication:
 
 **Frontend equivalents:**
 
-```typescript
+```typescript title="message-passing.ts"
 // WebSockets = Message broker
 const ws = new WebSocket('wss://api.example.com')
 ws.onmessage = (event) => {
@@ -777,3 +778,25 @@ When you understand these foundations, you don't just write code—you design sy
 _This summary is based on "Designing Data-Intensive Applications" by Martin Kleppmann. All concepts and examples are translated and adapted for frontend engineering context. For the full treatment and complete understanding, I highly recommend reading the original book._
 
 **Happy building! 🚀**
+
+---
+
+## Update Changelog
+
+<details name="update">
+<summary><strong>November 5, 2025</strong> - Enhanced code presentation with Expressive Code</summary>
+
+### What Changed:
+
+- **Added Expressive Code frames**: All code blocks now render with syntax-highlighted frames featuring file name tabs where applicable (e.g., `expensive-component.ts`)
+- **Improved code readability**: TypeScript, bash, and GraphQL code blocks now display with better syntax highlighting using dual themes (Dracula for dark mode, GitHub Light for light mode)
+- **Enhanced visual hierarchy**: Code examples throughout all four chapters now have clearer visual separation from surrounding text
+- **Better language identification**: All code blocks now explicitly specify their language for accurate syntax highlighting
+
+### Why These Changes:
+
+These improvements make the technical content more accessible and easier to follow. The enhanced code presentation helps readers quickly identify code examples and understand the concepts being illustrated. The dual-theme support ensures readability in both light and dark modes, improving the overall reading experience for this technical deep-dive.
+
+</details>
+
+---

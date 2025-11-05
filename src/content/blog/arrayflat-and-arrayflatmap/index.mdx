@@ -1,6 +1,7 @@
 ---
 title: Array.prototype.flat and Array.prototype.flatMap
 date: "2018-12-20T23:50:00.121Z"
+updatedDate: "2025-11-05"
 tags: ["javascript"]
 isPublished: true
 isDraft: false
@@ -32,18 +33,18 @@ It was renamed to `flat` after TC39 met in May 2018 and
 
 ## How do we flatten an Array Before ?
 
-```js
+```js title="flatten-utils.js"
 const flatten = (arr, depth = 1) =>
   arr.reduce(
     (a, v) =>
       a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v),
-    []
-  )
+    [],
+  );
 
-const flattened = arr => [].concat(...arr)
+const flattened = (arr) => [].concat(...arr);
 ```
 
-```js{}
+```js title="recursive-flatten.js"
 function flattenArray(arr) {
   const flattened = [].concat(...arr)
   return flattened.some(item =>Array.isArray(item))
@@ -65,21 +66,21 @@ array a single level deep. `flattenDeep` recursively flattens an
 array.`flattenDepth` also recursively flatten an array up to depth that defaults
 to 1.
 
-```js
-import _ from 'lodash'
+```js title="lodash-examples.js"
+import _ from "lodash";
 
-_.flatten([1, [2, [3, [4]], 5]])
+_.flatten([1, [2, [3, [4]], 5]]);
 // => [1, 2, [3, [4]], 5]
 
-_.flattenDeep([1, [2, [3, [4]], 5]])
+_.flattenDeep([1, [2, [3, [4]], 5]]);
 // => [1, 2, 3, 4, 5]
 
-var array = [1, [2, [3, [4]], 5]]
+var array = [1, [2, [3, [4]], 5]];
 
-_.flattenDepth(array, 1)
+_.flattenDepth(array, 1);
 // => [1, 2, [3, [4]], 5]
 
-_.flattenDepth(array, 2)
+_.flattenDepth(array, 2);
 // => [1, 2, 3, [4], 5]
 ```
 
@@ -91,7 +92,7 @@ Use recursion. Use Array.prototype.concat() with an empty array ([]) and the
 spread operator (...) to flatten an array. Recursively flatten each element that
 is an array.
 
-```js
+```js title="deep-flatten.js"
 const deepFlatten = (arr) =>
   [].concat(...arr.map((v) => (Array.isArray(v) ? deepFlatten(v) : v)));
 ```
@@ -100,7 +101,7 @@ const deepFlatten = (arr) =>
 
 The syntax for the flat and flatMap
 
-```js
+```js title="array-flat-syntax.js"
 var newArray = arr.flat([depth]); //defaults to one
 
 var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
@@ -108,7 +109,7 @@ var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
 }[, thisArg])
 ```
 
-```js
+```js title="flatmap-example.js"
 [1, 2, [3, [4, 5]], 5, 6].flatMap((v, i) => (Array.isArray(v) ? v.flat() : v));
 ```
 
@@ -116,9 +117,9 @@ The future is here not Just evenly distributed. With the two methods, we can
 flatten an array easily. `flatMap` combines the power of the regular map and
 flat together.
 
-```js
+```js title="flat-depth-examples.js"
 // Infinity can be used to flatten recursively
-;[1, 2, [3, [4, 5]], 5, 6]
+[1, 2, [3, [4, 5]], 5, 6]
   .flat(Infinity)
   [
     // [1, 2, 3, 4, 5, 5, 6]
@@ -129,14 +130,14 @@ flat together.
     // [1, 2, 3, [4, 5], 5, 6]
 
     (1, 2, [3, [4, 5]], 5, 6)
-  ].flat(2) // flats 2 depth level
+  ].flat(2); // flats 2 depth level
 // [1, 2, 3, [4, 5], 5, 6]
 ```
 
 The flat method removes empty slots in arrays and it will be very useful in
 cleaning up arrays.
 
-```js
+```js title="remove-empty-slots.js"
 const arr = [1, 2, , 4, 5];
 
 arr.flat(); // [1, 2, 4, 5]
@@ -158,5 +159,41 @@ version 11.15.0 release. Below is a screenshot from
 [Node Green](https://node.green). What is [Node Green](https://node.green)? (
 Its a node version of [CanIUse](https://caniuse.com))
 
-_updated on 3rd January, 2019_
 ![A picture of the nodejs versions that supports flat and flatMap](https://res.cloudinary.com/drnqdd87d/image/upload/v1578022086/Screenshot_2020-01-03_at_04.23.39_szrwka.png).
+
+---
+
+## Update Changelog
+
+<details name="update">
+<summary><strong>November 5, 2025</strong> - Enhanced code presentation with Expressive Code</summary>
+
+### What Changed:
+
+- **Added Expressive Code frames**: All code blocks now display with beautiful syntax-highlighted frames featuring file name tabs (e.g., `flatten-utils.js`, `lodash-examples.js`, `deep-flatten.js`)
+- **Improved syntax highlighting**: JavaScript code blocks now render with dual themes (Dracula for dark mode, GitHub Light for light mode)
+- **Better code organization**: Each code example now has a descriptive file name in the header, making it easier to understand the context and purpose of each snippet
+- **Enhanced visual presentation**: Code blocks have clearer separation from surrounding text with professional-looking frames
+
+### Why These Changes:
+
+These enhancements significantly improve the readability of this tutorial. The file name tabs help readers understand what each code snippet demonstrates, while the improved syntax highlighting makes the code easier to read and understand. This is especially valuable for educational content where clear, well-presented code examples are crucial for learning.
+
+</details>
+
+<details name="update">
+<summary><strong>January 3, 2019</strong> - Node.js support information added</summary>
+
+### What Changed:
+
+- **Node.js support documentation**: Added information about Node.js version 11.15.0 supporting `Array.prototype.flat` and `Array.prototype.flatMap`
+- **Node Green screenshot**: Added screenshot showing Node.js version support matrix
+- **Browser support update**: Updated specification status from Stage 3 to reflect actual browser implementation status
+
+### Why These Changes:
+
+At the time of writing (December 2018), these methods were still experimental. This update documented when they became available in Node.js, helping developers understand when they could safely use these features in server-side JavaScript.
+
+</details>
+
+---

@@ -1,6 +1,7 @@
 ---
 title: "From 10 Lines to 100 Retries: Building a Git Clone Function That Doesn't Quit"
 date: "2025-10-29"
+updatedDate: "2025-11-05"
 author: "Ojo Oluwasetemi Stephen 00S"
 description: "_The best developer tools feel like magic because they handle complexity invisibly. They meet you where you are, understand your intent, and just work. That's the standard we should hold all our code to—whether it's a 20-line shell function or a 20,000-line application._"
 tags:
@@ -66,14 +67,27 @@ function clone() {
 - No handling for existing directories
 - Limited flexibility in URL formats
 
+**Usage Example**:
+
+```bash title="Terminal"
+# Clone with full URL
+$ clone https://github.com/facebook/react
+# Clones and automatically cd into 'react' directory
+
+# Clone with custom directory name
+$ clone https://github.com/facebook/react my-react-fork
+# Clones and automatically cd into 'my-react-fork' directory
+```
+
 ### Key Lesson: Start with the 80% Use Case
 
 This first version solved the most common workflow. It wasn't perfect, but it worked for the majority of daily cloning tasks. This is a critical principle in tool development—ship something useful quickly, then iterate based on actual pain points.
 
 ## Version 2: Making URLs Flexible
 
-```bash
+```bash title="clone-v2.sh" del={2} ins={3-7}
 function clone() {
+  gh repo clone "$1" && cd "$(basename "$1" .git)"
   if [[ $1 == *"/"* && $1 != http* && $1 != git@* ]]; then
     repo_url="https://github.com/$1.git"
   else
@@ -98,13 +112,28 @@ function clone() {
 
 **The Trade-off**: We switched from `gh repo clone` to `git clone`, which meant we needed to handle authentication differently. This shows how each iteration brings new considerations.
 
+**Usage Example**:
+
+```bash title="Terminal"
+# Now supports shorthand notation!
+$ clone facebook/react
+# Expands to https://github.com/facebook/react.git
+
+# Still works with full URLs
+$ clone https://github.com/facebook/react
+$ clone git@github.com:facebook/react.git
+
+# With custom directory
+$ clone facebook/react my-react-fork
+```
+
 ### Key Lesson: Developer Experience is About Removing Cognitive Load
 
 The shorthand notation (`user/repo`) became the primary interface. Why? Because it matched the mental model developers already had. When you see a GitHub repo, you think "facebook/react", not "https://github.com/facebook/react.git". Good DX aligns with existing mental models.
 
 ## Version 3: Handling the Real World (Collisions)
 
-```bash
+```bash title="clone-v3.sh" ins={7-14} {8,10}
 function clone() {
   # ... URL parsing logic ...
 
@@ -132,13 +161,30 @@ function clone() {
 
 **The Pattern**: `repo-name_username` became the fallback naming scheme, making it easy to identify whose fork you're working with.
 
+**Usage Example**:
+
+```bash title="Terminal"
+# First clone - works as expected
+$ clone facebook/react
+# Clones into 'react' directory
+
+# Try to clone again - automatic fallback!
+$ clone facebook/react
+# Initial clone failed, retrying with alternate folder name...
+# Clones into 'react_facebook' directory
+
+# No manual intervention needed
+$ ls
+react/  react_facebook/
+```
+
 ### Key Lesson: Graceful Degradation in Tooling
 
 When the ideal path fails, good tools don't just error out—they try alternatives. This retry logic transformed a frustrating error into a seamless experience. The function now handles the common case (unique name) and the edge case (collision) without user intervention.
 
 ## Version 4: Multiple Retries and Better User Extraction
 
-```bash
+```bash title="clone-v4.sh" ins={10-22} {11,13,15-16}
 function clone() {
   # ... URL parsing to extract github_user and repo_name ...
 
@@ -177,6 +223,27 @@ function clone() {
 
 **The Engineering Decision**: Why 100 retries? It's effectively unlimited for practical purposes while still having a safety bound. This prevents infinite loops if something is fundamentally wrong.
 
+**Usage Example**:
+
+```bash title="Terminal"
+# Clone the same repo multiple times - sequential numbering
+$ clone facebook/react
+# Clones into 'react'
+
+$ clone facebook/react
+# Clones into 'react_facebook'
+
+$ clone facebook/react
+# Clones into 'react_facebook_1'
+
+$ clone facebook/react
+# Clones into 'react_facebook_2'
+
+# Can continue up to react_facebook_100
+$ ls
+react/  react_facebook/  react_facebook_1/  react_facebook_2/
+```
+
 ### Key Lesson: Defensive Programming and Edge Cases
 
 By this point, the function handles:
@@ -190,7 +257,7 @@ Each iteration added more "defensive" code—code that anticipates and handles e
 
 ## Version 5: Branch Support
 
-```bash
+```bash title="clone-v5.sh" ins={3-8,12-15} {4,6,13-14}
 function clone() {
   # Regex to detect branch in URL: github.com/user/repo/tree/branch
   if [[ "$input_url" =~ github\.com/([^/]+)/([^/]+)/tree/(.+) ]]; then
@@ -218,6 +285,24 @@ function clone() {
 - Matched the natural workflow of browsing code on GitHub
 
 **The UX Win**: You can now copy a URL from your browser (which might include `/tree/feature-branch`) and paste it directly. The function intelligently extracts and checks out that branch.
+
+**Usage Example**:
+
+```bash title="Terminal"
+# Copy URL from GitHub's branch view
+$ clone https://github.com/facebook/react/tree/experimental
+# Clones the repo AND checks out the 'experimental' branch
+# You're immediately on the branch you wanted
+
+# Verify you're on the correct branch
+$ git branch
+* experimental
+  main
+
+# Also works with shorthand + manual branch checkout
+$ clone facebook/react
+$ git checkout experimental
+```
 
 ### Key Lesson: Meet Users Where They Are
 
@@ -253,6 +338,27 @@ function clone() {
 - Makes the tool maintainable and debuggable
 
 **The Engineering Maturity**: Debug logging might seem simple, but it's often the difference between a tool you trust and one you don't. When things go wrong (and they will), debug output helps you understand why.
+
+**Usage Example**:
+
+```bash title="Terminal"
+# All URL formats now work seamlessly
+$ clone https://github.com/facebook/react/tree/experimental
+DEBUG: Input URL: 'https://github.com/facebook/react/tree/experimental'
+DEBUG: Extracted GitHub User: 'facebook'
+DEBUG: Extracted Repo Name: 'react'
+DEBUG: Branch: 'experimental'
+
+$ clone git@github.com:facebook/react.git
+DEBUG: Input URL: 'git@github.com:facebook/react.git'
+DEBUG: Extracted GitHub User: 'facebook'
+DEBUG: Extracted Repo Name: 'react'
+
+$ clone facebook/react
+DEBUG: Input URL: 'facebook/react'
+DEBUG: Extracted GitHub User: 'facebook'
+DEBUG: Extracted Repo Name: 'react'
+```
 
 ### Key Lesson: Observability in Developer Tools
 
@@ -376,5 +482,27 @@ P.S - All the functions look like JavaScript functions.
 ---
 
 _What small tools have you built that evolved over time? What patterns emerged in your iterations? The most impactful improvements often come from scratching your own itches and paying attention to the tiny friction points in your daily workflow._
+
+---
+
+## Update Changelog
+
+<details name="update">
+<summary><strong>November 5, 2025</strong> - Enhanced code examples and visual presentation</summary>
+
+### What Changed:
+
+- **Added Expressive Code frames**: All code blocks now display with beautiful syntax-highlighted frames featuring file name tabs (e.g., `clone-v2.sh`, `clone-v3.sh`)
+- **Visual diff annotations**: Code blocks now show insertions (`ins={}`) and deletions (`del={}`) to clearly illustrate what changed between versions
+- **Terminal usage examples**: Added practical terminal examples for each version showing real-world usage with sample commands and output
+- **Syntax highlighting improvements**: Migrated to `astro-expressive-code` for better code presentation with dual themes (Dracula for dark mode, GitHub Light for light mode)
+
+### Why These Changes:
+
+These enhancements make the article more educational and easier to follow. The visual diffs help readers immediately see what changed between versions, while the terminal examples demonstrate practical usage patterns. The improved code presentation makes the evolution of the function clearer and more engaging.
+
+</details>
+
+---
 
 <script src="https://gist.github.com/Oluwasetemi/b9c8f8fea9d2b274b7b45964eda9ae7f.js"></script>
