@@ -1,14 +1,17 @@
 ---
 import { getCollection } from "astro:content";
 
-import PortfolioCard from "../components/portfolio-card.astro";
-import { SITE_TITLE } from "../consts";
-import Layout from "../layouts/Layout.astro";
+import PortfolioCard from "../../components/portfolio-card.astro";
+import { SITE_TITLE } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
 
 const portfolios = await getCollection("portfolio");
 ---
 
-<Layout title={`Portfolio - ${SITE_TITLE}`} description="My portfolio of web development projects and work">
+<Layout
+  title={`Portfolio - ${SITE_TITLE}`}
+  description="My portfolio of web development projects and work"
+>
   <main class="max-w-6xl mx-auto px-8 py-8">
     <div class="text-center mb-12">
       <h1
@@ -16,12 +19,13 @@ const portfolios = await getCollection("portfolio");
       >
         My Portfolio
       </h1>
-      <p class="text-xl text-gray-600">A collection of projects I've worked on</p>
+      <p class="text-xl text-gray-600">
+        A collection of projects I've worked on
+      </p>
     </div>
 
     {
-      portfolios.length > 0
-? (
+      portfolios.length > 0 ? (
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
           {portfolios
             .sort((a, b) => {
@@ -29,15 +33,16 @@ const portfolios = await getCollection("portfolio");
               const dateB = new Date(b.data.publishedDate as Date);
               return dateB.getTime() - dateA.getTime();
             })
-            .map(portfolio => (
+            .map((portfolio) => (
               <PortfolioCard portfolio={portfolio} />
             ))}
         </ul>
-      )
-: (
+      ) : (
         <div class="text-center py-16 px-8 text-gray-600">
           <h2 class="text-3xl font-bold mb-4">Portfolio Coming Soon</h2>
-          <p class="text-lg">I'm currently working on showcasing my projects. Check back soon!</p>
+          <p class="text-lg">
+            I'm currently working on showcasing my projects. Check back soon!
+          </p>
         </div>
       )
     }
