@@ -2,10 +2,11 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
-
 import expressiveCode from "astro-expressive-code";
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
   integrations: [
     expressiveCode({
       themes: ["dracula", "github-light"],
+      plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
     }),
     mdx({
       syntaxHighlight: false, // Also disable for MDX
