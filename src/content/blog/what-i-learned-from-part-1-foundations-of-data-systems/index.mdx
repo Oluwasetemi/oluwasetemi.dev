@@ -441,7 +441,7 @@ You face the same challenge as backend services:
 
 **The solution:**
 
-```typescript
+```typescript showLineNumbers title="api-evolution.ts" wrap="false"
 // API v1
 interface User {
   id: string;
@@ -589,7 +589,7 @@ Dos **Request/Response (REST/GraphQL) when:**
 
 ### 1. The Append-Only Log Pattern
 
-```typescript
+```typescript showLineNumbers title="append-only-log.ts" wrap="false"
 // Use for: Undo/redo, time-travel debugging, audit trails
 const eventLog = [];
 
@@ -620,7 +620,7 @@ cache.users[1].name = "New Name"
 
 ### 3. The Optimistic Update Pattern
 
-```typescript
+```ts collapse={2-4} showLineNumbers=false title="optimistic-update.ts" wrap="false"
 // Use for: Variable network latency
 const { mutate } = useMutation({
   mutationFn: likePost,
@@ -640,7 +640,7 @@ const { mutate } = useMutation({
 
 ### 4. The Compatibility Pattern
 
-```typescript
+```typescript collapse={3-4} title="compatibility-pattern.ts" wrap="false"
 // Use for: API evolution
 interface Config {
   version: number;
@@ -770,6 +770,7 @@ When you understand these foundations, you don't just write code—you design sy
 **For building real-time systems:**
 
 - [WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+- [PartyKit](https://partykit.dev/) - [PartyServer](https://github.com/cloudflare/partykit), PartySocket, Y-PartyServer, partysub, partysync, partywhen
 - [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
 - [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)
 
@@ -796,6 +797,15 @@ _This summary is based on "Designing Data-Intensive Applications" by Martin Klep
 ### Why These Changes:
 
 These improvements make the technical content more accessible and easier to follow. The enhanced code presentation helps readers quickly identify code examples and understand the concepts being illustrated. The dual-theme support ensures readability in both light and dark modes, improving the overall reading experience for this technical deep-dive.
+
+</details>
+
+<details name="update">
+<summary><strong>November 6, 2025</strong> - Added PartyKit resources</summary>
+
+### What Changed:
+
+- **Added PartyKit resources**: [Added PartyKit resources to the resources section](https://github.com/cloudflare/partykit)
 
 </details>
 
