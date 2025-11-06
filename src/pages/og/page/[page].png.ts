@@ -17,14 +17,14 @@ const pageConfig: Record<
 > = {
   home: {
     title: "Oluwasetemi",
-    subtitle: "Software Engineer & Developer Advocate",
+    subtitle: "Fullstack Engineer",
     description:
       "Building and teaching delightful web experiences with modern JavaScript, React, and AI",
   },
   about: {
     title: "About Me",
     description:
-      "Software Engineer passionate about web development, open source, and sharing knowledge with the community",
+      "Fullstack Engineer passionate about web development, open source, and sharing knowledge with the community",
   },
   blog: {
     title: "Blog",
