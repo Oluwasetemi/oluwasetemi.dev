@@ -19,7 +19,7 @@ const pageConfig: Record<
     title: "Oluwasetemi",
     subtitle: "Software Engineer & Developer Advocate",
     description:
-      "Building delightful web experiences with modern JavaScript, React, and developer tools",
+      "Building and teaching delightful web experiences with modern JavaScript, React, and AI",
   },
   about: {
     title: "About Me",
@@ -62,119 +62,158 @@ export async function GET({ params }: { params: { page: string } }) {
         height: "100%",
         width: "100%",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
+        flexDirection: "row",
+        alignItems: "stretch",
         justifyContent: "space-between",
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         padding: "60px 80px",
         fontFamily: "system-ui, -apple-system, sans-serif",
+        gap: "60px",
       },
       children: [
-        // Header with favicon and logo
-        {
-          type: "div",
-          props: {
-            style: {
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              color: "white",
-              fontSize: 32,
-              fontWeight: "bold",
-              opacity: 0.9,
-            },
-            children: [
-              {
-                type: "img",
-                props: {
-                  src: "https://oluwasetemi.dev/favicon-32x32.png",
-                  width: 48,
-                  height: 48,
-                  style: {
-                    borderRadius: "8px",
-                  },
-                },
-              },
-              {
-                type: "div",
-                props: {
-                  children: "oluwasetemi.dev",
-                },
-              },
-            ],
-          },
-        },
-        // Main content
+        // Left side: Content
         {
           type: "div",
           props: {
             style: {
               display: "flex",
               flexDirection: "column",
-              gap: "24px",
+              justifyContent: "space-between",
+              flex: 1,
+              maxWidth: "700px",
             },
             children: [
-              // Title
+              // Header with favicon and logo
               {
                 type: "div",
                 props: {
                   style: {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
                     color: "white",
-                    fontSize: 80,
+                    fontSize: 32,
                     fontWeight: "bold",
-                    lineHeight: 1.1,
+                    opacity: 0.9,
                   },
-                  children: config.title,
+                  children: [
+                    {
+                      type: "img",
+                      props: {
+                        src: "https://oluwasetemi.dev/favicon-32x32.png",
+                        width: 48,
+                        height: 48,
+                        style: {
+                          borderRadius: "8px",
+                        },
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        children: "oluwasetemi.dev",
+                      },
+                    },
+                  ],
                 },
               },
-              // Subtitle (for home page)
-              config.subtitle && {
-                type: "div",
-                props: {
-                  style: {
-                    color: "rgba(255, 255, 255, 0.95)",
-                    fontSize: 40,
-                    fontWeight: "500",
-                    lineHeight: 1.3,
-                  },
-                  children: config.subtitle,
-                },
-              },
-              // Description
+              // Main content
               {
                 type: "div",
                 props: {
                   style: {
-                    color: "rgba(255, 255, 255, 0.9)",
-                    fontSize: 32,
-                    lineHeight: 1.4,
-                    maxWidth: "900px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "24px",
                   },
-                  children: config.description,
+                  children: [
+                    // Title
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          color: "white",
+                          fontSize: 72,
+                          fontWeight: "bold",
+                          lineHeight: 1.1,
+                        },
+                        children: config.title,
+                      },
+                    },
+                    // Subtitle (for home page)
+                    config.subtitle && {
+                      type: "div",
+                      props: {
+                        style: {
+                          color: "rgba(255, 255, 255, 0.95)",
+                          fontSize: 36,
+                          fontWeight: "500",
+                          lineHeight: 1.3,
+                        },
+                        children: config.subtitle,
+                      },
+                    },
+                    // Description
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          color: "rgba(255, 255, 255, 0.9)",
+                          fontSize: 28,
+                          lineHeight: 1.4,
+                        },
+                        children: config.description,
+                      },
+                    },
+                  ].filter(Boolean),
                 },
               },
-            ].filter(Boolean),
+              // Footer
+              {
+                type: "div",
+                props: {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  children: {
+                    type: "div",
+                    props: {
+                      style: {
+                        color: "rgba(255, 255, 255, 0.7)",
+                        fontSize: 24,
+                        textTransform: "uppercase",
+                        letterSpacing: "2px",
+                      },
+                      children:
+                        params.page === "home" ? "Welcome" : params.page,
+                    },
+                  },
+                },
+              },
+            ],
           },
         },
-        // Footer
+        // Right side: Headshot
         {
           type: "div",
           props: {
             style: {
               display: "flex",
               alignItems: "center",
-              width: "100%",
+              justifyContent: "center",
             },
             children: {
-              type: "div",
+              type: "img",
               props: {
+                src: "https://res.cloudinary.com/drnqdd87d/image/upload/v1730477477/headshot/file.png",
+                width: 400,
+                height: 400,
                 style: {
-                  color: "rgba(255, 255, 255, 0.7)",
-                  fontSize: 24,
-                  textTransform: "uppercase",
-                  letterSpacing: "2px",
+                  borderRadius: "20px",
+                  border: "6px solid rgba(255, 255, 255, 0.3)",
+                  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.3)",
                 },
-                children: params.page === "home" ? "Welcome" : params.page,
               },
             },
           },
