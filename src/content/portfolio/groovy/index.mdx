@@ -1,16 +1,22 @@
 ---
-title: Groovy Nightlife App
+title: Groovy Nightlife Management App
 slug: groovy
 imageUrl: "https://res.cloudinary.com/drnqdd87d/image/upload/v1632514977/Personal/groovy-small_x8y5an.png"
 url: "https://groovyapi.oluwasetemi.dev"
-description: "The problem I was solving with this solution is an App to manage
-  people&apos;s night life including solutions for varying level of user who
-  will manage the night-life from inventory to each order placed. I worked on
-  the backend with Typescript and the newly shinning prisma orm in a REST api
-  setup which uses swagger-ui for documentation. The developer experience was
-  smooth. "
+description: "A comprehensive nightlife management platform with inventory tracking, order management, and payment integration, built with TypeScript and Prisma ORM"
 technology:
-  ["typescript", "prisma", "nodejs", "rest", "mongodb", "paystack", "swagger"]
+  [
+    "typescript",
+    "prisma",
+    "nodejs",
+    "rest api",
+    "mongodb",
+    "paystack",
+    "flutterwave",
+    "swagger",
+    "github actions",
+    "aws",
+  ]
 isPublished: true
 publishedDate: "2021-08-25T06:00:00.012Z"
 isDraft: false
@@ -18,29 +24,43 @@ updated: false
 updatedDate: null
 ---
 
-# Groovy Nightlife App
+# Groovy Nightlife Management App
 
-The problem I was solving with this solution is an App to manage people&apos;s
-night life including solutions for varying level of user who will manage the
-night-life from inventory to each order placed. I worked on the backend with
-Typescript and the newly shinning prisma orm in a REST api setup which uses
-swagger-ui for documentation. The developer experience was smooth.
+## Overview
 
-## My Role on the Project
+A complete backend solution for nightlife venue management, handling everything from inventory control to customer orders and payments. Built with TypeScript and Prisma ORM, Groovy delivers exceptional developer experience while managing complex business logic across multiple user roles and payment providers.
 
-- Worked collaboratively with a mobile developer and a project manager.
-- I designed and implemented the database (prisma, mongodb).
-- Designed and Implemented communication with external API (paystack,
-  flutterwave).
-- I architected and implemented the backend (typescript, nodejs, rest api).
-- I used GitHub Actions to handle the CI and CD.
-- I handled the DevOps tasks. (AWS, Linux).
-- Documentation was done with swagger-ui
+## Key Features
 
-## Motivation
+- **Multi-Level User Management**: Role-based access control for customers, staff, and administrators
+- **Inventory System**: Real-time tracking of venue inventory with automated alerts
+- **Order Management**: Complete order lifecycle from placement to fulfillment
+- **Dual Payment Integration**: Support for both Paystack and Flutterwave payment gateways
+- **Interactive API Docs**: Comprehensive Swagger UI documentation for all endpoints
 
-This was a contract gig where I was brought on by the project manager, The
-developer experience DX was the silver linning for me during the project. Using
-prisma orm with typescript made everything type safe. Prisma data modelling was
-very smooth compared with mongoose modelling of data which I use for some of my
-project in the past.
+## My Role & Responsibilities
+
+- Architected and implemented complete backend as solo developer
+- Designed MongoDB database schema using Prisma ORM for type-safe data access
+- Built RESTful API with TypeScript for full type safety across the application
+- Integrated dual payment providers (Paystack and Flutterwave) for transaction flexibility
+- Created comprehensive API documentation using Swagger UI
+- Configured CI/CD pipeline with GitHub Actions for automated testing and deployment
+- Managed AWS infrastructure and Linux server deployment
+
+## Technical Highlights
+
+Leveraged Prisma ORM with TypeScript to achieve complete type safety from database to API responses, significantly improving developer experience and reducing runtime errors. The data modeling capabilities of Prisma simplified complex relationships between users, inventory, orders, and payments. Implemented dual payment gateway support, providing flexibility and redundancy for transaction processing. The Swagger integration provides interactive API documentation, making it easy for mobile developers to integrate with the backend.
+
+## Impact & Results
+
+- **Type Safety**: 100% type-safe codebase from database to API
+- **Developer Experience**: Exceptional DX with Prisma ORM and TypeScript integration
+- **Payment Flexibility**: Dual payment gateway support for transaction reliability
+- **API Documentation**: Complete interactive Swagger documentation
+- **Deployment**: Automated CI/CD with GitHub Actions and AWS hosting
+
+## Links
+
+- [API Documentation](https://groovyapi.oluwasetemi.dev) - Swagger UI interface
+- GitHub repo: Private

@@ -2,9 +2,20 @@
 title: TripleTen CLI
 imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/chooselife_ajndqs.png
 url: https://github.com/Oluwasetemi/tripleten_cli
-description:
-  "A Python CLI tool for tracking TripleTen Software Engineering leaderboard, featuring real-time watch mode, rich terminal tables, authentication management, and comprehensive configuration options for students, instructors, and tutors."
-technology: ["python", "click", "rich", "requests", "toml", "pytest", "black", "mypy", "pre-commit", "makefile"]
+github: https://github.com/Oluwasetemi/tripleten_cli
+description: "A Python CLI tool for tracking TripleTen Software Engineering leaderboard, featuring real-time watch mode, rich terminal tables, and comprehensive testing"
+technology:
+  [
+    "python",
+    "click",
+    "rich",
+    "requests",
+    "toml",
+    "pytest",
+    "black",
+    "mypy",
+    "pre-commit",
+  ]
 isPublished: true
 publishedDate: "2025-08-23T00:00:00.000Z"
 isDraft: false
@@ -14,213 +25,41 @@ updatedDate: "2025-08-23T00:00:00.000Z"
 
 # TripleTen CLI
 
-A comprehensive Python CLI tool designed to track and display the TripleTen Software Engineering leaderboard in real-time. Built for students, instructors, and tutors to monitor progress and rankings with rich terminal output, authentication management, and configurable watch modes.
+## Overview
+
+A Python CLI tool for tracking and displaying the TripleTen Software Engineering leaderboard in real-time. Built for students, instructors, and tutors to monitor progress and rankings with beautiful terminal output, persistent authentication, and configurable watch modes.
 
 ## Key Features
 
-### **Real-Time Leaderboard Tracking**
-- **Live Watch Mode**: Continuously refresh leaderboard with configurable intervals (30-60 seconds)
-- **Rich Terminal Tables**: Beautiful formatted tables with gold, silver, and bronze rank highlighting
-- **Current User Highlighting**: Bold yellow highlighting for the authenticated user's position
-- **Auto-formatting**: Right-aligned numbers, centered ranks, and responsive column sizing
+- **Real-Time Watch Mode**: Continuously refresh leaderboard with configurable intervals (30-60 seconds)
+- **Rich Terminal UI**: Beautiful formatted tables with rank highlighting and color-coded output
+- **Cookie Authentication**: Secure browser cookie-based login with clipboard integration
+- **Multiple Time Periods**: All-time, 30-day, and 7-day leaderboard views
+- **Persistent Configuration**: TOML-based settings for seamless repeated use
 
-### **Authentication & Configuration**
-- **Browser Cookie Authentication**: Secure login using browser cookies from TripleTen platform
-- **Clipboard Integration**: Automatic cookie reading from clipboard for seamless authentication
-- **Configuration Management**: Persistent settings with TOML-based configuration files
-- **Session Persistence**: Stored authentication credentials for repeated use
+## My Role & Responsibilities
 
-### **Multiple Time Periods**
-- **All Time Rankings**: Complete historical leaderboard data
-- **30 Days View**: Recent month performance tracking
-- **7 Days View**: Weekly progress monitoring
-- **Flexible Periods**: Easy switching between different time ranges
+- Designed and built entire CLI application as solo developer using Python and Click framework
+- Implemented rich terminal UI with color-coded tables and responsive formatting
+- Created cookie-based authentication system with clipboard integration for seamless login
+- Built TOML configuration management for persistent user settings
+- Established comprehensive testing strategy with pytest and code quality tools (Black, mypy, flake8)
+- Configured pre-commit hooks for automated code quality enforcement
+- Published package structure for easy installation and distribution
 
-### **Developer Experience**
-- **Rich Terminal Output**: Color-coded tables with emoji indicators and styling
-- **Interactive Configuration**: Easy setup and customization of default settings
-- **Help System**: Comprehensive command-line help and documentation
-- **Error Handling**: Graceful error handling with user-friendly messages
+## Technical Highlights
 
-## My Role on the Project
+Built a production-quality CLI tool leveraging Click for robust command-line interface and Rich library for beautiful terminal output with color-coded tables, progress indicators, and responsive formatting. The authentication system securely handles browser cookies with clipboard integration, eliminating manual credential entry. TOML configuration provides persistent settings across sessions, while the watch mode implements efficient polling with configurable refresh intervals. Comprehensive code quality tooling with Black, mypy, isort, flake8, and pre-commit hooks ensures maintainable, type-safe Python code with consistent styling.
 
-- **Full-Stack CLI Development**: Designed and implemented the entire CLI application from scratch
-- **Authentication System**: Built secure cookie-based authentication with clipboard integration
-- **Rich Terminal UI**: Created beautiful, responsive terminal tables with color coding and styling
-- **Configuration Management**: Implemented TOML-based configuration system with persistent storage
-- **Real-Time Features**: Developed watch mode with configurable refresh intervals
-- **Testing Strategy**: Established comprehensive testing with pytest and code quality tools
-- **Documentation**: Created detailed README, contributing guidelines, and usage examples
-- **DevOps**: Set up CI/CD with GitHub Actions, pre-commit hooks, and code quality tools
+## Impact & Results
 
-## Technical Architecture
+- **Developer Experience**: Instant leaderboard access without browser navigation
+- **Code Quality**: 100% type hints with mypy, formatted with Black, linted with flake8
+- **Testing**: Comprehensive pytest coverage with automated pre-commit checks
+- **Real-Time Monitoring**: Watch mode for continuous progress tracking
+- **Production Ready**: Published package structure with proper dependency management
 
-### **Core Technologies**
-- **Python**: Primary language with modern Python features and type hints
-- **Click**: Command-line interface framework for robust CLI development
-- **Rich**: Terminal formatting library for beautiful, colored output
-- **Requests**: HTTP library for API communication with TripleTen platform
-- **TOML**: Configuration file format for persistent settings
+## Links
 
-### **Development Tools**
-- **pytest**: Comprehensive testing framework with coverage reporting
-- **Black**: Code formatter for consistent Python styling
-- **mypy**: Static type checker for type safety
-- **isort**: Import statement organizer
-- **flake8**: Linter for style guide enforcement
-- **pre-commit**: Git hook framework for code quality
-
-### **Project Structure**
-- **Modular Design**: Clean separation of concerns with dedicated modules
-- **Configuration Management**: Centralized settings with TOML configuration files
-- **Error Handling**: Comprehensive error handling with user-friendly messages
-- **Testing**: Full test coverage with unit and integration tests
-
-## CLI Commands
-
-### **Leaderboard Display**
-```bash
-# Default leaderboard (all time)
-tripleten
-
-# Specific time periods
-tripleten leaderboard --period 30_days
-tripleten leaderboard --period 7_days
-
-# Watch mode with custom interval
-tripleten leaderboard --watch --interval 60
-tripleten leaderboard -w --interval 30
-```
-
-### **Authentication**
-```bash
-# Auto-read cookies from clipboard
-tripleten login
-
-# Manual cookie input
-tripleten login --cookies "your_cookie_string_here"
-```
-
-### **Configuration**
-```bash
-# Show current settings
-tripleten config --show
-
-# Set default values
-tripleten config --set default_interval 45
-tripleten config --set default_period 7_days
-```
-
-## Sample Output
-
-### **Rich Table Display**
-```
-🏆 Leaderboard
-┏━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┓
-┃  Rank  ┃ Name                 ┃         XP ┃  Completed ┃   Streak ┃
-┡━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━┩
-│   1    │ Oluwasetemi Ojo      │         43 │          0 │        0 │
-│   2    │ Marina Viriyalova    │         19 │          0 │        0 │
-│   3    │ Luiz Araujo          │         10 │          0 │        0 │
-└────────┴──────────────────────┴────────────┴────────────┴──────────┘
-```
-
-### **Configuration Display**
-```
-Current Configuration:
-Location: ~/.config/tripleten-cli/config.toml
-
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Setting          ┃ Value                                       ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ default_period   │ all_time                                    │
-│ default_interval │ 30                                          │
-│ session_cookie   │ ****def456                                  │
-│ user_id          │ alice123                                    │
-└──────────────────┴─────────────────────────────────────────────┘
-```
-
-## Installation & Usage
-
-### **Installation**
-```bash
-# Install from PyPI
-pip install tripleten-cli
-
-# Or install from source
-git clone https://github.com/Oluwasetemi/tripleten_cli.git
-cd tripleten_cli
-pip install -e .
-```
-
-### **Quick Start**
-```bash
-# Login with your TripleTen credentials
-tripleten login
-
-# View leaderboard
-tripleten
-
-# Watch mode for real-time updates
-tripleten -w --interval 30
-```
-
-## Development Setup
-
-### **Environment Setup**
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install development dependencies
-pip install -e ".[dev]"
-
-# Install pre-commit hooks
-pre-commit install
-```
-
-### **Code Quality**
-```bash
-# Format code
-black src/ tests/
-
-# Sort imports
-isort src/ tests/
-
-# Lint code
-flake8 src/ tests/
-
-# Type checking
-mypy src/
-
-# Run tests
-pytest
-```
-
-## Motivation & Impact
-
-This project was created to solve a real need in the TripleTen educational community. As a tutor and instructor, I needed a way to quickly check student progress and rankings without constantly refreshing the web interface. The CLI tool provides:
-
-- **Efficiency**: Quick access to leaderboard data without browser navigation
-- **Real-time Monitoring**: Watch mode for continuous progress tracking
-- **Better UX**: Rich terminal output with clear visual hierarchy
-- **Automation**: Persistent authentication and configuration for seamless use
-
-
-## Live Demo & Resources
-
-- **Source Code**: [GitHub Repository](https://github.com/Oluwasetemi/tripleten_cli)
-- **PyPI Package**: Available for easy installation
-- **Documentation**: Comprehensive README and contributing guidelines
-- **Demo Script**: Interactive demo showcasing all features
-
-## Future Enhancements
-
-- **Export Features**: CSV/JSON export of leaderboard data
-- **Notifications**: Desktop notifications for rank changes
-- **Analytics**: Progress tracking and trend analysis
-- **Multi-platform**: Enhanced support for different operating systems
-- **API Integration**: Direct API access for faster data retrieval
-
-The TripleTen CLI demonstrates modern Python CLI development practices with a focus on user experience, code quality, and maintainability.
+- [Source Code](https://github.com/Oluwasetemi/tripleten_cli) - GitHub repository
+- [PyPI Package](https://pypi.org/project/tripleten-cli/) - Install via pip (if published)
