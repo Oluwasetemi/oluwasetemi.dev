@@ -1,0 +1,83 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Schedule a Meeting";
+const description = "Book a meeting with Oluwasetemi Ojo - Full Stack Developer, Educator, and Open Source Contributor";
+---
+
+<Layout title={title} description={description} image="/og/page/contact.png">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-4">
+      Schedule a Meeting
+      <span role="img" aria-label="calendar">📅</span>
+    </h1>
+
+    <p class="text-lg mb-8 text-gray-700">
+      Book a time that works for you to discuss projects, collaborations, or any questions you might have.
+    </p>
+
+    <!-- Cal.com inline embed -->
+    <div style="width:100%;height:800px;overflow:scroll" id="my-cal-inline-react-note-setup-meeting"></div>
+
+    <div class="mt-8 text-center">
+      <p class="text-gray-600">
+        Prefer a different booking? Visit my{" "}
+        <a
+          href="https://cal.com/oluwasetemi"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-purple-600 hover:text-purple-800 underline"
+        >
+          Cal.com profile
+        </a>
+        {" "}to see all available meeting types.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if(typeof namespace === "string"){
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ["initNamespace", namespace]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", "react-note-setup-meeting", {origin:"https://app.cal.com"});
+
+  Cal.ns["react-note-setup-meeting"]("inline", {
+    elementOrSelector:"#my-cal-inline-react-note-setup-meeting",
+    config: {"layout":"month_view"},
+    calLink: "oluwasetemi/react-note-setup-meeting",
+  });
+
+  Cal.ns["react-note-setup-meeting"]("ui", {
+    "cssVarsPerTheme":{
+      "light":{"cal-brand":"#800080"},
+      "dark":{"cal-brand":"#fafafa"}
+    },
+    "hideEventTypeDetails":false,
+    "layout":"month_view"
+  });
+</script>
