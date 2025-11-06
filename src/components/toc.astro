@@ -1,0 +1,101 @@
+---
+export interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only show h2 and h3 headings
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+  <nav class="hidden xl:block fixed left-[calc(50%+550px)] top-24 w-[220px] max-h-[calc(100vh-8rem)] overflow-y-auto toc-scrollbar">
+    <div class="pl-3 border-l-2 border-gray-200">
+      <h2 class="text-[11px] font-semibold uppercase tracking-wide text-gray-400 mb-2 pl-2">On this page</h2>
+      <ul class="list-none p-0 m-0">
+        {tocHeadings.map(heading => (
+          <li class={`my-0.5 ${heading.depth === 3 ? 'pl-3' : ''}`}>
+            <a
+              href={`#${heading.slug}`}
+              class={`block py-1 px-2 text-gray-600 no-underline rounded transition-all duration-150 leading-tight hover:text-[#2337ff] hover:bg-gray-50 toc-link ${heading.depth === 3 ? 'text-[11px]' : 'text-xs'}`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+
+<style>
+  /* Custom scrollbar */
+  .toc-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 2px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #d1d5db;
+  }
+
+  /* Active state with left border indicator */
+  .toc-link.active {
+    color: #2337ff;
+    background: #eff6ff;
+    font-weight: 500;
+    border-left: 2px solid #2337ff;
+    padding-left: calc(0.5rem - 2px);
+  }
+</style>
+
+<script>
+  // Add active state to TOC links based on scroll position
+  function initTOC() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+
+    if (tocLinks.length === 0 || headings.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('id');
+          const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
+
+          if (entry.isIntersecting) {
+            // Remove active from all links
+            tocLinks.forEach(link => link.classList.remove('active'));
+            // Add active to current link
+            tocLink?.classList.add('active');
+          }
+        });
+      },
+      {
+        rootMargin: '-100px 0px -66%',
+        threshold: 0
+      }
+    );
+
+    headings.forEach((heading) => observer.observe(heading));
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initTOC);
+
+  // Run after view transitions (if using Astro view transitions)
+  document.addEventListener('astro:page-load', initTOC);
+</script>

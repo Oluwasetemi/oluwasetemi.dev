@@ -5,63 +5,73 @@ import { Image } from "astro:assets";
 
 import Footer from "../components/footer.astro";
 import FormattedDate from "../components/formatteddate.astro";
+import TOC from "../components/toc.astro";
 import Layout from "./Layout.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+  headings?: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+};
 
-const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags } = Astro.props;
+const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags, headings } = Astro.props;
 ---
 
 <Layout title={title} description={description || `Blog post: ${title}`}>
-  <main class="w-full max-w-full m-0">
-    <article class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
-      <figure class="w-full mt-4">
-        {
-          banner && (
-            <Image src={banner} alt={`Cover image for ${title}`} class="block mx-auto shadow-lg w-full max-w-4xl" />
-          )
-        }
-        {
-          bannerCredit && (
-            <figcaption class="mx-auto mt-2 w-full max-w-4xl text-sm text-gray-500 italic">{bannerCredit}</figcaption>
-          )
-        }
-      </figure>
-      <div class="max-w-4xl mx-auto px-4 py-8 text-gray-800">
-        <div class="mb-8 py-8 text-center leading-tight">
-          <div class="mb-4 text-gray-600">
-            <FormattedDate date={date} />
-            {
-              (updatedDate || modified) && (
-                <div class="italic">
-                  Last updated on <FormattedDate date={updatedDate || modifiedDate} />
-                </div>
-              )
-            }
-          </div>
-          <!-- <h1 class="m-0 mb-4">{title}</h1> -->
-          <hr class="border-gray-200" />
-        </div>
-        <slot />
-        {
-          tags && tags.length > 0 && (
-            <div class="mt-12 pt-8 border-t border-gray-200">
-              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">Tags</h3>
-              <div class="flex gap-2 flex-wrap">
-                {tags.map(tag => (
-                  <a
-                    href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
-                    class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
-                  >
-                    {tag}
-                  </a>
-                ))}
-              </div>
+  <div class="relative w-full">
+    {headings && <TOC headings={headings} />}
+    <main class="w-full">
+      <article class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <figure class="w-full mt-4">
+          {
+            banner && (
+              <Image src={banner} alt={`Cover image for ${title}`} class="block mx-auto shadow-lg w-full max-w-4xl" />
+            )
+          }
+          {
+            bannerCredit && (
+              <figcaption class="mx-auto mt-2 w-full max-w-4xl px-4 text-sm text-gray-500 italic">{bannerCredit}</figcaption>
+            )
+          }
+        </figure>
+        <div class="max-w-3xl xl:max-w-4xl mx-auto px-4 xl:px-8 py-8 text-gray-800">
+          <div class="mb-8 py-8 text-center leading-tight">
+            <div class="mb-4 text-gray-600">
+              <FormattedDate date={date} />
+              {
+                (updatedDate || modified) && (
+                  <div class="italic">
+                    Last updated on <FormattedDate date={updatedDate || modifiedDate} />
+                  </div>
+                )
+              }
             </div>
-          )
-        }
-      </div>
-    </article>
-  </main>
+            <!-- <h1 class="m-0 mb-4">{title}</h1> -->
+            <hr class="border-gray-200" />
+          </div>
+          <slot />
+          {
+            tags && tags.length > 0 && (
+              <div class="mt-12 pt-8 border-t border-gray-200">
+                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">Tags</h3>
+                <div class="flex gap-2 flex-wrap">
+                  {tags.map(tag => (
+                    <a
+                      href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
+                      class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
+                    >
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </article>
+    </main>
+  </div>
   <Footer />
 </Layout>
