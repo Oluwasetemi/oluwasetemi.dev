@@ -16,9 +16,12 @@ type Props = CollectionEntry<"blog">;
 const post = Astro.props;
 const { Content, headings } = await post.render();
 
+// Generate OG image URL
+const ogImage = `/og/blog/${post.slug}.png`;
+
 export const prerender = true;
 ---
 
-<BlogPost {...post.data} banner={post.data.banner as ImageMetadata} bannerCredit={post.data.bannerCredit} headings={headings}>
+<BlogPost {...post.data} banner={post.data.banner as ImageMetadata} bannerCredit={post.data.bannerCredit} headings={headings} ogImage={ogImage}>
   <Content />
 </BlogPost>

@@ -7,10 +7,12 @@ description:
   return more than one value, one after another, and on-demand in JavaScript._"
 banner: "./images/banner.jpg"
 bannerCredit: "Photo by [Mohammad Rahmani](https://unsplash.com/photos/8qEB0fTe9Vw)"
-tags: ["typescript", "react", "javascript"]
+tags: ["typescript", "javascript"]
 isPublished: true
 isDraft: false
 ---
+
+# Generators In JavaScript
 
 Functions are general concepts in a programming language that helps to group
 thought and return a single result. In this article, I will show you how to
@@ -323,7 +325,7 @@ called in the `getRandomSetChars` async generator that yields 3 values. It
 yields a random string, then yields a delay of 200ms and finally an array of two
 random strings.
 
-```typescript
+```ts
 function delay(ms: number): Promise<void> {
   return new Promise<void>((resolve) => {
     setTimeout(resolve, ms);

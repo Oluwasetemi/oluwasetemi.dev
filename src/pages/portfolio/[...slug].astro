@@ -25,9 +25,12 @@ export async function getStaticPaths() {
 const portfolio = Astro.props;
 const { Content } = await portfolio.render();
 
+// Generate OG image URL
+const ogImage = `/og/portfolio/${portfolio.slug}.png`;
+
 export const prerender = true;
 ---
 
-<PortfolioPost {...portfolio.data}>
+<PortfolioPost {...portfolio.data} ogImage={ogImage}>
   <Content />
 </PortfolioPost>

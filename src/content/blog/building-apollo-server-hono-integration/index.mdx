@@ -16,7 +16,7 @@ bannerCredit: "Photo by [Rahul Mishra](https://unsplash.com/@rahuulmiishra?utm_s
 
 This is focused on Apollo Server when creating a Graphql server. The goal of this post is to make turning a route in your existing hono api to power a graphql infrastructure. From this [page](https://orm.drizzle.team/docs/graphql) in the drizzle docs its easy to create a Graphql server with from your drizzle schema with just one line of code.
 
-```typescript=
+```ts
 const { schema } = buildSchema(db);
 ```
 
@@ -28,7 +28,7 @@ All the docs on `drizzle-graphql` and `apollo server` was not sufficient to help
 
 I set out to build something to solve this problem and I arrived at this `startServerAndCreateHonoHandler`.
 
-```typescript!
+```ts
 const graphqlHandler = startServerAndCreateHonoHandler(server, {
   context: async ({ req, c }) => ({
     user: await getUserFromRequest(req),
@@ -38,7 +38,7 @@ const graphqlHandler = startServerAndCreateHonoHandler(server, {
 });
 
 // Use in Hono app
-app.post('/graphql', graphqlHandler);
+app.post("/graphql", graphqlHandler);
 ```
 
 ## `startServerAndCreateHonoHandler` Function Explanation
@@ -47,19 +47,20 @@ This function creates a bridge between Apollo Server (GraphQL) and Hono (HTTP fr
 
 ### Function Signature
 
-```typescript!
-export function startServerAndCreateHonoHandler<TContext extends BaseContext = BaseContext>(
-  server: ApolloServer<TContext>,
-  options?: HonoIntegrationOptions<TContext>,
-)
+```ts
+export function startServerAndCreateHonoHandler<
+  TContext extends BaseContext = BaseContext,
+>(server: ApolloServer<TContext>, options?: HonoIntegrationOptions<TContext>);
 ```
 
 The TypeScript generics `<TContext extends BaseContext = BaseContext>` is a generic type definition that creates a flexible interface for Apollo Server integration with Hono. The generic ensures that whatever context type you define is properly typed throughout your GraphQL resolvers. It permits flexibility and customization of the context object.
 
-```typescript!
+```ts
 // Default usage (TContext = BaseContext)
 const defaultOptions: HonoIntegrationOptions = {
-  context: ({ req, c }) => ({ /* BaseContext properties */ })
+  context: ({ req, c }) => ({
+    /* BaseContext properties */
+  }),
 };
 
 // Custom context type
@@ -75,7 +76,7 @@ const customOptions: HonoIntegrationOptions<MyCustomContext> = {
     db: getDB(req),
     permissions: getUserPermissions(req),
     // ... other BaseContext properties
-  })
+  }),
 };
 ```
 
@@ -92,7 +93,7 @@ Back to the explanation of the `startServerAndCreateHonoHandler`, the function p
 
 **1. Server Startup Management**
 
-```typescript
+```ts
 let started = false;
 
 const ensureStarted = async () => {
@@ -109,7 +110,7 @@ const ensureStarted = async () => {
 
 **2. Request Body Handling**
 
-```typescript
+```ts
 if (
   req.method !== "GET" &&
   req.header("content-type")?.includes("application/json")
@@ -131,7 +132,7 @@ if (
 
 **3. Header Conversion**
 
-```typescript
+```ts
 const headerMap = new Map<string, string>();
 req.raw.headers.forEach((value, key) => {
   headerMap.set(key, value);
@@ -143,7 +144,7 @@ req.raw.headers.forEach((value, key) => {
 
 **4. GraphQL Request Creation**
 
-```typescript
+```ts
 const httpGraphQLRequest: HTTPGraphQLRequest = {
   method: req.method as "GET" | "POST",
   headers: headerMap as any,
@@ -157,7 +158,7 @@ const httpGraphQLRequest: HTTPGraphQLRequest = {
 
 **5. Context Creation**
 
-```typescript
+```ts
 const contextValue = options?.context
   ? await options.context({ req, c })
   : ({} as TContext);
@@ -169,7 +170,7 @@ const contextValue = options?.context
 
 **6. GraphQL Execution**
 
-```typescript
+```ts
 const response = await server.executeHTTPGraphQLRequest({
   httpGraphQLRequest,
   context: async () => contextValue,
@@ -181,7 +182,7 @@ const response = await server.executeHTTPGraphQLRequest({
 
 **7. Response Handling**
 
-```typescript
+```ts
 // Set response headers
 for (const [key, value] of response.headers) {
   c.header(key, value);
@@ -206,7 +207,7 @@ return c.newResponse(payload, (response.status ?? 200) as any);
 
 ### Usage Example
 
-```typescript
+```ts
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -227,11 +228,10 @@ This integration allows anyone to use Apollo Server's powerful GraphQL features 
 
 Below is the full code of the function:
 
-```typescript!
-export function startServerAndCreateHonoHandler<TContext extends BaseContext = BaseContext>(
-  server: ApolloServer<TContext>,
-  options?: HonoIntegrationOptions<TContext>,
-) {
+```ts
+export function startServerAndCreateHonoHandler<
+  TContext extends BaseContext = BaseContext,
+>(server: ApolloServer<TContext>, options?: HonoIntegrationOptions<TContext>) {
   let started = false;
 
   const ensureStarted = async () => {
@@ -250,13 +250,12 @@ export function startServerAndCreateHonoHandler<TContext extends BaseContext = B
 
       // Handle request body
       if (
-        req.method !== "GET"
-        && req.header("content-type")?.includes("application/json")
+        req.method !== "GET" &&
+        req.header("content-type")?.includes("application/json")
       ) {
         try {
           body = await req.json();
-        }
-        catch (e) {
+        } catch (e) {
           // eslint-disable-next-line no-console
           console.log(e);
           return c.json(
@@ -299,16 +298,14 @@ export function startServerAndCreateHonoHandler<TContext extends BaseContext = B
       let payload = "";
       if (response.body.kind === "complete") {
         payload = response.body.string;
-      }
-      else {
+      } else {
         for await (const chunk of response.body.asyncIterator) {
           payload += chunk;
         }
       }
 
       return c.newResponse(payload, (response.status ?? 200) as any);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("GraphQL execution error:", error);
       return c.json({ errors: [{ message: "Internal server error" }] }, 500);
     }
@@ -318,13 +315,13 @@ export function startServerAndCreateHonoHandler<TContext extends BaseContext = B
 
 It is used like this:
 
-```typescript=
+```ts
 router.all("/graphql", graphqlRateLimiter, graphqlHandler);
 ```
 
 And the `graphqlHandler` looks like this:
 
-```typescript
+```ts
 const graphqlHandler = startServerAndCreateHonoHandler(server, {
   context: async ({ req, c }) => {
     try {
@@ -351,7 +348,7 @@ This function made it possible for me to have `/graphql` on my [https://api.oluw
 
 Another beauty to this implementation is that it is compatible with GraphQL Yoga as well.
 
-```typescript
+```ts
 // Handle all GraphQL requests
 app.all("/graphql", async (c) => {
   // Convert Hono request to standard Request

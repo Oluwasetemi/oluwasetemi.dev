@@ -69,7 +69,7 @@ These aren't just backend concerns. Let me show you:
 
 **Scalability in Frontend:**
 
-```typescript title="scalability-patterns.ts"
+```ts title="scalability-patterns.ts"
 // Bundle size → tree shaking, compression, code splitting
 // State complexity → normalized state, memoization
 // Real-time updates → efficient diffing, virtualization
@@ -78,7 +78,7 @@ These aren't just backend concerns. Let me show you:
 
 **Maintainability in Frontend:**
 
-```typescript title="maintainability-patterns.ts"
+```ts title="maintainability-patterns.ts"
 // Code quality → ESLint, Prettier
 // Type safety → TypeScript, Zod
 // Component architecture → composition patterns
@@ -171,7 +171,7 @@ The book introduces a critical concept: **normalization vs. duplication**
 
 This is EXACTLY the decision you face with Redux state structure or any similar state management tool:
 
-```typescript title="normalization-decision.ts"
+```ts title="normalization-decision.ts"
 // When to normalize?
 // Frequent updates to individual entities
 // Shared references (same user in multiple places)
@@ -262,7 +262,7 @@ const ExpensiveComponent = ({ data }) => {
 
 Redux DevTools, Reducer pattern or a WebSocket client is literally an append-only log!
 
-```typescript title="append-only-log.ts"
+```ts title="append-only-log.ts"
 const actions = [
   { type: "SET_USER", payload: { id: 1, name: "Alice" } },
   { type: "SET_USER", payload: { id: 1, name: "Alice Smith" } }, // Append!
@@ -276,7 +276,7 @@ const actions = [
 
 JavaScript Maps are hash indexes:
 
-```typescript title="hash-index.ts"
+```ts title="hash-index.ts"
 // O(1) lookup - exactly like database hash index
 const index = new Map([
   ["user:1", { offset: 0, length: 50 }],
@@ -292,7 +292,7 @@ React's component keys? Hash indexes for reconciliation.
 
 IndexedDB is built on LevelDB, which uses SSTables! This is why IndexedDB supports range queries:
 
-```typescript title="sstables-indexeddb.ts"
+```ts title="sstables-indexeddb.ts"
 // Range query - only possible with sorted data
 const recentPosts = await db.getAllFromIndex(
   "posts",
@@ -307,7 +307,7 @@ const recentPosts = await db.getAllFromIndex(
 
 Code splitting is segmentation:
 
-```typescript title="code-splitting.ts"
+```ts title="code-splitting.ts"
 // Instead of one giant bundle
 // main.js (2MB)
 
@@ -324,7 +324,7 @@ The book emphasizes: "Sequential writes are much faster than random writes."
 
 This applies to frontend too:
 
-```typescript title="sequential-writes.ts"
+```ts title="sequential-writes.ts"
 // SLOW: Random writes
 for (let i = 0; i < 1000; i++) {
   await db.put("store", { id: i, data: Math.random() });
@@ -377,7 +377,7 @@ Kleppmann explains why trying to make network calls look like local function cal
 
 **This is your daily reality as a frontend engineer:**
 
-```typescript title="network-reality.ts"
+```ts title="network-reality.ts"
 // Treating network like local function (BAD)
 function getUser(id) {
   return fetch(`/api/users/${id}`).then((r) => r.json());
@@ -412,7 +412,7 @@ Message brokers (RabbitMQ, Kafka) provide asynchronous communication:
 
 **Frontend equivalents:**
 
-```typescript title="message-passing.ts"
+```ts title="message-passing.ts"
 // WebSockets = Message broker
 const ws = new WebSocket('wss://api.example.com')
 ws.onmessage = (event) => {
@@ -441,7 +441,7 @@ You face the same challenge as backend services:
 
 **The solution:**
 
-```typescript showLineNumbers title="api-evolution.ts" wrap="false" ins={11} {21}
+```ts showLineNumbers title="api-evolution.ts" wrap="false" ins={11} {21}
 // API v1
 interface User {
   id: string;
@@ -589,7 +589,7 @@ Dos **Request/Response (REST/GraphQL) when:**
 
 ### 1. The Append-Only Log Pattern
 
-```typescript showLineNumbers title="append-only-log.ts" wrap="false"
+```ts showLineNumbers title="append-only-log.ts" wrap="false"
 // Use for: Undo/redo, time-travel debugging, audit trails
 const eventLog = [];
 
@@ -607,7 +607,7 @@ function undo() {
 
 ### 2. The Normalized Cache Pattern
 
-```typescript
+```ts
 // Use for: Shared data, frequent updates
 const cache = {
   users: { 1: {...}, 2: {...} },
@@ -640,7 +640,7 @@ const { mutate } = useMutation({
 
 ### 4. The Compatibility Pattern
 
-```typescript collapse={3-4} title="compatibility-pattern.ts" wrap="false"
+```ts collapse={3-4} title="compatibility-pattern.ts" wrap="false"
 // Use for: API evolution
 interface Config {
   version: number;

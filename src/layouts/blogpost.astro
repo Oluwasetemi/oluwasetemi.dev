@@ -14,12 +14,13 @@ type Props = CollectionEntry<"blog">["data"] & {
     slug: string;
     text: string;
   }[];
+  ogImage?: string;
 };
 
-const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags, headings } = Astro.props;
+const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags, headings, ogImage } = Astro.props;
 ---
 
-<Layout title={title} description={description || `Blog post: ${title}`}>
+<Layout title={title} description={description || `Blog post: ${title}`} image={ogImage} type="article">
   <div class="relative w-full">
     {headings && <TOC headings={headings} />}
     <main class="w-full">
