@@ -1,0 +1,248 @@
+---
+title: "Introducing the new set method in ES2025"
+date: "2025-11-08"
+author: "Ojo Oluwasetemi Stephen 00S"
+description: "_ES2025 introduces the new `Set` method to the JavaScript language. This method provides native set operations previously requiring manual implementation._"
+tags:
+  - "javascript"
+  - "es2025"
+  - "set"
+  - "data structure"
+  - "math"
+isPublished: true
+banner: "./images/banner.jpg"
+bannerCredit: "Photo by [BoliviaInteligente](https://unsplash.com/@boliviainteligente?utm_source=oluwasetemi.dev&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=oluwasetemi.dev&utm_medium=referral)"
+---
+
+# Introducing the new set method in ES2025
+
+ES2025 introduces the new `Set` method to the JavaScript language. This method provides native set operations previously requiring manual implementation.
+
+## Prerequisites
+
+You are expected to have a good understanding of JavaScript or Nodejs. If you are willing to keep up with the latest updates to the language then this is a best fit for you.
+
+## The Map and Set Data Structures
+
+Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type but Object only allows strings and symbols. Set on the other hand is a collection of unique values.
+
+```js title="map-example.js"
+const map = new Map();
+map.set("name", "ojo");
+map.set("age", 28);
+map.set("city", "lagos");
+
+console.log(map);
+```
+
+```js title="set-example.js"
+const set = new Set();
+set.add("ojo");
+set.add(28);
+set.add("lagos");
+
+console.log(set);
+```
+
+You can see the basic way to declare a Map and Set in JavaScript. Some of the methods available in both data struture are quite similar. In maps, you `set` a key to a value, while with sets, you `add` a value to the set.
+
+Both support extracting values you set or added using the `get` method. Both also support checking if a value exists in the data structure using the `has` method. `delete` method is also available in both data structures to remove a value from the data structure. `clear` method is also available in both data structures to remove all values from the data structure. `size` property is also available in both data structures to get the number of values in the data structure.
+
+The next section will show you how to use the listed methods and property above.
+
+<div class="grid grid-cols-2 gap-4">
+
+```js title="map-methods.js" {2-7}
+const map = new Map();
+map.set("name", "ojo");
+map.has("name");
+map.size;
+map.get("name");
+map.delete("name");
+map.clear();
+```
+
+```js title="set-methods.js" {2-7}
+const set = new Set();
+set.add("ojo");
+set.has("ojo");
+set.size;
+set.get("ojo");
+set.delete("ojo");
+set.clear();
+```
+
+</div>
+
+## TypeScript Example
+
+The TypeScript example adds something extra to the above example. It adds a type to the set inform of `<type>` - this is called a generic.
+
+<div class="grid grid-cols-2 gap-4">
+
+```ts title="map-example.ts" del={1} add={2}
+const map = new Map();
+const map = new Map<string, string>();
+```
+
+```ts title="set-example.ts" del={1} add={2}
+const set = new Set();
+const set = new Set<string>();
+```
+
+</div>
+
+Reasons for favour this new 😜 modern data structure over the old one is that:
+
+- Guarantees order of insertion
+- Guarantees uniqueness of values with Set
+- Guarantees type safety
+- Instant lookup with `has`
+- Flexible keys with Map
+- Maps can use object as keys
+
+## Set in mathematics
+
+A [set](https://en.wikipedia.org/wiki/Set_(mathematics) is a collection of different things; the things are elements or members of the set and are typically mathematical objects: numbers, symbols, points in space, lines, other geometric shapes, variables, or other sets. set may be finite or infinite. There is a unique set with no elements, called the empty set; a set with a single element is a singleton. It has basic operations like union, intersection, difference, and complement.
+
+## ES2021 - ES2025
+
+ECMAScript 2021, the 12th edition, introduced the `replaceAll` method for Strings; `Promise.any`, a Promise combinator that short-circuits when an input value is fulfilled; `AggregateError`, a new Error type to represent multiple errors at once; logical assignment operators (`??=`, `&&=`, `||=`); `WeakRef`, for referring to a target object without preserving it from garbage collection, and `FinalizationRegistry`, to manage registration and unregistration of cleanup operations performed when target objects are garbage collected; separators for numeric literals (`1_000`); and `Array.prototype.sort` was made more precise, reducing the amount of cases that result in an implementation-defined sort order.
+
+ECMAScript 2022, the 13th edition, introduced `top-level await`, allowing the keyword to be used at the top level of modules; new class elements: `public and private instance fields`, public and `private static fields`, `private instance methods` and `accessors`, and `private static methods` and `accessors`; `static blocks inside classes`, to perform per-class evaluation initialization; the `#x` in obj syntax, to test for presence of private fields on objects; regular expression match indices via the `/d` flag, which provides start and end indices for matched substrings; the `cause` property on Error objects, which can be used to record a causation chain in errors; the `at` method for Strings, Arrays, and TypedArrays, which allows relative indexing; and `Object.hasOwn`, a convenient alternative to Object.prototype.hasOwnProperty.
+
+ECMAScript 2023, the 14th edition, introduced the `toSorted`, `toReversed`, `with`, `findLast`, and `findLastIndex` methods on Array.prototype and TypedArray.prototype, as well as the `toSpliced` method on Array.prototype; added support for `#!` comments at the beginning of files to better facilitate executable ECMAScript files; and allowed the use of most `Symbols as keys in weak collections`.
+
+ECMAScript 2024, the 15th edition, added facilities for `resizing and transferring ArrayBuffers and SharedArrayBuffers`; added a new RegExp `/v` flag for creating RegExps with more advanced features for working with sets of strings; and introduced the `Promise.withResolvers` convenience method for constructing Promises, the `Object.groupBy` and `Map.groupBy` methods for aggregating data, the `Atomics.waitAsync` method for asynchronously waiting for a change to shared memory, and the `String.prototype.isWellFormed` and `String.prototype.toWellFormed` methods for checking and ensuring that strings contain only well-formed Unicode.
+
+ECMAScript 2025, the 16th edition, added a `new Iterator global with associated static and prototype methods for working with iterators`; added methods to `Set.prototype for performing common operations on Sets`; added support for `importing JSON modules` as well as `syntax for declaring attributes of imported modules`; added the `RegExp.escape` method for escaping a string to be safely used in a regular expression; added syntax for `enabling and disabling modifier flags inline within regular expressions`; added the `Promise.try` method for calling functions which may or may not return a Promise and ensuring the result is always a Promise; and added a new `Float16Array TypedArray kind` as well as the related `DataView.prototype.getFloat16`, `DataView.prototype.setFloat16`, and `Math.f16round` methods.
+
+> Keep up is key to staying relevant in the tech industry. Here is TC39 GitHub to track the stages of the proposals: [TC39 GitHub](https://github.com/tc39/proposals).
+
+---
+
+Back to my main point. The new `Set` methods that add support for set operations like union, intersection, difference, and complement.
+
+The way I will preview this, will be to show you how those set(mathematical) operations where achieved before ES2025 and how the new `Set` methods make it easier to achieve these operations.
+
+### Union of sets
+
+Union of sets is the set of all elements that are in either of the sets. A unique combination of the two sets.
+
+```ts title="union-of-sets.ts" del={4} add={6}
+const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
+const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
+
+const beforeUnion = new Set([...set1, ...set2]);
+
+const afterUnion = set1.union(set2); // 'ES2021', 'ES2022', 'ES2023', 'ES2024', 'ES2025'
+```
+
+### Intersection of sets
+
+Intersection of sets is the set of all elements that are in both of the sets. A common elements of the two sets.
+
+```ts title="intersection-of-sets.ts" showLineNumbers=false del={4} add={6}
+const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
+const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
+
+const beforeIntersection = set1.filter((item) => set2.has(item));
+
+const afterIntersection = set1.intersection(set2); // 'ES2025'
+```
+
+### Difference of sets
+
+Difference of sets is the set of all elements that are in the first set but not in the second set. A unique elements of the first set.
+
+```ts title="difference-of-sets.ts" showLineNumbers=false del={4} add={6}
+const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
+const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
+
+const beforeDifference = set1.filter((item) => !set2.has(item));
+
+const afterDifference = set1.difference(set2); // 'ES2021', 'ES2022'
+```
+
+it introduced symmetric difference of sets which is the set of all elements that are in either of the sets but not in the intersection of the two sets.
+
+```ts title="symmetric-difference-of-sets.ts" showLineNumbers=false del={4} add={6}
+const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
+const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
+
+const beforeSymmetricDifference = set1.filter((item) => !set2.has(item));
+
+const afterSymmetricDifference = set1.symmetricDifference(set2); // 'ES2021', 'ES2022', 'ES2023', 'ES2024'
+```
+
+### Complement of sets
+
+Complement of sets is the set of all elements that are in the second set but not in the first set. A unique elements of the second set.
+
+```ts title="complement-of-sets.ts" showLineNumbers=false del={4} add={6}
+const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
+const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
+
+const beforeComplement = set2.filter((item) => !set1.has(item));
+
+const afterComplement = set2.complement(set1); // 'ES2023', 'ES2024'
+```
+
+> In mathematics, the union of the difference of two sets and the complement of the two sets is the same as the symmetric difference of the two sets.
+
+Not Sure but I think so:
+
+The result of the difference example is `['ES2021', 'ES2022']` and the result of the complement example is `['ES2023', 'ES2024']`.
+
+The result of the symmetric difference example is `['ES2021', 'ES2022', 'ES2023', 'ES2024']`.
+
+You can see that my assumption is correct. Rusty math here.
+
+### Subset and Superset of sets
+
+A set A is a subset of set B if all elements of A are also elements of B.
+
+A set A is a superset of set B if all elements of B are also elements of A.
+
+They are complementary concepts—if one set is a subset of another, then the second set is a superset of the first.
+
+```ts title="subset-and-superset.ts" showLineNumbers=false add={5,9}
+const managers = new Set(["John", "Jane"]);
+const allEmployees = new Set(["John", "Jane", "Bob", "Alice"]);
+
+const isSubset = [...managers].every((x) => allEmployees.has(x));
+
+// Are all managers employees?
+const isSubset = managers.isSubsetOf(allEmployees); // true
+console.log("Managers are subset:", isSubset);
+
+// Do we have all managers?
+const isSuperset = allEmployees.isSupersetOf(managers); // true
+console.log("Company has all managers:", isSuperset);
+```
+
+### Disjoint Check
+
+Two sets are disjoint if they have no elements in common.
+
+```ts title="disjoint-check.ts" showLineNumbers=false add={5,9}
+const frontendTeam = new Set(["Alice", "Bob"]);
+const backendTeam = new Set(["Charlie", "David"]);
+const fullstackTeam = new Set(["Alice", "Eve"]);
+
+// No overlap between frontend and backend?
+const noOverlap = frontendTeam.isDisjointFrom(backendTeam);
+console.log("Teams are separate:", noOverlap);
+
+// Any overlap with fullstack?
+const hasOverlap = frontendTeam.isDisjointFrom(fullstackTeam);
+console.log("No fullstack overlap:", hasOverlap);
+```
+
+## Conclusion
+
+The new `Set` methods in ES2025 make it easier to perform set operations like union, intersection, difference, and complement.
+
+The new `Set` methods are a modern data structure that is more efficient and easier to use than the old one. It is a great addition to the JavaScript language and it is a ready tool to add to your arsenal. The browser support is great and all thanks to Baseline support.
+
+> I can think of use cases as at the time of writing this article, but I will come back to this article to add more use cases as I find this applicable.
