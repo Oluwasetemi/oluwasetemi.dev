@@ -1,5 +1,5 @@
 ---
-title: "Introducing the new set method in ES2025"
+title: "Introducing the new Set methods in ES2025"
 date: "2025-11-08"
 author: "Ojo Oluwasetemi Stephen 00S"
 description: "_ES2025 introduces the new `Set` method to the JavaScript language. This method provides native set operations previously requiring manual implementation._"
@@ -14,9 +14,9 @@ banner: "./images/banner.jpg"
 bannerCredit: "Photo by [BoliviaInteligente](https://unsplash.com/@boliviainteligente?utm_source=oluwasetemi.dev&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=oluwasetemi.dev&utm_medium=referral)"
 ---
 
-# Introducing the new set method in ES2025
+# Introducing the new Set methods in ES2025
 
-ES2025 introduces the new `Set` method to the JavaScript language. This method provides native set operations previously requiring manual implementation.
+ES2025 introduces the new `Set` methods to the JavaScript language. These method provides native set operations previously requiring manual implementation.
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ const set = new Set<string>();
 
 </div>
 
-Reasons for favour this new 😜 modern data structure over the old one is that:
+Reasons to favour this new 😜 modern data structure over the old ones are that:
 
 - Guarantees order of insertion
 - Guarantees uniqueness of values with Set
@@ -103,7 +103,7 @@ Reasons for favour this new 😜 modern data structure over the old one is that:
 
 ## Set in mathematics
 
-A [set](https://en.wikipedia.org/wiki/Set_(mathematics) is a collection of different things; the things are elements or members of the set and are typically mathematical objects: numbers, symbols, points in space, lines, other geometric shapes, variables, or other sets. set may be finite or infinite. There is a unique set with no elements, called the empty set; a set with a single element is a singleton. It has basic operations like union, intersection, difference, and complement.
+A [set](<https://en.wikipedia.org/wiki/Set_(mathematics)>) is a collection of different things; the things are elements or members of the set and are typically mathematical objects: numbers, symbols, points in space, lines, other geometric shapes, variables, or other sets. set may be finite or infinite. There is a unique set with no elements, called the empty set; a set with a single element is a singleton. It has basic operations like union, intersection, difference, and complement.
 
 ## ES2021 - ES2025
 
@@ -117,7 +117,7 @@ ECMAScript 2024, the 15th edition, added facilities for `resizing and transferri
 
 ECMAScript 2025, the 16th edition, added a `new Iterator global with associated static and prototype methods for working with iterators`; added methods to `Set.prototype for performing common operations on Sets`; added support for `importing JSON modules` as well as `syntax for declaring attributes of imported modules`; added the `RegExp.escape` method for escaping a string to be safely used in a regular expression; added syntax for `enabling and disabling modifier flags inline within regular expressions`; added the `Promise.try` method for calling functions which may or may not return a Promise and ensuring the result is always a Promise; and added a new `Float16Array TypedArray kind` as well as the related `DataView.prototype.getFloat16`, `DataView.prototype.setFloat16`, and `Math.f16round` methods.
 
-> Keep up is key to staying relevant in the tech industry. Here is TC39 GitHub to track the stages of the proposals: [TC39 GitHub](https://github.com/tc39/proposals).
+> Keeping up is key to staying relevant in the tech industry. Here is TC39 GitHub to track the stages of the proposals: [TC39 GitHub](https://github.com/tc39/proposals).
 
 ---
 
@@ -146,7 +146,7 @@ Intersection of sets is the set of all elements that are in both of the sets. A 
 const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
 const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
 
-const beforeIntersection = set1.filter((item) => set2.has(item));
+const beforeIntersection = new Set([...set1].filter((item) => set2.has(item)));
 
 const afterIntersection = set1.intersection(set2); // 'ES2025'
 ```
@@ -159,7 +159,7 @@ Difference of sets is the set of all elements that are in the first set but not 
 const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
 const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
 
-const beforeDifference = set1.filter((item) => !set2.has(item));
+const beforeDifference = new Set([...set1].filter((item) => !set2.has(item)));
 
 const afterDifference = set1.difference(set2); // 'ES2021', 'ES2022'
 ```
@@ -170,7 +170,9 @@ it introduced symmetric difference of sets which is the set of all elements that
 const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
 const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
 
-const beforeSymmetricDifference = set1.filter((item) => !set2.has(item));
+const beforeSymmetricDifference = new Set(
+  [...set1].filter((item) => !set2.has(item)),
+);
 
 const afterSymmetricDifference = set1.symmetricDifference(set2); // 'ES2021', 'ES2022', 'ES2023', 'ES2024'
 ```
@@ -183,7 +185,7 @@ Complement of sets is the set of all elements that are in the second set but not
 const set1 = new Set<string>(["ES2021", "ES2022", "ES2025"]);
 const set2 = new Set<string>(["ES2023", "ES2024", "ES2025"]);
 
-const beforeComplement = set2.filter((item) => !set1.has(item));
+const beforeComplement = new Set([...set2].filter((item) => !set1.has(item)));
 
 const afterComplement = set2.complement(set1); // 'ES2023', 'ES2024'
 ```
@@ -206,7 +208,7 @@ A set A is a superset of set B if all elements of B are also elements of A.
 
 They are complementary concepts—if one set is a subset of another, then the second set is a superset of the first.
 
-```ts title="subset-and-superset.ts" showLineNumbers=false add={5,9}
+```ts title="subset-and-superset.ts" showLineNumbers=false add={7,11} del={4}
 const managers = new Set(["John", "Jane"]);
 const allEmployees = new Set(["John", "Jane", "Bob", "Alice"]);
 
@@ -225,7 +227,7 @@ console.log("Company has all managers:", isSuperset);
 
 Two sets are disjoint if they have no elements in common.
 
-```ts title="disjoint-check.ts" showLineNumbers=false add={5,9}
+```ts title="disjoint-check.ts" showLineNumbers=false add={6,10}
 const frontendTeam = new Set(["Alice", "Bob"]);
 const backendTeam = new Set(["Charlie", "David"]);
 const fullstackTeam = new Set(["Alice", "Eve"]);
@@ -243,6 +245,6 @@ console.log("No fullstack overlap:", hasOverlap);
 
 The new `Set` methods in ES2025 make it easier to perform set operations like union, intersection, difference, and complement.
 
-The new `Set` methods are a modern data structure that is more efficient and easier to use than the old one. It is a great addition to the JavaScript language and it is a ready tool to add to your arsenal. The browser support is great and all thanks to Baseline support.
+The new `Set` methods are a modern data structure methods that is more efficient and easier to use than the old one. It is a great addition to the JavaScript language and it is a ready tool to add to your arsenal. The browser support is great and all thanks to Baseline support.
 
-> I can think of use cases as at the time of writing this article, but I will come back to this article to add more use cases as I find this applicable.
+> I can't think of use cases as at the time of writing this article, but I will come back to this article to add more use cases as I find this applicable.
