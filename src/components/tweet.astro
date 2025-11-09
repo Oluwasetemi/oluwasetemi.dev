@@ -1,0 +1,40 @@
+---
+export interface Props {
+  id: string;
+  theme?: 'light' | 'dark';
+}
+
+const { id, theme = 'light' } = Astro.props;
+---
+
+<div class="tweet-embed my-8">
+  <blockquote class="twitter-tweet" data-theme={theme}>
+    <a href={`https://twitter.com/x/status/${id}`}>Loading tweet...</a>
+  </blockquote>
+</div>
+
+<script is:inline>
+  // Load Twitter widget script if not already loaded
+  if (!window.twttr) {
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    script.charset = 'utf-8';
+    document.body.appendChild(script);
+  } else if (window.twttr.widgets) {
+    // If script already loaded, reload widgets
+    window.twttr.widgets.load();
+  }
+</script>
+
+<style>
+  .tweet-embed {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .twitter-tweet {
+    margin: 0 auto !important;
+  }
+</style>
