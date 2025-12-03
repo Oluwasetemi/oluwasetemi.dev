@@ -135,13 +135,23 @@
       constructor() {
         // console.log("TTS: Constructor called");
 
-        this.synth = window.speechSynthesis;
+        // Feature detection for speechSynthesis
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
+          this.synth = window.speechSynthesis;
+          this.speechSupported = true;
+        } else {
+          this.synth = null;
+          this.speechSupported = false;
+          console.warn("TTS: speechSynthesis not supported in this browser");
+        }
+
         this.utterance = null;
         this.isPlaying = false;
         this.isPaused = false;
         this.contentElements = [];
         this.allText = "";
         this.textSegments = [];
+        this.wordElements = [];
         this.progressInterval = null;
         this.currentSegmentIndex = 0;
         this.startTime = 0;
@@ -166,6 +176,12 @@
 
       init() {
         // console.log("TTS: Initializing...");
+
+        // If speech synthesis is not supported, disable UI and exit
+        if (!this.speechSupported || !this.synth) {
+          this.disableUI();
+          return;
+        }
 
         // Load available voices
         this.loadVoices();
@@ -199,7 +215,25 @@
         // console.log( "TTS: Initialized. Found", this.contentElements.length, "content elements");
       }
 
+      disableUI() {
+        // Disable all controls when speech synthesis is not supported
+        if (this.playPauseBtn) {
+          this.playPauseBtn.disabled = true;
+          if (this.playPauseText) {
+            this.playPauseText.textContent = "Not Supported";
+          }
+        }
+        if (this.stopBtn) this.stopBtn.disabled = true;
+        if (this.speedSelect) this.speedSelect.disabled = true;
+        if (this.voiceSelect) this.voiceSelect.disabled = true;
+        if (this.currentSectionText) {
+          this.currentSectionText.textContent = "Text-to-Speech not available in this browser";
+        }
+      }
+
       loadVoices() {
+        if (!this.synth) return;
+
         const voices = this.synth.getVoices();
         // console.log("TTS: Available voices:", voices.length);
 
@@ -211,9 +245,13 @@
           const displayVoices =
             englishVoices.length > 0 ? englishVoices : voices;
 
-          displayVoices.forEach((voice, index) => {
+          displayVoices.forEach((voice) => {
+            // Get the real index from the full voices array
+            const realIndex = voices.indexOf(voice);
+            if (realIndex < 0) return; // Skip if not found
+
             const option = document.createElement("option");
-            option.value = index;
+            option.value = String(realIndex); // Use index from full voices array
             option.textContent = `${voice.name} (${voice.lang})`;
             if (voice.default) {
               option.selected = true;
@@ -335,9 +373,16 @@
       }
 
       start() {
+        if (!this.synth || !this.speechSupported) {
+          console.warn("TTS: Speech synthesis not available");
+          return;
+        }
+
         if (!this.allText || this.allText.length === 0) {
-          console.error( "No readable content found. Please make sure you are on a blog post page." );
           console.error("TTS: No text to read");
+          if (this.currentSectionText) {
+            this.currentSectionText.textContent = "No readable content found";
+          }
           return;
         }
 
@@ -423,6 +468,7 @@
       }
 
       pause() {
+        if (!this.synth) return;
         // console.log("TTS: Pausing");
         this.synth.pause();
         this.isPaused = true;
@@ -430,6 +476,7 @@
       }
 
       resume() {
+        if (!this.synth) return;
         // console.log("TTS: Resuming");
         this.synth.resume();
         this.isPaused = false;
@@ -438,7 +485,9 @@
 
       stop() {
         console.log("TTS: Stopping");
-        this.synth.cancel();
+        if (this.synth) {
+          this.synth.cancel();
+        }
         this.stopProgressTracking();
         this.isPlaying = false;
         this.isPaused = false;
@@ -451,12 +500,13 @@
       changeSpeed(speed) {
         console.log("TTS: Changing speed to", speed);
 
-        // Only change speed if utterance exists (playback is active)
-        if (this.utterance) {
-          this.utterance.rate = speed;
-          console.log("TTS: Speed changed to", speed);
-        } else {
-          console.log("TTS: Speed will be applied when playback starts");
+        if (this.isPlaying && !this.isPaused) {
+          // Need to restart playback for speed change to take effect
+          const wasPlaying = this.isPlaying;
+          this.stop();
+          if (wasPlaying) {
+            this.start();
+          }
         }
 
         this.updateUI();
@@ -465,28 +515,17 @@
       changeVoice() {
         console.log("TTS: Changing voice");
 
-        // Only change voice if utterance exists (playback is active)
-        if (!this.utterance) {
-          console.log("TTS: Voice will be applied when playback starts");
-          return;
+        if (!this.synth) return;
+
+        if (this.isPlaying && !this.isPaused) {
+          // Need to restart playback for voice change to take effect
+          const wasPlaying = this.isPlaying;
+          this.stop();
+          if (wasPlaying) {
+            this.start();
+          }
         }
 
-        const voices = this.synth.getVoices();
-        const selectedVoiceIndex = Number.parseInt(
-          this.voiceSelect?.value || "0"
-        );
-        if (voices[selectedVoiceIndex]) {
-          this.utterance.voice = voices[selectedVoiceIndex];
-          console.log(
-            "TTS: Using voice:",
-            voices[selectedVoiceIndex].name,
-            "lang:",
-            voices[selectedVoiceIndex].lang
-          );
-        } else {
-          console.warn("TTS: No voice selected, using default");
-        }
-        console.log("TTS: Voice changed to", voices[selectedVoiceIndex].name);
         this.updateUI();
       }
 
@@ -705,8 +744,8 @@
     function initTTS() {
       // console.log( "TTS: Attempting to initialize, readyState:", document.readyState );
       try {
-        const reader = new TextToSpeechReader();
-        reader.init();
+        // Constructor already calls this.init(), so just create the instance
+        new TextToSpeechReader();
       } catch (error) {
         console.error("TTS: Initialization error:", error);
       }

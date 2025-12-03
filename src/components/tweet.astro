@@ -1,15 +1,20 @@
 ---
 export interface Props {
   id: string;
+  username?: string;
   theme?: 'light' | 'dark';
 }
 
-const { id, theme = 'light' } = Astro.props;
+const { id, username, theme = 'light' } = Astro.props;
+// Use X.com domain with username if provided, otherwise use generic status URL
+const tweetUrl = username
+  ? `https://x.com/${username}/status/${id}`
+  : `https://x.com/i/status/${id}`;
 ---
 
 <div class="tweet-embed my-8">
   <blockquote class="twitter-tweet" data-theme={theme}>
-    <a href={`https://twitter.com/x/status/${id}`}>Loading tweet...</a>
+    <a href={tweetUrl}>Loading tweet...</a>
   </blockquote>
 </div>
 
