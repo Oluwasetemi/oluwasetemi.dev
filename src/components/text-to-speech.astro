@@ -196,11 +196,7 @@
           );
         }
 
-        // console.log(
-          "TTS: Initialized. Found",
-          this.contentElements.length,
-          "content elements"
-        );
+        // console.log( "TTS: Initialized. Found", this.contentElements.length, "content elements");
       }
 
       loadVoices() {
@@ -402,12 +398,7 @@
           this.startProgressTracking();
 
           this.synth.speak(this.utterance);
-          // console.log(
-            "TTS: Speak command issued, synth.speaking:",
-            this.synth.speaking,
-            "synth.pending:",
-            this.synth.pending
-          );
+          // console.log( "TTS: Speak command issued, synth.speaking:", this.synth.speaking, "synth.pending:", this.synth.pending );
 
           // Chrome workaround: sometimes speech synthesis gets stuck, resume it
           setTimeout(() => {
