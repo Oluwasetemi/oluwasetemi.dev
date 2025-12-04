@@ -1,0 +1,116 @@
+---
+// Cookie Consent Banner Component
+---
+
+<div id="cookie-consent" class="hidden fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 shadow-lg z-50">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex-1">
+      <p class="text-sm">
+        We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies.
+        <a href="/privacy" class="underline hover:text-gray-300">Learn more</a>
+      </p>
+    </div>
+    <div class="flex gap-3">
+      <button
+        id="cookie-accept"
+        class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+      >
+        Accept
+      </button>
+      <button
+        id="cookie-decline"
+        class="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+      >
+        Decline
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cookie consent handling
+  const COOKIE_NAME = 'cookie-consent';
+  const COOKIE_EXPIRY_DAYS = 365;
+
+  function setCookie(name: string, value: string, days: number) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+  }
+
+  function getCookie(name: string): string | null {
+    const nameEQ = `${name}=`;
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.indexOf(nameEQ) === 0) {
+        return cookie.substring(nameEQ.length);
+      }
+    }
+    return null;
+  }
+
+  function showConsentBanner() {
+    const banner = document.getElementById('cookie-consent');
+    if (banner) {
+      banner.classList.remove('hidden');
+    }
+  }
+
+  function hideConsentBanner() {
+    const banner = document.getElementById('cookie-consent');
+    if (banner) {
+      banner.classList.add('hidden');
+    }
+  }
+
+  function handleConsent(accepted: boolean) {
+    setCookie(COOKIE_NAME, accepted ? 'accepted' : 'declined', COOKIE_EXPIRY_DAYS);
+    hideConsentBanner();
+
+    // Dispatch custom event for GA to listen to
+    window.dispatchEvent(new CustomEvent('cookie-consent', {
+      detail: { accepted }
+    }));
+
+    // If accepted, trigger GA initialization
+    if (accepted && typeof window.initGoogleAnalytics === 'function') {
+      window.initGoogleAnalytics();
+    }
+  }
+
+  // Check if consent was already given
+  document.addEventListener('DOMContentLoaded', () => {
+    const consent = getCookie(COOKIE_NAME);
+
+    if (!consent) {
+      // No consent yet, show banner
+      showConsentBanner();
+    } else if (consent === 'accepted') {
+      // Consent was given, trigger GA initialization
+      window.dispatchEvent(new CustomEvent('cookie-consent', {
+        detail: { accepted: true }
+      }));
+    }
+
+    // Event listeners for buttons
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => handleConsent(true));
+    }
+
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => handleConsent(false));
+    }
+  });
+
+  // Extend Window interface for TypeScript
+  declare global {
+    interface Window {
+      initGoogleAnalytics?: () => void;
+    }
+  }
+</script>

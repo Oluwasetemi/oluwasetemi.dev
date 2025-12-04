@@ -5,6 +5,8 @@ import "../styles/global.css";
 import type { HTMLAttributes } from "astro/types";
 
 import BaseHead from "../components/basehead.astro";
+import CookieConsent from "../components/cookie-consent.astro";
+import GoogleAnalytics from "../components/google-analytics.astro";
 import Header from "../components/header.astro";
 
 type Props = {
@@ -23,6 +25,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
 <html lang="en" {...props}>
   <head>
     <BaseHead title={title} description={description} image={image} canonical={canonicalURL} type={type} />
+    <GoogleAnalytics />
   </head>
   <body>
     <Header />
@@ -30,5 +33,6 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <footer class="text-center py-8 text-gray-600 text-sm">
       <p>&copy; {new Date().getFullYear()} Oluwasetemi. All rights reserved.</p>
     </footer>
+    <CookieConsent />
   </body>
 </html>

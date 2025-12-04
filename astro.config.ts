@@ -6,11 +6,40 @@ import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://oluwasetemi.dev",
+  env: {
+    schema: {
+      PUBLIC_GISCUS_REPO: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      PUBLIC_GISCUS_REPO_ID: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      PUBLIC_GISCUS_CATEGORY: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      PUBLIC_GISCUS_CATEGORY_ID: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      PUBLIC_GOOGLE_ANALYTICS_ID: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+    },
+  },
   markdown: {
     syntaxHighlight: false, // Disable Astro's built-in syntax highlighting
   },
