@@ -33,6 +33,11 @@ export default defineConfig({
         access: "public",
         optional: true,
       }),
+      PUBLIC_GOOGLE_ANALYTICS_ID: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
     },
   },
   markdown: {

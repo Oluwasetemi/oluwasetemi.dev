@@ -1,0 +1,72 @@
+---
+// Google Analytics Component with Cookie Consent
+const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
+---
+
+<!-- Google Analytics -->
+<script is:inline define:vars={{ gaId }}>
+  // Google Analytics initialization function
+  window.initGoogleAnalytics = function () {
+    if (window.gtag) {
+      // Already initialized
+      return;
+    }
+
+    // Load gtag.js script
+    const script = document.createElement('script');
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    // Initialize dataLayer and gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(...args) {
+      window.dataLayer.push(...args);
+    }
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+    gtag('config', gaId, {
+      anonymize_ip: true,
+      cookie_flags: 'SameSite=Lax;Secure'
+    });
+
+    console.warn('Google Analytics initialized:', gaId);
+  };
+
+  // Listen for cookie consent
+  window.addEventListener('cookie-consent', (event) => {
+    if (event.detail && event.detail.accepted) {
+      window.initGoogleAnalytics();
+    }
+  });
+
+  // Check if consent was already given (page navigation)
+  function getCookie(name) {
+    const nameEQ = `${name}=`;
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.indexOf(nameEQ) === 0) {
+        return cookie.substring(nameEQ.length);
+      }
+    }
+    return null;
+  }
+
+  // Auto-initialize if consent was already given
+  if (getCookie('cookie-consent') === 'accepted') {
+    window.initGoogleAnalytics();
+  }
+</script>
+
+<!-- TypeScript definitions -->
+<script>
+  declare global {
+    interface Window {
+      dataLayer: any[];
+      gtag: (...args: any[]) => void;
+      initGoogleAnalytics?: () => void;
+    }
+  }
+</script>

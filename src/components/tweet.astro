@@ -26,7 +26,8 @@ const tweetUrl = username
     script.async = true;
     script.charset = 'utf-8';
     document.body.appendChild(script);
-  } else if (window.twttr.widgets) {
+  }
+ else if (window.twttr.widgets) {
     // If script already loaded, reload widgets
     window.twttr.widgets.load();
   }

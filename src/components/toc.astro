@@ -68,7 +68,8 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
     const tocLinks = document.querySelectorAll('.toc-link');
     const headings = document.querySelectorAll('article h2[id], article h3[id]');
 
-    if (tocLinks.length === 0 || headings.length === 0) return;
+    if (tocLinks.length === 0 || headings.length === 0)
+return;
 
     const observer = new IntersectionObserver(
       (entries) => {
