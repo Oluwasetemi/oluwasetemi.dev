@@ -1,7 +1,9 @@
+import type { ImageFunction } from "astro:content";
+
 import { defineCollection, z } from "astro:content";
 
 // Shared base schema factory for blog and drafts
-function createBaseContentSchema(image: any) {
+function createBaseContentSchema(image: ImageFunction) {
   return z.object({
     title: z.string(),
     description: z.string().optional(),
