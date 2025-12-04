@@ -1,8 +1,8 @@
 import { defineCollection, z } from "astro:content";
 
 // Shared base schema factory for blog and drafts
-const createBaseContentSchema = (image: any) =>
-  z.object({
+function createBaseContentSchema(image: any) {
+  return z.object({
     title: z.string(),
     description: z.string().optional(),
     author: z.string().optional(),
@@ -15,6 +15,7 @@ const createBaseContentSchema = (image: any) =>
     banner: image().optional(), // This allows images in the content directory
     bannerCredit: z.string().optional(),
   });
+}
 
 const blog = defineCollection({
   type: "content",
