@@ -1,24 +1,32 @@
+import type { ImageFunction } from "astro:content";
+
 import { defineCollection, z } from "astro:content";
+
+// Shared base schema factory for blog and drafts
+function createBaseContentSchema(image: ImageFunction) {
+  return z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    author: z.string().optional(),
+    // Transform string to Date object - supporting both 'date' and 'pubDate'
+    date: z.coerce.date().optional(),
+    pubDate: z.coerce.date().optional(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    banner: image().optional(), // This allows images in the content directory
+    bannerCredit: z.string().optional(),
+  });
+}
 
 const blog = defineCollection({
   type: "content",
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      author: z.string().optional(),
-      // Transform string to Date object - supporting both 'date' and 'pubDate'
-      date: z.coerce.date().optional(),
-      pubDate: z.coerce.date().optional(),
-      updatedDate: z.coerce.date().optional(),
+    createBaseContentSchema(image).extend({
       modified: z.boolean().optional(),
       modifiedDate: z.coerce.date().optional(),
-      heroImage: z.string().optional(),
-      tags: z.array(z.string()).optional(),
       isPublished: z.boolean().optional(),
       isDraft: z.boolean().optional(),
-      banner: image().optional(), // This allows images in the content directory
-      bannerCredit: z.string().optional(),
     }),
 });
 
@@ -43,18 +51,8 @@ const portfolio = defineCollection({
 const drafts = defineCollection({
   type: "content",
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      author: z.string().optional(),
-      date: z.coerce.date().optional(),
-      pubDate: z.coerce.date().optional(),
-      updatedDate: z.coerce.date().optional(),
-      heroImage: z.string().optional(),
-      tags: z.array(z.string()).optional(),
+    createBaseContentSchema(image).extend({
       isDraft: z.boolean().default(true),
-      banner: image().optional(),
-      bannerCredit: z.string().optional(),
     }),
 });
 
