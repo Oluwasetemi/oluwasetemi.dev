@@ -6,6 +6,7 @@ import { Image } from "astro:assets";
 import Footer from "../components/footer.astro";
 import FormattedDate from "../components/formatteddate.astro";
 import TOC from "../components/toc.astro";
+import TextToSpeech from "../components/text-to-speech.astro";
 import Layout from "./Layout.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
@@ -52,6 +53,10 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
             <!-- <h1 class="m-0 mb-4">{title}</h1> -->
             <hr class="border-gray-200" />
           </div>
+
+          <!-- Text-to-Speech Reader -->
+          <TextToSpeech />
+
           <slot />
           {
             tags && tags.length > 0 && (

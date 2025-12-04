@@ -1,0 +1,760 @@
+---
+// Text-to-Speech Reader Component with section highlighting
+---
+
+<div id="tts-reader" class="tts-reader sticky top-4 z-50 mb-8">
+  <div
+    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700"
+  >
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+      <!-- Play/Pause Button -->
+      <button
+        id="tts-play-pause"
+        class="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-medium"
+        aria-label="Play or pause reading"
+      >
+        <svg
+          id="play-icon"
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+          ></path>
+        </svg>
+        <svg
+          id="pause-icon"
+          class="w-5 h-5 hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"
+          ></path>
+        </svg>
+        <span id="play-pause-text">Read Article</span>
+      </button>
+
+      <!-- Speed Control -->
+      <div class="flex items-center gap-2">
+        <label
+          for="tts-speed"
+          class="text-sm font-medium text-gray-700 dark:text-gray-300"
+          >Speed:</label
+        >
+        <select
+          id="tts-speed"
+          class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+        >
+          <option value="0.5">0.5x</option>
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+      </div>
+
+      <!-- Voice Selection -->
+      <div class="flex items-center gap-2">
+        <label
+          for="tts-voice"
+          class="text-sm font-medium text-gray-700 dark:text-gray-300"
+          >Voice:</label
+        >
+        <select
+          id="tts-voice"
+          class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+        >
+          <!-- Populated dynamically -->
+        </select>
+      </div>
+
+      <!-- Stop Button -->
+      <button
+        id="tts-stop"
+        class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg transition-colors font-medium"
+        aria-label="Stop reading"
+      >
+        Stop
+      </button>
+
+      <!-- Progress Bar -->
+      <div class="w-full mt-2">
+        <div
+          class="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-1"
+        >
+          <span id="tts-current-section">Ready to read</span>
+          <span id="tts-progress-text">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+          <div
+            id="tts-progress-bar"
+            class="bg-purple-600 h-2 rounded-full transition-all"
+            style="width: 0%"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Highlight currently reading section */
+  .tts-reading-section {
+    background-color: rgba(168, 85, 247, 0.3) !important;
+    border-left: 8px solid #a855f7 !important;
+    padding-left: 1rem !important;
+    margin-left: -1rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3) !important;
+  }
+
+  /* Highlight current word being read with deeper shade */
+  .tts-current-word {
+    background-color: rgba(168, 85, 247, 0.7) !important;
+    color: white !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    transition: background-color 0.1s ease !important;
+  }
+
+  /* Smooth scrolling for focused elements */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    // console.log("TTS: Script loaded");
+
+    class TextToSpeechReader {
+      constructor() {
+        // console.log("TTS: Constructor called");
+
+        // Feature detection for speechSynthesis
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
+          this.synth = window.speechSynthesis;
+          this.speechSupported = true;
+        } else {
+          this.synth = null;
+          this.speechSupported = false;
+          console.warn("TTS: speechSynthesis not supported in this browser");
+        }
+
+        this.utterance = null;
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.contentElements = [];
+        this.allText = "";
+        this.textSegments = [];
+        this.wordElements = [];
+        this.progressInterval = null;
+        this.currentSegmentIndex = 0;
+        this.startTime = 0;
+
+        this.playPauseBtn = document.getElementById("tts-play-pause");
+        this.stopBtn = document.getElementById("tts-stop");
+        this.speedSelect = document.getElementById("tts-speed");
+        this.voiceSelect = document.getElementById("tts-voice");
+        this.playIcon = document.getElementById("play-icon");
+        this.pauseIcon = document.getElementById("pause-icon");
+        this.playPauseText = document.getElementById("play-pause-text");
+        this.progressBar = document.getElementById("tts-progress-bar");
+        this.progressText = document.getElementById("tts-progress-text");
+        this.currentSectionText = document.getElementById(
+          "tts-current-section"
+        );
+
+        // console.log("TTS: Elements found:", { playPauseBtn: !!this.playPauseBtn, stopBtn: !!this.stopBtn, speedSelect: !!this.speedSelect, voiceSelect: !!this.voiceSelect, });
+
+        this.init();
+      }
+
+      init() {
+        // console.log("TTS: Initializing...");
+
+        // If speech synthesis is not supported, disable UI and exit
+        if (!this.speechSupported || !this.synth) {
+          this.disableUI();
+          return;
+        }
+
+        // Load available voices
+        this.loadVoices();
+        if (this.synth.onvoiceschanged !== undefined) {
+          this.synth.onvoiceschanged = () => this.loadVoices();
+        }
+
+        // Get article content
+        this.prepareContent();
+
+        // Event listeners
+        if (this.playPauseBtn) {
+          this.playPauseBtn.addEventListener("click", () =>
+            this.togglePlayPause()
+          );
+        }
+        if (this.stopBtn) {
+          this.stopBtn.addEventListener("click", () => this.stop());
+        }
+        if (this.speedSelect) {
+          this.speedSelect.addEventListener("change", (e) =>
+            this.changeSpeed(Number.parseFloat(e.target.value))
+          );
+        }
+        if (this.voiceSelect) {
+          this.voiceSelect.addEventListener("change", (e) =>
+            this.changeVoice()
+          );
+        }
+
+        // console.log( "TTS: Initialized. Found", this.contentElements.length, "content elements");
+      }
+
+      disableUI() {
+        // Disable all controls when speech synthesis is not supported
+        if (this.playPauseBtn) {
+          this.playPauseBtn.disabled = true;
+          if (this.playPauseText) {
+            this.playPauseText.textContent = "Not Supported";
+          }
+        }
+        if (this.stopBtn) this.stopBtn.disabled = true;
+        if (this.speedSelect) this.speedSelect.disabled = true;
+        if (this.voiceSelect) this.voiceSelect.disabled = true;
+        if (this.currentSectionText) {
+          this.currentSectionText.textContent = "Text-to-Speech not available in this browser";
+        }
+      }
+
+      loadVoices() {
+        if (!this.synth) return;
+
+        const voices = this.synth.getVoices();
+        // console.log("TTS: Available voices:", voices.length);
+
+        if (this.voiceSelect && voices.length > 0) {
+          this.voiceSelect.innerHTML = "";
+
+          // Prefer English voices
+          const englishVoices = voices.filter((v) => v.lang.startsWith("en"));
+          const displayVoices =
+            englishVoices.length > 0 ? englishVoices : voices;
+
+          displayVoices.forEach((voice) => {
+            // Get the real index from the full voices array
+            const realIndex = voices.indexOf(voice);
+            if (realIndex < 0) return; // Skip if not found
+
+            const option = document.createElement("option");
+            option.value = String(realIndex); // Use index from full voices array
+            option.textContent = `${voice.name} (${voice.lang})`;
+            if (voice.default) {
+              option.selected = true;
+            }
+            this.voiceSelect.appendChild(option);
+          });
+        }
+      }
+
+      prepareContent() {
+        // Get all readable content from the article - avoid code blocks
+        const article =
+          document.querySelector("article.prose") ||
+          document.querySelector("main");
+        if (!article) {
+          console.warn("TTS: No article found");
+          return;
+        }
+
+        // Get all text-containing elements (headings, paragraphs, lists) but exclude code blocks
+        const selectors = "h1, h2, h3, h4, h5, h6, p, li, blockquote";
+
+        this.contentElements = Array.from(
+          article.querySelectorAll(selectors)
+        ).filter((el) => {
+          // Filter out elements inside code blocks
+          if ( el.closest("pre") || el.closest("code") || el.closest(".astro-code") ) {
+            return false;
+          }
+          return el.textContent.trim().length > 0;
+        });
+
+        // console.log( "TTS: Prepared", this.contentElements.length, "content elements" );
+
+        // Build text segments for mapping and wrap words
+        this.textSegments = [];
+        this.wordElements = [];
+        let charCount = 0;
+
+        this.contentElements.forEach((element, index) => {
+          const text = element.textContent.trim();
+          if (text) {
+            this.textSegments.push({
+              element,
+              startChar: charCount,
+              endChar: charCount + text.length,
+              text,
+              index,
+            });
+
+            // Wrap words in this element
+            this.wrapWordsInElement(element, charCount);
+
+            charCount += text.length + 1; // +1 for space
+          }
+        });
+
+        this.allText = this.textSegments.map((s) => s.text).join(" ");
+        // console.log("TTS: Total text length:", this.allText.length);
+        // console.log("TTS: Total words wrapped:", this.wordElements.length);
+      }
+
+      wrapWordsInElement(element, startCharOffset) {
+        // Get all text nodes in the element
+        const walker = document.createTreeWalker(
+          element,
+          NodeFilter.SHOW_TEXT,
+          null
+        );
+
+        const textNodes = [];
+        let node;
+        // eslint-disable-next-line no-cond-assign
+        while ((node = walker.nextNode())) {
+          if (node.textContent.trim().length > 0) {
+            textNodes.push(node);
+          }
+        }
+
+        let currentCharOffset = startCharOffset;
+
+        // Wrap words in each text node
+        textNodes.forEach((textNode) => {
+          const text = textNode.textContent;
+          const words = text.split(/(\s+)/); // Split but keep whitespace
+          const fragment = document.createDocumentFragment();
+
+          words.forEach((word) => {
+            if (word.trim().length > 0) {
+              // It's a word, wrap it in a span
+              const span = document.createElement("span");
+              span.textContent = word;
+              span.dataset.charStart = currentCharOffset;
+              span.dataset.charEnd = currentCharOffset + word.length;
+              this.wordElements.push(span);
+              fragment.appendChild(span);
+              currentCharOffset += word.length;
+            } else {
+              // It's whitespace, keep it as text
+              fragment.appendChild(document.createTextNode(word));
+              currentCharOffset += word.length;
+            }
+          });
+
+          textNode.parentNode.replaceChild(fragment, textNode);
+        });
+      }
+
+      togglePlayPause() {
+        // console.log( "TTS: Toggle play/pause. isPlaying:", this.isPlaying, "isPaused:", this.isPaused );
+
+        if (!this.isPlaying) {
+          this.start();
+        } else if (this.isPaused) {
+          this.resume();
+        } else {
+          this.pause();
+        }
+      }
+
+      start() {
+        if (!this.synth || !this.speechSupported) {
+          console.warn("TTS: Speech synthesis not available");
+          return;
+        }
+
+        if (!this.allText || this.allText.length === 0) {
+          console.error("TTS: No text to read");
+          if (this.currentSectionText) {
+            this.currentSectionText.textContent = "No readable content found";
+          }
+          return;
+        }
+
+        // console.log("TTS: Starting playback");
+
+        // Cancel any existing speech first
+        this.synth.cancel();
+        this.stopProgressTracking();
+
+        // Set playing state immediately to prevent multiple starts
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.updateUI();
+
+        this.utterance = new SpeechSynthesisUtterance(this.allText);
+        this.utterance.rate = Number.parseFloat(this.speedSelect?.value || "1");
+        this.utterance.pitch = 1.0;
+        this.utterance.volume = 1.0;
+
+        // console.log( "TTS: Audio settings - rate:", this.utterance.rate, "pitch:", this.utterance.pitch, "volume:", this.utterance.volume );
+
+        // Set voice
+        const voices = this.synth.getVoices();
+        const selectedVoiceIndex = Number.parseInt(
+          this.voiceSelect?.value || "0"
+        );
+        if (voices[selectedVoiceIndex]) {
+          this.utterance.voice = voices[selectedVoiceIndex];
+          // console.log( "TTS: Using voice:", voices[selectedVoiceIndex].name, "lang:", voices[selectedVoiceIndex].lang );
+        } else {
+          console.warn("TTS: No voice selected, using default");
+        }
+
+        // Event listeners
+        this.utterance.onstart = () => {
+          // console.log("TTS: Playback actually started (onstart event fired)");
+        };
+
+        this.utterance.onboundary = (event) => this.onWordBoundary(event);
+
+        this.utterance.onend = () => {
+          // console.log("TTS: Playback ended");
+          this.stopProgressTracking();
+          this.onEnd();
+        };
+
+        this.utterance.onerror = (event) => {
+          console.error("TTS Error:", event);
+          this.isPlaying = false;
+          this.isPaused = false;
+          this.stopProgressTracking();
+          this.updateUI();
+          console.error(`Speech synthesis error: ${event.error}`);
+        };
+
+        try {
+          // Start tracking progress with a fallback timer
+          this.startProgressTracking();
+
+          this.synth.speak(this.utterance);
+          // console.log( "TTS: Speak command issued, synth.speaking:", this.synth.speaking, "synth.pending:", this.synth.pending );
+
+          // Chrome workaround: sometimes speech synthesis gets stuck, resume it
+          setTimeout(() => {
+            if (this.synth.paused) {
+              // console.log("TTS: Speech was paused, resuming...");
+              this.synth.resume();
+            }
+            if (!this.synth.speaking && this.isPlaying) {
+              console.warn(
+                "TTS: Speech not speaking after 100ms, trying to resume"
+              );
+              this.synth.resume();
+            }
+          }, 100);
+        } catch (error) {
+          console.error("TTS: Error speaking:", error);
+          this.isPlaying = false;
+          this.stopProgressTracking();
+          this.updateUI();
+          console.error(`Error starting speech: ${error.message}`);
+        }
+      }
+
+      pause() {
+        if (!this.synth) return;
+        // console.log("TTS: Pausing");
+        this.synth.pause();
+        this.isPaused = true;
+        this.updateUI();
+      }
+
+      resume() {
+        if (!this.synth) return;
+        // console.log("TTS: Resuming");
+        this.synth.resume();
+        this.isPaused = false;
+        this.updateUI();
+      }
+
+      stop() {
+        console.log("TTS: Stopping");
+        if (this.synth) {
+          this.synth.cancel();
+        }
+        this.stopProgressTracking();
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.currentSegmentIndex = 0;
+        this.clearHighlights();
+        this.updateProgress(0);
+        this.updateUI();
+      }
+
+      changeSpeed(speed) {
+        console.log("TTS: Changing speed to", speed);
+
+        if (this.isPlaying && !this.isPaused) {
+          // Need to restart playback for speed change to take effect
+          const wasPlaying = this.isPlaying;
+          this.stop();
+          if (wasPlaying) {
+            this.start();
+          }
+        }
+
+        this.updateUI();
+      }
+
+      changeVoice() {
+        console.log("TTS: Changing voice");
+
+        if (!this.synth) return;
+
+        if (this.isPlaying && !this.isPaused) {
+          // Need to restart playback for voice change to take effect
+          const wasPlaying = this.isPlaying;
+          this.stop();
+          if (wasPlaying) {
+            this.start();
+          }
+        }
+
+        this.updateUI();
+      }
+
+      startProgressTracking() {
+        console.log("TTS: Starting progress tracking timer");
+        this.startTime = Date.now();
+        this.currentSegmentIndex = 0;
+
+        // Update progress every 100ms as a fallback
+        this.progressInterval = setInterval(() => {
+          if (!this.isPlaying || this.isPaused) return;
+
+          // Estimate progress based on time elapsed and speech rate
+          const elapsed = (Date.now() - this.startTime) / 1000; // seconds
+          const rate = Number.parseFloat(this.speedSelect?.value || "1");
+
+          // Rough estimate: average speaking speed is ~150 words per minute
+          // Adjust by rate
+          const wordsPerSecond = (150 / 60) * rate;
+          const estimatedCharsRead = Math.floor(elapsed * wordsPerSecond * 5); // ~5 chars per word
+
+          // Find current segment based on estimated position
+          const targetSegment = this.textSegments.find(
+            (seg) =>
+              estimatedCharsRead >= seg.startChar &&
+              estimatedCharsRead < seg.endChar
+          );
+
+          if (
+            targetSegment &&
+            targetSegment.index !== this.currentSegmentIndex
+          ) {
+            console.log(
+              "TTS: Timer-based segment update to",
+              targetSegment.index
+            );
+            this.currentSegmentIndex = targetSegment.index;
+            this.highlightSection(targetSegment.index);
+          }
+
+          // Update progress bar
+          const progress = Math.min(
+            100,
+            (estimatedCharsRead / this.allText.length) * 100
+          );
+          this.updateProgress(progress);
+        }, 100);
+      }
+
+      stopProgressTracking() {
+        console.log("TTS: Stopping progress tracking timer");
+        if (this.progressInterval) {
+          clearInterval(this.progressInterval);
+          this.progressInterval = null;
+        }
+      }
+
+      onWordBoundary(event) {
+        console.log( "TTS: Word boundary event:", event.name, "charIndex:", event.charIndex );
+
+        if (event.name !== "word") return;
+
+        const charIndex = event.charIndex;
+
+        // Find which segment we're in
+        const currentSegment = this.textSegments.find(
+          (seg) => charIndex >= seg.startChar && charIndex < seg.endChar
+        );
+
+        console.log( "TTS: Current segment at char", charIndex, ":", currentSegment ? currentSegment.index : "NOT FOUND" );
+
+        if (currentSegment) {
+          // Highlight current section
+          this.highlightSection(currentSegment.index);
+
+          // Highlight current word
+          this.highlightCurrentWord(charIndex);
+
+          // Update progress
+          const progress = (charIndex / this.allText.length) * 100;
+          this.updateProgress(progress);
+        }
+      }
+
+      highlightCurrentWord(charIndex) {
+        // Clear previous word highlight
+        this.wordElements.forEach((el) =>
+          el.classList.remove("tts-current-word")
+        );
+
+        // Find and highlight the current word
+        const currentWord = this.wordElements.find((span) => {
+          const start = Number.parseInt(span.dataset.charStart);
+          const end = Number.parseInt(span.dataset.charEnd);
+          return charIndex >= start && charIndex < end;
+        });
+
+        if (currentWord) {
+          currentWord.classList.add("tts-current-word");
+          console.log("TTS: Highlighting word:", currentWord.textContent);
+        }
+      }
+
+      highlightSection(index) {
+        console.log("TTS: Highlighting section", index);
+
+        // Clear previous section highlight
+        this.contentElements.forEach((el) => {
+          el.classList.remove("tts-reading-section");
+          el.style.backgroundColor = "";
+          el.style.borderLeft = "";
+        });
+
+        // Highlight current section
+        if (this.contentElements[index]) {
+          const element = this.contentElements[index];
+          console.log( "TTS: Adding highlight to element:", element.tagName, element.textContent.substring(0, 30) );
+
+          // Add class
+          element.classList.add("tts-reading-section");
+
+          // Also apply inline styles as backup
+          element.style.backgroundColor = "rgba(168, 85, 247, 0.3)";
+          element.style.borderLeft = "8px solid #a855f7";
+          element.style.paddingLeft = "1rem";
+          element.style.marginLeft = "-1rem";
+          element.style.boxShadow = "0 0 20px rgba(168, 85, 247, 0.3)";
+          element.style.transition = "all 0.3s ease";
+
+          console.log( "TTS: Applied styles. Element now has class:", element.classList.contains("tts-reading-section") );
+          console.log("TTS: Background color:", element.style.backgroundColor);
+
+          // Scroll into view
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+
+          // Update section name
+          const tagName = element.tagName.toLowerCase();
+          const preview = element.textContent.substring(0, 50).trim();
+          if (this.currentSectionText) {
+            this.currentSectionText.textContent = `Reading ${tagName}: ${preview}${preview.length >= 50 ? "..." : ""}`;
+          }
+        } else {
+          console.warn("TTS: No element found at index", index);
+        }
+      }
+
+      clearHighlights() {
+        document.querySelectorAll(".tts-reading-section").forEach((el) => {
+          el.classList.remove("tts-reading-section");
+          el.style.backgroundColor = "";
+          el.style.borderLeft = "";
+          el.style.paddingLeft = "";
+          el.style.marginLeft = "";
+          el.style.boxShadow = "";
+        });
+
+        // Also clear from all content elements
+        this.contentElements.forEach((el) => {
+          el.classList.remove("tts-reading-section");
+          el.style.backgroundColor = "";
+          el.style.borderLeft = "";
+          el.style.paddingLeft = "";
+          el.style.marginLeft = "";
+          el.style.boxShadow = "";
+        });
+
+        // Clear word highlights
+        this.wordElements.forEach((el) =>
+          el.classList.remove("tts-current-word")
+        );
+
+        if (this.currentSectionText) {
+          this.currentSectionText.textContent = "Ready to read";
+        }
+      }
+
+      updateProgress(percent) {
+        if (this.progressBar) {
+          this.progressBar.style.width = `${Math.min(100, percent)}%`;
+        }
+        if (this.progressText) {
+          this.progressText.textContent = `${Math.round(Math.min(100, percent))}%`;
+        }
+      }
+
+      onEnd() {
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.clearHighlights();
+        this.updateProgress(100);
+        this.updateUI();
+
+        setTimeout(() => {
+          this.updateProgress(0);
+        }, 2000);
+      }
+
+      updateUI() {
+        if (this.isPlaying && !this.isPaused) {
+          if (this.playIcon) this.playIcon.classList.add("hidden");
+          if (this.pauseIcon) this.pauseIcon.classList.remove("hidden");
+          if (this.playPauseText) this.playPauseText.textContent = "Pause";
+        } else {
+          if (this.playIcon) this.playIcon.classList.remove("hidden");
+          if (this.pauseIcon) this.pauseIcon.classList.add("hidden");
+          if (this.playPauseText) {
+            this.playPauseText.textContent = this.isPaused
+              ? "Resume"
+              : "Read Article";
+          }
+        }
+      }
+    }
+
+    // Initialize when DOM is ready
+    function initTTS() {
+      // console.log( "TTS: Attempting to initialize, readyState:", document.readyState );
+      try {
+        // Constructor already calls this.init(), so just create the instance
+        new TextToSpeechReader();
+      } catch (error) {
+        console.error("TTS: Initialization error:", error);
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTTS);
+    } else {
+      initTTS();
+    }
+  })();
+</script>
