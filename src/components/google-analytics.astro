@@ -6,7 +6,7 @@ const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
 <!-- Google Analytics -->
 <script is:inline define:vars={{ gaId }}>
   // Google Analytics initialization function
-  window.initGoogleAnalytics = function() {
+  window.initGoogleAnalytics = function () {
     if (window.gtag) {
       // Already initialized
       return;
@@ -20,8 +20,8 @@ const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
 
     // Initialize dataLayer and gtag
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
+    function gtag(...args) {
+      window.dataLayer.push(...args);
     }
     window.gtag = gtag;
 
@@ -31,7 +31,7 @@ const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
       cookie_flags: 'SameSite=Lax;Secure'
     });
 
-    console.log('Google Analytics initialized:', gaId);
+    console.warn('Google Analytics initialized:', gaId);
   };
 
   // Listen for cookie consent
@@ -43,10 +43,10 @@ const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
 
   // Check if consent was already given (page navigation)
   function getCookie(name) {
-    const nameEQ = name + '=';
+    const nameEQ = `${name}=`;
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
-      let cookie = cookies[i].trim();
+      const cookie = cookies[i].trim();
       if (cookie.indexOf(nameEQ) === 0) {
         return cookie.substring(nameEQ.length);
       }
@@ -66,7 +66,7 @@ const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || 'G-9N3VVC2B38';
     interface Window {
       dataLayer: any[];
       gtag: (...args: any[]) => void;
-      initGoogleAnalytics: () => void;
+      initGoogleAnalytics?: () => void;
     }
   }
 </script>

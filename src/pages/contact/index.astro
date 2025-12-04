@@ -38,11 +38,11 @@ const description = "Book a meeting with Oluwasetemi Ojo - Full Stack Developer,
 
 <script is:inline>
   (function (C, A, L) {
-    let p = function (a, ar) { a.q.push(ar); };
-    let d = C.document;
+    const p = function (a, ar) { a.q.push(ar); };
+    const d = C.document;
     C.Cal = C.Cal || function () {
-      let cal = C.Cal;
-      let ar = arguments;
+      const cal = C.Cal;
+      const ar = arguments;
       if (!cal.loaded) {
         cal.ns = {};
         cal.q = cal.q || [];
@@ -53,31 +53,34 @@ const description = "Book a meeting with Oluwasetemi Ojo - Full Stack Developer,
         const api = function () { p(api, arguments); };
         const namespace = ar[1];
         api.q = api.q || [];
-        if(typeof namespace === "string"){
+        if (typeof namespace === "string") {
           cal.ns[namespace] = cal.ns[namespace] || api;
           p(cal.ns[namespace], ar);
           p(cal, ["initNamespace", namespace]);
-        } else p(cal, ar);
+        }
+ else {
+ p(cal, ar);
+}
         return;
       }
       p(cal, ar);
     };
   })(window, "https://app.cal.com/embed/embed.js", "init");
 
-  Cal("init", "react-note-setup-meeting", {origin:"https://app.cal.com"});
+  Cal("init", "react-note-setup-meeting", { origin: "https://app.cal.com" });
 
   Cal.ns["react-note-setup-meeting"]("inline", {
-    elementOrSelector:"#my-cal-inline-react-note-setup-meeting",
-    config: {"layout":"month_view"},
+    elementOrSelector: "#my-cal-inline-react-note-setup-meeting",
+    config: { layout: "month_view" },
     calLink: "oluwasetemi/react-note-setup-meeting",
   });
 
   Cal.ns["react-note-setup-meeting"]("ui", {
-    "cssVarsPerTheme":{
-      "light":{"cal-brand":"#800080"},
-      "dark":{"cal-brand":"#fafafa"}
+    cssVarsPerTheme: {
+      light: { "cal-brand": "#800080" },
+      dark: { "cal-brand": "#fafafa" }
     },
-    "hideEventTypeDetails":false,
-    "layout":"month_view"
+    hideEventTypeDetails: false,
+    layout: "month_view"
   });
 </script>

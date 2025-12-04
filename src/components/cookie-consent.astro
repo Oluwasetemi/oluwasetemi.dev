@@ -87,7 +87,8 @@
     if (!consent) {
       // No consent yet, show banner
       showConsentBanner();
-    } else if (consent === 'accepted') {
+    }
+    else if (consent === 'accepted') {
       // Consent was given, trigger GA initialization
       window.dispatchEvent(new CustomEvent('cookie-consent', {
         detail: { accepted: true }

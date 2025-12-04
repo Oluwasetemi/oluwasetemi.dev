@@ -3,13 +3,13 @@
  * Helps create properly formatted UTM tracking URLs
  */
 
-export interface UTMParams {
+export type UTMParams = {
   source: string; // Required: e.g., 'twitter', 'newsletter', 'google'
   medium: string; // Required: e.g., 'social', 'email', 'cpc'
   campaign: string; // Required: e.g., 'summer_sale', 'product_launch'
   term?: string; // Optional: for paid keywords
   content?: string; // Optional: for A/B testing differentiation
-}
+};
 
 /**
  * Build a URL with UTM parameters
