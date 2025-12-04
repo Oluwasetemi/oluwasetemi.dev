@@ -79,7 +79,13 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
           <!-- Giscus Comments -->
           <div class="mt-12 pt-8 border-t border-gray-200">
             <h3 class="text-xl font-semibold text-gray-800 mb-6">Comments</h3>
-            <div class="giscus"></div>
+            <div
+              class="giscus"
+              data-repo={import.meta.env.PUBLIC_GISCUS_REPO || 'Oluwasetemi/oluwasetemi.dev'}
+              data-repo-id={import.meta.env.PUBLIC_GISCUS_REPO_ID || 'MDEwOlJlcG9zaXRvcnk1NzMzODI5Mg=='}
+              data-category={import.meta.env.PUBLIC_GISCUS_CATEGORY || 'General'}
+              data-category-id={import.meta.env.PUBLIC_GISCUS_CATEGORY_ID || 'DIC_kwDOA2rptM4CzZAp'}
+            ></div>
           </div>
         </div>
       </article>
@@ -91,12 +97,15 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
 <script is:inline>
   // Load Giscus comments
   (function() {
+    const giscusContainer = document.querySelector('.giscus');
+    if (!giscusContainer) return;
+
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', 'Oluwasetemi/oluwasetemi.dev');
-    script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnk1NzMzODI5Mg==');
-    script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDOA2rptM4CzZAp');
+    script.setAttribute('data-repo', giscusContainer.getAttribute('data-repo'));
+    script.setAttribute('data-repo-id', giscusContainer.getAttribute('data-repo-id'));
+    script.setAttribute('data-category', giscusContainer.getAttribute('data-category'));
+    script.setAttribute('data-category-id', giscusContainer.getAttribute('data-category-id'));
     script.setAttribute('data-mapping', 'url');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
