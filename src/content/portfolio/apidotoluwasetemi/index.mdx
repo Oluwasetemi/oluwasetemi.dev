@@ -1,131 +1,85 @@
 ---
-title: API.OLUWASETEMI.DEV
+title: API Platform
 imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/chooselife_ajndqs.png
 url: https://api.oluwasetemi.dev
-description: "A comprehensive personal API repository that serves as a full-featured backend solution demonstrating modern development practices. Built with Hono.js for high performance, the platform features dual authentication systems, real-time analytics, interactive API documentation, websocket for real-time communication, pubsub for graphql subscription and a powerful GraphQL endpoint."
+github: https://github.com/Oluwasetemi/api.oluwasetemi.dev
+description: "Comprehensive production-ready API platform demonstrating advanced backend patterns including authentication, real-time communication, and webhook systems. Built with Hono, Drizzle ORM, and TypeScript."
 technology:
   [
     "hono",
     "typescript",
-    "drizzle",
+    "drizzle-orm",
     "graphql",
     "apollo-server",
     "zod",
     "vitest",
-    "sqlite",
+    "postgresql",
     "openapi",
     "pino",
     "better-auth",
-    "analytics",
     "jwt",
     "websocket",
     "webhooks",
+    "sse",
   ]
 isPublished: true
 publishedDate: "2025-06-23T00:00:00.000Z"
 isDraft: false
 updated: true
-updatedDate: "2025-10-16T15:47:59.999Z"
+updatedDate: "2026-01-12T00:00:00.000Z"
 ---
 
-# API.OLUWASETEMI.DEV
+# API Platform
 
-A comprehensive personal API repository that serves as a full-featured backend solution demonstrating modern development practices. Built with Hono.js for high performance, the platform features dual authentication systems, real-time analytics, interactive API documentation, websocket for real-time communication, pubsub for graphql subscription and a powerful GraphQL endpoint.
+Comprehensive production-ready API platform demonstrating advanced backend patterns and real-time communication strategies. Built with Hono for high-performance HTTP handling, Drizzle ORM for type-safe database operations, and PostgreSQL for robust data persistence.
 
-## Key Features
+## Core APIs
 
-### **Dual Authentication Systems**
-
-- **Legacy JWT Authentication**: Traditional JWT-based auth with register, login, refresh, and protected routes
+- **Tasks API**: Hierarchical task management with parent-child relationships
+- **Products API**: Inventory management with stock tracking
+- **Posts & Comments API**: Content management with nested comments and authentication
+- **JWT Authentication**: Traditional JWT-based auth with register, login, refresh, and protected routes
 - **Better Auth Integration**: Modern authentication with email/password, session management, and enhanced security
-- **Protected Routes**: Comprehensive route protection with middleware
 
-### **Real-Time Analytics**
+## Real-time Features
 
-- **Request Tracking**: Comprehensive logging of all API requests with performance metrics
-- **Analytics Endpoints**: `/analytics/requests` and `/analytics/counts` for detailed insights
-- **Filtering & Grouping**: Advanced analytics with date ranges, method filtering, and grouping by day/path/method
-- **Performance Optimized**: Minimal overhead (~1-2ms per request) with non-blocking database writes
-- **Webhooks**: Webhooks are used to send notifications to the clients when a mutation is created. It is used to send notifications to the clients when a mutation(s) is created, can also receive notifications from the clients in the expected webhook standard for GitHub and Stripe.
+- **WebSockets**: Bidirectional real-time updates for tasks, products, and posts
+- **Server-Sent Events (SSE)**: One-way event streaming with automatic reconnection
+- **GraphQL Subscriptions**: Real-time data updates via GraphQL with PubSub
 
-### **GraphQL Integration**
+## Additional Features
 
-- **Auto-generated Schema**: Database tables automatically exposed as GraphQL types
-- **Authentication Support**: Complete auth mutations (register, login, refreshToken) and queries (me)
-- **Custom Queries**: Advanced analytics queries with filtering and grouping capabilities
-- **Interactive Playground**: Development playground at `/playground` for testing queries
-- **Subscriptions**: GraphQL subscriptions help user to listen to mutations for instant notification(works only when you use REST api to create the mutation)
-- **PubSub**: PubSub is used to publish and subscribe to events in the graphql server. It is used to send notifications to the clients when a mutation is created.
-- **Websocket**: Websocket is used to send notifications to the clients when a mutation is created. It is used to send notifications to the clients when a mutation is created.
+- **OpenAPI/Swagger Documentation**: Interactive API documentation at `/reference`
+- **Request Analytics**: Comprehensive logging and monitoring of API requests
+- **Health Checks**: Statistics endpoints for system monitoring
+- **Webhook System**: Event tracking with retry logic for failed deliveries
+- **Type-Safe Operations**: Full TypeScript integration with Zod validation
 
-### **Comprehensive Documentation**
+## Technical Stack
 
-- **OpenAPI Specification**: Full API documentation(json) with `/doc` endpoint
-- **Scalar Documentation**: Interactive API documentation at `https://api.oluwasetemi.dev/reference` and `https://api.oluwasetemi.dev/api/auth/docs`
-- **Type-Safe Routes**: All endpoints documented using @hono/zod-openapi
-- **Live Examples**: Working examples and testing interface
-
-### **Database & ORM**
-
-- **Drizzle ORM**: Type-safe database operations with SQLite
-- **Schema Management**: Single source of truth for database schemas
-- **Migrations**: Proper database migration system
-- **Type Safety**: Full TypeScript integration throughout
-
-## API Endpoints
-
-Visit the [API Base URL](https://api.oluwasetemi.dev) to see the available endpoints.
-
-## My Role on the Project(AI assisted)
-
-- **Full-Stack Architecture**: Designed and implemented the entire API architecture from scratch
-- **Authentication Systems**: Implemented both JWT and Better Auth with comprehensive security
-- **Analytics Engine**: Built real-time request tracking and analytics system
-- **GraphQL Implementation**: Set up Apollo Server with auto-generated schemas and custom queries
-- **Database Design**: Created and maintained database schemas using Drizzle ORM
-- **API Documentation**: Implemented comprehensive OpenAPI documentation with Scalar interface
-- **Testing Strategy**: Established comprehensive testing patterns with Vitest
-- **DevOps & Deployment**: Configured deployment pipeline and hosted at api.oluwasetemi.dev
-- **Code Quality**: Implemented ESLint configuration with @setemiojo/eslint-config
-
-## Technical Architecture
-
-### **Core Technologies**
-
-- **Framework**: Hono.js for high-performance web framework
-- **Database**: SQLite with Drizzle ORM for type-safe operations
+- **Backend Framework**: Hono for high-performance HTTP handling
+- **Database**: PostgreSQL with Drizzle ORM for type-safe operations
 - **Authentication**: Dual JWT and Better Auth systems
-- **GraphQL**: Apollo Server with Drizzle GraphQL integration
-- **Validation**: Zod schemas for runtime validation and OpenAPI docs
-- **Logging**: Structured logging with Pino for production monitoring
-- **Testing**: Vitest for comprehensive testing with proper organization
+- **GraphQL**: Apollo Server with auto-generated schemas from database
+- **Validation**: Zod schemas for runtime validation and OpenAPI documentation
+- **Real-time**: WebSockets, Server-Sent Events, and GraphQL Subscriptions
+- **Testing**: Vitest for comprehensive unit testing
+- **Logging**: Pino for structured production logging
+- **Documentation**: Scalar for interactive OpenAPI documentation
 
-### **Development Tools**
+## Production-Ready Patterns
 
-- **Package Manager**: pnpm with workspace configuration
-- **Code Quality**: ESLint with @setemiojo/eslint-config
-- **Type Safety**: Full TypeScript integration
-- **Process Management**: PM2 ecosystem configuration
-- **Documentation**: Scalar for interactive API docs
+- Type-safe APIs with OpenAPI/Swagger
+- Comprehensive authentication with JWT and Better Auth
+- Webhook systems with retry logic
+- Request analytics and monitoring
+- Health checks and statistics endpoints
+- Comprehensive error handling
+- Non-blocking database writes
 
-## Live Demo & Resources
+## Links
 
-- **API Base URL**: [api.oluwasetemi.dev](https://api.oluwasetemi.dev)
-- **Interactive Documentation**: [api.oluwasetemi.dev/reference](https://api.oluwasetemi.dev/reference)
-- **GraphQL Endpoint**: [api.oluwasetemi.dev/graphql](https://api.oluwasetemi.dev/graphql)
-- **OpenAPI Spec**: [api.oluwasetemi.dev/doc](https://api.oluwasetemi.dev/doc)
-- **Source Code**: [GitHub Repository](https://github.com/Oluwasetemi/api.oluwasetemi.dev)
-
-## Motivation & Impact
-
-This project serves as both a practical personal API and a comprehensive showcase of modern backend development practices. It demonstrates:
-
-- **Production-Ready Architecture**: Real-world authentication, analytics, and monitoring
-- **Developer Experience**: Interactive documentation, GraphQL playground, and comprehensive testing
-- **Performance**: High-performance Hono.js framework with optimized analytics
-- **Type Safety**: Full TypeScript integration with Zod validation
-- **Modern Practices**: Latest development tools and best practices
-
-The API is publicly available at [api.oluwasetemi.dev](https://api.oluwasetemi.dev) with interactive documentation at [api.oluwasetemi.dev/reference](https://api.oluwasetemi.dev/reference). The graphql endpoint is available at [api.oluwasetemi.dev/graphql](https://api.oluwasetemi.dev/graphql).
-
-Updated on 16th October 2025 for the new features like products, posts, websocket, websocket testing client and webhooks.
+- [API Base URL](https://api.oluwasetemi.dev)
+- [Interactive Documentation](https://api.oluwasetemi.dev/reference)
+- [GraphQL Endpoint](https://api.oluwasetemi.dev/graphql)
+- [Source Code](https://github.com/Oluwasetemi/api.oluwasetemi.dev)

@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = "{...OOS}";
 export const SITE_DESCRIPTION =
-  "I'm a Fullstack Engineer who works as a Tutor and a Frontend Engineering Instructor at AltSchoolAfrica. I specialize in building web application with TypeScript, JavaScript, React, and Node.js. You can explore my projects on GitHub and Stackblitz. I have a passion for teaching and sharing insights about web development, helping others learn and grow in this field. Check out my writing for more tips and tutorials.";
+  "I'm a Fullstack Engineer who works as a Tutor and a Frontend Engineering Instructor at AltSchoolAfrica. I specialize in building web applications with TypeScript, JavaScript, React, and Node.js. You can explore my projects on GitHub, StackBlitz, and CodeSandbox. I have a passion for teaching and sharing insights about web development, helping others learn and grow in this field. Check out my writing for more tips and tutorials.";
 export const SITE_AUTHOR = "Oluwasetemi Ojo";
 export const SITE_URL = "https://oluwasetemi.dev";
 

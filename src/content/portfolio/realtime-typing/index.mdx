@@ -1,64 +1,66 @@
 ---
-title: Real-time Typing Trainer
+title: Realtime Typing Trainer
 imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/c_fill,g_auto,h_250,w_970/b_rgb:000000,e_gradient_fade,y_-0.50/c_scale,co_rgb:ffffff,fl_relative,l_text:montserrat_25_style_light_align_center:Shop%20Now,w_0.5,y_0.18/v1760651181/test_mqj4yb.png
 url: https://realtime-typing-trainer.netlify.app
 github: https://github.com/Oluwasetemi/typing-trainer
-description: "A real-time multiplayer typing trainer built with React 19, TypeScript, and PartyKit, featuring live sessions, analytics, and seamless WebSocket synchronization"
+description: "Performance-focused typing practice platform with real-time multiplayer features and comprehensive training modes"
 technology:
   [
     "react",
     "typescript",
     "partykit",
+    "websocket",
     "tanstack-router",
     "vitest",
-    "websocket",
     "netlify",
   ]
 isPublished: true
 publishedDate: "2025-10-16T00:00:00.000Z"
 isDraft: false
-updated: false
-updatedDate: "2025-10-16T15:47:59.999Z"
+updated: true
+updatedDate: "2026-01-12T00:00:00.000Z"
 ---
 
-# Real-time Typing Trainer
+# Realtime Typing Trainer
 
-## Overview
-
-A real-time multiplayer typing trainer providing competitive practice sessions through PartyKit's serverless real-time infrastructure. Built with React 19 and TypeScript, it delivers instant synchronization of typing progress across participants with comprehensive analytics and session management.
+Performance-focused typing practice platform with real-time multiplayer features and comprehensive training modes.
 
 ## Key Features
 
-- **Real-Time Multiplayer**: PartyKit-powered WebSocket sessions supporting multiple concurrent users
-- **Comprehensive Analytics**: WPM, accuracy, error tracking, and character-level analysis
-- **Session Management**: Unique URLs for sharable multiplayer sessions with participant tracking
-- **Solo Practice**: Individual typing sessions with full analytics and progress tracking
-- **Type-Safe Routing**: TanStack Router for excellent developer experience and type safety
+- **Real-time Session Mode**: Live typing practice with real-time spectators watching your progress
+- **Competition Mode**: Multiplayer racing with live leaderboards and head-to-head competition
+- **Tournament Mode**: Bracket-style elimination tournaments for competitive typing events
+- **Solo Practice Mode**: Offline training for improving speed and accuracy without pressure
+- **Live Performance Tracking**: Real-time WPM, accuracy, and error analytics during practice
 
-## My Role & Responsibilities
+## Technical Implementation
 
-- Architected and built entire application as solo developer using React 19 and TypeScript
-- Implemented real-time multiplayer functionality with PartyKit serverless infrastructure
-- Designed WebSocket communication for instant typing progress synchronization
-- Built analytics engine calculating WPM, accuracy, and error patterns in real-time
-- Created session management system with unique shareable URLs for multiplayer
-- Configured Vitest testing framework for reliable code quality
-- Deployed frontend to Netlify with PartyKit backend at typing-trainer.oluwasetemi.partykit.dev
+Built with React and TypeScript, leveraging PartyKit for real-time WebSocket communication. The platform provides instant synchronization of typing progress across all participants with sub-100ms latency.
 
-## Technical Highlights
+### Core Technologies
 
-Leveraged React 19's concurrent rendering capabilities for smooth real-time updates without performance degradation. PartyKit provides serverless real-time infrastructure with automatic scaling and connection management, eliminating the need for traditional WebSocket server setup. TanStack Router delivers type-safe routing with file-based routing patterns and excellent developer experience. The analytics engine processes typing events in real-time, calculating WPM with accuracy adjustments and tracking error patterns for detailed performance insights.
+- **Frontend**: React 19 with concurrent rendering for smooth real-time updates
+- **Real-time Infrastructure**: PartyKit serverless WebSocket platform
+- **Routing**: TanStack Router for type-safe navigation
+- **Analytics Engine**: Real-time WPM calculation, accuracy tracking, and error pattern analysis
+- **Testing**: Vitest for comprehensive unit testing
+
+### Architecture Highlights
+
+- Serverless real-time infrastructure with automatic scaling
+- Session management with unique shareable URLs
+- Character-level analysis for detailed performance insights
+- Type-safe throughout with full TypeScript coverage
 
 ## Impact & Results
 
-- **Real-Time Performance**: Instant synchronization with sub-100ms latency using PartyKit
-- **Serverless Architecture**: Scalable real-time infrastructure without server management
-- **Modern React**: Showcases React 19 features and concurrent rendering capabilities
-- **Type Safety**: Complete TypeScript coverage ensuring runtime reliability
-- **Testing**: Vitest integration for comprehensive unit testing
+- **Real-Time Performance**: Sub-100ms latency using PartyKit's serverless infrastructure
+- **Scalable Architecture**: Automatic scaling without server management
+- **Comprehensive Training**: Multiple modes for different skill levels and goals
+- **Live Competition**: Real-time leaderboards and multiplayer racing
+- **Detailed Analytics**: WPM, accuracy, and error tracking with character-level insights
 
 ## Links
 
-- [Live Application](https://realtime-typing-trainer.netlify.app) - Try the multiplayer trainer
-- [Source Code](https://github.com/Oluwasetemi/typing-trainer) - GitHub repository
-- [PartyKit Server](https://typing-trainer.oluwasetemi.partykit.dev) - Real-time backend
+- [Live Application](https://realtime-typing-trainer.netlify.app)
+- [Source Code](https://github.com/Oluwasetemi/typing-trainer)

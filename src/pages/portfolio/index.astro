@@ -13,21 +13,21 @@ const portfolios = await getCollection("portfolio");
   description="My portfolio of web development projects and work"
   image="/og/page/portfolio.png"
 >
-  <main class="max-w-6xl mx-auto px-8 py-8">
-    <div class="text-center mb-12">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div class="text-center mb-8 sm:mb-10 lg:mb-12">
       <h1
-        class="text-5xl md:text-3xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
+        class="text-3xl sm:text-4xl md:text-5xl mb-3 sm:mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent font-bold"
       >
         My Portfolio
       </h1>
-      <p class="text-xl text-gray-600">
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">
         A collection of projects I've worked on
       </p>
     </div>
 
     {
       portfolios.length > 0 ? (
-        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none m-0 p-0">
           {portfolios
             .sort((a, b) => {
               const dateA = new Date(a.data.publishedDate as Date);
@@ -39,9 +39,9 @@ const portfolios = await getCollection("portfolio");
             ))}
         </ul>
       ) : (
-        <div class="text-center py-16 px-8 text-gray-600">
-          <h2 class="text-3xl font-bold mb-4">Portfolio Coming Soon</h2>
-          <p class="text-lg">
+        <div class="text-center py-12 sm:py-16 px-4 sm:px-8 text-gray-600">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Portfolio Coming Soon</h2>
+          <p class="text-base sm:text-lg">
             I'm currently working on showcasing my projects. Check back soon!
           </p>
         </div>

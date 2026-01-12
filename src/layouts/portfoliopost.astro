@@ -13,17 +13,17 @@ const { title, description, tags, url, github, ogImage } = Astro.props;
 
 <Layout title={title} description={description || `Portfolio project: ${title}`} image={ogImage}>
   <main class="w-full max-w-full m-0">
-    <article class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
-      <div class="max-w-4xl mx-auto px-4 py-8 text-gray-800">
-        <div class="mb-8 py-8 text-center leading-tight">
-          <div class="mb-4 flex justify-center gap-4 flex-wrap">
+    <article class="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-800 leading-relaxed">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-gray-800">
+        <div class="mb-6 sm:mb-8 py-4 sm:py-6 lg:py-8 text-center leading-tight">
+          <div class="mb-4 flex justify-center gap-3 sm:gap-4 flex-wrap">
             {
               url && (
                 <a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-md no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm"
+                  class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm sm:text-base touch-manipulation min-h-[44px] flex items-center"
                 >
                   Live Demo
                 </a>
@@ -35,7 +35,7 @@ const { title, description, tags, url, github, ogImage } = Astro.props;
                   href={github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-md no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm"
+                  class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm sm:text-base touch-manipulation min-h-[44px] flex items-center"
                 >
                   GitHub
                 </a>
@@ -47,11 +47,11 @@ const { title, description, tags, url, github, ogImage } = Astro.props;
         <slot />
         {
           tags && tags.length > 0 && (
-            <div class="mt-12 pt-8 border-t border-gray-200">
-              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">Tags</h3>
+            <div class="mt-8 sm:mt-10 lg:mt-12 pt-6 sm:pt-8 border-t border-gray-200">
+              <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3 sm:mb-4">Tags</h3>
               <div class="flex gap-2 flex-wrap">
                 {tags.map((tag: string) => (
-                  <span class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm">{tag}</span>
+                  <span class="bg-gray-100 text-gray-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm">{tag}</span>
                 ))}
               </div>
             </div>

@@ -1,0 +1,106 @@
+---
+title: SSE Test Client
+imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/sse-test.png
+url: https://api.oluwasetemi.dev/sse/client
+description: "Interactive Server-Sent Events testing client for one-way event streaming with automatic reconnection and real-time event monitoring"
+technology:
+  [
+    "sse",
+    "server-sent-events",
+    "real-time",
+    "hono",
+    "typescript",
+    "event-stream",
+  ]
+isPublished: true
+publishedDate: "2025-10-16T00:00:00.000Z"
+isDraft: false
+updated: false
+updatedDate: "2026-01-12T00:00:00.000Z"
+---
+
+# SSE Test Client
+
+Interactive Server-Sent Events (SSE) testing client for one-way event streaming with automatic reconnection. Demonstrates efficient server-to-client real-time communication patterns.
+
+## Overview
+
+A comprehensive SSE testing playground built to demonstrate and test server-to-client event streaming. Shows how Server-Sent Events enable efficient one-way real-time communication with automatic reconnection capabilities.
+
+## Key Features
+
+- **Real-Time Event Streaming**: Live server-to-client event delivery
+- **Automatic Reconnection**: Built-in reconnection with exponential backoff
+- **Event History**: Complete log of all received events with timestamps
+- **Connection Status**: Real-time connection state monitoring
+- **Multiple Event Types**: Support for different event categories
+- **Interactive Interface**: Clean UI for monitoring event stream
+
+## Technical Implementation
+
+Built with Hono's streaming support and the EventSource API, providing reliable one-way communication with minimal overhead.
+
+### Core Technologies
+
+- **EventSource API**: Native browser API for SSE connections
+- **Backend**: Hono framework with streaming response support
+- **Type Safety**: Full TypeScript integration for event contracts
+- **Connection Management**: Automatic reconnection handling
+- **Frontend**: Vanilla JavaScript for lightweight implementation
+
+### Architecture Highlights
+
+- HTTP-based protocol using standard web technologies
+- Automatic reconnection on connection loss
+- Event ID tracking for reliable delivery
+- Long-lived HTTP connections with keep-alive
+- Simple text-based protocol for efficiency
+
+## SSE vs WebSocket
+
+**When to Use SSE:**
+
+- One-way communication from server to client
+- Simpler implementation than WebSocket
+- Automatic reconnection built into browser
+- Works through most proxies and firewalls
+- Lower overhead for server-to-client updates
+
+**SSE Advantages:**
+
+- Built on HTTP/HTTPS (no special protocol)
+- Automatic reconnection with event ID tracking
+- Simpler server implementation
+- Better for unidirectional data flow
+- Native browser support with EventSource API
+
+## Use Cases
+
+- **Live Notifications**: Push notifications from server to client
+- **Real-Time Dashboards**: Live data updates for monitoring dashboards
+- **News Feeds**: Streaming content updates
+- **Stock Tickers**: Live price updates
+- **Activity Streams**: Real-time activity logs and audit trails
+- **Progress Updates**: Long-running operation status updates
+
+## Technical Highlights
+
+- Production-ready SSE implementation
+- Automatic reconnection with last event ID
+- Memory-efficient streaming
+- Support for named events
+- Connection health monitoring
+- Cross-origin support (CORS)
+
+## Real-Time Capabilities
+
+- Efficient one-way communication
+- Low latency event delivery
+- Automatic buffering and retry
+- Event ordering guarantees
+- Connection persistence with keep-alive
+
+## Links
+
+- [SSE Playground](https://api.oluwasetemi.dev/sse/client)
+- [API Platform Source](https://github.com/Oluwasetemi/api.oluwasetemi.dev)
