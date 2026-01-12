@@ -1,0 +1,117 @@
+---
+title: GraphQL Subscription Test
+imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/graphql-subscription.png
+url: https://api.oluwasetemi.dev/subscription-tester
+description: "Interactive GraphQL subscription testing client for real-time data updates with PubSub pattern demonstration"
+technology:
+  [
+    "graphql",
+    "subscriptions",
+    "apollo-server",
+    "pubsub",
+    "real-time",
+    "websocket",
+    "typescript",
+  ]
+isPublished: true
+publishedDate: "2025-10-16T00:00:00.000Z"
+isDraft: false
+updated: false
+updatedDate: "2026-01-12T00:00:00.000Z"
+---
+
+# GraphQL Subscription Test
+
+Interactive GraphQL subscription testing client for real-time data updates via GraphQL. Demonstrates the PubSub pattern for event-driven GraphQL subscriptions with WebSocket transport.
+
+## Overview
+
+A comprehensive GraphQL subscription testing tool that demonstrates how GraphQL subscriptions enable real-time updates through the PubSub (Publish-Subscribe) pattern. Shows how mutations trigger events that subscribers receive instantly.
+
+## Key Features
+
+- **Real-Time GraphQL Updates**: Subscribe to mutations and receive instant notifications
+- **PubSub Pattern**: Demonstrates publish-subscribe architecture in GraphQL
+- **Interactive Testing**: Execute mutations and observe subscription updates
+- **Multiple Subscription Types**: Test different GraphQL subscription operations
+- **WebSocket Transport**: Uses WebSocket protocol for GraphQL subscriptions
+- **Subscription Management**: Connect, disconnect, and manage multiple subscriptions
+
+## Technical Implementation
+
+Built with Apollo Server and GraphQL subscriptions over WebSocket protocol, showcasing event-driven real-time patterns in GraphQL.
+
+### Core Technologies
+
+- **GraphQL**: Apollo Server with subscription support
+- **PubSub**: In-memory PubSub for event broadcasting
+- **WebSocket**: Transport layer for GraphQL subscriptions
+- **TypeScript**: Type-safe GraphQL schema and resolvers
+- **Apollo Client**: Client-side subscription management
+
+### Architecture Highlights
+
+- Event-driven architecture with PubSub pattern
+- WebSocket-based GraphQL subscription transport
+- Resolver-based subscription filtering
+- Real-time mutation notifications
+- Type-safe GraphQL operations
+
+## How It Works
+
+1. **Subscribe**: Client opens a WebSocket connection and subscribes to events
+2. **Mutate**: REST API or GraphQL mutation creates/updates data
+3. **Publish**: Server publishes event to PubSub
+4. **Notify**: All subscribers receive the update in real-time
+5. **Update**: Client UI updates with new data
+
+## GraphQL Subscriptions vs Other Real-Time Patterns
+
+**Advantages:**
+
+- Type-safe real-time data with GraphQL schema
+- Declarative subscriptions with query-like syntax
+- Built-in filtering and field selection
+- Integrates with existing GraphQL API
+- Standardized protocol with Apollo ecosystem
+
+**Use Cases:**
+
+- Real-time dashboard updates
+- Live notification systems
+- Collaborative editing features
+- Chat applications
+- Activity feed updates
+- Stock/price ticker updates
+
+## Technical Highlights
+
+- Production-ready GraphQL subscription implementation
+- PubSub pattern for scalable event distribution
+- WebSocket connection management
+- Type-safe subscription resolvers
+- Automatic reconnection handling
+- Subscription filtering and authorization
+
+## Subscription Examples
+
+The tester demonstrates subscriptions for:
+
+- **Task Updates**: Real-time task creation and modification notifications
+- **Product Changes**: Live inventory and product updates
+- **Post Activity**: Instant post and comment notifications
+- **Custom Events**: Flexible event subscription patterns
+
+## Real-Time Capabilities
+
+- Instant event delivery via WebSocket
+- Multiple concurrent subscriptions
+- Filtered subscriptions based on criteria
+- Type-safe data delivery
+- Connection state management
+
+## Links
+
+- [Subscription Tester](https://api.oluwasetemi.dev/subscription-tester)
+- [GraphQL Playground](https://api.oluwasetemi.dev/graphql)
+- [API Platform Source](https://github.com/Oluwasetemi/api.oluwasetemi.dev)
