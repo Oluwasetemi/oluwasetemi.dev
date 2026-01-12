@@ -1,0 +1,90 @@
+---
+title: WebSocket Client Test
+imageUrl: https://res.cloudinary.com/drnqdd87d/image/upload/v1632393986/Personal/websocket-test.png
+url: https://api.oluwasetemi.dev/ws/client/tasks
+description: "Interactive WebSocket testing client for real-time bidirectional communication testing with live updates for tasks, products, and posts"
+technology:
+  [
+    "websocket",
+    "real-time",
+    "hono",
+    "typescript",
+    "bidirectional-communication",
+  ]
+isPublished: true
+publishedDate: "2025-10-16T00:00:00.000Z"
+isDraft: false
+updated: false
+updatedDate: "2026-01-12T00:00:00.000Z"
+---
+
+# WebSocket Client Test
+
+Interactive WebSocket testing client demonstrating real-time bidirectional communication patterns. Provides live testing interfaces for WebSocket connections with instant message broadcasting.
+
+## Overview
+
+A comprehensive WebSocket testing tool built to demonstrate and test real-time communication patterns. Features multiple endpoint tests for different data types, showing how WebSocket connections enable instant two-way communication between clients and servers.
+
+## Key Features
+
+- **Multiple WebSocket Endpoints**: Test clients for different data types
+  - [Tasks WebSocket](https://api.oluwasetemi.dev/ws/client/tasks) - Real-time task updates
+  - [Products WebSocket](https://api.oluwasetemi.dev/ws/client/products) - Live product inventory updates
+  - [Posts WebSocket](https://api.oluwasetemi.dev/ws/client/posts) - Instant post and comment notifications
+- **Bidirectional Communication**: Send and receive messages in real-time
+- **Connection Status Monitoring**: Live connection state visualization
+- **Message History**: View complete message exchange history
+- **Auto-Reconnection**: Automatic reconnection on connection loss
+- **Interactive Testing**: Send custom messages and observe server responses
+
+## Technical Implementation
+
+Built with Hono's WebSocket support and TypeScript, providing type-safe real-time communication with automatic connection management.
+
+### Core Technologies
+
+- **WebSocket Protocol**: Native WebSocket API for bidirectional communication
+- **Backend**: Hono framework with WebSocket adapter
+- **Type Safety**: Full TypeScript integration for message contracts
+- **Connection Management**: Automatic reconnection and heartbeat monitoring
+- **Frontend**: Vanilla JavaScript for lightweight, dependency-free testing
+
+### Architecture Highlights
+
+- Event-driven architecture for message handling
+- Heartbeat mechanism for connection health monitoring
+- Message broadcasting to all connected clients
+- Separate WebSocket servers for different data domains
+- Connection pooling and management
+
+## Use Cases
+
+- **WebSocket Development**: Test WebSocket implementations during development
+- **Real-Time Communication**: Understand WebSocket message patterns
+- **API Testing**: Verify real-time updates work as expected
+- **Learning Tool**: Explore WebSocket technology interactively
+- **Debugging**: Troubleshoot WebSocket connection issues
+
+## Real-Time Capabilities
+
+- Instant message delivery to all connected clients
+- Sub-100ms latency for local connections
+- Automatic reconnection with exponential backoff
+- Binary and text message support
+- Connection state change notifications
+
+## Technical Highlights
+
+- Production-ready WebSocket implementation
+- Type-safe message contracts
+- Comprehensive error handling
+- Memory-efficient connection management
+- Scalable architecture for multiple concurrent connections
+
+## Links
+
+- [Tasks WebSocket Test](https://api.oluwasetemi.dev/ws/client/tasks)
+- [Products WebSocket Test](https://api.oluwasetemi.dev/ws/client/products)
+- [Posts WebSocket Test](https://api.oluwasetemi.dev/ws/client/posts)
+- [API Platform Source](https://github.com/Oluwasetemi/api.oluwasetemi.dev)
