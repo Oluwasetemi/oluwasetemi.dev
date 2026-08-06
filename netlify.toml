@@ -9,7 +9,7 @@ command = "bun install && bun run build"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "20"
+NODE_VERSION = "26"
 
 # Redirects configuration to prevent adapter errors
 [[redirects]]
