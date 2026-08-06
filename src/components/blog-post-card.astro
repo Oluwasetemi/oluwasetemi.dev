@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import { getEntrySlug } from "../utils/content";
 import FormattedDate from "./formatteddate.astro";
 
 type Props = {
@@ -8,12 +9,13 @@ type Props = {
 };
 
 const { post } = Astro.props;
+const postSlug = getEntrySlug(post);
 ---
 
 <li
   class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border border-gray-200"
 >
-  <a href={`/blog/${post.slug}/`} class="block no-underline">
+  <a href={`/blog/${postSlug}/`} class="block no-underline">
     <h4 class="text-xl font-semibold mb-2 text-gray-800 leading-tight hover:text-indigo-600 transition-colors">
       {post.data.title}
     </h4>

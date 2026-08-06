@@ -1,6 +1,8 @@
 import type { ImageFunction } from "astro:content";
 
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 // Shared base schema factory for blog and drafts
 function createBaseContentSchema(image: ImageFunction) {
@@ -20,7 +22,7 @@ function createBaseContentSchema(image: ImageFunction) {
 }
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   schema: ({ image }) =>
     createBaseContentSchema(image).extend({
       modified: z.boolean().optional(),
@@ -31,7 +33,7 @@ const blog = defineCollection({
 });
 
 const portfolio = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/portfolio", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -49,7 +51,7 @@ const portfolio = defineCollection({
 });
 
 const drafts = defineCollection({
-  type: "content",
+  loader: glob({ base: "./src/content/drafts", pattern: "**/*.{md,mdx}" }),
   schema: ({ image }) =>
     createBaseContentSchema(image).extend({
       isDraft: z.boolean().default(true),

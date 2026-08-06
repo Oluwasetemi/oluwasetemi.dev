@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
@@ -41,6 +42,7 @@ export default defineConfig({
     },
   },
   markdown: {
+    processor: unified(),
     syntaxHighlight: false, // Disable Astro's built-in syntax highlighting
   },
   integrations: [

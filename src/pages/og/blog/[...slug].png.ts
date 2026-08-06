@@ -3,10 +3,12 @@ import type { CollectionEntry } from "astro:content";
 import { ImageResponse } from "@vercel/og";
 import { getCollection } from "astro:content";
 
+import { getEntrySlug } from "../../../utils/content";
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: getEntrySlug(post) },
     props: { post },
   }));
 }
@@ -25,6 +27,31 @@ export async function GET({ props }: { props: Props }) {
         day: "numeric",
       })
     : "";
+
+  const tagList = tags?.length
+    ? {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            gap: "12px",
+          },
+          children: tags.slice(0, 3).map((tag: string) => ({
+            type: "div",
+            props: {
+              style: {
+                background: "rgba(255, 255, 255, 0.2)",
+                color: "white",
+                padding: "8px 16px",
+                borderRadius: "8px",
+                fontSize: 20,
+              },
+              children: `#${tag}`,
+            },
+          })),
+        },
+      }
+    : null;
 
   const html = {
     type: "div",
@@ -141,29 +168,7 @@ export async function GET({ props }: { props: Props }) {
                 },
               },
               // Tags
-              tags &&
-                tags.length > 0 && {
-                  type: "div",
-                  props: {
-                    style: {
-                      display: "flex",
-                      gap: "12px",
-                    },
-                    children: tags.slice(0, 3).map((tag) => ({
-                      type: "div",
-                      props: {
-                        style: {
-                          background: "rgba(255, 255, 255, 0.2)",
-                          color: "white",
-                          padding: "8px 16px",
-                          borderRadius: "8px",
-                          fontSize: 20,
-                        },
-                        children: `#${tag}`,
-                      },
-                    })),
-                  },
-                },
+              tagList,
             ].filter(Boolean),
           },
         },

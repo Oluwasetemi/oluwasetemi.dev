@@ -3,10 +3,12 @@ import type { CollectionEntry } from "astro:content";
 import { ImageResponse } from "@vercel/og";
 import { getCollection } from "astro:content";
 
+import { getEntrySlug } from "../../../utils/content";
+
 export async function getStaticPaths() {
   const portfolioItems = await getCollection("portfolio");
   return portfolioItems.map((item) => ({
-    params: { slug: item.slug },
+    params: { slug: getEntrySlug(item) },
     props: { item },
   }));
 }

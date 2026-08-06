@@ -1,9 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import "../../styles/global.css";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 import PortfolioPost from "../../layouts/portfoliopost.astro";
+import { getEntrySlug } from "../../utils/content";
 
 type Props = CollectionEntry<"portfolio">;
 
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
   const portfolios = await getCollection("portfolio");
   return portfolios
     .map(portfolio => ({
-      params: { slug: portfolio.slug },
+      params: { slug: getEntrySlug(portfolio) },
       props: portfolio,
     }))
     .sort((a, b) => {
@@ -23,10 +24,11 @@ export async function getStaticPaths() {
 }
 
 const portfolio = Astro.props;
-const { Content } = await portfolio.render();
+const { Content } = await render(portfolio);
+const portfolioSlug = getEntrySlug(portfolio);
 
 // Generate OG image URL
-const ogImage = `/og/portfolio/${portfolio.slug}.png`;
+const ogImage = `/og/portfolio/${portfolioSlug}.png`;
 
 export const prerender = true;
 ---
