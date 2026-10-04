@@ -1,14 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 
-import Footer from "../../components/footer.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
 const posts = (await getCollection("blog"))
   .filter(post => post.data.isPublished !== false && post.data.isDraft !== true);
 
-// Collect all tags with their post counts
 const tagCounts = new Map<string, number>();
 posts.forEach((post) => {
   post.data.tags?.forEach((tag) => {
@@ -16,35 +14,119 @@ posts.forEach((post) => {
   });
 });
 
-// Sort tags alphabetically
-const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 ---
 
 <Layout title={`Tags - ${SITE_TITLE}`} description={`Browse all tags on ${SITE_DESCRIPTION}`}>
-  <main class="max-w-6xl mx-auto px-8 py-8">
-    <div class="text-center mb-12">
-      <h1
-        class="text-5xl md:text-3xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
-      >
-        All Tags
-      </h1>
-      <p class="text-xl text-gray-600">Browse posts by topic</p>
-    </div>
-    <section>
-      <div class="flex flex-wrap gap-4 justify-center">
+  <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
+    <div class="content-container">
+      <header class="tags-hero">
+        <p>Index</p>
+        <h1>Topics I return to.</h1>
+        <span>{sortedTags.length} tags across {posts.length} notes</span>
+      </header>
+
+      <section class="tag-cloud" aria-label="All tags">
         {sortedTags.map(([tag, count]) => (
-          <a
-            href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
-            class="bg-white rounded-lg px-6 py-3 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border border-gray-200 no-underline group"
-          >
-            <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600 transition-colors">
-              {tag}
-            </span>
-            <span class="ml-2 text-sm text-gray-500">({count})</span>
+          <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`} style={`--tag-size: ${Math.min(1.45, 0.85 + count / 14)}rem`}>
+            <span>{tag}</span>
+            <strong>{count}</strong>
           </a>
         ))}
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
-  <Footer />
 </Layout>
+
+<style>
+  .tags-hero {
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 2rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    background: rgb(255 255 255 / 0.72);
+  }
+
+  .tags-hero p {
+    margin: 0 0 0.75rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .tags-hero h1 {
+    max-width: 10ch;
+    color: rgb(39 39 42);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .tags-hero span {
+    display: inline-flex;
+    margin-top: 1.25rem;
+    border-radius: 999px;
+    background: rgb(244 244 245);
+    padding: 0.45rem 0.75rem;
+    color: rgb(82 82 91);
+    font-size: 0.8125rem;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 2rem;
+  }
+
+  .tag-cloud a {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 999px;
+    background: white;
+    padding: 0.45rem 0.75rem;
+    color: rgb(63 63 70);
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .tag-cloud a:hover,
+  .tag-cloud a:focus-visible {
+    border-color: rgb(20 184 166 / 0.7);
+    transform: translateY(-1px);
+  }
+
+  .tag-cloud a:focus-visible {
+    outline: 2px solid rgb(20 184 166 / 0.28);
+    outline-offset: 3px;
+  }
+
+  .tag-cloud span {
+    font-size: var(--tag-size);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+
+  .tag-cloud strong {
+    color: rgb(161 161 170);
+    font-size: 0.75rem;
+  }
+
+  :global(.dark) .tags-hero,
+  :global(.dark) .tag-cloud a {
+    border-color: rgb(63 63 70);
+    background: rgb(24 24 27 / 0.72);
+  }
+
+  :global(.dark) .tags-hero h1,
+  :global(.dark) .tag-cloud a {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .tags-hero span {
+    background: rgb(39 39 42);
+    color: rgb(212 212 216);
+  }
+</style>

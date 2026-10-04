@@ -6,6 +6,11 @@ import { SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
 const portfolios = await getCollection("portfolio");
+const sortedPortfolios = portfolios.sort((a, b) => {
+  const dateA = new Date(a.data.publishedDate as Date);
+  const dateB = new Date(b.data.publishedDate as Date);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout
@@ -13,39 +18,117 @@ const portfolios = await getCollection("portfolio");
   description="My portfolio of web development projects and work"
   image="/og/page/portfolio.png"
 >
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-    <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-      <h1
-        class="text-3xl sm:text-4xl md:text-5xl mb-3 sm:mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent font-bold"
-      >
-        My Portfolio
-      </h1>
-      <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">
-        A collection of projects I've worked on
-      </p>
-    </div>
-
-    {
-      portfolios.length > 0 ? (
-        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none m-0 p-0">
-          {portfolios
-            .sort((a, b) => {
-              const dateA = new Date(a.data.publishedDate as Date);
-              const dateB = new Date(b.data.publishedDate as Date);
-              return dateB.getTime() - dateA.getTime();
-            })
-            .map((portfolio) => (
-              <PortfolioCard portfolio={portfolio} />
-            ))}
-        </ul>
-      ) : (
-        <div class="text-center py-12 sm:py-16 px-4 sm:px-8 text-gray-600">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Portfolio Coming Soon</h2>
-          <p class="text-base sm:text-lg">
-            I'm currently working on showcasing my projects. Check back soon!
-          </p>
+  <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
+    <div class="content-container">
+      <header class="portfolio-hero">
+        <div>
+          <p>Build log</p>
+          <h1>Projects with fingerprints.</h1>
         </div>
-      )
-    }
+        <aside aria-label="Portfolio count">
+          <strong>{sortedPortfolios.length}</strong>
+          <span>published projects</span>
+        </aside>
+      </header>
+
+      {
+        sortedPortfolios.length > 0 ? (
+          <ul class="portfolio-grid">
+            {sortedPortfolios.map((portfolio) => <PortfolioCard portfolio={portfolio} />)}
+          </ul>
+        ) : (
+          <section class="portfolio-empty">
+            <h2>Portfolio coming soon</h2>
+            <p>I’m currently working on showcasing my projects. Check back soon.</p>
+          </section>
+        )
+      }
+    </div>
   </main>
 </Layout>
+
+<style>
+  .portfolio-hero {
+    display: grid;
+    gap: 1.25rem;
+    align-items: end;
+    border-bottom: 1px dashed rgb(212 212 216);
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .portfolio-hero {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .portfolio-hero p {
+    margin: 0 0 0.75rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .portfolio-hero h1 {
+    max-width: 11ch;
+    color: rgb(39 39 42);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .portfolio-hero aside {
+    display: grid;
+    min-width: 11rem;
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 1.5rem;
+    padding: 1rem;
+  }
+
+  .portfolio-hero strong {
+    color: rgb(39 39 42);
+    font-size: 3rem;
+    line-height: 1;
+    letter-spacing: -0.08em;
+  }
+
+  .portfolio-hero span {
+    color: rgb(113 113 122);
+    font-size: 0.8125rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 0.85rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .portfolio-grid :global(li) {
+    border-style: dashed;
+  }
+
+  .portfolio-empty {
+    margin-top: 2rem;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  :global(.dark) .portfolio-hero {
+    border-color: rgb(63 63 70);
+  }
+
+  :global(.dark) .portfolio-hero h1,
+  :global(.dark) .portfolio-hero strong {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .portfolio-empty,
+  :global(.dark) .portfolio-hero aside {
+    border-color: rgb(63 63 70);
+  }
+</style>

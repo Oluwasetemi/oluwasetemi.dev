@@ -8,117 +8,147 @@ import PortfolioCard from "../components/portfolio-card.astro";
 import { SITE_DESCRIPTION, SITE_TITLE, SOCIALS } from "../consts";
 import Layout from "../layouts/Layout.astro";
 
-// Get latest blog posts (limit to 4)
 const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .filter((post: CollectionEntry<"blog">) => post.data.isPublished !== false && post.data.isDraft !== true)
   .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
     const dateA = a.data.pubDate || a.data.date;
     const dateB = b.data.pubDate || b.data.date;
-    if (!dateA || !dateB)
-return 0;
+    if (!dateA || !dateB) return 0;
     return dateB.valueOf() - dateA.valueOf();
   })
   .slice(0, 4);
 
-// Get portfolio items
 const portfolios: CollectionEntry<"portfolio">[] = (await getCollection("portfolio"))
   .sort((a: CollectionEntry<"portfolio">, b: CollectionEntry<"portfolio">) => {
     const dateA = a.data.publishedDate;
     const dateB = b.data.publishedDate;
-    if (!dateA || !dateB)
-return 0;
+    if (!dateA || !dateB) return 0;
     return dateB.valueOf() - dateA.valueOf();
   })
-  .slice(0, 3);
+  .slice(0, 4);
+
+const photos = [
+  { src: "/images/setemi.jpg", rotate: "rotate-2" },
+  { src: "/images/setemi-model.jpg", rotate: "-rotate-2" },
+  { src: "/images/setemi-with-temi.jpg", rotate: "rotate-2" },
+  { src: "/images/setemi-model-2.jpg", rotate: "rotate-2" },
+  { src: "/images/temi.jpg", rotate: "-rotate-2" },
+];
+
+const work = [
+  { role: "Frontend Engineering Instructor", company: "AltSchool Africa", period: "Now" },
+  { role: "Consultant · FullStack Engineer", company: "Intellubus", period: "Now" },
+  { role: "Technical Writer", company: "oluwasetemi.dev", period: "Writing" },
+];
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og/page/home.png">
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-    <!-- Hero Section -->
-    <section class="py-8 sm:py-12 text-left">
-      <h1
-        class="text-4xl sm:text-5xl lg:text-6xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
-      >
-        I'm Oluwasetemi
-      </h1>
-      <p class="text-lg sm:text-xl leading-relaxed">
-        I'm a <mark class="bg-gradient-to-r from-pink-400 to-red-500 text-white px-2 py-1 rounded">Fullstack Engineer who works as a Frontend Engineering Instructor @AltSchoolAfrica</mark
-        >. I specialize in building web applications and teaching web development with TypeScript, JavaScript, React,
-        and Node.js. You can explore my projects on
-        <a
-          href={`https://github.com/${SOCIALS.github}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline"
-        >GitHub</a
-        >,
-        <a
-          href={`https://stackblitz.com/${SOCIALS.stackblitz}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline"
-        >StackBlitz</a
-        >, and
-        <a
-          href={`https://codesandbox.io/u/${SOCIALS.codesandbox}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline"
-        >CodeSandbox</a
-        >.
-      </p>
+  <main id="main-content" tabindex="-1">
+    <section class="page-container mt-16 sm:mt-20">
+      <div class="content-container">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            Fullstack engineer, educator, and builder of thoughtful web experiences.
+          </h1>
+          <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            <span class="rounded-full border border-dashed border-teal-500/40 bg-teal-50 px-2 py-1 font-medium text-zinc-900 dark:bg-teal-400/10 dark:text-zinc-100">I’m Oluwasetemi Ojo</span>. I build web applications with TypeScript, JavaScript, React, and Node.js, and I help the next generation of frontend engineers grow at AltSchool Africa.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-4 text-zinc-500 dark:text-zinc-400">
+            <a href={`https://github.com/${SOCIALS.github}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="GitHub">GitHub</a>
+            <a href={`https://linkedin.com/in/${SOCIALS.linkedIn}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="LinkedIn">LinkedIn</a>
+            <a href={`https://stackblitz.com/${SOCIALS.stackblitz}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="StackBlitz">StackBlitz</a>
+            <button
+              id="theme-toggle"
+              type="button"
+              class="inline-flex items-center gap-2 rounded-full border border-dashed border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:border-teal-500/60 hover:text-zinc-950 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-teal-400/60 dark:hover:text-zinc-50"
+              aria-label="Switch theme"
+            >
+              <span id="theme-toggle-dot" class="h-2 w-2 rounded-full bg-teal-500 dark:bg-teal-400"></span>
+              <span id="theme-toggle-text">Switch theme</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Portfolio Section -->
-    {
-      portfolios.length > 0 && (
-        <section class="my-12 sm:my-16 lg:my-20">
-          <div class="text-center mb-8 sm:mb-12">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              My Portfolios
-            </h2>
-            <p class="text-lg sm:text-xl text-gray-600 mb-6">Showcasing my latest projects and work</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-              <a
-                href="/portfolio"
-                class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 inline-flex items-center gap-2 text-sm sm:text-base"
-              >
-                View All Projects
-                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-              <span class="bg-gradient-to-r from-pink-500 to-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold shadow-md">
-                {portfolios.length} Projects
-              </span>
-            </div>
+    <div class="mt-16 sm:mt-20">
+      <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+        {photos.map(photo => (
+          <div class:list={["relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800", photo.rotate]}>
+            <img src={photo.src} alt="" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
           </div>
-          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none m-0 p-0">
-            {portfolios.map(portfolio => (
-              <PortfolioCard portfolio={portfolio} />
-            ))}
-          </ul>
-        </section>
-      )
-    }
+        ))}
+      </div>
+    </div>
 
-    <!-- Latest Posts Section -->
-    <section class="my-12 sm:my-16">
-      <h2
-        class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
-      >
-        Some of my Writings
-      </h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 list-none m-0 p-0">
-        {allPosts.map(post => <BlogPostCard post={post} />)}
-      </ul>
-      <div class="text-center mt-8">
-        <a
-          href="/blog"
-          class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full no-underline font-medium hover:-translate-y-0.5 transition-transform duration-200 text-sm sm:text-base"
-        >To see all of my writings</a
-        >
+    <section class="page-container mt-24 md:mt-28">
+      <div class="content-container grid grid-cols-1 gap-y-20 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-24">
+        <div>
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Latest writing</h2>
+            <a href="/blog" class="text-sm font-medium text-teal-500 hover:text-teal-600 dark:text-teal-400">All articles</a>
+          </div>
+          <ul class="mt-8 grid list-none gap-12 p-0">
+            {allPosts.map(post => <BlogPostCard post={post} />)}
+          </ul>
+        </div>
+
+        <div class="space-y-10">
+          <section class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+            <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Work</h2>
+            <ol class="mt-6 space-y-4">
+              {work.map(item => (
+                <li class="flex gap-4">
+                  <div class="mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white text-sm font-semibold text-teal-500 shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-white/10">{item.company[0]}</div>
+                  <dl class="flex flex-auto flex-wrap gap-x-2">
+                    <dt class="sr-only">Company</dt>
+                    <dd class="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">{item.company}</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="text-xs text-zinc-500 dark:text-zinc-400">{item.role}</dd>
+                    <dt class="sr-only">Period</dt>
+                    <dd class="ml-auto text-xs text-zinc-400 dark:text-zinc-500">{item.period}</dd>
+                  </dl>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {portfolios.length > 0 && (
+            <section>
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Selected projects</h2>
+                <a href="/portfolio" class="text-sm font-medium text-teal-500 hover:text-teal-600 dark:text-teal-400">All projects</a>
+              </div>
+              <ul class="mt-6 grid list-none gap-4 p-0">
+                {portfolios.map(portfolio => <PortfolioCard portfolio={portfolio} />)}
+              </ul>
+            </section>
+          )}
+        </div>
       </div>
     </section>
   </main>
 </Layout>
+
+<script is:inline>
+  (() => {
+    const button = document.getElementById("theme-toggle");
+    const label = document.getElementById("theme-toggle-text");
+    if (!button || !label) return;
+
+    const updateLabel = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      label.textContent = isDark ? "Light mode" : "Dark mode";
+      button.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+    };
+
+    button.addEventListener("click", () => {
+      const shouldUseDark = !document.documentElement.classList.contains("dark");
+      document.documentElement.classList.toggle("dark", shouldUseDark);
+      localStorage.setItem("theme", shouldUseDark ? "dark" : "light");
+      updateLabel();
+    });
+
+    updateLabel();
+  })();
+</script>

@@ -2,15 +2,42 @@
 // Text-to-Speech Reader Component with section highlighting
 ---
 
-<div id="tts-reader" class="tts-reader sticky top-4 z-50 mb-8">
-  <div
-    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700"
-  >
-    <div class="flex items-center justify-between gap-4 flex-wrap">
+<div id="tts-reader" class="tts-reader sticky top-4 z-50 mb-8" data-tts-state="normal">
+  <div class="tts-window rounded-2xl border border-zinc-200/80 bg-white/95 p-4 shadow-lg shadow-zinc-900/5 backdrop-blur dark:border-zinc-700/50 dark:bg-zinc-900/95">
+    <div class="mb-4 flex items-center justify-between gap-4">
+      <div class="min-w-0">
+        <p class="m-0 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">Speech</p>
+        <p id="tts-window-summary" class="m-0 truncate text-sm text-zinc-600 dark:text-zinc-300">Ready to read</p>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button
+          id="tts-minimize"
+          type="button"
+          class="tts-window-button"
+          aria-label="Minimize speech reader"
+          aria-pressed="false"
+          title="Minimize"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true" class="h-4 w-4"><path d="M4 8h8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>
+        </button>
+        <button
+          id="tts-maximize"
+          type="button"
+          class="tts-window-button"
+          aria-label="Maximize speech reader"
+          aria-pressed="false"
+          title="Maximize"
+        >
+          <svg id="tts-maximize-icon" viewBox="0 0 16 16" aria-hidden="true" class="h-4 w-4"><path d="M5.25 3.75h-1.5v3m8.5 0v-3h-3m0 8.5h3v-3m-8.5 0v3h3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="tts-reader-body" class="flex items-center justify-between gap-4 flex-wrap">
       <!-- Play/Pause Button -->
       <button
         id="tts-play-pause"
-        class="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-medium"
+        class="flex items-center gap-2 rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
         aria-label="Play or pause reading"
       >
         <svg
@@ -40,12 +67,12 @@
       <div class="flex items-center gap-2">
         <label
           for="tts-speed"
-          class="text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >Speed:</label
         >
         <select
           id="tts-speed"
-          class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          class="rounded-full border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
         >
           <option value="0.5">0.5x</option>
           <option value="0.75">0.75x</option>
@@ -60,12 +87,12 @@
       <div class="flex items-center gap-2">
         <label
           for="tts-voice"
-          class="text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >Voice:</label
         >
         <select
           id="tts-voice"
-          class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          class="rounded-full border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
         >
           <!-- Populated dynamically -->
         </select>
@@ -74,7 +101,7 @@
       <!-- Stop Button -->
       <button
         id="tts-stop"
-        class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg transition-colors font-medium"
+        class="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
         aria-label="Stop reading"
       >
         Stop
@@ -83,15 +110,15 @@
       <!-- Progress Bar -->
       <div class="w-full mt-2">
         <div
-          class="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-1"
+          class="mb-1 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400"
         >
           <span id="tts-current-section">Ready to read</span>
           <span id="tts-progress-text">0%</span>
         </div>
-        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+        <div class="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
           <div
             id="tts-progress-bar"
-            class="bg-purple-600 h-2 rounded-full transition-all"
+            class="h-1.5 rounded-full bg-teal-500 transition-all dark:bg-teal-400"
             style="width: 0%"
           >
           </div>
@@ -102,22 +129,121 @@
 </div>
 
 <style is:global>
+  .tts-reader :where(p, button) {
+    margin: 0;
+  }
+
+  .tts-window {
+    transition:
+      width 180ms ease,
+      max-width 180ms ease,
+      padding 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .tts-window-button {
+    display: inline-flex;
+    height: 2rem;
+    width: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    color: rgb(113 113 122);
+    transition:
+      color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .tts-window-button:hover {
+    background: rgb(244 244 245);
+    color: rgb(39 39 42);
+  }
+
+  .dark .tts-window-button:hover {
+    background: rgb(39 39 42);
+    color: rgb(244 244 245);
+  }
+
+  .tts-reader[data-tts-state="minimized"] {
+    position: fixed;
+    right: auto;
+    bottom: 1rem;
+    left: 1rem;
+    top: auto;
+    z-index: 70;
+    margin: 0;
+    width: min(22rem, calc(100vw - 2rem));
+  }
+
+  .tts-reader[data-tts-state="minimized"] .tts-window {
+    padding: 0.75rem 0.875rem;
+    box-shadow: 0 18px 50px rgb(24 24 27 / 0.14);
+  }
+
+  .tts-reader[data-tts-state="minimized"] #tts-reader-body {
+    display: none;
+  }
+
+  .tts-reader[data-tts-state="minimized"] .tts-window > div:first-child {
+    margin-bottom: 0;
+  }
+
+  .tts-reader[data-tts-state="minimized"] #tts-window-summary::before {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 999px;
+    background: rgb(20 184 166);
+    content: "";
+    vertical-align: 0.05em;
+  }
+
+  .tts-reader[data-tts-state="maximized"] {
+    position: fixed;
+    inset: 6rem 1rem auto;
+    z-index: 70;
+    margin: 0 auto;
+    max-width: min(56rem, calc(100vw - 2rem));
+  }
+
+  .tts-reader[data-tts-state="maximized"] .tts-window {
+    padding: 1.25rem;
+    box-shadow: 0 24px 70px rgb(24 24 27 / 0.16);
+  }
+
+  .tts-reader[data-tts-state="maximized"] #tts-reader-body {
+    gap: 1rem;
+  }
+
+  .tts-reader[data-tts-state="maximized"] #tts-reader-body > .w-full {
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .tts-reader[data-tts-state="maximized"] {
+      inset: 4.5rem 0.75rem auto;
+      max-width: calc(100vw - 1.5rem);
+    }
+  }
+
   /* Highlight currently reading section */
   .tts-reading-section {
-    background-color: rgba(168, 85, 247, 0.3) !important;
-    border-left: 8px solid #a855f7 !important;
-    padding-left: 1rem !important;
-    margin-left: -1rem !important;
+    background-color: rgb(20 184 166 / 0.08) !important;
+    border-radius: 0.75rem !important;
+    padding-inline: 0.75rem !important;
+    margin-inline: -0.75rem !important;
     transition: all 0.3s ease !important;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3) !important;
+    box-shadow: inset 0 0 0 1px rgb(20 184 166 / 0.16) !important;
   }
 
   /* Highlight current word being read with deeper shade */
   .tts-current-word {
-    background-color: rgba(168, 85, 247, 0.7) !important;
-    color: white !important;
+    background-color: rgb(20 184 166 / 0.18) !important;
+    color: inherit !important;
     padding: 2px 4px !important;
-    border-radius: 3px !important;
+    border-radius: 0.35rem !important;
     transition: background-color 0.1s ease !important;
   }
 
@@ -169,6 +295,11 @@
         this.currentSectionText = document.getElementById(
           "tts-current-section"
         );
+        this.reader = document.getElementById("tts-reader");
+        this.minimizeBtn = document.getElementById("tts-minimize");
+        this.maximizeBtn = document.getElementById("tts-maximize");
+        this.windowSummary = document.getElementById("tts-window-summary");
+        this.windowState = "normal";
 
         // console.log("TTS: Elements found:", { playPauseBtn: !!this.playPauseBtn, stopBtn: !!this.stopBtn, speedSelect: !!this.speedSelect, voiceSelect: !!this.voiceSelect, });
 
@@ -209,6 +340,13 @@
           this.voiceSelect.addEventListener("change", () =>
             this.changeVoice());
         }
+        if (this.minimizeBtn) {
+          this.minimizeBtn.addEventListener("click", () => this.toggleMinimized());
+        }
+        if (this.maximizeBtn) {
+          this.maximizeBtn.addEventListener("click", () => this.toggleMaximized());
+        }
+        this.applyWindowState();
 
         // console.log( "TTS: Initialized. Found", this.contentElements.length, "content elements");
       }
@@ -229,6 +367,40 @@ this.speedSelect.disabled = true;
 this.voiceSelect.disabled = true;
         if (this.currentSectionText) {
           this.currentSectionText.textContent = "Text-to-Speech not available in this browser";
+        }
+        if (this.windowSummary) {
+          this.windowSummary.textContent = "Not available in this browser";
+        }
+      }
+
+      toggleMinimized() {
+        this.windowState = this.windowState === "minimized" ? "normal" : "minimized";
+        this.applyWindowState();
+      }
+
+      toggleMaximized() {
+        this.windowState = this.windowState === "maximized" ? "normal" : "maximized";
+        this.applyWindowState();
+      }
+
+      applyWindowState() {
+        if (!this.reader)
+return;
+
+        this.reader.dataset.ttsState = this.windowState;
+
+        if (this.minimizeBtn) {
+          const minimized = this.windowState === "minimized";
+          this.minimizeBtn.setAttribute("aria-pressed", String(minimized));
+          this.minimizeBtn.setAttribute("title", minimized ? "Restore" : "Minimize");
+          this.minimizeBtn.setAttribute("aria-label", minimized ? "Restore speech reader" : "Minimize speech reader");
+        }
+
+        if (this.maximizeBtn) {
+          const maximized = this.windowState === "maximized";
+          this.maximizeBtn.setAttribute("aria-pressed", String(maximized));
+          this.maximizeBtn.setAttribute("title", maximized ? "Restore" : "Maximize");
+          this.maximizeBtn.setAttribute("aria-label", maximized ? "Restore speech reader" : "Maximize speech reader");
         }
       }
 
@@ -388,6 +560,9 @@ return; // Skip if not found
           console.error("TTS: No text to read");
           if (this.currentSectionText) {
             this.currentSectionText.textContent = "No readable content found";
+          }
+          if (this.windowSummary) {
+            this.windowSummary.textContent = "No readable content found";
           }
           return;
         }
@@ -650,6 +825,10 @@ return;
           el.classList.remove("tts-reading-section");
           el.style.backgroundColor = "";
           el.style.borderLeft = "";
+          el.style.borderRadius = "";
+          el.style.paddingInline = "";
+          el.style.marginInline = "";
+          el.style.boxShadow = "";
         });
 
         // Highlight current section
@@ -661,11 +840,11 @@ return;
           element.classList.add("tts-reading-section");
 
           // Also apply inline styles as backup
-          element.style.backgroundColor = "rgba(168, 85, 247, 0.3)";
-          element.style.borderLeft = "8px solid #a855f7";
-          element.style.paddingLeft = "1rem";
-          element.style.marginLeft = "-1rem";
-          element.style.boxShadow = "0 0 20px rgba(168, 85, 247, 0.3)";
+          element.style.backgroundColor = "rgb(20 184 166 / 0.08)";
+          element.style.borderRadius = "0.75rem";
+          element.style.paddingInline = "0.75rem";
+          element.style.marginInline = "-0.75rem";
+          element.style.boxShadow = "inset 0 0 0 1px rgb(20 184 166 / 0.16)";
           element.style.transition = "all 0.3s ease";
 
           console.log("TTS: Applied styles. Element now has class:", element.classList.contains("tts-reading-section"));
@@ -677,8 +856,12 @@ return;
           // Update section name
           const tagName = element.tagName.toLowerCase();
           const preview = element.textContent.substring(0, 50).trim();
+          const sectionLabel = `Reading ${tagName}: ${preview}${preview.length >= 50 ? "..." : ""}`;
           if (this.currentSectionText) {
-            this.currentSectionText.textContent = `Reading ${tagName}: ${preview}${preview.length >= 50 ? "..." : ""}`;
+            this.currentSectionText.textContent = sectionLabel;
+          }
+          if (this.windowSummary) {
+            this.windowSummary.textContent = sectionLabel;
           }
         }
  else {
@@ -693,6 +876,9 @@ return;
           el.style.borderLeft = "";
           el.style.paddingLeft = "";
           el.style.marginLeft = "";
+          el.style.borderRadius = "";
+          el.style.paddingInline = "";
+          el.style.marginInline = "";
           el.style.boxShadow = "";
         });
 
@@ -703,6 +889,9 @@ return;
           el.style.borderLeft = "";
           el.style.paddingLeft = "";
           el.style.marginLeft = "";
+          el.style.borderRadius = "";
+          el.style.paddingInline = "";
+          el.style.marginInline = "";
           el.style.boxShadow = "";
         });
 
@@ -713,6 +902,9 @@ return;
 
         if (this.currentSectionText) {
           this.currentSectionText.textContent = "Ready to read";
+        }
+        if (this.windowSummary) {
+          this.windowSummary.textContent = "Ready to read";
         }
       }
 
