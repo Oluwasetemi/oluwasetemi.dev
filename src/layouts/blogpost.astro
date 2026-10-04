@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 
 import { Image } from "astro:assets";
 
-import Footer from "../components/footer.astro";
 import FormattedDate from "../components/formatteddate.astro";
 import TOC from "../components/toc.astro";
 import TextToSpeech from "../components/text-to-speech.astro";
@@ -22,11 +21,11 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
 ---
 
 <Layout title={title} description={description || `Blog post: ${title}`} image={ogImage} type="article">
-  <div class="relative w-full">
+  <div class="page-container mt-12 sm:mt-16">
     {headings && <TOC headings={headings} />}
-    <main class="w-full">
-      <article class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
-        <figure class="w-full mt-4">
+    <main id="main-content" tabindex="-1" class="content-container">
+      <article class="prose">
+        <figure class="mt-4 w-full">
           {
             banner && (
               <Image src={banner} alt={`Cover image for ${title}`} class="block mx-auto shadow-lg w-full max-w-4xl" />
@@ -34,13 +33,13 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
           }
           {
             bannerCredit && (
-              <figcaption class="mx-auto mt-2 w-full max-w-4xl px-4 text-sm text-gray-500 italic">{bannerCredit}</figcaption>
+              <figcaption class="mx-auto mt-2 w-full max-w-4xl px-4 text-sm text-zinc-500 italic">{bannerCredit}</figcaption>
             )
           }
         </figure>
-        <div class="max-w-3xl xl:max-w-4xl mx-auto px-4 xl:px-8 py-8 text-gray-800">
+        <div class="mx-auto max-w-3xl py-8">
           <div class="mb-8 py-8 text-center leading-tight">
-            <div class="mb-4 text-gray-600">
+            <div class="mb-4 text-sm text-zinc-500">
               <FormattedDate date={date} />
               {
                 (updatedDate || modified) && (
@@ -51,7 +50,7 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
               }
             </div>
             <!-- <h1 class="m-0 mb-4">{title}</h1> -->
-            <hr class="border-gray-200" />
+            <hr />
           </div>
 
           <!-- Text-to-Speech Reader -->
@@ -60,13 +59,13 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
           <slot />
           {
             tags && tags.length > 0 && (
-              <div class="mt-12 pt-8 border-t border-gray-200">
-                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">Tags</h3>
+              <div class="mt-12 border-t border-zinc-100 pt-8 dark:border-zinc-800">
+                <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-500">Tags</h3>
                 <div class="flex gap-2 flex-wrap">
                   {tags.map(tag => (
                     <a
                       href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
-                      class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
+                      class="rounded-full bg-zinc-100 px-3 py-1.5 text-sm text-zinc-700 transition hover:bg-teal-50 hover:text-teal-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-teal-400/10 dark:hover:text-teal-300"
                     >
                       {tag}
                     </a>
@@ -77,8 +76,8 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
           }
 
           <!-- Giscus Comments -->
-          <div class="mt-12 pt-8 border-t border-gray-200">
-            <h3 class="text-xl font-semibold text-gray-800 mb-6">Comments</h3>
+          <div class="mt-12 border-t border-zinc-100 pt-8 dark:border-zinc-800">
+            <h3 class="mb-6 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Comments</h3>
             <div
               class="giscus"
               data-repo={import.meta.env.PUBLIC_GISCUS_REPO || 'Oluwasetemi/oluwasetemi.dev'}
@@ -91,7 +90,6 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
       </article>
     </main>
   </div>
-  <Footer />
 </Layout>
 
 <script is:inline>

@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 
 import BlogPostCard from "../../components/blog-post-card.astro";
-import Footer from "../../components/footer.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
@@ -11,27 +10,98 @@ const posts = (await getCollection("blog"))
   .sort((a, b) => {
     const dateA = a.data.pubDate || a.data.date;
     const dateB = b.data.pubDate || b.data.date;
-    if (!dateA || !dateB)
-return 0;
+    if (!dateA || !dateB) return 0;
     return dateB.valueOf() - dateA.valueOf();
   });
 ---
 
 <Layout title={`Blog - ${SITE_TITLE}`} description={SITE_DESCRIPTION} image="/og/page/blog.png">
-  <main class="max-w-6xl mx-auto px-8 py-8">
-    <div class="text-center mb-12">
-      <h1
-        class="text-5xl md:text-3xl mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent"
-      >
-        My Blog
-      </h1>
-      <p class="text-xl text-gray-600">Thoughts on web development, technology, and learning</p>
+  <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
+    <div class="content-container">
+      <header class="archive-hero">
+        <p>Notebook</p>
+        <h1>Writing from the workbench.</h1>
+        <span>{posts.length} published notes</span>
+      </header>
+
+      <section class="archive-board" aria-label="Articles">
+        <ul class="archive-list">
+          {posts.map(post => <BlogPostCard post={post} />)}
+        </ul>
+      </section>
     </div>
-    <section>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0">
-        {posts.map(post => <BlogPostCard post={post} />)}
-      </ul>
-    </section>
   </main>
-  <Footer />
 </Layout>
+
+<style>
+  .archive-hero {
+    display: grid;
+    gap: 1rem;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 2rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    background: radial-gradient(circle at top right, rgb(20 184 166 / 0.12), transparent 22rem), rgb(255 255 255 / 0.72);
+  }
+
+  .archive-hero p {
+    margin: 0;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .archive-hero h1 {
+    max-width: 12ch;
+    color: rgb(39 39 42);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .archive-hero span {
+    width: fit-content;
+    border-radius: 999px;
+    background: rgb(244 244 245);
+    padding: 0.45rem 0.75rem;
+    color: rgb(82 82 91);
+    font-size: 0.8125rem;
+  }
+
+  .archive-board {
+    position: relative;
+    margin-top: 3rem;
+  }
+
+  .archive-board::before {
+    position: absolute;
+    inset: 0 auto 0 0.35rem;
+    width: 1px;
+    background-image: linear-gradient(to bottom, rgb(20 184 166 / 0.35) 45%, transparent 0);
+    background-size: 1px 0.75rem;
+    content: "";
+  }
+
+  .archive-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 2rem;
+    margin: 0;
+    padding: 0 0 0 2rem;
+    list-style: none;
+  }
+
+  :global(.dark) .archive-hero {
+    border-color: rgb(63 63 70);
+    background: radial-gradient(circle at top right, rgb(45 212 191 / 0.1), transparent 22rem), rgb(24 24 27 / 0.72);
+  }
+
+  :global(.dark) .archive-hero h1 {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .archive-hero span {
+    background: rgb(39 39 42);
+    color: rgb(212 212 216);
+  }
+</style>

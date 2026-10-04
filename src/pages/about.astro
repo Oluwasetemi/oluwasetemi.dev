@@ -1,118 +1,221 @@
 ---
-import Layout from "../layouts/blogpost.astro";
+import Layout from "../layouts/Layout.astro";
+
+const notes = [
+  {
+    title: "Name",
+    body: "Oluwasetemi is pronounced SHAY + TAY, not TI + ME. Ojo, Temi, Setemi, or Stephen all work if they are easier.",
+  },
+  {
+    title: "Work",
+    body: "I build software with JavaScript and TypeScript, and teach frontend engineering to entry-level developers.",
+  },
+  {
+    title: "Taste",
+    body: "I care about making hard concepts simple, useful, and interesting enough that people keep learning.",
+  },
+  {
+    title: "Home",
+    body: "I currently live in Kingston, Jamaica. Ibadan, Lagos, Abuja, and Benue State are all part of the story too.",
+  },
+];
 ---
 
 <Layout
   title="About Me"
   description="Learn more about Oluwasetemi Ojo - Fullstack Engineer"
-  pubDate={new Date()}
-  heroImage="/images/setemi.jpg"
-  ogImage="/og/page/about.png"
+  image="/og/page/about.png"
 >
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 text-gray-800">
-    <h2 class="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-gray-900">
-      About Me
-      <span role="img" aria-label="a man">👨</span>
-    </h2>
+  <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
+    <div class="content-container">
+      <header class="about-hero">
+        <div>
+          <p>Personal README</p>
+          <h1>I build, teach, write, and keep learning in public.</h1>
+        </div>
+        <img src="/images/setemi.jpg" alt="Oluwasetemi Ojo" loading="eager" />
+      </header>
 
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I'm Oluwasetemi
-      <span role="img" aria-label="nigerian flag">🇳🇬</span>, my name is pronounced SHAY + TAY(Not TI) + ME. People often
-      call me Ojo, Temi, Setemi or Stephen. I prefer to be addressed with anyone that is easy for you.
-    </p>
+      <section class="about-intro" aria-label="Short biography">
+        <p>
+          I’m Oluwasetemi Ojo, a fullstack engineer from Nigeria who enjoys solving problems with JavaScript, TypeScript, React, Node.js, and GraphQL. I care less about technology as identity and more about choosing the right tool for the problem in front of me.
+        </p>
+        <p>
+          Teaching is a major part of my work. I focus on the tiny details that make difficult concepts click, especially for people finding their way into web development.
+        </p>
+      </section>
 
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I'm a web developer, passionate about the stuffs I build from Nigeria
-      <span role="img" aria-label="nigerian flag">🇳🇬</span>
-      who loves to work with JavaScript, Typescript Reactjs, Nodejs and GraphQL. I love to solve problems compared to focusing
-      of the technology howbeit, I consider what technology is best fits the domain of problems.
-    </p>
+      <section class="about-notes" aria-label="About notes">
+        {notes.map((note, index) => (
+          <article>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <h2>{note.title}</h2>
+            <p>{note.body}</p>
+          </article>
+        ))}
+      </section>
 
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I teach programming and web development related courses to entry level developers. I focus on all the stuffs that
-      will make the difference and make learning interesting. I have a special way of making complex concept simple and
-      easy to grasp.
-    </p>
+      <section class="about-story" aria-labelledby="about-story-title">
+        <h2 id="about-story-title">A few more human details.</h2>
+        <div>
+          <p>
+            I am the second of six children and the first male in my lineage. Both of my parents are late, blessed memory. Those losses shaped a lot of my relationship with work, responsibility, and family.
+          </p>
+          <p>
+            I am married to Ajayi Temidayo Abosede, and we are blessed with two beautiful children, Esther and John.
+          </p>
+          <p>
+            I am interested in AI, realtime systems, performance, WebAssembly, WebGL, WebGPU, WebSocket, Web Workers, and Service Workers. I like the edge where fundamentals and new tools meet.
+          </p>
+        </div>
+      </section>
 
-    <!-- <img src="/images/setemi.jpg" alt="oluwasetemi" class="w-full max-w-md h-auto rounded-xl mx-auto my-8 shadow-lg" /> -->
-
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I took time to learn JavaScript after I finished from the university, I wrote about this in a blog,
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.oluwasetemi.dev/blog/story-part-1/"
-        class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800"
-      >
-        you should check it out.
-      </a>
-    </p>
-
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      Building Software products for clients is what I do when I am not teaching.
-      <a
-        href="/portfolio"
-        class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800"
-      >You can checkout my portfolios here.</a
-      >
-    </p>
-
-    <h3 class="text-xl sm:text-2xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-900">More on Family</h3>
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I am the second of 6 children and the first male in the lineage. Both parent are late (Blessed memory), Mum died
-      first year in university and Dad died while I was serving(as a graduate in nigeria it is mandatory to serve the
-      nation for a year which involves paramilitary training and other community services) Nigeria (country of birth) in
-      Benue State (Food basket of the nation), Nigeria in 2017.
-    </p>
-
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I am in love
-      <span role="img" aria-label="the love blush">😍</span>
-      with Ajayi Temidayo Abosede. She is my gift from God and we are blessed with 2 beautiful children - Esther(Monire)
-      and John(Titioluwa).
-    </p>
-
-    <h3 class="text-xl sm:text-2xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-900">More on Technical Experience</h3>
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I build software with JavaScript and Typescript confidently. I have good experience with C# and Python (Flask,
-      Django). I have written a little bit of C and C++ (not near production experience trust me, educational purpose).
-    </p>
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I have keen interest in AI, Real-time, Performance Improvement in Web Applications and related technologies like
-      Web Assembly, WebGL, WebGPU, WebSocket, Web Workers and Service Workers.
-    </p>
-
-    <h3 class="text-xl sm:text-2xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-900">More about Location</h3>
-    <p class="mb-4 sm:mb-6 leading-relaxed">
-      I currently live in the beautiful city of Kingston Jamaica, grew up in Ibadan , worked 2 year in Lagos, Abuja
-      happens to be my second home and
-      <abbr title="National Youth Service Corps" class="underline decoration-dotted cursor-help">NYSC</abbr>
-      Service took me to Benue State.I love travelling and exploring new cultures.
-    </p>
-
-    <h3 class="text-xl sm:text-2xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-900">More Links</h3>
-    <p class="mb-3 sm:mb-4 leading-relaxed">
-      <a href="/contact" class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800">Contact</a>
-      - Contact me! (WIP)
-    </p>
-    <p class="mb-3 sm:mb-4 leading-relaxed">
-      <a href="/links" class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800">Links</a>
-      - a bunch of links to stuff I work on.
-    </p>
-    <p class="mb-3 sm:mb-4 leading-relaxed">
-      <a href="/uses" class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800">Uses</a>
-      - all the stuffs I use from fonts, vscode theme to IDE and <a href="https://github.com/oluwasetemi/dotfiles" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800">dotfiles</a>.
-    </p>
-    <p class="mb-3 sm:mb-4 leading-relaxed">
-      <a
-        href="https://discord.gg/zUQpSXg"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-blue-600 underline decoration-2 underline-offset-2 hover:text-blue-800"
-      >
-        Discord Server
-      </a>
-      - Join our discord community!.
-    </p>
+      <nav class="about-links" aria-label="More about Oluwasetemi">
+        <a href="/portfolio">Portfolio</a>
+        <a href="/links">Links</a>
+        <a href="/uses">Uses</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
   </main>
 </Layout>
+
+<style>
+  .about-hero {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+    border-bottom: 1px dashed rgb(212 212 216);
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-hero {
+      grid-template-columns: minmax(0, 1fr) 16rem;
+    }
+  }
+
+  .about-hero p {
+    margin: 0 0 0.75rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .about-hero h1 {
+    max-width: 13ch;
+    color: rgb(39 39 42);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .about-hero img {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 2rem;
+    object-fit: cover;
+    padding: 0.4rem;
+  }
+
+  .about-intro {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+    color: rgb(82 82 91);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  @media (min-width: 768px) {
+    .about-intro {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .about-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .about-notes article,
+  .about-story {
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 1.5rem;
+    background: white;
+    padding: 1.25rem;
+  }
+
+  .about-notes span {
+    color: rgb(20 184 166);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .about-notes h2,
+  .about-story h2 {
+    margin-top: 0.5rem;
+    color: rgb(39 39 42);
+    font-size: 1.125rem;
+    letter-spacing: -0.03em;
+  }
+
+  .about-notes p,
+  .about-story p {
+    margin-top: 0.6rem;
+    color: rgb(113 113 122);
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .about-story {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-story {
+      grid-template-columns: 14rem 1fr;
+    }
+  }
+
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .about-links a {
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  :global(.dark) .about-hero,
+  :global(.dark) .about-hero img,
+  :global(.dark) .about-notes article,
+  :global(.dark) .about-story {
+    border-color: rgb(63 63 70);
+  }
+
+  :global(.dark) .about-hero h1,
+  :global(.dark) .about-notes h2,
+  :global(.dark) .about-story h2 {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .about-notes article,
+  :global(.dark) .about-story {
+    background: rgb(24 24 27 / 0.72);
+  }
+</style>

@@ -8,95 +8,351 @@ export interface Props {
 }
 
 const { headings } = Astro.props;
-
-// Filter to only show h2 and h3 headings
-const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.depth === 3);
 ---
 
 {tocHeadings.length > 0 && (
-  <nav class="hidden xl:block fixed left-[calc(50%+550px)] top-24 w-[220px] max-h-[calc(100vh-8rem)] overflow-y-auto toc-scrollbar">
-    <div class="pl-3 border-l-2 border-gray-200">
-      <h2 class="text-[11px] font-semibold uppercase tracking-wide text-gray-400 mb-2 pl-2">On this page</h2>
-      <ul class="list-none p-0 m-0">
+  <aside class="toc-shell" aria-labelledby="toc-title">
+    <nav class="toc-panel" aria-label="Table of contents">
+      <h2 id="toc-title" class="toc-title">On this page</h2>
+      <ol class="toc-list">
+        <span class="toc-cursor" aria-hidden="true"></span>
         {tocHeadings.map(heading => (
-          <li class={`my-0.5 ${heading.depth === 3 ? 'pl-3' : ''}`}>
-            <a
-              href={`#${heading.slug}`}
-              class={`block py-1 px-2 text-gray-600 no-underline rounded transition-all duration-150 leading-tight hover:text-[#2337ff] hover:bg-gray-50 toc-link ${heading.depth === 3 ? 'text-[11px]' : 'text-xs'}`}
-            >
-              {heading.text}
+          <li class:list={["toc-item", heading.depth === 2 ? "toc-item-h2" : "toc-item-h3"]}>
+            <a href={`#${heading.slug}`} class="toc-link" data-toc-link>
+              <span>{heading.text}</span>
             </a>
           </li>
         ))}
-      </ul>
-    </div>
-  </nav>
+      </ol>
+    </nav>
+  </aside>
 )}
 
 <style>
-  /* Custom scrollbar */
-  .toc-scrollbar::-webkit-scrollbar {
-    width: 3px;
+  .toc-shell {
+    display: none;
   }
 
-  .toc-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
+  @media (min-width: 1280px) {
+    .toc-shell {
+      position: fixed;
+      top: 7rem;
+      left: calc(50% + 31rem);
+      z-index: 20;
+      display: block;
+      width: 15rem;
+      max-height: calc(100vh - 9rem);
+      overflow: auto;
+      padding: 0.125rem 0.25rem 0.125rem 0;
+      overscroll-behavior: contain;
+    }
   }
 
-  .toc-scrollbar::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 2px;
+  .toc-panel {
+    color: rgb(113 113 122);
   }
 
-  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #d1d5db;
+  .toc-title {
+    margin: 0 0 0.875rem;
+    padding-left: 1.35rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25rem;
+    color: rgb(39 39 42);
   }
 
-  /* Active state with left border indicator */
-  .toc-link.active {
-    color: #2337ff;
-    background: #eff6ff;
+  .toc-list {
+    --toc-line: rgb(228 228 231);
+    --toc-line-strong: rgb(20 184 166 / 0.72);
+    --toc-hover: rgb(39 39 42);
+    --toc-cursor-y: 0px;
+    --toc-cursor-height: 0px;
+    position: relative;
+    margin: 0;
+    padding: 0.125rem 0 0.125rem 1.35rem;
+    list-style: none;
+  }
+
+  .toc-list::before {
+    position: absolute;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    left: 0.25rem;
+    width: 1px;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, transparent, var(--toc-line) 0.75rem, var(--toc-line) calc(100% - 0.75rem), transparent);
+    content: "";
+  }
+
+  .toc-cursor {
+    position: absolute;
+    top: var(--toc-cursor-y);
+    left: 1.02rem;
+    z-index: -1;
+    width: calc(100% - 0.6rem);
+    height: var(--toc-cursor-height);
+    border-radius: 0.55rem;
+    background: color-mix(in srgb, rgb(20 184 166) 7%, transparent);
+    box-shadow: inset 0 0 0 1px rgb(20 184 166 / 0.08);
+    opacity: 0;
+    transform: translateY(0) scale(0.985);
+    transform-origin: left center;
+    transition:
+      top 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      height 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 160ms ease,
+      transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .toc-list:has(.toc-link.is-active) .toc-cursor {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .toc-item {
+    position: relative;
+    margin: 0;
+  }
+
+  .toc-item-h3 {
+    padding-left: 1.05rem;
+  }
+
+  .toc-item-h2::before,
+  .toc-item-h3::before,
+  .toc-item-h3::after {
+    position: absolute;
+    pointer-events: none;
+    content: "";
+    transition:
+      background-color 160ms ease,
+      opacity 160ms ease,
+      transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .toc-item-h2::before {
+    top: 0.82rem;
+    left: -1.18rem;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 999px;
+    background: var(--toc-line);
+  }
+
+  .toc-item-h3::before {
+    top: 0.86rem;
+    left: -1.1rem;
+    width: 0.9rem;
+    height: 1px;
+    border-radius: 999px;
+    background: var(--toc-line);
+  }
+
+  .toc-item-h3::after {
+    top: 0.48rem;
+    left: -1.1rem;
+    width: 1px;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: var(--toc-line);
+    opacity: 0.9;
+  }
+
+  .toc-link {
+    position: relative;
+    display: block;
+    padding: 0.285rem 0.45rem 0.285rem 0;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: rgb(113 113 122);
+    text-decoration: none;
+    text-wrap: pretty;
+    transition:
+      color 160ms ease,
+      opacity 160ms ease,
+      transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .toc-link span {
+    display: inline;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 180ms ease;
+  }
+
+  .toc-item-h3 .toc-link {
+    font-size: 0.75rem;
+    color: rgb(139 139 149);
+  }
+
+  .toc-link:hover,
+  .toc-link:focus-visible {
+    color: var(--toc-hover);
+  }
+
+  .toc-link:hover span,
+  .toc-link:focus-visible span {
+    background-size: 100% 1px;
+  }
+
+  .toc-link:focus-visible {
+    border-radius: 0.45rem;
+    outline: 2px solid rgb(20 184 166 / 0.38);
+    outline-offset: 3px;
+  }
+
+  .toc-link.is-active {
+    color: rgb(20 184 166);
     font-weight: 500;
-    border-left: 2px solid #2337ff;
-    padding-left: calc(0.5rem - 2px);
+  }
+
+  .toc-item:has(.toc-link:hover)::before,
+  .toc-item:has(.toc-link:focus-visible)::before,
+  .toc-item:has(.toc-link.is-active)::before,
+  .toc-item-h3:has(.toc-link.is-active)::after {
+    background: var(--toc-line-strong);
+  }
+
+  .toc-item-h2:has(.toc-link.is-active)::before {
+    transform: scale(1.28);
+  }
+
+  .toc-item-h3:has(.toc-link.is-active)::before {
+    transform: scaleX(1.12);
+    transform-origin: left center;
+  }
+
+  :global(.dark) .toc-title {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .toc-list {
+    --toc-line: rgb(63 63 70);
+    --toc-line-strong: rgb(45 212 191 / 0.72);
+    --toc-hover: rgb(228 228 231);
+  }
+
+  :global(.dark) .toc-cursor {
+    background: rgb(45 212 191 / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(45 212 191 / 0.08);
+  }
+
+  :global(.dark) .toc-link,
+  :global(.dark) .toc-item-h3 .toc-link {
+    color: rgb(113 113 122);
+  }
+
+  :global(.dark) .toc-link.is-active {
+    color: rgb(244 244 245);
+  }
+
+  .toc-shell::-webkit-scrollbar {
+    width: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc-cursor,
+    .toc-link,
+    .toc-link span,
+    .toc-item-h2::before,
+    .toc-item-h3::before,
+    .toc-item-h3::after {
+      transition: none;
+    }
   }
 </style>
 
 <script>
-  // Add active state to TOC links based on scroll position
   function initTOC() {
-    const tocLinks = document.querySelectorAll('.toc-link');
-    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const shell = document.querySelector<HTMLElement>('.toc-shell');
+    const list = document.querySelector<HTMLElement>('.toc-list');
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+    const headings = Array.from(document.querySelectorAll<HTMLElement>('article h2[id], article h3[id]'));
 
-    if (tocLinks.length === 0 || headings.length === 0)
-return;
+    if (!shell || !list || links.length === 0 || headings.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute('id');
-          const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
+    const tocWindow = window as Window & { __oluwasetemiTocCleanup?: () => void };
+    const shellElement = shell;
+    const listElement = list;
 
-          if (entry.isIntersecting) {
-            // Remove active from all links
-            tocLinks.forEach(link => link.classList.remove('active'));
-            // Add active to current link
-            tocLink?.classList.add('active');
-          }
-        });
-      },
-      {
-        rootMargin: '-100px 0px -66%',
-        threshold: 0
+    tocWindow.__oluwasetemiTocCleanup?.();
+
+    let activeId = '';
+    let ticking = false;
+    const byId = new Map(links.map(link => [decodeURIComponent(link.hash.slice(1)), link]));
+
+    function moveCursor(link: HTMLAnchorElement) {
+      const item = link.closest<HTMLElement>('.toc-item');
+      if (!item) return;
+
+      listElement.style.setProperty('--toc-cursor-y', `${item.offsetTop}px`);
+      listElement.style.setProperty('--toc-cursor-height', `${item.offsetHeight}px`);
+    }
+
+    function setActive(id: string) {
+      if (!id || id === activeId) return;
+      activeId = id;
+
+      links.forEach(link => {
+        link.classList.remove('is-active');
+        link.removeAttribute('aria-current');
+      });
+
+      const activeLink = byId.get(id);
+      if (!activeLink) return;
+
+      activeLink.classList.add('is-active');
+      activeLink.setAttribute('aria-current', 'location');
+      moveCursor(activeLink);
+
+      const linkRect = activeLink.getBoundingClientRect();
+      const shellRect = shellElement.getBoundingClientRect();
+      if (linkRect.top < shellRect.top + 24 || linkRect.bottom > shellRect.bottom - 24) {
+        activeLink.scrollIntoView({ block: 'nearest' });
       }
-    );
+    }
 
-    headings.forEach((heading) => observer.observe(heading));
+    function updateActiveLink() {
+      ticking = false;
+      const current = headings
+        .filter(heading => heading.getBoundingClientRect().top <= 140)
+        .at(-1) ?? headings[0];
+
+      setActive(current.id);
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateActiveLink);
+    }
+
+    function onResize() {
+      const activeLink = activeId ? byId.get(activeId) : null;
+      if (activeLink) moveCursor(activeLink);
+    }
+
+    const linkCleanups = links.map(link => {
+      const onClick = () => setActive(decodeURIComponent(link.hash.slice(1)));
+      link.addEventListener('click', onClick);
+      return () => link.removeEventListener('click', onClick);
+    });
+
+    updateActiveLink();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+
+    tocWindow.__oluwasetemiTocCleanup = () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      linkCleanups.forEach(cleanup => cleanup());
+    };
   }
 
-  // Run on page load
   document.addEventListener('DOMContentLoaded', initTOC);
-
-  // Run after view transitions (if using Astro view transitions)
   document.addEventListener('astro:page-load', initTOC);
 </script>

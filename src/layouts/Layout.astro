@@ -7,6 +7,7 @@ import type { HTMLAttributes } from "astro/types";
 import BaseHead from "../components/basehead.astro";
 import CookieConsent from "../components/cookie-consent.astro";
 import GoogleAnalytics from "../components/google-analytics.astro";
+import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
 
 type Props = {
@@ -25,14 +26,29 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
 <html lang="en" {...props}>
   <head>
     <BaseHead title={title} description={description} image={image} canonical={canonicalURL} type={type} />
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", shouldUseDark);
+      })();
+    </script>
     <GoogleAnalytics />
   </head>
-  <body>
-    <Header />
-    <slot />
-    <footer class="text-center py-8 text-gray-600 text-sm">
-      <p>&copy; {new Date().getFullYear()} Oluwasetemi. All rights reserved.</p>
-    </footer>
+  <body class="flex min-h-screen flex-col bg-zinc-50 text-zinc-600 antialiased dark:bg-black dark:text-zinc-400">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-zinc-900 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg dark:focus:bg-zinc-100 dark:focus:text-zinc-900"
+    >
+      Skip to main content
+    </a>
+    <div class="fixed inset-0 -z-10 bg-white dark:bg-zinc-950"></div>
+    <div class="flex w-full flex-1 flex-col">
+      <Header />
+      <slot />
+      <Footer />
+    </div>
     <CookieConsent />
   </body>
 </html>

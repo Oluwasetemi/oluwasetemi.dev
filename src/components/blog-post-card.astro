@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import { micromark } from "micromark";
+
 import { getEntrySlug } from "../utils/content";
 import FormattedDate from "./formatteddate.astro";
 
@@ -10,32 +12,69 @@ type Props = {
 
 const { post } = Astro.props;
 const postSlug = getEntrySlug(post);
+const descriptionHtml = post.data.description
+  ? micromark(post.data.description).replace(/^<p>|<\/p>\n?$/g, "")
+  : "";
 ---
 
-<li
-  class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border border-gray-200"
->
-  <a href={`/blog/${postSlug}/`} class="block no-underline">
-    <h4 class="text-xl font-semibold mb-2 text-gray-800 leading-tight hover:text-indigo-600 transition-colors">
-      {post.data.title}
-    </h4>
-    <p class="text-gray-500 text-sm mb-4">
+<li class="group relative flex flex-col items-start">
+  <div class="absolute -inset-x-4 -inset-y-6 z-0 scale-95 rounded-2xl bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 dark:bg-zinc-800/50"></div>
+  <a href={`/blog/${postSlug}/`} class="relative z-10 block no-underline">
+    <time class="relative z-10 order-first mb-3 flex items-center pl-3.5 text-sm text-zinc-400 dark:text-zinc-500">
+      <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
+        <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700"></span>
+      </span>
       <FormattedDate date={post.data.pubDate || post.data.date} />
-    </p>
-    {
-      post.data.tags && (
-        <div class="flex gap-2 flex-wrap mt-4">
-          {post.data.tags.map(tag => (
-            <a
-              href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
-              class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm hover:bg-indigo-100 hover:text-indigo-700 transition-colors no-underline"
-              onclick="event.stopPropagation()"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-      )
-    }
+    </time>
+    <h3 class="relative z-10 text-base font-semibold tracking-tight text-zinc-800 transition group-hover:text-teal-500 dark:text-zinc-100 dark:group-hover:text-teal-400">
+      {post.data.title}
+    </h3>
+    {descriptionHtml && <p class="blog-card-description relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400" set:html={descriptionHtml} />}
+    <div class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500">
+      Read article
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ml-1 h-4 w-4 stroke-current"><path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </div>
   </a>
+  {post.data.tags && (
+    <div class="relative z-10 mt-4 flex flex-wrap gap-2">
+      {post.data.tags.slice(0, 3).map(tag => (
+        <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`} class="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-600 transition hover:bg-teal-50 hover:text-teal-600 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-teal-400/10 dark:hover:text-teal-300">
+          {tag}
+        </a>
+      ))}
+    </div>
+  )}
 </li>
+
+<style>
+  .blog-card-description :global(em) {
+    font-style: italic;
+  }
+
+  .blog-card-description :global(code) {
+    border-radius: 0.35rem;
+    background: rgb(244 244 245);
+    padding: 0.05rem 0.3rem;
+    color: rgb(39 39 42);
+    font-size: 0.8125em;
+  }
+
+  .blog-card-description :global(a) {
+    color: rgb(20 184 166);
+    text-decoration: none;
+  }
+
+  .blog-card-description :global(strong) {
+    color: rgb(39 39 42);
+    font-weight: 650;
+  }
+
+  :global(.dark) .blog-card-description :global(code) {
+    background: rgb(39 39 42);
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .blog-card-description :global(strong) {
+    color: rgb(244 244 245);
+  }
+</style>
