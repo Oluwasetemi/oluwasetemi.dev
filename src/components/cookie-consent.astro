@@ -60,6 +60,7 @@
     const banner = document.getElementById('cookie-consent');
     if (banner) {
       banner.classList.remove('hidden');
+      document.documentElement.classList.add('cookie-consent-visible');
     }
   }
 
@@ -67,6 +68,7 @@
     const banner = document.getElementById('cookie-consent');
     if (banner) {
       banner.classList.add('hidden');
+      document.documentElement.classList.remove('cookie-consent-visible');
     }
   }
 
