@@ -1,62 +1,228 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import { micromark } from "micromark";
+
+import FormattedDate from "../components/formatteddate.astro";
 import Layout from "./Layout.astro";
 
 type Props = CollectionEntry<"portfolio">["data"] & {
   ogImage?: string;
 };
 
-const { title, description, tags, url, github, ogImage } = Astro.props;
+const { title, description, tags, tech, url, github, publishedDate, ogImage } = Astro.props;
+const descriptionHtml = description ? micromark(description).replace(/^<p>|<\/p>\n?$/g, "") : "";
+const stack = tech || tags || [];
 ---
 
 <Layout title={title} description={description || `Portfolio project: ${title}`} image={ogImage}>
   <main id="main-content" tabindex="-1" class="page-container mt-12 sm:mt-16">
-    <article class="prose content-container">
-      <div class="mx-auto max-w-3xl py-6 sm:py-8">
-        <div class="mb-6 py-4 text-center leading-tight sm:mb-8 sm:py-8">
-          <div class="mb-4 flex flex-wrap justify-center gap-3 sm:gap-4">
-            {
-              url && (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex min-h-[44px] items-center rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white no-underline transition hover:bg-zinc-700 sm:px-6 sm:py-3 sm:text-base dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
-                >
-                  Live Demo
-                </a>
-              )
-            }
-            {
-              github && (
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex min-h-[44px] items-center rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white no-underline transition hover:bg-zinc-700 sm:px-6 sm:py-3 sm:text-base dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
-                >
-                  GitHub
-                </a>
-              )
-            }
-          </div>
-          <hr />
+    <article class="project-shell content-container">
+      <header class="project-hero">
+        <div>
+          <a href="/portfolio" class="project-back">← Portfolio</a>
+          <h1>{title}</h1>
+          {descriptionHtml && <p class="project-description" set:html={descriptionHtml} />}
         </div>
+        <aside class="project-meta-card" aria-label="Project details">
+          {publishedDate && (
+            <p>
+              <span>Published</span>
+              <strong><FormattedDate date={publishedDate} /></strong>
+            </p>
+          )}
+          {stack.length > 0 && (
+            <p>
+              <span>Stack</span>
+              <strong>{stack.slice(0, 4).join(", ")}</strong>
+            </p>
+          )}
+          <div class="project-actions">
+            {url && (
+              <a href={url} target="_blank" rel="noopener noreferrer">Live demo</a>
+            )}
+            {github && (
+              <a href={github} target="_blank" rel="noopener noreferrer">GitHub</a>
+            )}
+          </div>
+        </aside>
+      </header>
+
+      <div class="project-content prose">
         <slot />
-        {
-          tags && tags.length > 0 && (
-            <div class="mt-8 border-t border-zinc-100 pt-6 sm:mt-10 sm:pt-8 lg:mt-12 dark:border-zinc-800">
-              <h3 class="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 sm:mb-4 sm:text-sm">Tags</h3>
-              <div class="flex flex-wrap gap-2">
-                {tags.map((tag: string) => (
-                  <span class="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700 sm:px-3 sm:py-1.5 sm:text-sm dark:bg-zinc-800 dark:text-zinc-300">{tag}</span>
-                ))}
-              </div>
-            </div>
-          )
-        }
       </div>
+
+      {stack.length > 0 && (
+        <footer class="project-tags" aria-label="Project tags">
+          <h2>Built with</h2>
+          <div>
+            {stack.map((tag: string) => <span>{tag}</span>)}
+          </div>
+        </footer>
+      )}
     </article>
   </main>
 </Layout>
+
+<style>
+  .project-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    gap: 2rem;
+  }
+
+  .project-hero {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: 1.25rem;
+    align-items: end;
+    border-bottom: 1px dashed rgb(212 212 216);
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-hero {
+      grid-template-columns: minmax(0, 1fr) 16rem;
+    }
+  }
+
+  .project-back {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .project-hero > div {
+    min-width: 0;
+  }
+
+  .project-hero h1 {
+    max-width: 13ch;
+    overflow-wrap: anywhere;
+    color: rgb(39 39 42);
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .project-description {
+    max-width: 44rem;
+    margin-top: 1.25rem;
+    overflow-wrap: anywhere;
+    color: rgb(82 82 91);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .project-meta-card {
+    display: grid;
+    gap: 0.9rem;
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 1.5rem;
+    background: rgb(255 255 255 / 0.72);
+    padding: 1rem;
+  }
+
+  .project-meta-card p {
+    margin: 0;
+  }
+
+  .project-meta-card span {
+    display: block;
+    color: rgb(161 161 170);
+    font-size: 0.75rem;
+  }
+
+  .project-meta-card strong {
+    display: block;
+    margin-top: 0.15rem;
+    color: rgb(39 39 42);
+    font-size: 0.875rem;
+    font-weight: 650;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-actions a,
+  .project-tags span {
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 999px;
+    padding: 0.4rem 0.7rem;
+    color: rgb(20 184 166);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .project-content {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 48rem;
+  }
+
+  .project-content :global(> h1:first-child) {
+    display: none;
+  }
+
+  .project-tags {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 48rem;
+    border-top: 1px dashed rgb(212 212 216);
+    padding-top: 1.5rem;
+  }
+
+  .project-tags h2 {
+    margin: 0 0 1rem;
+    color: rgb(39 39 42);
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .project-tags div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  :global(.dark) .project-hero,
+  :global(.dark) .project-tags {
+    border-color: rgb(63 63 70);
+  }
+
+  :global(.dark) .project-hero h1,
+  :global(.dark) .project-meta-card strong,
+  :global(.dark) .project-tags h2 {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .project-description {
+    color: rgb(161 161 170);
+  }
+
+  :global(.dark) .project-meta-card {
+    border-color: rgb(45 212 191 / 0.35);
+    background: rgb(24 24 27 / 0.72);
+  }
+
+  :global(.dark) .project-meta-card span {
+    color: rgb(161 161 170);
+  }
+
+  :global(.dark) .project-actions a,
+  :global(.dark) .project-tags span {
+    border-color: rgb(45 212 191 / 0.35);
+    color: rgb(45 212 191);
+  }
+</style>

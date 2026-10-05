@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 import { Image } from "astro:assets";
+import { micromark } from "micromark";
 
 import FormattedDate from "../components/formatteddate.astro";
 import TOC from "../components/toc.astro";
@@ -17,67 +18,72 @@ type Props = CollectionEntry<"blog">["data"] & {
   ogImage?: string;
 };
 
-const { title, description, date, banner, updatedDate, bannerCredit, modified, modifiedDate, tags, headings, ogImage } = Astro.props;
+const { title, description, date, pubDate, banner, updatedDate, bannerCredit, modified, modifiedDate, tags, headings, ogImage } = Astro.props;
+const publishedDate = pubDate || date;
+const descriptionHtml = description ? micromark(description).replace(/^<p>|<\/p>\n?$/g, "") : "";
 ---
 
 <Layout title={title} description={description || `Blog post: ${title}`} image={ogImage} type="article">
   <div class="page-container mt-12 sm:mt-16">
     {headings && <TOC headings={headings} />}
     <main id="main-content" tabindex="-1" class="content-container">
-      <article class="prose">
-        <figure class="mt-4 w-full">
-          {
-            banner && (
-              <Image src={banner} alt={`Cover image for ${title}`} class="block mx-auto shadow-lg w-full max-w-4xl" />
-            )
-          }
-          {
-            bannerCredit && (
-              <figcaption class="mx-auto mt-2 w-full max-w-4xl px-4 text-sm text-zinc-500 italic">{bannerCredit}</figcaption>
-            )
-          }
-        </figure>
-        <div class="mx-auto max-w-3xl py-8">
-          <div class="mb-8 py-8 text-center leading-tight">
-            <div class="mb-4 text-sm text-zinc-500">
-              <FormattedDate date={date} />
-              {
-                (updatedDate || modified) && (
-                  <div class="italic">
-                    Last updated on <FormattedDate date={updatedDate || modifiedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <!-- <h1 class="m-0 mb-4">{title}</h1> -->
-            <hr />
+      <article class="post-shell">
+        <header class="post-hero">
+          <div>
+            <a href="/blog" class="post-back">← Blog</a>
+            <h1>{title}</h1>
+            {descriptionHtml && <p class="post-description" set:html={descriptionHtml} />}
+          </div>
+          <aside aria-label="Article details" class="post-meta-card">
+            {publishedDate && (
+              <p>
+                <span>Published</span>
+                <strong><FormattedDate date={publishedDate} /></strong>
+              </p>
+            )}
+            {(updatedDate || modified) && (
+              <p>
+                <span>Updated</span>
+                <strong><FormattedDate date={updatedDate || modifiedDate} /></strong>
+              </p>
+            )}
+            {tags && tags.length > 0 && (
+              <p>
+                <span>Topics</span>
+                <strong>{tags.slice(0, 3).join(", ")}</strong>
+              </p>
+            )}
+          </aside>
+        </header>
+
+        {
+          banner && (
+            <figure class="post-cover">
+              <Image src={banner} alt={`Cover image for ${title}`} />
+              {bannerCredit && <figcaption>{bannerCredit}</figcaption>}
+            </figure>
+          )
+        }
+
+        <div class="post-body-wrap">
+          <TextToSpeech />
+          <div class="prose post-content">
+            <slot />
           </div>
 
-          <!-- Text-to-Speech Reader -->
-          <TextToSpeech />
-
-          <slot />
-          {
-            tags && tags.length > 0 && (
-              <div class="mt-12 border-t border-zinc-100 pt-8 dark:border-zinc-800">
-                <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-500">Tags</h3>
-                <div class="flex gap-2 flex-wrap">
-                  {tags.map(tag => (
-                    <a
-                      href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
-                      class="rounded-full bg-zinc-100 px-3 py-1.5 text-sm text-zinc-700 transition hover:bg-teal-50 hover:text-teal-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-teal-400/10 dark:hover:text-teal-300"
-                    >
-                      {tag}
-                    </a>
-                  ))}
-                </div>
+          {tags && tags.length > 0 && (
+            <footer class="post-tags" aria-label="Article tags">
+              <h2>Tagged with</h2>
+              <div>
+                {tags.map(tag => (
+                  <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}>{tag}</a>
+                ))}
               </div>
-            )
-          }
+            </footer>
+          )}
 
-          <!-- Giscus Comments -->
-          <div class="mt-12 border-t border-zinc-100 pt-8 dark:border-zinc-800">
-            <h3 class="mb-6 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Comments</h3>
+          <section class="post-comments" aria-labelledby="comments-title">
+            <h2 id="comments-title">Comments</h2>
             <div
               class="giscus"
               data-repo={import.meta.env.PUBLIC_GISCUS_REPO || 'Oluwasetemi/oluwasetemi.dev'}
@@ -85,12 +91,194 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
               data-category={import.meta.env.PUBLIC_GISCUS_CATEGORY || 'General'}
               data-category-id={import.meta.env.PUBLIC_GISCUS_CATEGORY_ID || 'DIC_kwDOA2rptM4CzZAp'}
             ></div>
-          </div>
+          </section>
         </div>
       </article>
     </main>
   </div>
 </Layout>
+
+<style>
+  .post-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    gap: 2rem;
+  }
+
+  .post-hero {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: 1.25rem;
+    align-items: end;
+    border-bottom: 1px dashed rgb(212 212 216);
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .post-hero {
+      grid-template-columns: minmax(0, 1fr) 15rem;
+    }
+  }
+
+  .post-back {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .post-hero > div {
+    min-width: 0;
+  }
+
+  .post-hero h1 {
+    max-width: 13ch;
+    overflow-wrap: anywhere;
+    color: rgb(39 39 42);
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .post-description {
+    max-width: 44rem;
+    margin-top: 1.25rem;
+    overflow-wrap: anywhere;
+    color: rgb(82 82 91);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-description :global(code) {
+    border-radius: 0.35rem;
+    background: rgb(244 244 245);
+    padding: 0.05rem 0.3rem;
+  }
+
+  .post-meta-card {
+    position: relative;
+    z-index: 20;
+    display: grid;
+    gap: 0.85rem;
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 1.5rem;
+    background: rgb(255 255 255 / 0.72);
+    padding: 1rem;
+  }
+
+  .post-meta-card p {
+    margin: 0;
+  }
+
+  .post-meta-card span {
+    display: block;
+    color: rgb(161 161 170);
+    font-size: 0.75rem;
+  }
+
+  .post-meta-card strong {
+    display: block;
+    margin-top: 0.15rem;
+    color: rgb(39 39 42);
+    font-size: 0.875rem;
+    font-weight: 650;
+  }
+
+  .post-cover {
+    margin: 0;
+  }
+
+  .post-cover :global(img) {
+    width: 100%;
+    max-height: 28rem;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 2rem;
+    object-fit: cover;
+    padding: 0.35rem;
+    box-shadow: none;
+  }
+
+  .post-cover figcaption {
+    margin-top: 0.6rem;
+    color: rgb(113 113 122);
+    font-size: 0.8125rem;
+    font-style: italic;
+  }
+
+  .post-body-wrap {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 48rem;
+  }
+
+  .post-content :global(> h1:first-child) {
+    display: none;
+  }
+
+  .post-tags,
+  .post-comments {
+    margin-top: 3rem;
+    border-top: 1px dashed rgb(212 212 216);
+    padding-top: 1.5rem;
+  }
+
+  .post-tags h2,
+  .post-comments h2 {
+    margin: 0 0 1rem;
+    color: rgb(39 39 42);
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .post-tags div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post-tags a {
+    border: 1px dashed rgb(20 184 166 / 0.45);
+    border-radius: 999px;
+    padding: 0.4rem 0.7rem;
+    color: rgb(20 184 166);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  :global(.dark) .post-hero,
+  :global(.dark) .post-cover :global(img),
+  :global(.dark) .post-tags,
+  :global(.dark) .post-comments {
+    border-color: rgb(63 63 70);
+  }
+
+  :global(.dark) .post-hero h1,
+  :global(.dark) .post-meta-card strong,
+  :global(.dark) .post-tags h2,
+  :global(.dark) .post-comments h2 {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .post-description {
+    color: rgb(161 161 170);
+  }
+
+  :global(.dark) .post-meta-card {
+    border-color: rgb(45 212 191 / 0.35);
+    background: rgb(24 24 27 / 0.72);
+  }
+
+  :global(.dark) .post-meta-card span {
+    color: rgb(161 161 170);
+  }
+</style>
 
 <script is:inline>
   // Load Giscus comments
@@ -115,7 +303,6 @@ const { title, description, date, banner, updatedDate, bannerCredit, modified, m
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
 
-    // Insert script after the page loads
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(script);

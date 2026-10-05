@@ -34,16 +34,17 @@ const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.de
     display: none;
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1720px) {
     .toc-shell {
       position: fixed;
       top: 7rem;
-      left: calc(50% + 31rem);
-      z-index: 20;
+      left: calc(50% + 35rem);
+      z-index: 10;
       display: block;
-      width: 15rem;
+      width: 13rem;
       max-height: calc(100vh - 9rem);
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
       padding: 0.125rem 0.25rem 0.125rem 0;
       overscroll-behavior: contain;
     }
@@ -283,6 +284,8 @@ const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.de
 
     let activeId = '';
     let ticking = false;
+    let lockedActiveId = '';
+    let unlockActiveTimer: number | undefined;
     const byId = new Map(links.map(link => [decodeURIComponent(link.hash.slice(1)), link]));
 
     function moveCursor(link: HTMLAnchorElement) {
@@ -318,11 +321,26 @@ const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.de
 
     function updateActiveLink() {
       ticking = false;
+
+      if (lockedActiveId) {
+        const lockedLink = byId.get(lockedActiveId);
+        if (lockedLink) moveCursor(lockedLink);
+        return;
+      }
+
       const current = headings
         .filter(heading => heading.getBoundingClientRect().top <= 140)
         .at(-1) ?? headings[0];
 
       setActive(current.id);
+    }
+
+    function unlockActiveLink() {
+      if (!lockedActiveId) return;
+      lockedActiveId = '';
+      if (unlockActiveTimer) window.clearTimeout(unlockActiveTimer);
+      unlockActiveTimer = undefined;
+      updateActiveLink();
     }
 
     function onScroll() {
@@ -337,18 +355,36 @@ const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.de
     }
 
     const linkCleanups = links.map(link => {
-      const onClick = () => setActive(decodeURIComponent(link.hash.slice(1)));
+      const onClick = (event: MouseEvent) => {
+        const id = decodeURIComponent(link.hash.slice(1));
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        event.preventDefault();
+        lockedActiveId = id;
+        setActive(id);
+        history.pushState(null, '', link.hash);
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+
+        if (unlockActiveTimer) window.clearTimeout(unlockActiveTimer);
+        unlockActiveTimer = window.setTimeout(unlockActiveLink, prefersReducedMotion ? 0 : 1400);
+      };
       link.addEventListener('click', onClick);
       return () => link.removeEventListener('click', onClick);
     });
 
     updateActiveLink();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scrollend', unlockActiveLink);
     window.addEventListener('resize', onResize);
 
     tocWindow.__oluwasetemiTocCleanup = () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scrollend', unlockActiveLink);
       window.removeEventListener('resize', onResize);
+      if (unlockActiveTimer) window.clearTimeout(unlockActiveTimer);
       linkCleanups.forEach(cleanup => cleanup());
     };
   }

@@ -57,15 +57,7 @@ const work = [
             <a href={`https://github.com/${SOCIALS.github}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="GitHub">GitHub</a>
             <a href={`https://linkedin.com/in/${SOCIALS.linkedIn}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="LinkedIn">LinkedIn</a>
             <a href={`https://stackblitz.com/${SOCIALS.stackblitz}`} target="_blank" rel="noopener noreferrer" class="transition hover:text-zinc-900 dark:hover:text-zinc-100" aria-label="StackBlitz">StackBlitz</a>
-            <button
-              id="theme-toggle"
-              type="button"
-              class="inline-flex items-center gap-2 rounded-full border border-dashed border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:border-teal-500/60 hover:text-zinc-950 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-teal-400/60 dark:hover:text-zinc-50"
-              aria-label="Switch theme"
-            >
-              <span id="theme-toggle-dot" class="h-2 w-2 rounded-full bg-teal-500 dark:bg-teal-400"></span>
-              <span id="theme-toggle-text">Switch theme</span>
-            </button>
+
           </div>
         </div>
       </div>
@@ -129,26 +121,3 @@ const work = [
     </section>
   </main>
 </Layout>
-
-<script is:inline>
-  (() => {
-    const button = document.getElementById("theme-toggle");
-    const label = document.getElementById("theme-toggle-text");
-    if (!button || !label) return;
-
-    const updateLabel = () => {
-      const isDark = document.documentElement.classList.contains("dark");
-      label.textContent = isDark ? "Light mode" : "Dark mode";
-      button.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
-    };
-
-    button.addEventListener("click", () => {
-      const shouldUseDark = !document.documentElement.classList.contains("dark");
-      document.documentElement.classList.toggle("dark", shouldUseDark);
-      localStorage.setItem("theme", shouldUseDark ? "dark" : "light");
-      updateLabel();
-    });
-
-    updateLabel();
-  })();
-</script>

@@ -47,6 +47,16 @@
       sans-serif;
   }
 
+  .cookie-consent-visible body {
+    padding-bottom: 14rem;
+  }
+
+  @media (min-width: 640px) {
+    .cookie-consent-visible body {
+      padding-bottom: 0;
+    }
+  }
+
   h1,
   h2,
   h3,
@@ -100,11 +110,13 @@
 
 @layer components {
   .page-container {
-    @apply mx-auto max-w-7xl px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
+    min-width: 0;
   }
 
   .content-container {
-    @apply mx-auto max-w-2xl lg:max-w-5xl;
+    @apply mx-auto w-full max-w-2xl lg:max-w-5xl;
+    min-width: 0;
   }
 
   .prose {
@@ -117,6 +129,58 @@
 
   .prose img {
     @apply rounded-2xl;
+  }
+
+  .dark .prose {
+    --tw-prose-body: rgb(212 212 216);
+    --tw-prose-headings: rgb(244 244 245);
+    --tw-prose-lead: rgb(212 212 216);
+    --tw-prose-links: rgb(45 212 191);
+    --tw-prose-bold: rgb(244 244 245);
+    --tw-prose-counters: rgb(161 161 170);
+    --tw-prose-bullets: rgb(113 113 122);
+    --tw-prose-hr: rgb(63 63 70);
+    --tw-prose-quotes: rgb(228 228 231);
+    --tw-prose-quote-borders: rgb(45 212 191 / 0.45);
+    --tw-prose-captions: rgb(161 161 170);
+    --tw-prose-code: rgb(244 244 245);
+    --tw-prose-pre-code: rgb(244 244 245);
+    --tw-prose-pre-bg: rgb(24 24 27);
+    --tw-prose-th-borders: rgb(63 63 70);
+    --tw-prose-td-borders: rgb(39 39 42);
+    color: rgb(212 212 216);
+  }
+
+  .dark .prose p,
+  .dark .prose li,
+  .dark .prose blockquote,
+  .dark .prose figcaption,
+  .dark .prose td,
+  .dark .prose th {
+    color: rgb(212 212 216) !important;
+  }
+
+  .dark .prose h1,
+  .dark .prose h2,
+  .dark .prose h3,
+  .dark .prose h4,
+  .dark .prose h5,
+  .dark .prose h6,
+  .dark .prose strong {
+    color: rgb(244 244 245) !important;
+  }
+
+  .dark .prose hr {
+    border-color: rgb(63 63 70) !important;
+  }
+
+  .dark .prose code {
+    background: rgb(39 39 42);
+    color: rgb(244 244 245) !important;
+  }
+
+  .dark .prose pre {
+    background: rgb(24 24 27) !important;
   }
 
   .contact-content {
@@ -146,4 +210,44 @@
     @apply absolute h-px w-px overflow-hidden whitespace-nowrap border-0 p-0;
     clip: rect(0, 0, 0, 0);
   }
+}
+
+/* Keep long-form MDX readable in dark mode after typography utilities are generated. */
+.dark .prose {
+  --tw-prose-body: rgb(212 212 216) !important;
+  --tw-prose-headings: rgb(244 244 245) !important;
+  --tw-prose-lead: rgb(212 212 216) !important;
+  --tw-prose-links: rgb(45 212 191) !important;
+  --tw-prose-bold: rgb(244 244 245) !important;
+  --tw-prose-counters: rgb(161 161 170) !important;
+  --tw-prose-bullets: rgb(113 113 122) !important;
+  --tw-prose-hr: rgb(63 63 70) !important;
+  --tw-prose-quotes: rgb(228 228 231) !important;
+  --tw-prose-quote-borders: rgb(45 212 191 / 0.45) !important;
+  --tw-prose-captions: rgb(161 161 170) !important;
+  --tw-prose-code: rgb(244 244 245) !important;
+  --tw-prose-pre-code: rgb(244 244 245) !important;
+  --tw-prose-pre-bg: rgb(24 24 27) !important;
+  --tw-prose-th-borders: rgb(63 63 70) !important;
+  --tw-prose-td-borders: rgb(39 39 42) !important;
+  color: rgb(212 212 216) !important;
+}
+
+.dark .prose p,
+.dark .prose li,
+.dark .prose blockquote,
+.dark .prose figcaption,
+.dark .prose td,
+.dark .prose th {
+  color: rgb(212 212 216) !important;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6,
+.dark .prose strong {
+  color: rgb(244 244 245) !important;
 }
