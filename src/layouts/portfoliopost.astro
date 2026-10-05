@@ -10,9 +10,9 @@ type Props = CollectionEntry<"portfolio">["data"] & {
   ogImage?: string;
 };
 
-const { title, description, tags, tech, url, github, publishedDate, ogImage } = Astro.props;
+const { title, description, tags, tech, technology, url, github, publishedDate, ogImage } = Astro.props;
 const descriptionHtml = description ? micromark(description).replace(/^<p>|<\/p>\n?$/g, "") : "";
-const stack = tech || tags || [];
+const stack = tags || tech || technology || [];
 ---
 
 <Layout title={title} description={description || `Portfolio project: ${title}`} image={ogImage}>
