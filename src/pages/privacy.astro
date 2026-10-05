@@ -1,0 +1,207 @@
+---
+import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "../consts";
+import Layout from "../layouts/Layout.astro";
+
+const effectiveDate = "October 4, 2026";
+
+const sections = [
+  {
+    title: "What this site is",
+    body: [
+      `${SITE_TITLE} is the personal website, blog, and portfolio of ${SITE_AUTHOR}. Most content on this site is public and can be read without creating an account.`,
+      "This page is a practical privacy notice for visitors. It is not legal advice.",
+    ],
+  },
+  {
+    title: "Information collected",
+    body: [
+      "This site may collect basic technical information that browsers and hosting providers normally process, such as IP address, device/browser details, pages visited, timestamps, referrer URLs, and error or server logs.",
+      "If you use the contact or scheduling page, Cal.com may process information you submit to book a meeting, such as your name, email address, selected time, and message details.",
+      "If you email me directly, I receive the information you choose to send in that message.",
+    ],
+  },
+  {
+    title: "Cookies and analytics",
+    body: [
+      "The site shows a cookie banner before loading Google Analytics. If you accept, Google Analytics may be loaded to understand traffic and improve the site. If you decline, the site stores that choice and does not intentionally initialize Google Analytics.",
+      "The cookie-consent choice is stored for up to 365 days. Google Analytics is configured with IP anonymization where supported.",
+    ],
+  },
+  {
+    title: "Third-party services",
+    body: [
+      "The site is hosted on Netlify and uses Astro-generated static/server output. Netlify may process server and request logs to provide hosting, security, and reliability.",
+      "Google Analytics is used only after cookie consent is accepted. Cal.com is embedded on the scheduling page. External links such as GitHub, LinkedIn, X, StackBlitz, and Discord are governed by their own privacy practices once you leave this site.",
+      "No additional analytics, error tracking, email, newsletter, advertising, or CDN services are used at this time.",
+      "Cloudflare is used to serve the site and may process request logs for security and performance monitoring."
+    ],
+  },
+  {
+    title: "How information is used",
+    body: [
+      "Information is used to operate the site, measure aggregate traffic, respond to messages, schedule meetings, prevent abuse, debug errors, and improve content and user experience.",
+      "I do not sell visitor personal information.",
+    ],
+  },
+  {
+    title: "Retention and choices",
+    body: [
+      "Cookie consent can be changed by clearing this site's cookies in your browser. Hosting logs, analytics records, emails, and scheduling records are retained according to the relevant service settings and operational needs.",
+      "No exact retention periods or deletion/export request process are defined at this time.",
+    ],
+  },
+  {
+    title: "Children",
+    body: [
+      "This site is intended for a general developer audience and is not directed to children.",
+    ],
+  },
+  {
+    title: "Contact",
+    body: [
+      `For privacy questions, contact ${SITE_AUTHOR} through the contact page or by email.`,
+    ],
+  },
+];
+---
+
+<Layout title={`Privacy Policy - ${SITE_TITLE}`} description="Privacy policy for oluwasetemi.dev" image="/og/page/home.png">
+  <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
+    <div class="content-container">
+      <header class="policy-hero">
+        <p>Privacy policy</p>
+        <h1>Simple notes on data, cookies, and third-party services.</h1>
+        <span>Effective {effectiveDate}</span>
+      </header>
+
+      <section class="policy-summary" aria-label="Policy summary">
+        <p>
+          This is a lightweight policy for <a href={SITE_URL}>{SITE_URL.replace("https://", "")}</a>. It is written from repository evidence: cookie consent, Google Analytics after consent, Cal.com scheduling, and Netlify hosting.
+        </p>
+      </section>
+
+      <div class="policy-sections">
+        {sections.map((section, index) => (
+          <section class="policy-section" aria-labelledby={`policy-section-${index}`}>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h2 id={`policy-section-${index}`}>{section.title}</h2>
+              {section.body.map(paragraph => <p>{paragraph}</p>)}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .policy-hero {
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 2rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    background: radial-gradient(circle at top right, rgb(20 184 166 / 0.12), transparent 22rem), rgb(255 255 255 / 0.72);
+  }
+
+  .policy-hero p {
+    margin: 0 0 0.75rem;
+    color: rgb(20 184 166);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .policy-hero h1 {
+    max-width: 13ch;
+    color: rgb(39 39 42);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 760;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .policy-hero span {
+    display: inline-flex;
+    margin-top: 1.25rem;
+    border-radius: 999px;
+    background: rgb(244 244 245);
+    padding: 0.45rem 0.75rem;
+    color: rgb(82 82 91);
+    font-size: 0.8125rem;
+  }
+
+  .policy-summary {
+    margin-top: 1rem;
+    border: 1px dashed rgb(212 212 216);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    color: rgb(82 82 91);
+    line-height: 1.7;
+  }
+
+  .policy-summary a {
+    color: rgb(20 184 166);
+    font-weight: 600;
+  }
+
+  .policy-sections {
+    margin-top: 2rem;
+  }
+
+  .policy-section {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1rem;
+    border-bottom: 1px dashed rgb(228 228 231);
+    padding: 1.5rem 0;
+  }
+
+  .policy-section > span {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    border: 1px dashed rgb(20 184 166 / 0.5);
+    border-radius: 999px;
+    color: rgb(20 184 166);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .policy-section h2 {
+    color: rgb(39 39 42);
+    font-size: 1.125rem;
+    letter-spacing: -0.03em;
+  }
+
+  .policy-section p {
+    margin-top: 0.75rem;
+    color: rgb(82 82 91);
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  :global(.dark) .policy-hero,
+  :global(.dark) .policy-summary {
+    border-color: rgb(63 63 70);
+    background: rgb(24 24 27 / 0.72);
+  }
+
+  :global(.dark) .policy-hero h1,
+  :global(.dark) .policy-section h2 {
+    color: rgb(244 244 245);
+  }
+
+  :global(.dark) .policy-hero span {
+    background: rgb(39 39 42);
+    color: rgb(212 212 216);
+  }
+
+  :global(.dark) .policy-section {
+    border-color: rgb(63 63 70);
+  }
+
+  :global(.dark) .policy-section p,
+  :global(.dark) .policy-summary {
+    color: rgb(161 161 170);
+  }
+</style>

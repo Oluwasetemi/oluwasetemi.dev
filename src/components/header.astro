@@ -49,6 +49,14 @@ const twitter = SOCIALS.twitter.replace(/^@/, "");
 
       <div class="flex items-center gap-3">
         <div class="hidden items-center gap-3 text-zinc-500 sm:flex dark:text-zinc-400">
+          <button
+            type="button"
+            class="theme-toggle inline-flex h-8 items-center gap-2 rounded-full border border-dashed border-zinc-300 px-3 text-xs font-medium text-zinc-700 transition hover:border-teal-500/60 hover:text-zinc-950 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-teal-400/60 dark:hover:text-zinc-50"
+            aria-label="Switch theme"
+          >
+            <span class="h-2 w-2 rounded-full bg-teal-500 dark:bg-teal-400" aria-hidden="true"></span>
+            <span class="theme-toggle-text">Theme</span>
+          </button>
           <a href={`https://github.com/${SOCIALS.github}`} class="transition hover:text-zinc-900 dark:hover:text-zinc-100" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <svg viewBox="0 0 16 16" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" /></svg>
           </a>
@@ -65,6 +73,14 @@ const twitter = SOCIALS.twitter.replace(/^@/, "");
             Menu
           </summary>
           <nav aria-label="Primary mobile" class="absolute right-0 mt-3 w-56 rounded-2xl bg-white p-3 text-sm font-medium text-zinc-800 shadow-xl ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:text-zinc-200 dark:ring-white/10">
+            <button
+              type="button"
+              class="theme-toggle mb-2 flex w-full items-center justify-between rounded-xl border border-dashed border-zinc-200 px-3 py-2 text-left text-sm text-zinc-700 transition hover:border-teal-500/60 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-teal-400/60 dark:hover:text-zinc-50"
+              aria-label="Switch theme"
+            >
+              <span class="theme-toggle-text">Theme</span>
+              <span class="h-2 w-2 rounded-full bg-teal-500 dark:bg-teal-400" aria-hidden="true"></span>
+            </button>
             {links.map(link => <a href={link.href} class="block rounded-xl px-3 py-2 transition hover:bg-zinc-50 hover:text-teal-500 dark:hover:bg-zinc-800">{link.label}</a>)}
           </nav>
         </details>
@@ -72,3 +88,29 @@ const twitter = SOCIALS.twitter.replace(/^@/, "");
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const updateThemeButtons = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      document.querySelectorAll(".theme-toggle").forEach((button) => {
+        button.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+      });
+      document.querySelectorAll(".theme-toggle-text").forEach((label) => {
+        label.textContent = isDark ? "Light" : "Dark";
+      });
+    };
+
+    document.querySelectorAll(".theme-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        const shouldUseDark = !document.documentElement.classList.contains("dark");
+        document.documentElement.classList.toggle("dark", shouldUseDark);
+        localStorage.setItem("theme", shouldUseDark ? "dark" : "light");
+        updateThemeButtons();
+      });
+    });
+
+    updateThemeButtons();
+    document.addEventListener("astro:page-load", updateThemeButtons);
+  })();
+</script>

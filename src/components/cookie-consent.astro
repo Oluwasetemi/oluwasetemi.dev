@@ -2,30 +2,35 @@
 // Cookie Consent Banner Component
 ---
 
-<div id="cookie-consent" class="hidden fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 shadow-lg z-50">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="flex-1">
-      <p class="text-sm">
-        We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies.
-        <a href="/privacy" class="underline hover:text-gray-300">Learn more</a>
+<aside
+  id="cookie-consent"
+  class="fixed inset-x-4 bottom-4 z-50 hidden rounded-2xl border border-dashed border-zinc-700/70 bg-zinc-950/95 p-4 text-white shadow-2xl shadow-zinc-950/20 backdrop-blur sm:inset-x-auto sm:left-4 sm:max-w-xl"
+  aria-label="Cookie notice"
+>
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div class="max-w-md">
+      <p class="m-0 text-sm font-medium text-zinc-100">Cookies and analytics</p>
+      <p class="mt-1 text-sm leading-6 text-zinc-300">
+        I use an optional analytics cookie to understand traffic after you accept. You can decline and still use the site.
+        <a href="/privacy" class="font-medium text-teal-300 underline decoration-dashed underline-offset-4 hover:text-teal-200">Read the privacy policy</a>.
       </p>
     </div>
-    <div class="flex gap-3">
-      <button
-        id="cookie-accept"
-        class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
-      >
-        Accept
-      </button>
+    <div class="flex shrink-0 gap-2">
       <button
         id="cookie-decline"
-        class="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+        class="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-zinc-500 hover:text-white"
       >
         Decline
       </button>
+      <button
+        id="cookie-accept"
+        class="rounded-full bg-teal-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-teal-300"
+      >
+        Accept
+      </button>
     </div>
   </div>
-</div>
+</aside>
 
 <script>
   // Cookie consent handling
