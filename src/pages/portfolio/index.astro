@@ -5,44 +5,92 @@ import PortfolioCard from "../../components/portfolio-card.astro";
 import { SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
-const portfolios = await getCollection("portfolio");
+const portfolios = await getCollection("portfolio", ({ data }) => data.isDraft !== true && data.isPublished !== false);
 const sortedPortfolios = portfolios.sort((a, b) => {
   const dateA = new Date(a.data.publishedDate as Date);
   const dateB = new Date(b.data.publishedDate as Date);
   return dateB.getTime() - dateA.getTime();
 });
+
+const featuredPortfolios = sortedPortfolios.filter((portfolio) => portfolio.data.tier === "featured");
+const teachingPortfolios = sortedPortfolios.filter((portfolio) => portfolio.data.tier === "teaching");
+const archivePortfolios = sortedPortfolios.filter((portfolio) => portfolio.data.tier === "archive" || !portfolio.data.tier);
 ---
 
 <Layout
   title={`Portfolio - ${SITE_TITLE}`}
-  description="My portfolio of web development projects and work"
+  description="Selected projects, teaching systems, and experiments from Oluwasetemi Ojo"
   image="/og/page/portfolio.png"
 >
   <main id="main-content" tabindex="-1" class="page-container mt-16 sm:mt-20">
     <div class="content-container">
       <header class="portfolio-hero">
         <div>
-          <p>Build log</p>
-          <h1>Projects with fingerprints.</h1>
+          <p>Selected work</p>
+          <h1>Proof, not a pile.</h1>
+          <div class="portfolio-intro">
+            <p>
+              A tighter portfolio built around a few projects with real context: teaching tools, civic workflows, backend
+              systems, and developer utilities. The rest lives in the archive instead of competing with the strongest work.
+            </p>
+          </div>
         </div>
         <aside aria-label="Portfolio count">
-          <strong>{sortedPortfolios.length}</strong>
-          <span>published projects</span>
+          <strong>{featuredPortfolios.length}</strong>
+          <span>featured projects</span>
         </aside>
       </header>
 
-      {
-        sortedPortfolios.length > 0 ? (
-          <ul class="portfolio-grid">
-            {sortedPortfolios.map((portfolio) => <PortfolioCard portfolio={portfolio} />)}
+      <section class="portfolio-section" aria-labelledby="featured-title">
+        <div class="section-heading">
+          <p>Top shelf</p>
+          <h2 id="featured-title">Featured projects</h2>
+          <span>Projects worth reading as case studies, not just clicking as demos.</span>
+        </div>
+        {
+          featuredPortfolios.length > 0 ? (
+            <ul class="portfolio-grid featured-grid">
+              {featuredPortfolios.map((portfolio) => <PortfolioCard portfolio={portfolio} />)}
+            </ul>
+          ) : (
+            <section class="portfolio-empty">
+              <h2>Featured projects coming soon</h2>
+              <p>I’m currently curating the strongest projects into deeper case studies.</p>
+            </section>
+          )
+        }
+      </section>
+
+      {teachingPortfolios.length > 0 && (
+        <section class="portfolio-section" aria-labelledby="teaching-title">
+          <div class="section-heading">
+            <p>Teaching systems</p>
+            <h2 id="teaching-title">Curriculum and classroom work</h2>
+            <span>
+              Educational tools, notes, and workshops that support how I teach web development and AI-assisted building.
+            </span>
+          </div>
+          <ul class="portfolio-grid compact-grid">
+            {teachingPortfolios.map((portfolio) => <PortfolioCard portfolio={portfolio} />)}
           </ul>
-        ) : (
-          <section class="portfolio-empty">
-            <h2>Portfolio coming soon</h2>
-            <p>I’m currently working on showcasing my projects. Check back soon.</p>
-          </section>
-        )
-      }
+        </section>
+      )}
+
+      {archivePortfolios.length > 0 && (
+        <section class="portfolio-section" aria-labelledby="archive-title">
+          <div class="section-heading">
+            <p>Archive</p>
+            <h2 id="archive-title">Older work and experiments</h2>
+            <span>
+              Useful history, protocol demos, client work, and smaller experiments. Kept available, but intentionally not
+              positioned as the main proof of current direction.
+            </span>
+          </div>
+          <ul class="portfolio-grid compact-grid archive-grid">
+            {archivePortfolios.map((portfolio) => <PortfolioCard portfolio={portfolio} />)}
+          </ul>
+        </section>
+      )}
     </div>
   </main>
 </Layout>
@@ -58,11 +106,12 @@ const sortedPortfolios = portfolios.sort((a, b) => {
 
   @media (min-width: 768px) {
     .portfolio-hero {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
     }
   }
 
-  .portfolio-hero p {
+  .portfolio-hero p,
+  .section-heading p {
     margin: 0 0 0.75rem;
     color: rgb(20 184 166);
     font-size: 0.875rem;
@@ -76,6 +125,19 @@ const sortedPortfolios = portfolios.sort((a, b) => {
     font-weight: 760;
     letter-spacing: -0.075em;
     line-height: 0.9;
+  }
+
+  .portfolio-intro {
+    max-width: 43rem;
+    margin-top: 1.25rem;
+  }
+
+  .portfolio-intro p {
+    margin: 0;
+    color: rgb(82 82 91);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
   }
 
   .portfolio-hero aside {
@@ -98,6 +160,35 @@ const sortedPortfolios = portfolios.sort((a, b) => {
     font-size: 0.8125rem;
   }
 
+  .portfolio-section {
+    margin-top: 3rem;
+  }
+
+  .portfolio-section + .portfolio-section {
+    border-top: 1px dashed rgb(212 212 216);
+    padding-top: 3rem;
+  }
+
+  .section-heading {
+    max-width: 43rem;
+  }
+
+  .section-heading h2 {
+    color: rgb(39 39 42);
+    font-size: clamp(2rem, 4vw, 3.75rem);
+    font-weight: 740;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+  }
+
+  .section-heading span {
+    display: block;
+    margin-top: 0.85rem;
+    color: rgb(82 82 91);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
@@ -105,6 +196,18 @@ const sortedPortfolios = portfolios.sort((a, b) => {
     margin: 2rem 0 0;
     padding: 0;
     list-style: none;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  }
+
+  .compact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  }
+
+  .archive-grid {
+    opacity: 0.88;
   }
 
   .portfolio-grid :global(li) {
@@ -118,16 +221,20 @@ const sortedPortfolios = portfolios.sort((a, b) => {
     padding: 1.5rem;
   }
 
-  :global(.dark) .portfolio-hero {
+  :global(.dark) .portfolio-hero,
+  :global(.dark) .portfolio-section + .portfolio-section {
     border-color: rgb(63 63 70);
   }
 
   :global(.dark) .portfolio-hero h1,
-  :global(.dark) .portfolio-hero strong {
+  :global(.dark) .portfolio-hero strong,
+  :global(.dark) .section-heading h2 {
     color: rgb(244 244 245);
   }
 
-  :global(.dark) .portfolio-hero span {
+  :global(.dark) .portfolio-hero span,
+  :global(.dark) .portfolio-intro p,
+  :global(.dark) .section-heading span {
     color: rgb(161 161 170);
   }
 
