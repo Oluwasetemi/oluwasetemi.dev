@@ -83,54 +83,50 @@ const notes = [
 <style>
   .about-hero {
     display: grid;
-    gap: 1.5rem;
     align-items: end;
-    border-bottom: 1px dashed rgb(212 212 216);
-    padding-bottom: 2rem;
-  }
+    gap: 1.5rem;
+    border-block-end: 1px dashed var(--color-border);
+    padding-block-end: 2rem;
 
-  @media (min-width: 768px) {
-    .about-hero {
+    @media (min-width: 768px) {
       grid-template-columns: minmax(0, 1fr) 16rem;
     }
-  }
 
-  .about-hero p {
-    margin: 0 0 0.75rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .about-hero h1 {
-    max-width: 13ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
+    h1 {
+      max-inline-size: 13ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
 
-  .about-hero img {
-    aspect-ratio: 4 / 5;
-    width: 100%;
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
-    object-fit: cover;
-    padding: 0.4rem;
+    img {
+      aspect-ratio: 4 / 5;
+      inline-size: 100%;
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-hero);
+      object-fit: cover;
+      padding: 0.4rem;
+    }
   }
 
   .about-intro {
     display: grid;
     gap: 1rem;
-    margin-top: 2rem;
-    color: rgb(82 82 91);
+    margin-block-start: 2rem;
+    color: var(--color-copy);
     font-size: 1rem;
     line-height: 1.8;
-  }
 
-  @media (min-width: 768px) {
-    .about-intro {
+    @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }
   }
@@ -139,47 +135,48 @@ const notes = [
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
     gap: 0.75rem;
-    margin-top: 2rem;
+    margin-block-start: 2rem;
+
+    article {
+      border: 1px dashed var(--color-border);
+      border-radius: 1.5rem;
+      background: var(--color-surface-card);
+      padding: 1.25rem;
+    }
+
+    span {
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
   }
 
-  .about-notes article,
-  .about-story {
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 1.5rem;
-    background: white;
-    padding: 1.25rem;
-  }
+  :is(.about-notes, .about-story) {
+    h2 {
+      margin-block-start: 0.5rem;
+      color: var(--color-heading);
+      font-size: 1.125rem;
+      letter-spacing: -0.03em;
+    }
 
-  .about-notes span {
-    color: rgb(20 184 166);
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .about-notes h2,
-  .about-story h2 {
-    margin-top: 0.5rem;
-    color: rgb(39 39 42);
-    font-size: 1.125rem;
-    letter-spacing: -0.03em;
-  }
-
-  .about-notes p,
-  .about-story p {
-    margin-top: 0.6rem;
-    color: rgb(113 113 122);
-    font-size: 0.875rem;
-    line-height: 1.65;
+    p {
+      margin-block-start: 0.6rem;
+      color: var(--color-muted);
+      font-size: 0.875rem;
+      line-height: 1.65;
+    }
   }
 
   .about-story {
     display: grid;
     gap: 1rem;
-    margin-top: 0.75rem;
-  }
+    margin-block-start: 0.75rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 1.5rem;
+    background: var(--color-surface-card);
+    padding: 1.25rem;
 
-  @media (min-width: 768px) {
-    .about-story {
+    @media (min-width: 768px) {
       grid-template-columns: 14rem 1fr;
     }
   }
@@ -188,34 +185,16 @@ const notes = [
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 1rem;
-  }
+    margin-block-start: 1rem;
 
-  .about-links a {
-    border: 1px dashed rgb(20 184 166 / 0.45);
-    border-radius: 999px;
-    padding: 0.5rem 0.85rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  :global(.dark) .about-hero,
-  :global(.dark) .about-hero img,
-  :global(.dark) .about-notes article,
-  :global(.dark) .about-story {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .about-hero h1,
-  :global(.dark) .about-notes h2,
-  :global(.dark) .about-story h2 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .about-notes article,
-  :global(.dark) .about-story {
-    background: rgb(24 24 27 / 0.72);
+    a {
+      border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
   }
 </style>

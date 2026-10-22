@@ -98,95 +98,99 @@ const archivePortfolios = sortedPortfolios.filter((portfolio) => portfolio.data.
 <style>
   .portfolio-hero {
     display: grid;
-    gap: 1.25rem;
     align-items: end;
-    border-bottom: 1px dashed rgb(212 212 216);
-    padding-bottom: 2rem;
-  }
+    gap: 1.25rem;
+    border-block-end: 1px dashed var(--color-border);
+    padding-block-end: 2rem;
 
-  @media (min-width: 768px) {
-    .portfolio-hero {
+    @media (min-width: 768px) {
       grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      max-inline-size: 11ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
+
+    aside {
+      display: grid;
+      min-inline-size: 11rem;
+      border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
+      border-radius: 1.5rem;
+      padding: 1rem;
+    }
+
+    strong {
+      color: var(--color-heading);
+      font-size: 3rem;
+      letter-spacing: -0.08em;
+      line-height: 1;
+    }
+
+    span {
+      color: var(--color-muted);
+      font-size: 0.8125rem;
     }
   }
 
-  .portfolio-hero p,
-  .section-heading p {
-    margin: 0 0 0.75rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
-  .portfolio-hero h1 {
-    max-width: 11ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
-
   .portfolio-intro {
-    max-width: 43rem;
-    margin-top: 1.25rem;
-  }
+    max-inline-size: 43rem;
+    margin-block-start: 1.25rem;
 
-  .portfolio-intro p {
-    margin: 0;
-    color: rgb(82 82 91);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.75;
-  }
-
-  .portfolio-hero aside {
-    display: grid;
-    min-width: 11rem;
-    border: 1px dashed rgb(20 184 166 / 0.45);
-    border-radius: 1.5rem;
-    padding: 1rem;
-  }
-
-  .portfolio-hero strong {
-    color: rgb(39 39 42);
-    font-size: 3rem;
-    line-height: 1;
-    letter-spacing: -0.08em;
-  }
-
-  .portfolio-hero span {
-    color: rgb(113 113 122);
-    font-size: 0.8125rem;
+    p {
+      margin: 0;
+      color: var(--color-copy);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.75;
+    }
   }
 
   .portfolio-section {
-    margin-top: 3rem;
-  }
+    margin-block-start: 3rem;
 
-  .portfolio-section + .portfolio-section {
-    border-top: 1px dashed rgb(212 212 216);
-    padding-top: 3rem;
+    & + & {
+      border-block-start: 1px dashed var(--color-border);
+      padding-block-start: 3rem;
+    }
   }
 
   .section-heading {
-    max-width: 43rem;
-  }
+    max-inline-size: 43rem;
 
-  .section-heading h2 {
-    color: rgb(39 39 42);
-    font-size: clamp(2rem, 4vw, 3.75rem);
-    font-weight: 740;
-    letter-spacing: -0.06em;
-    line-height: 0.95;
-  }
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .section-heading span {
-    display: block;
-    margin-top: 0.85rem;
-    color: rgb(82 82 91);
-    font-size: 0.95rem;
-    line-height: 1.7;
+    h2 {
+      color: var(--color-heading);
+      font-size: clamp(2rem, 4vw, 3.75rem);
+      font-weight: 740;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+    }
+
+    span {
+      display: block;
+      margin-block-start: 0.85rem;
+      color: var(--color-copy);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
   }
 
   .portfolio-grid {
@@ -196,54 +200,29 @@ const archivePortfolios = sortedPortfolios.filter((portfolio) => portfolio.data.
     margin: 2rem 0 0;
     padding: 0;
     list-style: none;
-  }
 
-  .featured-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-  }
+    :global(li) {
+      border-style: dashed;
+    }
 
-  .compact-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  }
+    &.featured-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    }
 
-  .archive-grid {
-    opacity: 0.88;
-  }
+    &.compact-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    }
 
-  .portfolio-grid :global(li) {
-    border-style: dashed;
+    &.archive-grid {
+      opacity: 0.88;
+    }
   }
 
   .portfolio-empty {
-    margin-top: 2rem;
-    border: 1px dashed rgb(212 212 216);
+    margin-block-start: 2rem;
+    border: 1px dashed var(--color-border);
     border-radius: 1.5rem;
+    background: var(--color-surface-panel);
     padding: 1.5rem;
-  }
-
-  :global(.dark) .portfolio-hero,
-  :global(.dark) .portfolio-section + .portfolio-section {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .portfolio-hero h1,
-  :global(.dark) .portfolio-hero strong,
-  :global(.dark) .section-heading h2 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .portfolio-hero span,
-  :global(.dark) .portfolio-intro p,
-  :global(.dark) .section-heading span {
-    color: rgb(161 161 170);
-  }
-
-  :global(.dark) .portfolio-empty,
-  :global(.dark) .portfolio-hero aside {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .portfolio-empty {
-    background: rgb(24 24 27 / 0.72);
   }
 </style>

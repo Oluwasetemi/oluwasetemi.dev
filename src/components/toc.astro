@@ -32,236 +32,198 @@ const tocHeadings = headings.filter(heading => heading.depth === 2 || heading.de
 <style>
   .toc-shell {
     display: none;
-  }
 
-  @media (min-width: 1720px) {
-    .toc-shell {
+    &::-webkit-scrollbar {
+      inline-size: 0;
+    }
+
+    @media (min-width: 1720px) {
       position: fixed;
-      top: 7rem;
-      left: calc(50% + 35rem);
+      inset: 7rem auto auto calc(50% + 35rem);
       z-index: 10;
       display: block;
-      width: 13rem;
-      max-height: calc(100vh - 9rem);
-      overflow-x: hidden;
+      max-block-size: calc(100dvh - 9rem);
+      inline-size: 13rem;
+      overflow-x: clip;
       overflow-y: auto;
-      padding: 0.125rem 0.25rem 0.125rem 0;
       overscroll-behavior: contain;
+      padding: 0.125rem 0.25rem 0.125rem 0;
+      scrollbar-gutter: stable;
     }
   }
 
   .toc-panel {
-    color: rgb(113 113 122);
+    color: var(--color-muted);
   }
 
   .toc-title {
     margin: 0 0 0.875rem;
-    padding-left: 1.35rem;
+    padding-inline-start: 1.35rem;
+    color: var(--color-heading);
     font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.25rem;
-    color: rgb(39 39 42);
   }
 
   .toc-list {
-    --toc-line: rgb(228 228 231);
-    --toc-line-strong: rgb(20 184 166 / 0.72);
-    --toc-hover: rgb(39 39 42);
+    --toc-line: var(--color-border-soft);
+    --toc-line-strong: color-mix(in srgb, var(--color-accent) 72%, transparent);
+    --toc-hover: var(--color-heading);
     --toc-cursor-y: 0px;
     --toc-cursor-height: 0px;
     position: relative;
     margin: 0;
     padding: 0.125rem 0 0.125rem 1.35rem;
     list-style: none;
-  }
 
-  .toc-list::before {
-    position: absolute;
-    top: 0.45rem;
-    bottom: 0.45rem;
-    left: 0.25rem;
-    width: 1px;
-    border-radius: 999px;
-    background: linear-gradient(to bottom, transparent, var(--toc-line) 0.75rem, var(--toc-line) calc(100% - 0.75rem), transparent);
-    content: "";
+    &::before {
+      position: absolute;
+      inset: 0.45rem auto 0.45rem 0.25rem;
+      inline-size: 1px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, transparent, var(--toc-line) 0.75rem, var(--toc-line) calc(100% - 0.75rem), transparent);
+      content: "";
+    }
+
+    &:has(.toc-link.is-active) .toc-cursor {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   .toc-cursor {
     position: absolute;
-    top: var(--toc-cursor-y);
-    left: 1.02rem;
+    inset: var(--toc-cursor-y) auto auto 1.02rem;
     z-index: -1;
-    width: calc(100% - 0.6rem);
-    height: var(--toc-cursor-height);
+    block-size: var(--toc-cursor-height);
+    inline-size: calc(100% - 0.6rem);
     border-radius: 0.55rem;
-    background: color-mix(in srgb, rgb(20 184 166) 7%, transparent);
-    box-shadow: inset 0 0 0 1px rgb(20 184 166 / 0.08);
+    background: color-mix(in srgb, var(--color-accent) 7%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 8%, transparent);
     opacity: 0;
-    transform: translateY(0) scale(0.985);
+    transform: scale(0.985);
     transform-origin: left center;
     transition:
-      top 220ms cubic-bezier(0.23, 1, 0.32, 1),
-      height 220ms cubic-bezier(0.23, 1, 0.32, 1),
-      opacity 160ms ease,
+      inset-block-start 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      block-size 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity var(--transition-color),
       transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .toc-list:has(.toc-link.is-active) .toc-cursor {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 
   .toc-item {
     position: relative;
     margin: 0;
+
+    &:has(.toc-link:is(:hover, :focus-visible, .is-active))::before {
+      background: var(--toc-line-strong);
+    }
+  }
+
+  .toc-item-h2 {
+    &::before {
+      position: absolute;
+      inset: 0.82rem auto auto -1.18rem;
+      block-size: 0.38rem;
+      inline-size: 0.38rem;
+      border-radius: 999px;
+      background: var(--toc-line);
+      content: "";
+      pointer-events: none;
+      transition: background-color var(--transition-color), transform var(--transition-movement);
+    }
+
+    &:has(.toc-link.is-active)::before {
+      transform: scale(1.28);
+    }
   }
 
   .toc-item-h3 {
-    padding-left: 1.05rem;
-  }
+    padding-inline-start: 1.05rem;
 
-  .toc-item-h2::before,
-  .toc-item-h3::before,
-  .toc-item-h3::after {
-    position: absolute;
-    pointer-events: none;
-    content: "";
-    transition:
-      background-color 160ms ease,
-      opacity 160ms ease,
-      transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
+    &::before,
+    &::after {
+      position: absolute;
+      inset-inline-start: -1.1rem;
+      border-radius: 999px;
+      background: var(--toc-line);
+      content: "";
+      pointer-events: none;
+      transition: background-color var(--transition-color), opacity var(--transition-color), transform var(--transition-movement);
+    }
 
-  .toc-item-h2::before {
-    top: 0.82rem;
-    left: -1.18rem;
-    width: 0.38rem;
-    height: 0.38rem;
-    border-radius: 999px;
-    background: var(--toc-line);
-  }
+    &::before {
+      inset-block-start: 0.86rem;
+      block-size: 1px;
+      inline-size: 0.9rem;
+    }
 
-  .toc-item-h3::before {
-    top: 0.86rem;
-    left: -1.1rem;
-    width: 0.9rem;
-    height: 1px;
-    border-radius: 999px;
-    background: var(--toc-line);
-  }
+    &::after {
+      inset-block-start: 0.48rem;
+      block-size: 0.42rem;
+      inline-size: 1px;
+      opacity: 0.9;
+    }
 
-  .toc-item-h3::after {
-    top: 0.48rem;
-    left: -1.1rem;
-    width: 1px;
-    height: 0.42rem;
-    border-radius: 999px;
-    background: var(--toc-line);
-    opacity: 0.9;
+    &:has(.toc-link.is-active) {
+      &::before {
+        transform: scaleX(1.12);
+        transform-origin: left center;
+      }
+
+      &::after {
+        background: var(--toc-line-strong);
+      }
+    }
+
+    .toc-link {
+      color: var(--color-subtle);
+      font-size: 0.75rem;
+    }
   }
 
   .toc-link {
     position: relative;
     display: block;
     padding: 0.285rem 0.45rem 0.285rem 0;
+    color: var(--color-muted);
     font-size: 0.8125rem;
     line-height: 1.25rem;
-    color: rgb(113 113 122);
     text-decoration: none;
     text-wrap: pretty;
-    transition:
-      color 160ms ease,
-      opacity 160ms ease,
-      transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
+    transition: color var(--transition-color), opacity var(--transition-color), transform var(--transition-movement);
 
-  .toc-link span {
-    display: inline;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px;
-    transition: background-size 180ms ease;
-  }
+    span {
+      display: inline;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0 1px;
+      transition: background-size var(--transition-movement);
+    }
 
-  .toc-item-h3 .toc-link {
-    font-size: 0.75rem;
-    color: rgb(139 139 149);
-  }
+    &:is(:hover, :focus-visible) {
+      color: var(--toc-hover);
 
-  .toc-link:hover,
-  .toc-link:focus-visible {
-    color: var(--toc-hover);
-  }
+      span {
+        background-size: 100% 1px;
+      }
+    }
 
-  .toc-link:hover span,
-  .toc-link:focus-visible span {
-    background-size: 100% 1px;
-  }
+    &:focus-visible {
+      border-radius: 0.45rem;
+      outline: 2px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+      outline-offset: 3px;
+    }
 
-  .toc-link:focus-visible {
-    border-radius: 0.45rem;
-    outline: 2px solid rgb(20 184 166 / 0.38);
-    outline-offset: 3px;
-  }
-
-  .toc-link.is-active {
-    color: rgb(20 184 166);
-    font-weight: 500;
-  }
-
-  .toc-item:has(.toc-link:hover)::before,
-  .toc-item:has(.toc-link:focus-visible)::before,
-  .toc-item:has(.toc-link.is-active)::before,
-  .toc-item-h3:has(.toc-link.is-active)::after {
-    background: var(--toc-line-strong);
-  }
-
-  .toc-item-h2:has(.toc-link.is-active)::before {
-    transform: scale(1.28);
-  }
-
-  .toc-item-h3:has(.toc-link.is-active)::before {
-    transform: scaleX(1.12);
-    transform-origin: left center;
-  }
-
-  :global(.dark) .toc-title {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .toc-list {
-    --toc-line: rgb(63 63 70);
-    --toc-line-strong: rgb(45 212 191 / 0.72);
-    --toc-hover: rgb(228 228 231);
-  }
-
-  :global(.dark) .toc-cursor {
-    background: rgb(45 212 191 / 0.06);
-    box-shadow: inset 0 0 0 1px rgb(45 212 191 / 0.08);
-  }
-
-  :global(.dark) .toc-link,
-  :global(.dark) .toc-item-h3 .toc-link {
-    color: rgb(113 113 122);
-  }
-
-  :global(.dark) .toc-link.is-active {
-    color: rgb(244 244 245);
-  }
-
-  .toc-shell::-webkit-scrollbar {
-    width: 0;
+    &.is-active {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .toc-cursor,
-    .toc-link,
-    .toc-link span,
-    .toc-item-h2::before,
-    .toc-item-h3::before,
-    .toc-item-h3::after {
+    :where(.toc-cursor, .toc-link, .toc-link span, .toc-item-h2::before, .toc-item-h3::before, .toc-item-h3::after) {
       transition: none;
     }
   }

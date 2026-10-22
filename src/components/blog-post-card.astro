@@ -47,34 +47,27 @@ const descriptionHtml = post.data.description
 </li>
 
 <style>
-  .blog-card-description :global(em) {
-    font-style: italic;
-  }
+  .blog-card-description {
+    :global(em) {
+      font-style: italic;
+    }
 
-  .blog-card-description :global(code) {
-    border-radius: 0.35rem;
-    background: rgb(244 244 245);
-    padding: 0.05rem 0.3rem;
-    color: rgb(39 39 42);
-    font-size: 0.8125em;
-  }
+    :global(code) {
+      border-radius: 0.35rem;
+      background: var(--color-surface-muted);
+      padding: 0.05rem 0.3rem;
+      color: var(--color-heading);
+      font-size: 0.8125em;
+    }
 
-  .blog-card-description :global(a) {
-    color: rgb(20 184 166);
-    text-decoration: none;
-  }
+    :global(a) {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
 
-  .blog-card-description :global(strong) {
-    color: rgb(39 39 42);
-    font-weight: 650;
-  }
-
-  :global(.dark) .blog-card-description :global(code) {
-    background: rgb(39 39 42);
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .blog-card-description :global(strong) {
-    color: rgb(244 244 245);
+    :global(strong) {
+      color: var(--color-heading);
+      font-weight: 650;
+    }
   }
 </style>

@@ -56,44 +56,44 @@ export const prerender = true;
 <style>
   .back-link {
     display: inline-flex;
-    margin-bottom: 1rem;
-    color: rgb(20 184 166);
+    margin-block-end: 1rem;
+    color: var(--color-accent);
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
   }
 
   .tag-hero {
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-hero);
+    background: var(--color-surface-panel);
     padding: clamp(1.5rem, 5vw, 3rem);
-    background: rgb(255 255 255 / 0.72);
-  }
 
-  .tag-hero p {
-    margin: 0 0 0.75rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .tag-hero h1 {
-    max-width: 11ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
+    h1 {
+      max-inline-size: 11ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
 
-  .tag-hero span {
-    display: inline-flex;
-    margin-top: 1.25rem;
-    border-radius: 999px;
-    background: rgb(244 244 245);
-    padding: 0.45rem 0.75rem;
-    color: rgb(82 82 91);
-    font-size: 0.8125rem;
+    span {
+      display: inline-flex;
+      margin-block-start: 1.25rem;
+      border-radius: 999px;
+      background: var(--color-surface-muted);
+      padding: 0.45rem 0.75rem;
+      color: var(--color-copy);
+      font-size: 0.8125rem;
+    }
   }
 
   .tag-posts {
@@ -103,19 +103,5 @@ export const prerender = true;
     margin: 2.5rem 0 0;
     padding: 0;
     list-style: none;
-  }
-
-  :global(.dark) .tag-hero {
-    border-color: rgb(63 63 70);
-    background: rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .tag-hero h1 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .tag-hero span {
-    background: rgb(39 39 42);
-    color: rgb(212 212 216);
   }
 </style>

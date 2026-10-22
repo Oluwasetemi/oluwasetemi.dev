@@ -129,14 +129,74 @@
 </div>
 
 <style is:global>
-  .tts-reader :where(p, button) {
-    margin: 0;
+  .tts-reader {
+    :where(p, button) {
+      margin: 0;
+    }
+
+    &[data-tts-state="minimized"] {
+      position: fixed;
+      inset: auto auto 1rem 1rem;
+      z-index: 70;
+      margin: 0;
+      inline-size: min(22rem, calc(100dvw - 2rem));
+
+      .tts-window {
+        padding: 0.75rem 0.875rem;
+        box-shadow: 0 18px 50px color-mix(in srgb, var(--shadow-color) 14%, transparent);
+
+        & > div:first-child {
+          margin-block-end: 0;
+        }
+      }
+
+      #tts-reader-body {
+        display: none;
+      }
+
+      #tts-window-summary::before {
+        display: inline-block;
+        block-size: 0.5rem;
+        inline-size: 0.5rem;
+        margin-inline-end: 0.5rem;
+        border-radius: 999px;
+        background: var(--color-accent);
+        content: "";
+        vertical-align: 0.05em;
+      }
+    }
+
+    &[data-tts-state="maximized"] {
+      position: fixed;
+      inset: 6rem 1rem auto;
+      z-index: 70;
+      max-inline-size: min(56rem, calc(100dvw - 2rem));
+      margin-inline: auto;
+
+      .tts-window {
+        padding: 1.25rem;
+        box-shadow: 0 24px 70px color-mix(in srgb, var(--shadow-color) 16%, transparent);
+      }
+
+      #tts-reader-body {
+        gap: 1rem;
+
+        & > .w-full {
+          margin-block-start: 0.75rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        inset: 4.5rem 0.75rem auto;
+        max-inline-size: calc(100dvw - 1.5rem);
+      }
+    }
   }
 
   .tts-window {
     transition:
-      width 180ms ease,
-      max-width 180ms ease,
+      inline-size 180ms ease,
+      max-inline-size 180ms ease,
       padding 180ms ease,
       box-shadow 180ms ease,
       transform 180ms ease;
@@ -144,112 +204,37 @@
 
   .tts-window-button {
     display: inline-flex;
-    height: 2rem;
-    width: 2rem;
+    block-size: 2rem;
+    inline-size: 2rem;
     align-items: center;
     justify-content: center;
     border-radius: 999px;
-    color: rgb(113 113 122);
+    color: var(--color-muted);
     transition:
-      color 160ms ease,
-      background-color 160ms ease;
-  }
+      color var(--transition-color),
+      background-color var(--transition-color);
 
-  .tts-window-button:hover {
-    background: rgb(244 244 245);
-    color: rgb(39 39 42);
-  }
-
-  .dark .tts-window-button:hover {
-    background: rgb(39 39 42);
-    color: rgb(244 244 245);
-  }
-
-  .tts-reader[data-tts-state="minimized"] {
-    position: fixed;
-    right: auto;
-    bottom: 1rem;
-    left: 1rem;
-    top: auto;
-    z-index: 70;
-    margin: 0;
-    width: min(22rem, calc(100vw - 2rem));
-  }
-
-  .tts-reader[data-tts-state="minimized"] .tts-window {
-    padding: 0.75rem 0.875rem;
-    box-shadow: 0 18px 50px rgb(24 24 27 / 0.14);
-  }
-
-  .tts-reader[data-tts-state="minimized"] #tts-reader-body {
-    display: none;
-  }
-
-  .tts-reader[data-tts-state="minimized"] .tts-window > div:first-child {
-    margin-bottom: 0;
-  }
-
-  .tts-reader[data-tts-state="minimized"] #tts-window-summary::before {
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-right: 0.5rem;
-    border-radius: 999px;
-    background: rgb(20 184 166);
-    content: "";
-    vertical-align: 0.05em;
-  }
-
-  .tts-reader[data-tts-state="maximized"] {
-    position: fixed;
-    inset: 6rem 1rem auto;
-    z-index: 70;
-    margin: 0 auto;
-    max-width: min(56rem, calc(100vw - 2rem));
-  }
-
-  .tts-reader[data-tts-state="maximized"] .tts-window {
-    padding: 1.25rem;
-    box-shadow: 0 24px 70px rgb(24 24 27 / 0.16);
-  }
-
-  .tts-reader[data-tts-state="maximized"] #tts-reader-body {
-    gap: 1rem;
-  }
-
-  .tts-reader[data-tts-state="maximized"] #tts-reader-body > .w-full {
-    margin-top: 0.75rem;
-  }
-
-  @media (max-width: 640px) {
-    .tts-reader[data-tts-state="maximized"] {
-      inset: 4.5rem 0.75rem auto;
-      max-width: calc(100vw - 1.5rem);
+    &:hover {
+      background: var(--color-surface-muted);
+      color: var(--color-heading);
     }
   }
 
-  /* Highlight currently reading section */
   .tts-reading-section {
-    background-color: rgb(20 184 166 / 0.08) !important;
-    border-radius: 0.75rem !important;
-    padding-inline: 0.75rem !important;
     margin-inline: -0.75rem !important;
-    transition: all 0.3s ease !important;
-    box-shadow: inset 0 0 0 1px rgb(20 184 166 / 0.16) !important;
+    border-radius: 0.75rem !important;
+    background-color: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
+    padding-inline: 0.75rem !important;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 16%, transparent) !important;
+    transition: background-color 300ms ease, box-shadow 300ms ease !important;
   }
 
-  /* Highlight current word being read with deeper shade */
   .tts-current-word {
-    background-color: rgb(20 184 166 / 0.18) !important;
-    color: inherit !important;
-    padding: 2px 4px !important;
     border-radius: 0.35rem !important;
-    transition: background-color 0.1s ease !important;
-  }
-
-  /* Smooth scrolling for focused elements */
-  html {
-    scroll-behavior: smooth;
+    background-color: color-mix(in srgb, var(--color-accent) 18%, transparent) !important;
+    padding: 2px 4px !important;
+    color: inherit !important;
+    transition: background-color 100ms ease !important;
   }
 </style>
 

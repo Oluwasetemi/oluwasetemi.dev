@@ -97,111 +97,89 @@ const sections = [
 
 <style>
   .policy-hero {
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-hero);
+    background:
+      radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 22rem),
+      var(--color-surface-panel);
     padding: clamp(1.5rem, 5vw, 3rem);
-    background: radial-gradient(circle at top right, rgb(20 184 166 / 0.12), transparent 22rem), rgb(255 255 255 / 0.72);
-  }
 
-  .policy-hero p {
-    margin: 0 0 0.75rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .policy-hero h1 {
-    max-width: 13ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
+    h1 {
+      max-inline-size: 13ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
 
-  .policy-hero span {
-    display: inline-flex;
-    margin-top: 1.25rem;
-    border-radius: 999px;
-    background: rgb(244 244 245);
-    padding: 0.45rem 0.75rem;
-    color: rgb(82 82 91);
-    font-size: 0.8125rem;
+    span {
+      display: inline-flex;
+      margin-block-start: 1.25rem;
+      border-radius: 999px;
+      background: var(--color-surface-muted);
+      padding: 0.45rem 0.75rem;
+      color: var(--color-copy);
+      font-size: 0.8125rem;
+    }
   }
 
   .policy-summary {
-    margin-top: 1rem;
-    border: 1px dashed rgb(212 212 216);
+    margin-block-start: 1rem;
+    border: 1px dashed var(--color-border);
     border-radius: 1.5rem;
+    background: var(--color-surface-panel);
     padding: 1rem;
-    color: rgb(82 82 91);
+    color: var(--color-copy);
     line-height: 1.7;
-  }
 
-  .policy-summary a {
-    color: rgb(20 184 166);
-    font-weight: 600;
+    a {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
   }
 
   .policy-sections {
-    margin-top: 2rem;
+    margin-block-start: 2rem;
   }
 
   .policy-section {
     display: grid;
     grid-template-columns: 2.5rem minmax(0, 1fr);
     gap: 1rem;
-    border-bottom: 1px dashed rgb(228 228 231);
-    padding: 1.5rem 0;
-  }
+    border-block-end: 1px dashed var(--color-border-soft);
+    padding-block: 1.5rem;
 
-  .policy-section > span {
-    display: grid;
-    width: 2.25rem;
-    height: 2.25rem;
-    place-items: center;
-    border: 1px dashed rgb(20 184 166 / 0.5);
-    border-radius: 999px;
-    color: rgb(20 184 166);
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
+    & > span {
+      display: grid;
+      block-size: 2.25rem;
+      inline-size: 2.25rem;
+      place-items: center;
+      border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
+      border-radius: 999px;
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
 
-  .policy-section h2 {
-    color: rgb(39 39 42);
-    font-size: 1.125rem;
-    letter-spacing: -0.03em;
-  }
+    h2 {
+      color: var(--color-heading);
+      font-size: 1.125rem;
+      letter-spacing: -0.03em;
+    }
 
-  .policy-section p {
-    margin-top: 0.75rem;
-    color: rgb(82 82 91);
-    font-size: 0.95rem;
-    line-height: 1.75;
-  }
-
-  :global(.dark) .policy-hero,
-  :global(.dark) .policy-summary {
-    border-color: rgb(63 63 70);
-    background: rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .policy-hero h1,
-  :global(.dark) .policy-section h2 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .policy-hero span {
-    background: rgb(39 39 42);
-    color: rgb(212 212 216);
-  }
-
-  :global(.dark) .policy-section {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .policy-section p,
-  :global(.dark) .policy-summary {
-    color: rgb(161 161 170);
+    p {
+      margin-block-start: 0.75rem;
+      color: var(--color-copy);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
   }
 </style>

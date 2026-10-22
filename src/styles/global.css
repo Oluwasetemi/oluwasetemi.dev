@@ -29,6 +29,37 @@
 @layer base {
   :root {
     color-scheme: light;
+    --color-accent: rgb(20 184 166);
+    --color-heading: rgb(39 39 42);
+    --color-copy: rgb(82 82 91);
+    --color-muted: rgb(113 113 122);
+    --color-subtle: rgb(161 161 170);
+    --color-border: rgb(212 212 216);
+    --color-border-soft: rgb(228 228 231);
+    --color-surface: rgb(255 255 255);
+    --color-surface-muted: rgb(244 244 245);
+    --color-surface-panel: rgb(255 255 255 / 0.72);
+    --color-surface-card: rgb(255 255 255 / 0.78);
+    --shadow-color: rgb(24 24 27);
+    --radius-card: 1.5rem;
+    --radius-hero: 2rem;
+    --transition-color: 160ms ease;
+    --transition-movement: 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  :root.dark {
+    color-scheme: dark;
+    --color-accent: rgb(45 212 191);
+    --color-heading: rgb(244 244 245);
+    --color-copy: rgb(212 212 216);
+    --color-muted: rgb(161 161 170);
+    --color-subtle: rgb(113 113 122);
+    --color-border: rgb(63 63 70);
+    --color-border-soft: rgb(63 63 70);
+    --color-surface: rgb(24 24 27);
+    --color-surface-muted: rgb(39 39 42);
+    --color-surface-panel: rgb(24 24 27 / 0.72);
+    --color-surface-card: rgb(24 24 27 / 0.72);
   }
 
   html {

@@ -37,49 +37,51 @@ const posts = (await getCollection("blog"))
   .archive-hero {
     display: grid;
     gap: 1rem;
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-hero);
+    background:
+      radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 22rem),
+      var(--color-surface-panel);
     padding: clamp(1.5rem, 5vw, 3rem);
-    background: radial-gradient(circle at top right, rgb(20 184 166 / 0.12), transparent 22rem), rgb(255 255 255 / 0.72);
-  }
 
-  .archive-hero p {
-    margin: 0;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
+    p {
+      margin: 0;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .archive-hero h1 {
-    max-width: 12ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
+    h1 {
+      max-inline-size: 12ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
 
-  .archive-hero span {
-    width: fit-content;
-    border-radius: 999px;
-    background: rgb(244 244 245);
-    padding: 0.45rem 0.75rem;
-    color: rgb(82 82 91);
-    font-size: 0.8125rem;
+    span {
+      inline-size: fit-content;
+      border-radius: 999px;
+      background: var(--color-surface-muted);
+      padding: 0.45rem 0.75rem;
+      color: var(--color-copy);
+      font-size: 0.8125rem;
+    }
   }
 
   .archive-board {
     position: relative;
-    margin-top: 3rem;
-  }
+    margin-block-start: 3rem;
 
-  .archive-board::before {
-    position: absolute;
-    inset: 0 auto 0 0.35rem;
-    width: 1px;
-    background-image: linear-gradient(to bottom, rgb(20 184 166 / 0.35) 45%, transparent 0);
-    background-size: 1px 0.75rem;
-    content: "";
+    &::before {
+      position: absolute;
+      inset: 0 auto 0 0.35rem;
+      inline-size: 1px;
+      background-image: linear-gradient(to bottom, color-mix(in srgb, var(--color-accent) 35%, transparent) 45%, transparent 0);
+      background-size: 1px 0.75rem;
+      content: "";
+    }
   }
 
   .archive-list {
@@ -89,19 +91,5 @@ const posts = (await getCollection("blog"))
     margin: 0;
     padding: 0 0 0 2rem;
     list-style: none;
-  }
-
-  :global(.dark) .archive-hero {
-    border-color: rgb(63 63 70);
-    background: radial-gradient(circle at top right, rgb(45 212 191 / 0.1), transparent 22rem), rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .archive-hero h1 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .archive-hero span {
-    background: rgb(39 39 42);
-    color: rgb(212 212 216);
   }
 </style>
