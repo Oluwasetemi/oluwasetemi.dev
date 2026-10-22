@@ -44,6 +44,8 @@ const portfolio = defineCollection({
     url: z.string().optional(),
     github: z.string().optional(),
     tech: z.array(z.string()).optional(),
+    technology: z.array(z.string()).optional(),
+    tier: z.enum(["featured", "teaching", "archive"]).optional(),
     isPublished: z.boolean().optional(),
     isDraft: z.boolean().optional(),
     publishedDate: z.coerce.date().optional(),
