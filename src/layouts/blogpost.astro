@@ -102,63 +102,61 @@ const descriptionHtml = description ? micromark(description).replace(/^<p>|<\/p>
   .post-shell {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    width: 100%;
-    min-width: 0;
     gap: 2rem;
+    min-inline-size: 0;
+    inline-size: 100%;
   }
 
   .post-hero {
     display: grid;
-    width: 100%;
-    min-width: 0;
-    gap: 1.25rem;
     align-items: end;
-    border-bottom: 1px dashed rgb(212 212 216);
-    padding-bottom: 2rem;
-  }
+    gap: 1.25rem;
+    min-inline-size: 0;
+    inline-size: 100%;
+    border-block-end: 1px dashed var(--color-border);
+    padding-block-end: 2rem;
 
-  @media (min-width: 768px) {
-    .post-hero {
+    @media (min-width: 768px) {
       grid-template-columns: minmax(0, 1fr) 15rem;
+    }
+
+    & > div {
+      min-inline-size: 0;
+    }
+
+    h1 {
+      max-inline-size: 13ch;
+      overflow-wrap: anywhere;
+      color: var(--color-heading);
+      font-size: clamp(2.75rem, 7vw, 6.25rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
     }
   }
 
   .post-back {
     display: inline-flex;
-    margin-bottom: 1rem;
-    color: rgb(20 184 166);
+    margin-block-end: 1rem;
+    color: var(--color-accent);
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
   }
 
-  .post-hero > div {
-    min-width: 0;
-  }
-
-  .post-hero h1 {
-    max-width: 13ch;
-    overflow-wrap: anywhere;
-    color: rgb(39 39 42);
-    font-size: clamp(2.75rem, 7vw, 6.25rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
-
   .post-description {
-    max-width: 44rem;
-    margin-top: 1.25rem;
+    max-inline-size: 44rem;
+    margin-block-start: 1.25rem;
     overflow-wrap: anywhere;
-    color: rgb(82 82 91);
+    color: var(--color-copy);
     font-size: 1rem;
     line-height: 1.75;
-  }
 
-  .post-description :global(code) {
-    border-radius: 0.35rem;
-    background: rgb(244 244 245);
-    padding: 0.05rem 0.3rem;
+    :global(code) {
+      border-radius: 0.35rem;
+      background: var(--color-surface-muted);
+      padding: 0.05rem 0.3rem;
+    }
   }
 
   .post-meta-card {
@@ -166,117 +164,90 @@ const descriptionHtml = description ? micromark(description).replace(/^<p>|<\/p>
     z-index: 20;
     display: grid;
     gap: 0.85rem;
-    border: 1px dashed rgb(20 184 166 / 0.45);
+    border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
     border-radius: 1.5rem;
-    background: rgb(255 255 255 / 0.72);
+    background: var(--color-surface-panel);
     padding: 1rem;
-  }
 
-  .post-meta-card p {
-    margin: 0;
-  }
+    p {
+      margin: 0;
+    }
 
-  .post-meta-card span {
-    display: block;
-    color: rgb(161 161 170);
-    font-size: 0.75rem;
-  }
+    span {
+      display: block;
+      color: var(--color-subtle);
+      font-size: 0.75rem;
+    }
 
-  .post-meta-card strong {
-    display: block;
-    margin-top: 0.15rem;
-    color: rgb(39 39 42);
-    font-size: 0.875rem;
-    font-weight: 650;
+    strong {
+      display: block;
+      margin-block-start: 0.15rem;
+      color: var(--color-heading);
+      font-size: 0.875rem;
+      font-weight: 650;
+    }
   }
 
   .post-cover {
     margin: 0;
-  }
 
-  .post-cover :global(img) {
-    width: 100%;
-    max-height: 28rem;
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
-    object-fit: cover;
-    padding: 0.35rem;
-    box-shadow: none;
-  }
+    :global(img) {
+      max-block-size: 28rem;
+      inline-size: 100%;
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-hero);
+      box-shadow: none;
+      object-fit: cover;
+      padding: 0.35rem;
+    }
 
-  .post-cover figcaption {
-    margin-top: 0.6rem;
-    color: rgb(113 113 122);
-    font-size: 0.8125rem;
-    font-style: italic;
+    figcaption {
+      margin-block-start: 0.6rem;
+      color: var(--color-muted);
+      font-size: 0.8125rem;
+      font-style: italic;
+    }
   }
 
   .post-body-wrap {
+    max-inline-size: 48rem;
+    inline-size: 100%;
     margin-inline: auto;
-    width: 100%;
-    max-width: 48rem;
   }
 
   .post-content :global(> h1:first-child) {
     display: none;
   }
 
-  .post-tags,
-  .post-comments {
-    margin-top: 3rem;
-    border-top: 1px dashed rgb(212 212 216);
-    padding-top: 1.5rem;
+  :is(.post-tags, .post-comments) {
+    margin-block-start: 3rem;
+    border-block-start: 1px dashed var(--color-border);
+    padding-block-start: 1.5rem;
+
+    h2 {
+      margin: 0 0 1rem;
+      color: var(--color-heading);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
   }
 
-  .post-tags h2,
-  .post-comments h2 {
-    margin: 0 0 1rem;
-    color: rgb(39 39 42);
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-  }
+  .post-tags {
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
 
-  .post-tags div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .post-tags a {
-    border: 1px dashed rgb(20 184 166 / 0.45);
-    border-radius: 999px;
-    padding: 0.4rem 0.7rem;
-    color: rgb(20 184 166);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  :global(.dark) .post-hero,
-  :global(.dark) .post-cover :global(img),
-  :global(.dark) .post-tags,
-  :global(.dark) .post-comments {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .post-hero h1,
-  :global(.dark) .post-meta-card strong,
-  :global(.dark) .post-tags h2,
-  :global(.dark) .post-comments h2 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .post-description {
-    color: rgb(161 161 170);
-  }
-
-  :global(.dark) .post-meta-card {
-    border-color: rgb(45 212 191 / 0.35);
-    background: rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .post-meta-card span {
-    color: rgb(161 161 170);
+    a {
+      border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
+      border-radius: 999px;
+      padding: 0.4rem 0.7rem;
+      color: var(--color-accent);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
   }
 </style>
 

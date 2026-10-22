@@ -40,93 +40,76 @@ const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1] ||
 
 <style>
   .tags-hero {
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 2rem;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-hero);
+    background: var(--color-surface-panel);
     padding: clamp(1.5rem, 5vw, 3rem);
-    background: rgb(255 255 255 / 0.72);
-  }
 
-  .tags-hero p {
-    margin: 0 0 0.75rem;
-    color: rgb(20 184 166);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
+    p {
+      margin: 0 0 0.75rem;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
 
-  .tags-hero h1 {
-    max-width: 10ch;
-    color: rgb(39 39 42);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
+    h1 {
+      max-inline-size: 10ch;
+      color: var(--color-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
 
-  .tags-hero span {
-    display: inline-flex;
-    margin-top: 1.25rem;
-    border-radius: 999px;
-    background: rgb(244 244 245);
-    padding: 0.45rem 0.75rem;
-    color: rgb(82 82 91);
-    font-size: 0.8125rem;
+    span {
+      display: inline-flex;
+      margin-block-start: 1.25rem;
+      border-radius: 999px;
+      background: var(--color-surface-muted);
+      padding: 0.45rem 0.75rem;
+      color: var(--color-copy);
+      font-size: 0.8125rem;
+    }
   }
 
   .tag-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem;
-    margin-top: 2rem;
-  }
+    margin-block-start: 2rem;
 
-  .tag-cloud a {
-    display: inline-flex;
-    gap: 0.5rem;
-    align-items: baseline;
-    border: 1px dashed rgb(212 212 216);
-    border-radius: 999px;
-    background: white;
-    padding: 0.45rem 0.75rem;
-    color: rgb(63 63 70);
-    text-decoration: none;
-    transition: border-color 160ms ease, transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
+    a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      border: 1px dashed var(--color-border);
+      border-radius: 999px;
+      background: var(--color-surface-panel);
+      padding: 0.45rem 0.75rem;
+      color: var(--color-copy);
+      text-decoration: none;
+      transition: border-color var(--transition-color), transform var(--transition-movement);
 
-  .tag-cloud a:hover,
-  .tag-cloud a:focus-visible {
-    border-color: rgb(20 184 166 / 0.7);
-    transform: translateY(-1px);
-  }
+      &:is(:hover, :focus-visible) {
+        border-color: color-mix(in srgb, var(--color-accent) 70%, transparent);
+        transform: translateY(-1px);
+      }
 
-  .tag-cloud a:focus-visible {
-    outline: 2px solid rgb(20 184 166 / 0.28);
-    outline-offset: 3px;
-  }
+      &:focus-visible {
+        outline: 2px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+        outline-offset: 3px;
+      }
+    }
 
-  .tag-cloud span {
-    font-size: var(--tag-size);
-    font-weight: 600;
-    letter-spacing: -0.04em;
-  }
+    span {
+      font-size: var(--tag-size);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
 
-  .tag-cloud strong {
-    color: rgb(161 161 170);
-    font-size: 0.75rem;
-  }
-
-  :global(.dark) .tags-hero,
-  :global(.dark) .tag-cloud a {
-    border-color: rgb(63 63 70);
-    background: rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .tags-hero h1,
-  :global(.dark) .tag-cloud a {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .tags-hero span {
-    background: rgb(39 39 42);
-    color: rgb(212 212 216);
+    strong {
+      color: var(--color-subtle);
+      font-size: 0.75rem;
+    }
   }
 </style>

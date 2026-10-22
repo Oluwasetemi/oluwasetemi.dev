@@ -68,55 +68,53 @@ const stack = tags || tech || technology || [];
   .project-shell {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    width: 100%;
-    min-width: 0;
     gap: 2rem;
+    min-inline-size: 0;
+    inline-size: 100%;
   }
 
   .project-hero {
     display: grid;
-    width: 100%;
-    min-width: 0;
-    gap: 1.25rem;
     align-items: end;
-    border-bottom: 1px dashed rgb(212 212 216);
-    padding-bottom: 2rem;
-  }
+    gap: 1.25rem;
+    min-inline-size: 0;
+    inline-size: 100%;
+    border-block-end: 1px dashed var(--color-border);
+    padding-block-end: 2rem;
 
-  @media (min-width: 768px) {
-    .project-hero {
+    @media (min-width: 768px) {
       grid-template-columns: minmax(0, 1fr) 16rem;
+    }
+
+    & > div {
+      min-inline-size: 0;
+    }
+
+    h1 {
+      max-inline-size: 13ch;
+      overflow-wrap: anywhere;
+      color: var(--color-heading);
+      font-size: clamp(2.75rem, 7vw, 6.25rem);
+      font-weight: 760;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
     }
   }
 
   .project-back {
     display: inline-flex;
-    margin-bottom: 1rem;
-    color: rgb(20 184 166);
+    margin-block-end: 1rem;
+    color: var(--color-accent);
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
   }
 
-  .project-hero > div {
-    min-width: 0;
-  }
-
-  .project-hero h1 {
-    max-width: 13ch;
-    overflow-wrap: anywhere;
-    color: rgb(39 39 42);
-    font-size: clamp(2.75rem, 7vw, 6.25rem);
-    font-weight: 760;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
-  }
-
   .project-description {
-    max-width: 44rem;
-    margin-top: 1.25rem;
+    max-inline-size: 44rem;
+    margin-block-start: 1.25rem;
     overflow-wrap: anywhere;
-    color: rgb(82 82 91);
+    color: var(--color-copy);
     font-size: 1rem;
     line-height: 1.75;
   }
@@ -124,28 +122,28 @@ const stack = tags || tech || technology || [];
   .project-meta-card {
     display: grid;
     gap: 0.9rem;
-    border: 1px dashed rgb(20 184 166 / 0.45);
+    border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
     border-radius: 1.5rem;
-    background: rgb(255 255 255 / 0.72);
+    background: var(--color-surface-panel);
     padding: 1rem;
-  }
 
-  .project-meta-card p {
-    margin: 0;
-  }
+    p {
+      margin: 0;
+    }
 
-  .project-meta-card span {
-    display: block;
-    color: rgb(161 161 170);
-    font-size: 0.75rem;
-  }
+    span {
+      display: block;
+      color: var(--color-subtle);
+      font-size: 0.75rem;
+    }
 
-  .project-meta-card strong {
-    display: block;
-    margin-top: 0.15rem;
-    color: rgb(39 39 42);
-    font-size: 0.875rem;
-    font-weight: 650;
+    strong {
+      display: block;
+      margin-block-start: 0.15rem;
+      color: var(--color-heading);
+      font-size: 0.875rem;
+      font-weight: 650;
+    }
   }
 
   .project-actions {
@@ -154,75 +152,44 @@ const stack = tags || tech || technology || [];
     gap: 0.5rem;
   }
 
-  .project-actions a,
-  .project-tags span {
-    border: 1px dashed rgb(20 184 166 / 0.45);
+  :is(.project-actions a, .project-tags span) {
+    border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
     border-radius: 999px;
     padding: 0.4rem 0.7rem;
-    color: rgb(20 184 166);
+    color: var(--color-accent);
     font-size: 0.8125rem;
     font-weight: 600;
     text-decoration: none;
   }
 
   .project-content {
+    max-inline-size: 48rem;
+    inline-size: 100%;
     margin-inline: auto;
-    width: 100%;
-    max-width: 48rem;
-  }
 
-  .project-content :global(> h1:first-child) {
-    display: none;
+    :global(> h1:first-child) {
+      display: none;
+    }
   }
 
   .project-tags {
+    max-inline-size: 48rem;
+    inline-size: 100%;
     margin-inline: auto;
-    width: 100%;
-    max-width: 48rem;
-    border-top: 1px dashed rgb(212 212 216);
-    padding-top: 1.5rem;
-  }
+    border-block-start: 1px dashed var(--color-border);
+    padding-block-start: 1.5rem;
 
-  .project-tags h2 {
-    margin: 0 0 1rem;
-    color: rgb(39 39 42);
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-  }
+    h2 {
+      margin: 0 0 1rem;
+      color: var(--color-heading);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
 
-  .project-tags div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  :global(.dark) .project-hero,
-  :global(.dark) .project-tags {
-    border-color: rgb(63 63 70);
-  }
-
-  :global(.dark) .project-hero h1,
-  :global(.dark) .project-meta-card strong,
-  :global(.dark) .project-tags h2 {
-    color: rgb(244 244 245);
-  }
-
-  :global(.dark) .project-description {
-    color: rgb(161 161 170);
-  }
-
-  :global(.dark) .project-meta-card {
-    border-color: rgb(45 212 191 / 0.35);
-    background: rgb(24 24 27 / 0.72);
-  }
-
-  :global(.dark) .project-meta-card span {
-    color: rgb(161 161 170);
-  }
-
-  :global(.dark) .project-actions a,
-  :global(.dark) .project-tags span {
-    border-color: rgb(45 212 191 / 0.35);
-    color: rgb(45 212 191);
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
   }
 </style>

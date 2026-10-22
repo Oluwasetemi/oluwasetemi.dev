@@ -65,111 +65,110 @@ const portfolioSlug = getEntrySlug(portfolio);
   .portfolio-card {
     display: flex;
     align-items: center;
-    background: white;
-    border-radius: 12px;
+    margin-block-end: 2rem;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 0.75rem;
+    background: var(--color-surface);
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px color-mix(in srgb, var(--shadow-color) 10%, transparent);
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 2rem;
-  }
+      transform 200ms ease,
+      box-shadow 200ms ease;
 
-  .portfolio-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px color-mix(in srgb, var(--shadow-color) 15%, transparent);
+    }
 
-  .portfolio-card.small {
-    max-width: 450px;
+    &.small {
+      max-inline-size: 28.125rem;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 
   .card-image {
-    flex-shrink: 0;
-    margin-right: 2rem;
-  }
+    flex: none;
+    margin-inline-end: 2rem;
 
-  .card-image img {
-    max-width: 200px;
-    height: auto;
-    border-radius: 8px;
-    transition: transform 0.2s ease;
-  }
+    img {
+      block-size: auto;
+      max-inline-size: 12.5rem;
+      border-radius: 0.5rem;
+      transition: transform 200ms ease;
 
-  .card-image img:hover {
-    transform: scale(1.05);
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    @media (max-width: 768px) {
+      margin-block-end: 1rem;
+      margin-inline-end: 0;
+
+      img {
+        max-inline-size: 100%;
+      }
+    }
   }
 
   .card-details {
     flex: 1;
+    min-inline-size: 0;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+    }
   }
 
   .title-link {
-    text-decoration: none;
     color: inherit;
-  }
+    text-decoration: none;
 
-  .title-link:hover {
-    color: #667eea;
-  }
-
-  .card-details h2 {
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    &:hover {
+      color: var(--color-accent);
+    }
   }
 
   .icon {
-    width: 16px;
-    height: 16px;
+    block-size: 1rem;
+    inline-size: 1rem;
   }
 
   .tech {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
   }
 
   .tech-tag {
-    background: #f3f4f6;
-    color: #374151;
+    border-radius: 0.25rem;
+    background: var(--color-surface-muted);
     padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    color: var(--color-copy);
     font-size: 0.8rem;
     white-space: nowrap;
   }
 
   .description {
-    color: #666;
+    color: var(--color-muted);
     line-height: 1.6;
     text-decoration: none;
-  }
 
-  .description:hover {
-    color: #333;
-  }
-
-  @media (max-width: 768px) {
-    .portfolio-card {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .card-image {
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-
-    .card-image img {
-      max-width: 100%;
-    }
-
-    .tech {
-      justify-content: center;
+    &:hover {
+      color: var(--color-heading);
     }
   }
 </style>
